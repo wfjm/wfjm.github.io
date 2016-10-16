@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="jekyll" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+    <div id="header"> 
+      <div class="marginwrapper">
+        <table width="100%">
+          <tbody>
+            <td id="header-title">{{ page.title }}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    
+    <div id="mainwrapper">
+      <div id="main">
+        <div class="marginwrapper">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+    
+    <div id="navbar"> 
+      <div class="marginwrapper">
+        <ul>
+          <li><a href="/">wfjm's Home</a></li>
+          <li><a href="/home-w11">w11 Project</a></li>
+          <ul>
+            <li><a href="/home-w11/proj/status.html">Status</a></li>
+            <li><a href="/home-w11/proj/milestones.html">Milestones</a></li>
+            <li><a href="/home-w11/proj/releases.html">Releases</a></li>
+            <li><a href="/home-w11/proj/roadmap.html">Roadmap</a></li>
+            <li><a href="/home-w11/proj/thanks.html">Thanks</a></li>
+          </ul>
+          <li><a href="/home-w11/impl">w11 core and SoC</a></li>
+          <ul>
+            <li><a href="/home-w11/impl/features.html">Features</a></li>
+            <li><a href="/home-w11/impl/implementation.html">Implementation</a></li>
+            <li><a href="/home-w11/impl/performance.html">Performance</a></li>
+            <li><a href="/home-w11/impl/verification.html">Verification</a></li>
+            <li><a href="/home-w11/impl/resources.html">Resources</a></li>
+          </ul>
+          <li><a href="/home-w11/inst">Installation</a></li>
+          <ul>
+            <li><a href="/home-w11/inst/dirlayout.html">Directory Structure</a></li>
+            <li><a href="/home-w11/inst/systems.html">System Images</a></li>
+          </ul>
+        </ul>
+      </div>  
+    </div>
+
+    <div id="footer">
+      {{ page.path }}
+    </div>
+  </body>
+</html>
+  

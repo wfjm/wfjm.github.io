@@ -1,0 +1,28 @@
+---
+layout: w11
+title:  Verification
+---
+<h2>Test Benches</h2>
+The project contains self-checking test benches for several components,
+the w11a core as well as for the whole systems under
+<pre>
+  <a href="{{site.w11_tree}}/rtl/vlib/serport/tb/">rtl/vlib/serport/tb</a>              UART and autobauder
+  <a href="{{site.w11_tree}}/rtl/vlib/rlink/tb/">rtl/vlib/rlink/tb</a>                remote register interface
+  <a href="{{site.w11_tree}}/rtl/w11a/tb/">rtl/w11a/tb</a>                      w11a core
+  <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys2/tb/">rtl/sys_gen/w11a/nexys2/tb</a>       w11a_n2 system
+  <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys3/tb/">rtl/sys_gen/w11a/nexys3/tb</a>       w11a_n3 system
+  <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys4/tb/">rtl/sys_gen/w11a/nexys4/tb</a>       w11a_n4 system
+  <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/s3board/tb/">rtl/sys_gen/w11a/s3board/tb</a>      w11a_s3 system
+  <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/tb/">rtl/sys_gen/w11a/tb</a>              common files for system tests
+</pre>
+
+See 
+<a href="{{site.w11_blob}}/doc/w11a_tb_guide.txt">w11a_tb_guide.txt</a> 
+for detail instructions to run these test benches.
+
+<h2>Test Programs</h2>
+The CPU core as well as the peripherals have been verified in ghdl simulation
+and in FPGA with test programs. The list of acceptable implementation
+differences as well as the a list of issues to be resolved in upcoming
+revisions is summarized in
+<a href="{{site.w11_blob}}/doc/w11a_known_issues.txt">w11a_known_issues.txt</a>.

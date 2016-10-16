@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="jekyll">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <title>{{ page.title }}</title>
+  </head>
+  <body>
+    <div id="header"> 
+      <div class="marginwrapper">
+        <table width="100%">
+          <tbody>
+            <td id="header-title">{{ page.title }}</td>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="mainwrapper">
+      <div id="main">
+        <div class="marginwrapper">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+    
+    <div id="navbar"> 
+      <div class="marginwrapper">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><li><a href="/projects.html">Projects</a></li>
+          <ul>
+            <li><a href="/home-w11">w11</a></li>
+          </ul>
+        </ul>
+      </div>  
+    </div>
+
+    <div id="footer">
+      {{ page.path }}
+    </div>
+  </body>
+</html>

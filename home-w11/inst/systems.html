@@ -1,0 +1,245 @@
+---
+layout: w11
+title:  System Images
+oskit_blob: https://github.com/wfjm/w11/blob/master/tools/oskit
+---
+<!-- Fig. S-1 -->
+
+<div id="Fig_S-1" style="float:right; float:right; width: 260px; padding:10px; margin: 10px">
+  <a href="http://www.retro11.de/data/oc_w11/pictures/2010-08-08-screenshot.jpg">
+  <img width="256" height="192" alt="click for higher resolution"
+  src="http://www.retro11.de/data/oc_w11/pictures/2010-08-08-screenshot.jpg" />
+  </a>
+  <br/>
+  <sub>
+  Fig S-1: Screen shot of 2.11BSD boot sequence and some commands on a w11a_s3 
+  system. The output of the two DL11 is directed in the DL0/DL1 windows. 
+  In the bottom right corner is a window with messages of the backend server
+  process visible. See also
+  <a href="http://www.retro11.de/data/oc_w11/pictures/2010-08-08-screenshot.jpg">hi-res jpg</a>.
+  </sub>
+</div>
+
+<h2>Running Systems</h2>
+
+The most stringent test so far is that the following operating systems are known to boot:
+<ul>
+  <li><b>UNIX 5th edition</b>. Released in June 1974 this very early UNIX uses
+        only a fraction of the hardware capabilities, and also works happily 
+        on a CPU with out FPP. This system fits on a single RK05 volume
+        (<a href="http://www.retro11.de/data/oc_w11/oskits/unix_v5_rkset.tgz">download disk image</a>; under Caldera license).</li>
+  <li><b>2.11 BSD UNIX</b>. Released in 1992, this end-point of historical UNIX
+        development on PDP-11's uses almost all features (22 bit addressing,
+        separate I/D space, 3 processor modes) to squeeze a full UNIX with 
+        most of the 4.3 BSD features into a 16 bit machine. A system with the 
+        latest patches is needed to get the 
+<a href="https://web.archive.org/web/20141018182505/http://www.classiccmp.org/pipermail/cctech/2007-January/032518.html">
+          kernel FPP emulation (patch 445)</a> and 
+<a href="https://web.archive.org/web/20141018182505/http://www.classiccmp.org/pipermail/cctech/2009-January/062011.html">
+          RK05 as boot device (patch 446/447)</a> to work.
+        The current w11a system has only RK11 or RL02 disks, so a very limited subset
+        of the full 2.11BSD distribution was packed onto 5 RK05 disk volumes
+        or a single RL02 disk volume. Both disk sets are available for
+        download, see below under <a href="#p_OS_Kits">OS Kits</a>.
+        See <a href="#Fig_S-1">Figure S-1</a> for a
+        screen shot of a 2.11BSD boot sequence on a w11a system.
+    </li>
+</ul>
+
+See 
+<a href="{{site.w11_blob}}/doc/w11a_os_guide.txt">w11a_os_guide.txt</a>
+for description of the FPGA board and backend server setup as well as the
+boot procedure of these UNIX systems.
+
+<h2 id="s_Lic_Unix">License Situation Unix</h2>
+
+<a href="http://en.wikipedia.org/wiki/Ancient_UNIX">Ancient UNIX</a> 
+systems for the PDP-11 can now be freely used, see 
+<a href="http://minnie.tuhs.org/Archive/Caldera-license.pdf">
+Caldera license</a>. 
+
+<h2 id="s_lic_DEC">License Situation DEC Operating systems</h2>
+
+Unfortunately there is no hobbyist or non-commercial license available for 
+historical DEC PDP-11 operating systems like 
+<b><a href="http://en.wikipedia.org/wiki/RSX-11">RSX-11M</a> V3.2</b>, 
+owned since 1994 by Mentec Inc. (see 
+<a href="https://groups.google.com/forum/#!topic/biz.digital.announce/mnNlxqdYTwo">
+DEC press release dated 7/1/94</a>).
+The <a href="https://web.archive.org/web/20140710034347/http://www.eecis.udel.edu/~mader/delta/download/license.txt">
+Mentec license</a> is commonly understood to cover the some older versions 
+of DEC operating systems on software simulators, most notably on the 
+'simh' suite. The Mentec license does not cover the usage of these historic 
+systems on any 'real hardware' implementation of a PDP-11.
+<b>Usage on the w11 is not covered by the Mentec license</b>. 
+If somebody happens to have a valid license, please try and 
+<a href="mailto:wfjm@opencores.org">send a note to the author</a>. 
+
+<h2 id="s_OS_Kits">Available OS Kits</h2>
+A number of ready to use operating system images are provided for usage
+on w11a or on simh in a configuration equivalent to a w11a.
+
+<br />
+<table border="0">
+  <tr>
+    <th align="center" valign="top"><b>System</b></th>
+    <th align="center" valign="top"><b>Disk</b></th>
+    <th align="center" valign="top"><b>Tarball</b></th>
+    <th align="center" valign="top"><b>Decription</b></th>
+    <th align="center" colspan="2"><b>License</b></th>
+    <th align="left"   valign="top"><b>Comment</b></th>
+  </tr>
+  <tr>
+    <th align="center"></th>
+    <th align="center"><b>Type</b></th>
+    <th align="center"></th>
+    <th align="center"></th>
+    <th align="center"><b>w11</b></th>
+    <th align="center"><b>simh</b></th>
+    <th align="left"></th>
+  </tr>
+  <!-- Unix V5 rkset-->
+  <tr class="treven">
+    <td><b>Unix V5</b></td>
+    <td align="center">RK05</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/unix_v5_rkset.tgz">
+        rkset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/unix-v5_rk/README_unix_v5_rkset.txt">README</a></td>
+    <td align="center">Caldera</td>
+    <td align="center">Caldera</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- 2.11BSD rlset-->
+  <tr class="trodd">
+    <td><b>2.11BSD</b></td>
+    <td align="center">RL02</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rlset.tgz">
+        rlset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rl/README_211bsd_rlset.txt">README</a></td>
+    <td align="center">BSD</td>
+    <td align="center">BSD</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- 2.11BSD rkset-->
+  <tr class="treven">
+    <td><b>2.11BSD</b></td>
+    <td align="center">RK05</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rkset.tgz">
+        rkset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rk/README_211bsd_rkset.txt">README</a></td>
+    <td align="center">BSD</td>
+    <td align="center">BSD</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- 2.11BSD rlset-->
+  <tr class="trodd">
+    <td><b>2.11BSD</b></td>
+    <td align="center">RL02</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rlset.tgz">
+        rlset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rl/README_211bsd_rlset.txt">README</a></td>
+    <td align="center">BSD</td>
+    <td align="center">BSD</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- 2.11BSD rpset-->
+  <tr class="treven">
+    <td><b>2.11BSD</b></td>
+    <td align="center">RP06</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rpset.tgz">
+        rpset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rp/README_211bsd_rpset.txt">README</a></td>
+    <td align="center">BSD</td>
+    <td align="center">BSD</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- 2.11BSD tmset-->
+  <tr class="trodd">
+    <td><b>2.11BSD</b></td>
+    <td align="center">TM11</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_tmset.tgz">
+        tmset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/211bsd_tm/README_211bsd_tmset.txt">README</a></td>
+    <td align="center">BSD</td>
+    <td align="center">BSD</td>
+    <td align="left">bootable tape for installation on a RP06 disk</td>
+  </tr>
+
+  <!-- RT11 V4.0-->
+  <tr class="treven">
+    <td><b>RT11 V4.0</b></td>
+    <td align="center">RK05</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rt11-40_rkset.tgz">
+        rkset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/rt11-40_rk/README_rt11-40_rkset.txt">README</a></td>
+    <td align="center"><b>NONE</b></td>
+    <td align="center">Mentec</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- RT11 V5.3-->
+  <tr class="trodd">
+    <td><b>RT11 V5.3</b></td>
+    <td align="center">RL02</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rt11-53_rlset.tgz">
+        rlset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/rt11-53_rl/README_rt11-53_rlset.txt">README</a></td>
+    <td align="center"><b>NONE</b></td>
+    <td align="center">Mentec</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- RSX-11M V3.1 rkset-->
+  <tr class="treven">
+    <td><b>RSX-11M V3.1</b></td>
+    <td align="center">RK05</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11m-31_rkset.tgz">
+        rkset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/rsx11m-31_rk/README_rsx11m-31_rkset.txt">README</a></td>
+    <td align="center"><b>NONE</b></td>
+    <td align="center">Mentec</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- RSX-11M V4.0 rkset-->
+  <tr class="trodd">
+    <td><b>RSX-11M V4.0</b></td>
+    <td align="center">RK05</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11m-40_rkset.tgz">
+        rkset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/rsx11m-40_rk/README_rsx11m-40_rkset.txt">README</a></td>
+    <td align="center"><b>NONE</b></td>
+    <td align="center">Mentec</td>
+    <td align="left"></td>
+  </tr>
+
+  <!-- RSX-11M+ V3.0 rpset-->
+  <tr class="treven">
+    <td><b>RSX-11M+ V3.0</b></td>
+    <td align="center">RP06</td>
+    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11mp-30_rpset.tgz">
+        rpset</a></td>
+    <td align="center"><a href="{{page.oskit_blob}}/rsx11mp-30_rp/README_rsx11mp-30_rpset.txt">README</a></td>
+    <td align="center"><b>NONE</b></td>
+    <td align="center">Mentec</td>
+    <td align="left"></td>
+  </tr>
+
+</table>
+
+<!--
+A <b>RSX-11M V3.2</b> system, 
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/rsx11/RSX11M_V3.2_Jun79/2_Operation/AA-H625A-TC_RSX-11M_V3.2_System_Generation_Jun79.pdf">sysgen'ed</a> 
+for a 11/70 CPU with 1920 kwords, no FP-11, a 50 Hz clock, full duplex 
+terminal driver, and a DK: system disk should work, a 
+<a href="http://web.archive.org/web/20080721190915/http://www.computer.museum.uq.edu.au/RSX/AA-1936F-TC%20IAS,%20RSX,%20VAX-VMS%20FORTRAN%20IV%20User%27s%20Guide.tif">
+Fortran-IV V2.2</a> build with
+foreis.obj should even provide 
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/fortran/AA-R953A-TK_F4LangRef_Mar83.pdf">Fortran</a> 
+on this system without FPP. 
+-->

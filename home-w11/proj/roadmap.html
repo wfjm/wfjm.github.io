@@ -1,0 +1,160 @@
+---
+layout: w11
+title:  Roadmap
+---
+<div style="float:right; float:right; width: 240px; padding:10px; margin: 10px">
+<!-- Fig. R-1 -->
+  <a href="http://www.retro11.de/data/oc_w11/pictures/2010-08-08-w11a_s3.jpg">
+  <img id="Fig_R-1" width="240" height="201" alt="click for higher resolution" 
+src="http://www.retro11.de/data/oc_w11/pictures/2010-08-08-w11a_s3.jpg"
+  />
+  </a>
+  <br/>
+  <sub>
+  Fig R-1: w11a running on a Digilent 
+  <a href="http://www.digilentinc.com/Products/Detail.cfm?Prod=S3BOARD">
+  S3BOARD</a> board with XC3S1000. The rlink connection is via the RS232 
+  port and a FTDI 
+  <a href="http://www.ftdichip.com/Products/EvaluationKits/USB-Serial.htm">
+  US232R-100</a> cable. The 
+  <a href="http://www.digilentinc.com/Products/Catalog.cfm?NavPath=2,398&amp;Cat=7#DBB1">DBB1</a>
+  <a href="http://en.wikipedia.org/wiki/Kludge">kludge card</a> 
+  contains a test setup for a
+  FTDI <a href="http://www.ftdichip.com/Products/EvaluationKits/UM232R.htm">
+  UM232R</a> module.
+  </sub>
+
+<br/>
+<br/>
+
+<!-- Fig. R-2 -->
+  <a href="http://www.retro11.de/data/oc_w11/pictures/1174-cd-open.jpg">
+  <img id="Fig_R-2" width="240" height="180" alt="click for higher resolution" 
+src="http://www.retro11.de/data/oc_w11/pictures/1174-cd-open.jpg"
+    />
+  </a>
+  <br/>
+  <sub>
+  Fig R-2: Two of four processors of the 11/74 prototype PHEANX, which was
+    used up to the 90's for RSX builds. Earlier the machine was used under
+    the name CASTOR by DEC RSX Engineering in Maynard.
+    Picture courtesy of Dave Carroll.
+  </sub>
+
+</div>
+
+<p>
+<h2>Short term (in work)</h2>
+<ul>
+  <li>proper integration of <b>CPU monitoring unit</b> (dmcmon) and
+      <b>hardware break point unit</b> (dmhbpt) with w11 core and back end
+      software.
+  <li>lots of verification topics</li>
+</ul>
+</p>
+
+<p>
+<h2>Mid term</h2>
+<ul>
+  <li><b>DEUNA</b> Ethernet; 2.11BSD on w11a on the internet.</li>
+  <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
+  <li><b>fifo buffered</b> implementation of <b>character devices</b> 
+      (DL11,PC11,LP11).</li>
+  <li><b>KW11P:</b> programmable clock (needed for 2.11BSD kernel 
+      profiling).</li>
+  <li><b>CPU throttling</b> mechanism (some old code, especially tests
+         with timing loops, has problems on a <i>fast</i> machine...).</li>
+  <li>port to <a href="http://www.ztex.de/usb-fpga-2/usb-fpga-2.13.e.html">
+      ZTEX <b>USB-FPGA Module 2.13</b></a>. The ZTEX 2.13 combines Atrix-7 
+      and Cypress FX2, and has a fast JTAG over USB, and is therefore a good 
+      candidate for 'yet another port'.</li>
+</ul>
+</p>
+
+<p>
+<h2>Long term</h2>
+<ul>
+  <li>the current <b>w11a</b> system will be frozen when the above
+    mentions I/O system components are implemented.</li>
+  <li><b>w11f</b>: a w11a plus a <b>FPP Floating Point Processor</b>.
+    The FPP will be <b>asynchronous</b>, with a more efficient coupling
+    than in the original KB11-C CPU plus FP11-C FPP combination.</li>
+  <li><b>w11m</b>: a w11f with a <b>new cache system</b>, now <b>write-back</b>,
+    wider cache lines, suitable to build a 
+    <b>11/70MP multiprocessor system</b>. In contrast to the original 11/70MP 
+    a state-of-the-art <b>cache coherence</b> will be implemented.</li>
+  <li><b>w11e</b>:a stripped down w11a optimized as an <b>embedded</b> console 
+    and IO processor in larger systems.</li>
+  <li><b>w11n</b>: a w11m with a w11e as CIOP (console and IO processor)
+    which can be operated <b>stand-alone</b> without a backend server.</li>
+  <li><b>w11p</b>: new CPU with a much <b>improved micro architecture</b>. 
+    With <b>micro- and macro-pipelining</b> and a <b>significantly improved 
+    <a href="http://en.wikipedia.org/wiki/Cycles_per_instruction">CPI</a></b>, 
+    better than the J11.
+    Much faster than the w11a and derivatives, but also significantly higher 
+    resource consumption. Will implement, finally, the 11/44 and J11 special 
+    instructions (MFPT, MTPS, MFPS, TSTSET, WRTLCK), and make the
+    <b>processor type selectable</b>.</li>
+</ul>
+</p>
+
+<p>
+<h2>Release plan for w11a</h2>
+
+<table border="0" cellspacing="3">
+    <th valign="top" align="center"><b>Release</b></th>
+    <th valign="top" align="center"><b>&nbsp;Target Date&nbsp;</b></th>
+    <th valign="top" align="left"><b>Main release goals</b></th>
+  </tr>
+  <!-- disclaimer -->
+  <!-- v0.8 -->
+  <tr class="treven">
+    <td valign="top" align="center">V0.80</td>
+    <td valign="top" align="center">t.b.d.</td>
+    <td valign="top">verification: fix known CPU and IO issues</td>
+  </tr>
+  <!-- v0.9 -->
+  <tr class="trodd">
+    <td valign="top" align="center">V0.90</td>
+    <td valign="top" align="center">t.b.d.</td>
+    <td valign="top">communication: DZ11; DEUNA;</td>
+  </tr>
+  <!-- v1.0 -->
+  <tr class="treven">
+    <td valign="top" align="center">V1.00</td>
+    <td valign="top" align="center">t.b.d.</td>
+    <td valign="top">cleanups: e.g. buffered DL11,PC11,LP11; </td>
+  </tr>
+</table>
+</p>
+
+<p>
+
+Long term goal is to re-create a PDP-11/70MP (aka 11/74) system. 
+This up to 4 CPU 
+<a href="http://en.wikipedia.org/wiki/Symmetric_multiprocessing">
+symmetric multiprocessor system</a> was developed in the 
+late '70's by DEC, but was 
+<a href="http://www.village.org/pdp11/faq.pages/never11s.html">
+never marketed</a>.
+A few prototypes were build, see
+<a href="#Fig_R-2">Figure R-2</a> for a picture of
+PHEANX/CASTOR. Some documentation has survived, like the preliminary DEC 
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/1174/EK-70MP-TM_PRE_1170mp_Prelim_Technical_Manual_1977.pdf">
+11/70MP system manual</a>, see also a
+<a href="http://www.miim.com/faq/hardware/multipro.html">historical summary</a>.
+Full SMP support was added around 1980 to the RSX-11M-PLUS V2.0 
+operating system, 
+see for example the set and remove affinity system calls in the
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/rsx11/RSX11M_V4.1_Apr83/4_ProgramDevelopment/AA-L675A-TC_execRef_Nov81.pdf">
+Executive Manual</a> (STAF$ on p 5-193 and RMAF$ on p 5-128).
+Worth to note in this context is that already in 1972 a 16 node SMP
+system based on PDP-11 CPU's was build by
+<a href="http://en.wikipedia.org/wiki/William_Wulf">W. Wulf</a> and 
+<a href="http://en.wikipedia.org/wiki/Gordon_Bell">G. Bell</a>
+at Carnegie Mellon, the <a href="http://en.wikipedia.org/wiki/C.mmp">C.mmp</a>,
+see their paper 
+<a href="http://research.microsoft.com/en-us/um/people/gbell/CGB%20Files/Cmmp%20Multi-Mini-Processor%20ComConference%201972%20c.pdf">
+"C.mmp--A Multi-mini-processor"</a>
+for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
+</p>
