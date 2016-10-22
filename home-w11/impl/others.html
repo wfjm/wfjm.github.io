@@ -1,0 +1,59 @@
+---
+layout: w11
+title:  Other PDP-11 FPGA Implementations
+---
+<h2>Other Implementations</h2>
+Currently there are three other openly available FPGA implementations 
+of the PDP-11 architecture:
+
+<style>
+  dt {
+    margin-top: 0.5em;
+    font-weight: bold;
+  }
+</style>
+
+<dl>
+  <dt><a href="http://labo.nshimizu.com/pop11.html">
+    Naohiko Shimizu's POP-11:</a></dt>
+  <dd>a PDP-11/40 with MMU and EIS, boots 
+    <a href="http://en.wikipedia.org/wiki/Version_6_Unix">UNIX 6th edition</a>
+    from an IDE disk. Written in 
+    <a href="http://shimizu-lab.dt.u-tokai.ac.jp/pgm/sfl2vl/index.html">
+    SFL</a>. 
+    The POP-11 sources are open source, the SFL-to-Verilog converter 
+    unfortunately not.
+    See also a 
+    <a href="http://csdl.computer.org/comp/proceedings/asp-dac/2004/2543/00/25430571.pdf">
+    proceedings paper</a> on POP-11 submitted for the Asia and South Pacific 
+    Design Automation 2004 conference.
+    Naohiko's motivation is to 'Reincarnate Historic Systems on FPGA with 
+    Novel Design Methodology' and use this in teaching, see his presentation
+    given on the 
+<a href="http://ieeexplore.ieee.org/xpl/mostRecentIssue.jsp?reload=true&amp;punumber=5406656">
+ICCD 2009</a>
+    (<a href="http://ieeexplore.ieee.org/xpl/freeabs_all.jsp?arnumber=5413182">
+abstract</a>,
+<a href="http://www.ip-arch.jp/shmz-slide.pdf">slides</a> and 
+     <a href="http://iccd.et.tudelft.nl/2009/proceedings/10Shimizu.pdf">proceedings</a>).
+  </dd>
+
+  <dt><a href="http://www.heeltoe.com/download/pdp11/README.html">
+    Brad Parker's FPGA PDP-11:</a></dt>
+  <dd>currently a PDP-11/34 but soon a 
+    11/44, boots <a href="http://en.wikipedia.org/wiki/RT-11">RT-11</a>, 
+    <a href="http://en.wikipedia.org/wiki/RSTS/E">RSTS V4</a> 
+    and 2.9 BSD from an IDE disk via an RK11 emulation.
+    Written in Verilog. This project evolved independantly of the w11
+    on an essentially parallel time scale. See also
+    <a href="http://www.sdtimes.com/blog/post/2009/08/04/Build-your-own-PDP-11.aspx">
+    SD Times Article</a>.
+  </dd>
+
+  <dt><a href="http://pdp2011.sytse.net/wordpress/">
+    Sytse van Slooten's PDP2011:</a></dt> 
+  <dd>
+    another PDP-11/70 implementation, in VHDL, runs on several Xilinx and
+    Altera based FPGA boards.
+  </dd>
+</dl>

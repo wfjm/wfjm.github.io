@@ -1,7 +1,101 @@
 ---
 layout: w11
 title:  System Images
+oskit_url:  http://www.retro11.de/data/oc_w11/oskits
 oskit_blob: https://github.com/wfjm/w11/blob/master/tools/oskit
+oskits:
+
+# Unix V5 rkset
+ - system: Unix V5
+   vol: RK05
+   typ: rkset
+   tar: unix_v5_rkset.tgz
+   desc: unix-v5_rk/README_unix_v5_rkset.txt
+   licw: Caldera
+   lics: Caldera
+   com:
+
+# 2.11BSD rkset
+ - system: 2.11BSD
+   vol: RK05
+   typ: rkset 
+   tar: 211bsd_rkset.tgz
+   desc: 211bsd_rk/README_211bsd_rkset.txt
+   licw: BSD
+   lics: BSD
+   com:
+
+
+# 2.11BSD rlset
+ - system: 2.11BSD
+   vol: RL02
+   typ: rlset 
+   tar: 211bsd_rlset.tgz
+   desc: 211bsd_rl/README_211bsd_rlset.txt
+   licw: BSD
+   lics: BSD
+   com:
+
+# 2.11BSD rpset
+ - system: 2.11BSD
+   vol: RP06
+   typ: rpset 
+   tar: 211bsd_rpset.tgz
+   desc: 211bsd_rp/README_211bsd_rpset.txt
+   licw: BSD
+   lics: BSD
+   com:
+
+# 2.11BSD tmset
+ - system: 2.11BSD
+   vol: TM11
+   typ: tmset 
+   tar: 211bsd_tmset.tgz
+   desc: 211bsd_tm/README_211bsd_tmset.txt
+   licw: BSD
+   lics: BSD
+   com: bootable tape for installation on a RP06 disk
+
+# RT11 V4.0 rkset
+ - system: RT11 V4.0
+   vol: RK05
+   typ: rkset 
+   tar: rt11-40_rkset.tgz
+   desc: rt11-40_rk/README_rt11-40_rkset.txt
+   licw: NONE
+   lics: Mentec
+   com:
+
+# RT11 V5.3 rlset
+ - system: RT11 V5.3
+   vol: RL02
+   typ: rlset 
+   tar: rt11-53_rlset.tgz
+   desc: rt11-53_rl/README_rt11-53_rlset.txt
+   licw: NONE
+   lics: Mentec
+   com:
+
+# RSX-11M V3.1 rkset
+ - system: RSX-11M V3.1
+   vol: RK05
+   typ: rkset 
+   tar: rsx11m-31_rkset.tgz
+   desc: rsx11m-31_rk/README_rsx11m-31_rkset.txt
+   licw: NONE
+   lics: Mentec
+   com:
+
+# RSX-11M+ V3.0 rpset
+ - system: RSX-11M+ V3.0
+   vol: RP06
+   typ: rpset 
+   tar: rsx11mp-30_rpset.tgz
+   desc: rsx11mp-30_rp/README_rsx11mp-30_rpset.txt
+   licw: NONE
+   lics: Mentec
+   com:
+
 ---
 <!-- Fig. S-1 -->
 
@@ -98,137 +192,32 @@ on w11a or on simh in a configuration equivalent to a w11a.
     <th align="center"><b>simh</b></th>
     <th align="left"></th>
   </tr>
-  <!-- Unix V5 rkset-->
-  <tr class="treven">
-    <td><b>Unix V5</b></td>
-    <td align="center">RK05</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/unix_v5_rkset.tgz">
-        rkset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/unix-v5_rk/README_unix_v5_rkset.txt">README</a></td>
-    <td align="center">Caldera</td>
-    <td align="center">Caldera</td>
-    <td align="left"></td>
-  </tr>
 
-  <!-- 2.11BSD rlset-->
-  <tr class="trodd">
-    <td><b>2.11BSD</b></td>
-    <td align="center">RL02</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rlset.tgz">
-        rlset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rl/README_211bsd_rlset.txt">README</a></td>
-    <td align="center">BSD</td>
-    <td align="center">BSD</td>
-    <td align="left"></td>
-  </tr>
+  {% for osk in page.oskits %}
+    {% capture trclass %}{% cycle 'treven', 'trodd' %}{% endcapture %}
+    {% if osk.licw == "NONE" %}
+      {% assign licw_style = "font-weight:bold; background-color:mistyrose;" %}
+    {% else %}
+      {% assign licw_style = "" %}
+    {% endif %}
 
-  <!-- 2.11BSD rkset-->
-  <tr class="treven">
-    <td><b>2.11BSD</b></td>
-    <td align="center">RK05</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rkset.tgz">
-        rkset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rk/README_211bsd_rkset.txt">README</a></td>
-    <td align="center">BSD</td>
-    <td align="center">BSD</td>
-    <td align="left"></td>
+  <tr class={{trclass}}>
+    <td align="left"><b>{{osk.system}}</b>
+    </td>
+    <td align="center">{{osk.vol}}
+    </td>
+    <td align="center"><a href="{{page.oskit_url}}/{{osk.tar}}">{{osk.typ}}</a>
+    </td>
+    <td align="center"><a href="{{page.oskit_blob}}/{{osk.desc}}">README</a>
+    </td>
+    <td align="center"><span style="{{licw_style}}">{{osk.licw}}</span>
+    </td>
+    <td align="center">{{osk.lics}}
+    </td>
+    <td align="left">{{osk.com}}
+    </td>
   </tr>
-
-  <!-- 2.11BSD rlset-->
-  <tr class="trodd">
-    <td><b>2.11BSD</b></td>
-    <td align="center">RL02</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rlset.tgz">
-        rlset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rl/README_211bsd_rlset.txt">README</a></td>
-    <td align="center">BSD</td>
-    <td align="center">BSD</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- 2.11BSD rpset-->
-  <tr class="treven">
-    <td><b>2.11BSD</b></td>
-    <td align="center">RP06</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_rpset.tgz">
-        rpset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/211bsd_rp/README_211bsd_rpset.txt">README</a></td>
-    <td align="center">BSD</td>
-    <td align="center">BSD</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- 2.11BSD tmset-->
-  <tr class="trodd">
-    <td><b>2.11BSD</b></td>
-    <td align="center">TM11</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/211bsd_tmset.tgz">
-        tmset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/211bsd_tm/README_211bsd_tmset.txt">README</a></td>
-    <td align="center">BSD</td>
-    <td align="center">BSD</td>
-    <td align="left">bootable tape for installation on a RP06 disk</td>
-  </tr>
-
-  <!-- RT11 V4.0-->
-  <tr class="treven">
-    <td><b>RT11 V4.0</b></td>
-    <td align="center">RK05</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rt11-40_rkset.tgz">
-        rkset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/rt11-40_rk/README_rt11-40_rkset.txt">README</a></td>
-    <td align="center"><b>NONE</b></td>
-    <td align="center">Mentec</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- RT11 V5.3-->
-  <tr class="trodd">
-    <td><b>RT11 V5.3</b></td>
-    <td align="center">RL02</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rt11-53_rlset.tgz">
-        rlset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/rt11-53_rl/README_rt11-53_rlset.txt">README</a></td>
-    <td align="center"><b>NONE</b></td>
-    <td align="center">Mentec</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- RSX-11M V3.1 rkset-->
-  <tr class="treven">
-    <td><b>RSX-11M V3.1</b></td>
-    <td align="center">RK05</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11m-31_rkset.tgz">
-        rkset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/rsx11m-31_rk/README_rsx11m-31_rkset.txt">README</a></td>
-    <td align="center"><b>NONE</b></td>
-    <td align="center">Mentec</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- RSX-11M V4.0 rkset-->
-  <tr class="trodd">
-    <td><b>RSX-11M V4.0</b></td>
-    <td align="center">RK05</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11m-40_rkset.tgz">
-        rkset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/rsx11m-40_rk/README_rsx11m-40_rkset.txt">README</a></td>
-    <td align="center"><b>NONE</b></td>
-    <td align="center">Mentec</td>
-    <td align="left"></td>
-  </tr>
-
-  <!-- RSX-11M+ V3.0 rpset-->
-  <tr class="treven">
-    <td><b>RSX-11M+ V3.0</b></td>
-    <td align="center">RP06</td>
-    <td align="center"><a href="http://www.retro11.de/data/oc_w11/oskits/rsx11mp-30_rpset.tgz">
-        rpset</a></td>
-    <td align="center"><a href="{{page.oskit_blob}}/rsx11mp-30_rp/README_rsx11mp-30_rpset.txt">README</a></td>
-    <td align="center"><b>NONE</b></td>
-    <td align="center">Mentec</td>
-    <td align="left"></td>
-  </tr>
+  {% endfor %}
 
 </table>
 
