@@ -102,7 +102,8 @@ CPU originated accesses. This is used to implement the I/O system emulation.
 A single rbus can handle up to four CPUs with their attached peripherals 
 plus additional auxiliary units like the 'human I/O interceptor' used on 
 the Digilent boards
-(see <a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/bplib/bpgen/sn_humanio_rbus.vhd">sn_humanio_rbus.vhd</a>).
+(see <a href="{{site.w11_blob}}/rtl/bplib/bpgen/sn_humanio_rbus.vhd">
+sn_humanio_rbus.vhd</a>).
 The rbus has a simple interrupt mechanism. A slave can ask for 'attention' by
 asserting the LAM signal for a cycle (side note: LAM for 'look-at-me' is a 
 retro pun on 
@@ -132,7 +133,7 @@ and <a href="{{site.w11_blob}}/rtl/vlib/comlib/byte2cdata.vhd">byte2cdata.vhd</a
 These 9 bit to 8 bit interface adapters provide a fifo buffered byte wide 
 rlink interface used in all systems
 (see also
-<a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/vlib/rlink/rlink_core8.vhd">rlink_core8.vhd</a>).
+<a href="{{site.w11_blob}}/rtl/vlib/rlink/rlink_core8.vhd">rlink_core8.vhd</a>).
 </p>
 
 In the current systems the rlink communication is done via 
@@ -140,7 +141,8 @@ In the current systems the rlink communication is done via
 <li> an USB FIFO interface using the onboard
 <a href="http://www.cypress.com/?id=193">Cypress FX2</a> USB controller 
 on Nexys2 and Nexys3 boards. The FPGA interface (see
-<a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">fx2_2fifoctl_ic.vhd</a>) 
+<a href="{{site.w11_blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
+fx2_2fifoctl_ic.vhd</a>) 
 provides two end points and a data transfer speed of up to 30 MByte/sec
 and a request-response rate of 4 kHz, limited by the USB 2.0 timing structure.
 The FX2 firmware supports besides data transfers to a running FPGA design also
@@ -151,7 +153,7 @@ and
 </li>
 
 <li> a real or USB-emulated serial port (see
-<a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/vlib/rlink/rlink_sp1c.vhd">rlink_sp1c.vhd</a>).
+<a href="{{site.w11_blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">rlink_sp1c.vhd</a>).
 The UART (see <a href="{{site.w11_blob}}/rtl/vlib/serport/serport_uart_rx.vhd">serport_uart_rx.vhd</a>
 and
  <a href="{{site.w11_blob}}/rtl/vlib/serport/serport_uart_tx.vhd">serport_uart_tx.vhd</a>)
@@ -263,9 +265,9 @@ and
 <a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/tb/Makefile">tb_w11a_n2</a>).
 Two master Makefiles contain pattern rules for simulation and synthesis and 
 encapsulate all the <code>vbomconf</code> magic 
-(see <a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/make/generic_ghdl.mk">generic_ghdl.mk</a>
+(see <a href="{{site.w11_blob}}/rtl/make_ise/generic_ghdl.mk">generic_ghdl.mk</a>
 and
-<a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/make/generic_xflow.mk">generic_xflow.mk</a>).
+<a href="{{site.w11_blob}}/rtl/make_ise/generic_xflow.mk">generic_xflow.mk</a>).
 A full w11a system with USB support is build from about 100 vhdl source files,
 test benches from about 120 vhdl source files. Using the vbom's a large number
 of designs can be easily maintained.
