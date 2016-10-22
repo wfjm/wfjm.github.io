@@ -1,15 +1,9 @@
-/* $Id: CBMcdb_main.css 3833 2012-12-01 13:17:34Z mueller $ */
-/*                                                                            */
-/*  Revision History:                                                         */
-/* Date        Version  Comment                                               */
-/* 2012-11-11   1.0.5   change anchor defaults; rename td*->tr*, add trgray   */
-/* 2012-10-28   1.0.4   add #header-unsudo                                    */
-/* 2012-10-26   1.0.3   navbar with different background                      */
-/* 2012-10-22   1.0.2   new navbar behaviour (no underline, but hover color)  */
-/* 2012-10-21   1.0.1   more contrast between table lines: tdodd f0->ed       */
-/* 2012-08-17   1.0     Initial version                                       */
-/*                                                                            */
 /* general style defs */
+
+code {
+  background-color: WhiteSmoke ;
+}
+
 /* tables */
 
 /* define table basics                                */

@@ -39,7 +39,6 @@ is composed of four main units:
     (see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_vmbox.vhd">pdp11_vmbox.vhd</a>).</li>
 </ul>
 
-<p>
 Main difference to the KB11-C is that the w11a is not a micro coded design
 but based on a large sequencer state machine with currently 113 states and
 584 transitions. The number of states is significantly smaller than in the
@@ -54,7 +53,6 @@ The w11a main sequencer state flow graph is shown in
 The symbols and color code used in this flow chart is explained in the
 document 
 <a href="{{site.w11_blob}}/doc/w11a_seq_flow.txt">w11a_seq_flow.txt</a>.
-</p>
 
 <p>
 The strict separation of main state machine and data path helped a lot
@@ -137,8 +135,6 @@ rlink interface used in all systems
 <a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/vlib/rlink/rlink_core8.vhd">rlink_core8.vhd</a>).
 </p>
 
-
-<p>
 In the current systems the rlink communication is done via 
 <ul>
 <li> an USB FIFO interface using the onboard
@@ -170,7 +166,6 @@ up to 12 MBaud (in w11a designs 10 MBaud possible).
 </li>
 
 </ul>
-</p>
 
 <h2>The I/O System Emulation</h2>
 
@@ -267,7 +262,7 @@ The Makefile's in general just contain a few definitions and includes
 and
 <a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/tb/Makefile">tb_w11a_n2</a>).
 Two master Makefiles contain pattern rules for simulation and synthesis and 
-encapsulate all the <tt>vbomconf</tt> magic 
+encapsulate all the <code>vbomconf</code> magic 
 (see <a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/make/generic_ghdl.mk">generic_ghdl.mk</a>
 and
 <a href="http://opencores.org/websvn,filedetails?repname=w11&path=/w11/trunk/rtl/make/generic_xflow.mk">generic_xflow.mk</a>).
