@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <title>{{ page.title }}</title>
   </head>
+
   <body>
+    <!-- header section -->
     <div id="header"> 
       <div class="marginwrapper">
         <table width="100%">
@@ -17,6 +19,7 @@
       </div>
     </div>
 
+    <!-- content section -->
     <div id="mainwrapper">
       <div id="main">
         <div class="marginwrapper">
@@ -25,20 +28,62 @@
       </div>
     </div>
     
+    <!-- navigation bar -->
+    {% assign pagepath  = page.path | prepend: "/" %}
+    {% assign pageplist = pagepath  | split: "/" %}
+    {% assign pagelevel = pageplist | size %}
     <div id="navbar"> 
       <div class="marginwrapper">
         <ul>
-          <li><a href="/">Home</a></li>
-          <li><li><a href="/projects.html">Projects</a></li>
-          <ul>
-            <li><a href="/home/w11">w11</a></li>
-          </ul>
+          {% for nav in site.navbar %}
+            {% assign navplist = nav.link | split: "/" %}
+            {% assign navlevel = navplist | size %}
+            {% assign navshow = 1 %}
+            {% if navlevel <= pagelevel %}
+              {% for nele in navplist %}
+                {% unless forloop.last %}
+                  {% if nele != pageplist[forloop.index0] %}
+                    {% assign navshow = 0 %}
+                  {% endif %}
+                {% endunless %}
+              {% endfor %}
+            {% else %}
+              {% assign navshow = 0 %}
+            {% endif %}
+            {% if navshow == 1 or navlevel <= 7 %}
+              {% assign navstyle = "" %}
+              {% if navlevel <= 1 %}
+                {% assign navstyle = "font-size:120%; font-weight:bold" %}
+              {% elsif navlevel == 2 %}
+                {% assign navstyle = "font-size:110%; font-weight:bold" %}
+              {% elsif navlevel == 3 %}
+                {% assign navstyle = "font-weight:bold; padding-left:0.5em" %}
+              {% elsif navlevel == 4 %}
+                {% assign navstyle = "padding-left:1.0em" %}
+              {% elsif navlevel == 5 %}
+                {% assign navstyle = "font-size:90%; padding-left:1.5em" %}
+              {% endif %}
+              {% assign listyle = "" %}
+              {% if pagepath == nav.link %}
+                {% assign listyle = "background-color: #ccddcc" %}
+              {% endif %}
+              <li style="{{listyle}}"><a href="{{nav.link}}">
+                  <span style="{{navstyle}}">{{nav.text}}</span>
+                  </a>
+              </li>
+            {% endif %}
+          {% endfor %}
         </ul>
       </div>  
     </div>
 
+    <!-- footer section -->
     <div id="footer">
-      {{ page.path }}
+      {{ pagepath }} :: {{ pagelevel }} : {{ pagedir }} : {{ pagename1 }}
+      <img height="20" width="20" alt="W3C validator"
+           src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">
     </div>
+
   </body>
+
 </html>
