@@ -1,9 +1,18 @@
 /* general style defs --------------------------------------------- */
 
+body {
+  line-height: 1.3em;
+}
+
+h1,h2,h3,h4 {
+  color: #007000;
+}
+
 code {
   background-color: WhiteSmoke ;
 }
 
+h1
 /* tables */
 
 /* define table basics                                */
@@ -32,6 +41,13 @@ td {
   background: #ededed;
 }
 .treven { 
+  background: #fdfdfd;
+}
+
+.trtoggle tr:nth-child(odd) {
+  background: #ededed;
+}
+.trtoggle tr:nth-child(even) {
   background: #fdfdfd;
 }
 
@@ -215,6 +231,7 @@ a:active  {
   margin-left: 15px;
   margin-right: 15px;
   font-size: 83%;
+  line-height: 1.4em;
 }
 
 /* footer style defs ---------------------------------------------- */
