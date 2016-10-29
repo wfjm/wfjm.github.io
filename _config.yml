@@ -23,8 +23,8 @@ navbar:
    link: home/w11/proj/releases.html
  - text: Roadmap
    link: home/w11/proj/roadmap.html
- - text: Thanks
-   link: home/w11/proj/thanks.html
+ - text: Credits
+   link: home/w11/proj/credits.html
  - text: Core and SoC
    link: home/w11/impl/
  - text: Implementation
