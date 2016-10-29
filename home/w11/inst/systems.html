@@ -129,11 +129,18 @@ The most stringent test so far is that the following operating systems are known
         separate I/D space, 3 processor modes) to squeeze a full UNIX with 
         most of the 4.3 BSD features into a 16 bit machine. A system with the 
         latest patches is needed to get the 
-<a href="https://web.archive.org/web/20141018182505/http://www.classiccmp.org/pipermail/cctech/2007-January/032518.html">
-          kernel FPP emulation (patch 445)</a> and 
-<a href="https://web.archive.org/web/20141018182505/http://www.classiccmp.org/pipermail/cctech/2009-January/062011.html">
-          RK05 as boot device (patch 446/447)</a> to work.
-        The current w11a system has only RK11 or RL02 disks, so a very limited subset
+        {% include wbm-link.html 
+           date="20141018182505"
+           link="http://www.classiccmp.org/pipermail/cctech/2007-January/032518.html"
+           text="kernel FPP emulation (patch 445)" %}
+        and 
+        {% include wbm-link.html 
+           date="20141018182505"
+           link="http://www.classiccmp.org/pipermail/cctech/2009-January/062011.html"
+           text="RK05 as boot device (patch 446/447)" %}
+        to work.
+        The current w11a system has only RK11 or RL02 disks, so a very limited 
+        subset
         of the full 2.11BSD distribution was packed onto 5 RK05 disk volumes
         or a single RL02 disk volume. Both disk sets are available for
         download, see below under <a href="#p_OS_Kits">OS Kits</a>.
@@ -162,8 +169,12 @@ historical DEC PDP-11 operating systems like
 owned since 1994 by Mentec Inc. (see 
 <a href="https://groups.google.com/forum/#!topic/biz.digital.announce/mnNlxqdYTwo">
 DEC press release dated 7/1/94</a>).
-The <a href="https://web.archive.org/web/20140710034347/http://www.eecis.udel.edu/~mader/delta/download/license.txt">
-Mentec license</a> is commonly understood to cover the some older versions 
+The 
+{% include wbm-link.html 
+   date="20140710034347"
+   link="http://www.eecis.udel.edu/~mader/delta/download/license.txt"
+   text="Mentec license" %}
+is commonly understood to cover the some older versions 
 of DEC operating systems on software simulators, most notably on the 
 'simh' suite. The Mentec license does not cover the usage of these historic 
 systems on any 'real hardware' implementation of a PDP-11.

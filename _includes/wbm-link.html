@@ -1,0 +1,8 @@
+{% assign date_year = include.date | slice: 0,4 %}
+{% assign date_mon  = include.date | slice: 4,2 %}
+{% assign date_day  = include.date | slice: 6,2 %}
+
+<a href="https://web.archive.org/web/{{include.date}}/{{include.link}}">
+  {{include.text}}
+</a>
+<!-- archived on {{date_year}}-{{date_mon}}-{{date_day}} -->

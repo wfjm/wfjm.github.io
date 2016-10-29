@@ -48,8 +48,11 @@ The
 and 
 <a href="https://en.wikipedia.org/wiki/Tower_of_Hanoi"><b>Tower of Hanoi</b></a>
 benchmark codes taken from the 
-<a href="https://web.archive.org/web/20140706031712/http://www.vaxcluster.de/mambo/unixbench-4.1.0.tgz">'BYTE UNIX
-Benchmark'</a> were used to compare the w11a with 
+{% include wbm-link.html 
+   date="20140706031712"
+   link="http://www.vaxcluster.de/mambo/unixbench-4.1.0.tgz"
+   text="'BYTE UNIX Benchmark'" %}
+were used to compare the w11a with 
 <i>real</i> PDP-11's and other processors. The w11a values were determined
 for both boards, the comparison values obtained from 
 <a href="http://www.vaxcluster.de/mambo/index.php?option=displaypage&amp;Itemid=106&amp;op=incl&amp;SubMenu=">Michael Schneider's benchmark collection</a>:
@@ -84,8 +87,12 @@ values for the Dhry/MHz or 'Dhrystone per MHz' column. For a fair comparison
 it is also important to remark that the PDP-11/53+ systems didn't have a 
 cache and were therefore about a factor 2.3 slower than a PDP-11/93 with cache
 (see 
-<a href="https://web.archive.org/web/20160618161420/http://www.village.org/pdp11/faq.pages/prfmnc.html">comparison</a>),
-explaining the large factor between the w11a_s3 and the 11/53 benchmark results.
+{% include wbm-link.html 
+   date="20160618161420"
+   link="http://www.village.org/pdp11/faq.pages/prfmnc.html"
+   text="comparison" %}
+, explaining the large factor between the w11a_s3 and the 11/53 
+benchmark results.
 
 <p>
 The Dhrystone, Tower of Hanoi and 'syscall' benchmarks were also run on a 
