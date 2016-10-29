@@ -1,0 +1,83 @@
+---
+layout: default
+category: bsd211
+title: 2.11BSD Patch 446+447
+---
+<h2>fixes for ulrem,umount,tar,tcsh,ps,vmstat,apropos,pstat,rk</h2>
+
+<p>
+Over the past 2 years several bug fixes for 2.11BSD accumulated, and over
+xmas break I finally found the time to communicate them to Steven Schultz.
+Steven was so kind to package them into two new patch files
+</p>
+<ul>
+  <li><b>446</b>: issued December 27, 2008</li>
+  <li><b>447</b>: issued December 31, 2008</li>
+</ul>
+
+Together, the patches address the following points
+<ul>
+  <li><code>ulrem.s</code>: the unsigned long modulo operator (%) was 
+    broken in <code>libkern</code></li>
+  <li><code>umount</code>: returned inverted exit codes (1 for success, 
+    0 for failure)</li>
+  <li><code>tar</code>: core dumped when a whole /usr tree was archived</li>
+  <li><code>tcsh</code>: the time buildin function printed some erroneous or 
+    zero statistics</li>
+  <li><code>ps</code>: core dumped when '-t' option was used with no 
+    further argument</li>
+  <li><code>apropos</code>: core dumped when 2 or more arguments were given</li>
+  <li><code>vmstat</code>: wrong normalization for some fields</li>
+  <li>several issues around the rk disk driver
+    <ul>
+      <li>no rk root attach function</li>
+      <li>no rk BOOTDEV support</li>
+      <li>incorrect UCB_METER code (<code>vmstat/iostat</code> never showed any 
+        rk activity)</li>
+      <li>autoconfig left the RK11 controller in an error state</li>
+    </ul>
+  </li>
+  <li><code>pstat</code>: added additional options to access more kernel 
+    data structures
+    <ul>
+      <li>new -c option, dumping the coremap</li>
+      <li>new -m option, dumping the ub_map (UNIBUS map)</li>
+      <li>new -b option, dumping the buffer pool table</li>
+      <li>change -s output, gives now full table dump</li>
+      <li>adapt the info's displayed by -T</li>
+    </ul>
+  </li>
+  <li>some documentation corrections (<code>vmstat</code>, 
+    <code>pstat</code>, <code>tcsh</code>)</li>
+</ul>
+Note: In case you wonder, as I did, why 211BSD survived 20 years with a
+       broken unsigned long % operator:
+<ul>
+  <li>only the non-FPP <code>libkern</code> implementation was affected</li>
+  <li>the kernel simply doesn't have any unsigned long modulo's :)</li>
+  <li>apparently only standalone mkfs after patch 434 was compromised</li>
+</ul>
+
+<p>
+For the full story of all the above consult the header of the patch files.
+</p>
+
+<p>
+The patch files are available from moe.2bsd.com and ftp.wx.gd-ais.com.
+Note, that Steven changed the packaging some time ago, the patches are
+now packed in bzip'ed tarballs in groups of ten patches. So you'll have
+to look into
+</p>
+<ul>
+  <li>tp://moe.2bsd.com/pub/2.11BSD/440-447.tar.bz2</li>
+  <li>tp://ftp.wx.gd-ais.com/pub/2.11BSD/440-447.tar.bz2</li>
+</ul>
+
+<p>
+<em>for original note to 2.11BSD users see
+  {% include wbm-link.html 
+  date="20141018182452"
+  link="http://www.classiccmp.org/pipermail/cctech/2009-January/062011.html"
+  text="posting to cctech@classiccmp.org" %}
+ </em>
+</p>

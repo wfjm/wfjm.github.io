@@ -1,0 +1,42 @@
+---
+layout: default
+category: bsd211
+title: 2.11BSD Patch 445
+---
+<h2>FPSIM fixed; 211bsd runs on systems without FPP</h2>
+
+<p>
+Some time ago I looked into running 2.11bsd on systems without
+floating point unit. The release notes state that this is untested
+and unsupported, and indeed it didn't work.
+</p>
+<p>
+Robin Birch some time ago fixed part of the issues, see patch 434,
+but still the kernel paniced when the very first program was started.
+I managed to localize and fix the problem in <code>sys/pdp/mch_fpsim.s</code>.
+</p>
+<p>
+Steven Schultz right away issued 2.11BSD patch #445. All patches
+up to and including 445 are provided by Steven under
+</p>
+<pre>
+   ftp://sg-1.ims.ideas.gd-ais.com/pub/2.11BSD
+</pre>
+A patch level 445 system will now boot on simh for example on a
+<pre>
+   set cpu 11/70 nofpp 4m
+</pre>
+configuration and work just fine, albeit a little slower.
+<p>
+It should thus also work on a real 11/70 without FPP. I heard
+of some 11/70 with non-working FPP's, so this maybe good news
+for the owners.
+</p>
+<p>
+<em>for original note to 2.11BSD users see
+  {% include wbm-link.html 
+  date="20141018182505"
+  link="http://www.classiccmp.org/pipermail/cctech/2007-January/032518.html"
+  text="posting to cctech@classiccmp.org" %}
+ </em>
+</p>

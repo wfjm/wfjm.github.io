@@ -61,3 +61,5 @@ navbar:
 
  - text: w11
    link: blogs/w11/
+ - text: 2.11BSD
+   link: blogs/211bsd/

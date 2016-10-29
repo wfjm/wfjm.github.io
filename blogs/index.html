@@ -2,11 +2,15 @@
 layout: default
 title:  Blogs
 ---
-<ul>
-  {% for cat in site.categories %}
-    {% assign catnam = cat[0] %}
-    <li>
-      <a href="/blogs/{{catnam}}">{{catnam}}</a>
-    </li>
-  {% endfor %}
-</ul>
+The blog is organized in categories, which follow the project structure
+<dl>
+  <dt><a href="/blogs/w11">w11</a>:</dt>
+  <dd>all news on the github w11 project</dd>
+
+  <dt><a href="/blogs/211bsd">211bsd</a>:</dt>
+  <dd>all news on 2.11BSD related activities</dd>
+    
+  <dt><a href="/blogs/ouxr">ouxr</a>:</dt>
+  <dd>all news on 'Old Unix CrossReference project</dd>
+
+</dl>
