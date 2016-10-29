@@ -8,12 +8,56 @@
   </head>
 
   <body>
+    <!-- prepare for header and next/prev navigation -->
+    {% assign pageplist  = page.path  | split: "/" %}
+    {% assign pagelevel  = pageplist | size %}
+    {% assign navbarsize = site.navbar | size %}
+    {% for nav in site.navbar %}
+      {% assign navpath  = nav.link %}
+      {% assign navplist = nav.link | split: "/" %}
+      {% assign navlevel = navplist | size %}
+      {% assign navplast = navpath | slice: -1,1 %}
+      {% assign navpath  = nav.link %}
+      {% if navplast == "/" or  navplast == "" %}
+        {% assign navpath  = navpath | append: "index.html" %}
+      {% endif %}
+      {% if page.path == navpath %}
+        {% assign navindex = forloop.index0 %}
+        {% assign navindex_prev = navindex | minus: 1 %}
+        {% assign navindex_next = navindex | plus:  1 %}
+        {% if navindex_prev >= 0 %}
+          {% assign navlink_prev = site.navbar[navindex_prev].link %}
+        {% endif %}
+        {% if navindex_next < navbarsize %}
+          {% assign navlink_next = site.navbar[navindex_next].link %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
     <!-- header section -->
     <div id="header"> 
       <div class="marginwrapper">
-        <table width="100%">
+        <table>
           <tbody>
-            <td id="header-title">{{ page.title }}</td>
+            <tr>
+              <td rowspan="2" id="header-logo">
+                <img height="80" src="/downloads/icons/retro-logo.svg">
+              </td>
+              <td id="header-title">{{ page.title }}</td>
+              </td>
+            </tr>
+            <tr>
+              <td id="header-navlist">
+                <ul>
+                  {% if navlink_prev %}
+                    <li><a href="/{{navlink_prev}}">PREV</a></li>
+                  {% endif %}
+                  {% if navlink_next %}
+                    <li><a href="/{{navlink_next}}">NEXT</a></li>
+                  {% endif %}
+                 </ul>
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -29,15 +73,18 @@
     </div>
     
     <!-- navigation bar -->
-    {% assign pagepath  = page.path | prepend: "/" %}
-    {% assign pageplist = pagepath  | split: "/" %}
-    {% assign pagelevel = pageplist | size %}
     <div id="navbar"> 
       <div class="marginwrapper">
         <ul>
           {% for nav in site.navbar %}
+            {% assign navpath  = nav.link %}
             {% assign navplist = nav.link | split: "/" %}
             {% assign navlevel = navplist | size %}
+            {% assign navplast = navpath | slice: -1,1 %}
+            {% assign navpath  = nav.link %}
+            {% if navplast == "/" or  navplast == "" %}
+              {% assign navpath  = navpath | append: "index.html" %}
+            {% endif %}
             {% assign navshow = 1 %}
             {% if navlevel <= pagelevel %}
               {% for nele in navplist %}
@@ -50,26 +97,23 @@
             {% else %}
               {% assign navshow = 0 %}
             {% endif %}
-            {% if navshow == 1 or navlevel <= 3 %}
-              {% assign navstyle = "" %}
-              {% if navlevel <= 1 %}
-                {% assign navstyle = "font-size:120%; font-weight:bold" %}
+            {% if navshow == 1 or navlevel <= 2 %}
+              {% if navlevel == 0 %}
+                {% assign navliclass = "navlvl0" %}
+              {% elsif navlevel == 1 %}
+                {% assign navliclass = "navlvl1" %}
               {% elsif navlevel == 2 %}
-                {% assign navstyle = "font-size:110%; font-weight:bold" %}
+                {% assign navliclass = "navlvl2" %}
               {% elsif navlevel == 3 %}
-                {% assign navstyle = "font-weight:bold; padding-left:0.5em" %}
-              {% elsif navlevel == 4 %}
-                {% assign navstyle = "padding-left:1.0em" %}
-              {% elsif navlevel == 5 %}
-                {% assign navstyle = "font-size:90%; padding-left:1.5em" %}
+                {% assign navliclass = "navlvl3" %}
+              {% else %}
+                {% assign navliclass = "navlvl4" %}
               {% endif %}
-              {% assign listyle = "" %}
-              {% if pagepath == nav.link %}
-                {% assign listyle = "background-color: #ccddcc" %}
+              {% if page.path == navpath %}
+                {% assign navliclass = navliclass | append: " navselect" %}
+                {% assign navindex = forloop.index0 %}
               {% endif %}
-              <li style="{{listyle}}"><a href="{{nav.link}}">
-                  <span style="{{navstyle}}">{{nav.text}}</span>
-                  </a>
+              <li class="{{navliclass}}"><a href="/{{nav.link}}">{{nav.text}}</a>
               </li>
             {% endif %}
           {% endfor %}
@@ -79,7 +123,19 @@
 
     <!-- footer section -->
     <div id="footer">
-      {{ pagepath }} 
+      {{ page.path }} 
+      ::
+      {{ pagelevel }} 
+      ::
+      {{ navindex }} 
+      ::
+      {% if navlink_prev %}
+        <a href="/{{navlink_prev}}">PREV</a>
+      {% endif %}
+      {% if navlink_next %}
+        <a href="/{{navlink_next}}">NEXT</a>
+      {% endif %}
+
       <a href="https://validator.w3.org/check/referer">
         <img height="20" width="20" alt="W3C validator"
              src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">

@@ -1,4 +1,4 @@
-/* general style defs */
+/* general style defs --------------------------------------------- */
 
 code {
   background-color: WhiteSmoke ;
@@ -9,6 +9,10 @@ code {
 /* define table basics                                */
 /* - table headers have a blueish bachground          */
 /* - increase padding a bit to avoid to dense packing */
+table { 
+ border: 5px black;
+}
+
 th { 
   background-color: #eaeaff;
   padding-top:    5px;
@@ -24,10 +28,11 @@ td {
   padding-right:  5px;
 }
 
-tfoot td {
-  background-color: #f4f4ff;
-  padding-top:    5px;
-  padding-bottom: 5px;
+.trodd { 
+  background: #ededed;
+}
+.treven { 
+  background: #fdfdfd;
 }
 
 /* re-define anchor basics     */
@@ -49,6 +54,7 @@ a:active  {
   color:  #ff0000;
 }
 
+/* header style defs ---------------------------------------------- */
 
 #header {
 /*  background: #eeeeee; */
@@ -60,37 +66,38 @@ a:active  {
   width: 100%;
 }
 
+#header-logo { 
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100px;
+}
+
 #header-title { 
   font-size: 35px;
   font-weight: bold;
 }
 
-#header-logstate { 
-  font-size: 12px;
-  padding-right:  15px;
-}
-#header-login { 
-  background: #ff8080;
-  font-size: 12px;
-  font-weight: bold;
-  padding-left:   5px;
-  padding-right:  5px;
-}
-#header-logout { 
-  background: #00ff00;
-  font-size: 12px;
-  font-weight: bold;
-  padding-left:   5px;
-  padding-right:  5px;
-}
-#header-unsudo { 
-  background: #ffbb00;
-  font-size: 12px;
-  font-weight: bold;
-  padding-left:   5px;
-  padding-right:  5px;
+#header-navlist { 
+  text-align: right;
 }
 
+#header-navlist ul { 
+  list-style-type: none;
+}
+
+#header-navlist ul li { 
+  display: inline;
+  background-color: white;
+  padding: 3px;
+  border: 2px solid #777788;
+  border-radius: 5px;
+}
+
+#header-navlist ul li a:hover {
+  background-color: #ddeedd;
+  text-decoration: none;
+}
 
 #mainwrapper {
   float: left;
@@ -102,6 +109,8 @@ a:active  {
   font-size: 14px;
 /*  background: #eeeeff; */
 }
+
+/* navbar style defs ---------------------------------------------- */
 
 #navbar {
   float: left;
@@ -116,31 +125,99 @@ a:active  {
   padding:0 0 0 0;
   margin:0;
   font-weight: normal;
-  border-top:    1px solid #777788;
-  border-bottom: 1px solid #777788;
-  border-left:   2px solid #777788;
-  border-right:  2px solid #777788;
   background: #ddeedd;
+  border-top: 2px solid #777788;
+  border-bottom: 2px solid #777788;
+  border-left: 2px solid #777788;
+  border-right: 2px solid #777788;
 }
 
-#navbar ul a{ 
+#navbar ul li { 
   display: block;
-  overflow: auto; /*force hasLayout in IE7 */
   text-decoration: none;
-  border-top:    1px solid #777788;
-  border-bottom: 1px solid #777788;
   color: black;
   padding:3px 3px 3px 5px;
 }
 
+#navbar ul li a { 
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
 #navbar a:link, 
 #navbar a:visited, 
-#navbar a:active{
+#navbar a:active {
 }
 
 #navbar a:hover{
   background-color: #ccddcc;
 }
+
+#navbar .navlvl0 {
+  font-size: 120%;
+  font-weight: bold;
+  border-bottom: 1px solid #777788;
+}
+
+#navbar .navlvl1 {
+  font-size: 110%;
+  font-weight: bold;
+  padding-left: 10px;
+  border-top: 1px solid #777788;
+  border-bottom: 1px solid #777788;
+}
+
+#navbar .navlvl2 {
+  font-weight: bold;
+  padding-left: 15px;
+  border-top: 1px solid #777788;
+  border-bottom: 1px solid #777788;
+}
+
+#navbar .navlvl3 {
+  padding-left: 20px;
+}
+
+#navbar .navlvl4 {
+  font-size: 80%;
+  padding-left: 25px;
+}
+
+#navbar .navselect {
+  background-color: #ccddcc;
+}
+
+/* figure style defs ---------------------------------------------- */
+
+.figureframe {
+  float:right; 
+  width:260px; 
+  margin:10px;
+  background-color: #f0f0ff;
+}
+.figureframe-wide {
+  float:right; 
+  width:280px; 
+  padding:0px;
+  margin:10px;
+  background-color: #f0f0ff;
+}
+
+.figurebox {
+  margin-top:10px;
+  margin-bottom:10px;
+  text-align: center;
+}
+.figurecaption {
+  margin-top:10px;
+  margin-bottom:10px;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-size: 83%;
+}
+
+/* footer style defs ---------------------------------------------- */
 
 #footer {
   clear: left;
@@ -156,26 +233,3 @@ a:active  {
   margin-top: 0;
 }
 
-.trodd { 
-  background: #ededed;
-}
-.treven { 
-  background: #fdfdfd;
-}
-.trgray { 
-  color: #a0a0a0;
-  font-style:italic;
-}
-.trgray a { 
-  color: #a0a0ff;
-}
-.trgray a:hover { 
-  color: #0000ff;
-}
-
-.editbutton {
-  background: #c0ffc0;
-  font-weight: bold;
-  padding-left:   5px;
-  padding-right:  5px;
-}
