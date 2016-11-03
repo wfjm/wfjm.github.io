@@ -37,34 +37,30 @@
     {% endfor %}
 
     <!-- header section -->
-    <div id="header"> 
-      <div class="marginwrapper">
-        <table>
-          <tbody>
-            <tr>
-              <td rowspan="2" id="header-logo">
-                <img height="80" src="/downloads/icons/retro-logo.svg"
-                     alt="wfjm's retro logo">
-              </td>
-              <td id="header-title">{{ page.title }}</td>
-            </tr>
-            <tr>
-              <td id="header-navlist">
-                <ul>
-                  {% if navlink_prev %}
-                    <li><a href="/{{navlink_prev}}">PREV</a></li>
-                  {% endif %}
-                  {% if navlink_next %}
-                    <li><a href="/{{navlink_next}}">NEXT</a></li>
-                  {% endif %}
-                 </ul>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
+    <table id="header"> 
+      <tr id="header-top">
+        <td id="header-toplogo" rowspan="2">
+          <img height="80" src="/downloads/icons/retro-logo.svg"
+               alt="wfjm's retro logo">
+        </td>
+        <td id="header-toptitle">
+          {{ page.title }}
+        </td>
+      </tr>
+      <tr id="header-bot">
+        <td id="header-botnav">
+          {% if navlink_prev %}
+            <a href="/{{navlink_prev}}">
+              <img src="/downloads/icons/i3ds/prev.gif" alt="PREV"></a>
+          {% endif %}
+          {% if navlink_next %}
+            <a href="/{{navlink_next}}">
+              <img src="/downloads/icons/i3ds/next.gif" alt="NEXT"></a>
+          {% endif %}
+        </td>
+      </td>
+    </table>
+   
     <!-- content section -->
     <div id="mainwrapper">
       <div id="main">
@@ -125,24 +121,36 @@
 
     <!-- footer section -->
     <div id="footer">
-      {{ page.path }} 
-      ::
-      {{ pagelevel }} 
-      ::
-      {{ navindex }} 
-      ::
       {% if navlink_prev %}
-        <a href="/{{navlink_prev}}">PREV</a>
+        <a href="/{{navlink_prev}}">
+          <img src="/downloads/icons/i3d/prev.gif" alt="PREV">
+        </a>
       {% endif %}
       {% if navlink_next %}
-        <a href="/{{navlink_next}}">NEXT</a>
+        <a href="/{{navlink_next}}">
+          <img src="/downloads/icons/i3d/next.gif" alt="NEXT">
+        </a>
       {% endif %}
 
       <a href="https://validator.w3.org/check/referer">
-        <img height="20" width="20" alt="W3C validator"
+        <img height="40" width="40" alt="W3C validator"
              src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">
       </a>
     </div>
+
+    <!-- debug footer section -->
+      <div id="footer-debug">
+        {{ jekyll.environment }}
+        ::
+        {{ site.GH_ENV }}
+        ::
+        {{ page.path }} 
+        ::
+        {{ pagelevel }} 
+        ::
+        {{ navindex }} 
+        ::
+      </div>
 
   </body>
 

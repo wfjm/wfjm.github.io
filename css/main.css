@@ -8,7 +8,6 @@ code {
   background-color: WhiteSmoke ;
 }
 
-h1
 /* tables */
 
 /* define table basics                                */
@@ -69,46 +68,26 @@ a:active  {
 /* header style defs ---------------------------------------------- */
 
 #header {
-/*  background: #eeeeee; */
-  text-align: center;
-}
-
-#header table {
-  background: #e0e0ff;
   width: 100%;
+  text-align: center;
+  background: #e0e0ff;
 }
 
-#header-logo { 
+#header-toplogo {
   text-align: left;
   padding-left: 10px;
   padding-right: 10px;
   width: 100px;
 }
-
-#header-title { 
+#header-toptitle {
+  height: 60px;
   font-size: 35px;
   font-weight: bold;
+  vertival-align: middle;
 }
 
-#header-navlist { 
+#header-botnav {
   text-align: right;
-}
-
-#header-navlist ul { 
-  list-style-type: none;
-}
-
-#header-navlist ul li { 
-  display: inline;
-  background-color: white;
-  padding: 3px;
-  border: 2px solid #777788;
-  border-radius: 5px;
-}
-
-#header-navlist ul li a:hover {
-  background-color: #ddeedd;
-  text-decoration: none;
 }
 
 #mainwrapper {
@@ -236,7 +215,7 @@ a:active  {
   clear: left;
   width: 100%;
   background: #dddddd;
-  text-align: center;
+  text-align: right;
   padding: 4px 0;
   font-size: 14px;
 }
