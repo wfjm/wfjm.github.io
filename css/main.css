@@ -120,6 +120,11 @@ a:active  {
 /*  background: #eeeeff; */
 }
 
+.marginwrapper {
+  margin: 10px;
+  margin-top: 0;
+}
+
 /* navbar style defs ---------------------------------------------- */
 
 #navbar {
@@ -254,10 +259,5 @@ a:active  {
   width: 35%;
   text-align: right;
   vertical-align: bottom;
-}
-
-.marginwrapper {
-  margin: 10px;
-  margin-top: 0;
 }
 
