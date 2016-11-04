@@ -1,0 +1,18 @@
+---
+layout: default
+title: debug listsite
+---
+<table class="trtoggle">
+  <tr>
+    <th>key</th>
+    <th>val</th>
+  </tr>
+  {% for p in site %}
+    {% assign key = p[0] %}
+    {% assign val = p[1] %}
+    <tr>
+      <td>{{p}}</td>
+      <td>{{site[p] | inspect | truncate: 300, '.....' }}</td>
+    </tr>
+  {% endfor %}
+</table>

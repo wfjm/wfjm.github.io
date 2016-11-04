@@ -1,0 +1,23 @@
+---
+layout: default
+title: debug list_pages
+w3c_chtml: "https://validator.w3.org/check"
+w3c_clink: "https://validator.w3.org/checklink"
+---
+{% assign pages_urlsorted = site.pages | sort: "url" %}
+<table class="trtoggle">
+  <tr>
+    <th>url</th>
+    <th>val</th>
+    <th>lck</th>
+    <th>title</th>
+  </tr>
+  {% for p in pages_urlsorted %}
+    <tr>
+      <td><a href="{{p.url}}">{{p.url}}</a></td>
+      <td><a href="{{page.w3c_chtml}}?uri={{site.url}}{{p.url}}">val</a></td>
+      <td><a href="{{page.w3c_clink}}?uri={{site.url}}{{p.url}}">lck</a></td>
+      <td>{{p.title}}</td>
+    </tr>
+  {% endfor %}
+</table>

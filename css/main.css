@@ -65,6 +65,19 @@ a:active  {
   color:  #ff0000;
 }
 
+.abotton {
+  background: #eee;
+  padding: 3px;
+  border-style: ridge;
+  border-width: 1px; 
+  border-radius: 5px; 
+  border-color: #333;
+}
+.abotton:hover {
+  background-color: #ccddcc;
+  text-decoration: none;
+}
+
 /* header style defs ---------------------------------------------- */
 
 #header {
@@ -81,13 +94,19 @@ a:active  {
 }
 #header-toptitle {
   height: 60px;
-  font-size: 35px;
+  font-size: 200%;
   font-weight: bold;
   vertival-align: middle;
 }
 
+#header-botpath {
+  font-size: 80%;
+  text-align: left;
+  vertical-align: bottom;
+}
 #header-botnav {
   text-align: right;
+  vertical-align: bottom;
 }
 
 #mainwrapper {
@@ -215,9 +234,26 @@ a:active  {
   clear: left;
   width: 100%;
   background: #dddddd;
+}
+
+#footer table {
+  width: 100%;
+  background: #dddddd;
+}
+#footer-about {
+  width: 35%;
+  text-align: left;
+  vertical-align: center;
+}
+#footer-time {
+  width: 30%;
+  text-align: center;
+  vertical-align: bottom;
+}
+#footer-nav {
+  width: 35%;
   text-align: right;
-  padding: 4px 0;
-  font-size: 14px;
+  vertical-align: bottom;
 }
 
 .marginwrapper {

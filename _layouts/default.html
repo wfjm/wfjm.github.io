@@ -43,12 +43,30 @@
           <img height="80" src="/downloads/icons/retro-logo.svg"
                alt="wfjm's retro logo">
         </td>
-        <td id="header-toptitle">
+        <td id="header-toptitle" colspan="2">
           {{ page.title }}
         </td>
       </tr>
       <tr id="header-bot">
+        <td id="header-botpath">
+          {% assign headnavlink = "" %}
+          {% for e in pageplist %}
+            {% if e != "index.html" %}
+              {% assign headnavlink = headnavlink | append: "/" | append: e %}
+              / 
+              {% unless forloop.last %}
+                <a href="{{headnavlink}}"> {{e}} </a>
+              {% else %}
+                {{e}}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+        </td>
         <td id="header-botnav">
+          {% unless page.path == "index.html" %}
+            <a href="/">
+              <img src="/downloads/icons/i3ds/home.gif" alt="HOME"></a>
+          {% endunless %}
           {% if navlink_prev %}
             <a href="/{{navlink_prev}}">
               <img src="/downloads/icons/i3ds/prev.gif" alt="PREV"></a>
@@ -58,7 +76,7 @@
               <img src="/downloads/icons/i3ds/next.gif" alt="NEXT"></a>
           {% endif %}
         </td>
-      </td>
+      </tr>
     </table>
    
     <!-- content section -->
@@ -121,29 +139,42 @@
 
     <!-- footer section -->
     <div id="footer">
-      {% if navlink_prev %}
-        <a href="/{{navlink_prev}}">
-          <img src="/downloads/icons/i3d/prev.gif" alt="PREV">
-        </a>
-      {% endif %}
-      {% if navlink_next %}
-        <a href="/{{navlink_next}}">
-          <img src="/downloads/icons/i3d/next.gif" alt="NEXT">
-        </a>
-      {% endif %}
-
-      <a href="https://validator.w3.org/check/referer">
-        <img height="40" width="40" alt="W3C validator"
-             src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">
-      </a>
+      <table>
+        <tr>
+          <td id="footer-about">
+            <a class="abotton" href="/about">about</a>
+          </td>
+          <td id="footer-time">
+            {% if page.lastchange %}
+              <em> updated {{page.lastchange}} </em>
+            {% endif %}
+          </td>
+          <td id="footer-nav">
+            {% unless page.path == "index.html" %}
+            <a href="/">
+              <img src="/downloads/icons/i3d/home.gif" alt="HOME"></a>
+            {% endunless %}
+            {% if navlink_prev %}
+              <a href="/{{navlink_prev}}">
+                <img src="/downloads/icons/i3d/prev.gif" alt="PREV"></a>
+            {% endif %}
+            {% if navlink_next %}
+              <a href="/{{navlink_next}}">
+                <img src="/downloads/icons/i3d/next.gif" alt="NEXT"></a>
+            {% endif %}
+  
+            <a href="https://validator.w3.org/check/referer">
+              <img height="40" width="40" alt="W3C validator"
+                   src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">
+            </a>
+          </td>
+        </tr>
+      </table>
     </div>
 
     <!-- debug footer section -->
+    {% if jekyll.environment == "development" %}
       <div id="footer-debug">
-        {{ jekyll.environment }}
-        ::
-        {{ site.GH_ENV }}
-        ::
         {{ page.path }} 
         ::
         {{ pagelevel }} 
@@ -151,7 +182,7 @@
         {{ navindex }} 
         ::
       </div>
-
+    {% endif %}
   </body>
 
 </html>
