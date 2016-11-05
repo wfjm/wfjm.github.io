@@ -11,17 +11,8 @@ title: Dump site.github
     {% assign key = item[0] %}
     {% assign val = item[1] %}
     <tr>
-      <td class="va-top">{{key}}</td>
-      <td>
-        {% assign val_je = val | jsonify | replace: '":','" : '| 
-             replace: ',"',' , "'| replace: '},{','} , {' %}
-        {% assign val_je_tr = val | truncate: 200, "  ....." %}
-        {% if val_je.size != val_je_tr.size %}
-        {% assign val_je_tr = val_je_tr | 
-             append: "("  | append: val.size | append: ")" %}
-        {% endif %}
-        {{ val_je_tr }}
-      </td>
+      {% assign xxx = item | jsonify %}
+      <td>{{xxx}}</td>
     </tr>
   {% endfor %}
 </table>
