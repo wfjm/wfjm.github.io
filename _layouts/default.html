@@ -180,9 +180,9 @@
             <th>Property</th>
             <th>Value</th>
           </tr>
-          {% for e in page %}
-            {% assign key = e[0] %}
-            {% assign val = e[1] %}
+          {% for item in page %}
+            {% assign key = item[0] %}
+            {% assign val = item[1] %}
             {% unless key == "content" %}
               <tr>
                 <td class="va-top">{{key}}</td>

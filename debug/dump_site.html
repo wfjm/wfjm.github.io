@@ -19,13 +19,15 @@ title: Dump site
           {% when "documents" %}
             <i>too long</i>
           {% when "html_pages" %}
-            <i>too long</i>
+            <i>see <a href="list_html_pages.html">list_html_pages</a></i>
           {% when "pages" %}
             <i>see <a href="list_pages.html">list_pages</a></i>
           {% when "posts" %}
             <i>too long</i>
           {% when "static_files" %}
-            <i>too long</i>
+            <i>see <a href="list_static_files.html">list_static_files</a></i>
+          {% when "github" %}
+            <i>see <a href="dump_site_github.html">dump_site_github</a></i>
           {% else %}
             {% assign val = site[p] | jsonify | replace: '":','" : '| 
                  replace: ',"',' , "'| replace: '},{','} , {' %}

@@ -1,10 +1,10 @@
 ---
 layout: plain
-title: List site.pages
+title: List site.html_pages
 w3c_chtml: "https://validator.w3.org/check"
 w3c_clink: "https://validator.w3.org/checklink"
 ---
-{% assign pages_sorted = site.pages | sort: "url" %}
+{% assign pages_sorted = site.html_pages | sort: "url" %}
 <table class="trtoggle">
   <tr>
     <th>url</th>

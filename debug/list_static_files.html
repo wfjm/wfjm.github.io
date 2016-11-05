@@ -1,0 +1,19 @@
+---
+layout: plain
+title: List site.static_files
+---
+{% assign files_sorted = site.static_files | sort: "path" %}
+<table class="trtoggle">
+  <tr>
+    <th>path</th>
+    <th>type</th>
+    <th>last modified</th>
+  </tr>
+  {% for f in files_sorted %}
+    <tr>
+      <td><a href="{{f.path}}">{{f.path}}</a></td>
+      <td>{{f.extname}}</td>
+      <td>{{f.modified_time}}</td>
+    </tr>
+  {% endfor %}
+</table>
