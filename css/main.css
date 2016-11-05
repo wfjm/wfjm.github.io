@@ -78,6 +78,22 @@ a:active  {
   text-decoration: none;
 }
 
+.dlbig dt {
+  font-size: 150%;
+  font-weight: bold;
+  margin-top: 1em;
+}
+.dlbig dd {
+  margin-top: 5px;
+  margin-left: 25px;
+}
+
+.dlbig dl dt {
+  font-size: 120%;
+  font-weight: bold;
+  margin-top: 0.5em;
+}
+
 /* header style defs ---------------------------------------------- */
 
 #header {

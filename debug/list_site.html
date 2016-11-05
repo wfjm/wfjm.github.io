@@ -1,6 +1,6 @@
 ---
-layout: default
-title: debug listsite
+layout: plain
+title: Dump site
 ---
 <table class="trtoggle">
   <tr>
@@ -8,11 +8,35 @@ title: debug listsite
     <th>val</th>
   </tr>
   {% for p in site %}
-    {% assign key = p[0] %}
-    {% assign val = p[1] %}
     <tr>
       <td>{{p}}</td>
-      <td>{{site[p] | inspect | truncate: 300, '.....' }}</td>
+      <td>
+        {% case p %}
+          {% when "categories" %}
+            <i>too long</i>
+          {% when "collections" %}
+            <i>too long</i>
+          {% when "documents" %}
+            <i>too long</i>
+          {% when "html_pages" %}
+            <i>too long</i>
+          {% when "pages" %}
+            <i>too long</i>
+          {% when "posts" %}
+            <i>too long</i>
+          {% when "static_files" %}
+            <i>too long</i>
+          {% else %}
+            {% assign val = site[p] | inspect %}
+            {% assign val_tr = val | truncate: 500, "  ....." %}
+            {% if val.size != val_tr.size %}
+              {% assign val_tr = val_tr | append: "(" %}
+              {% assign val_tr = val_tr | append: val.size %}
+              {% assign val_tr = val_tr | append: ")" %}
+            {% endif %}
+            {{ val_tr }}
+        {% endcase %}
+      </td>
     </tr>
   {% endfor %}
 </table>
