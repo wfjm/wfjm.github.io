@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="jekyll">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <link rel="icon" href="/downloads/icons/favicon.ico" />
+    <link rel="shortcut icon" href="/downloads/icons/favicon.ico" />
+    <title>{{ page.title }}</title>
+  </head>
+
+  <body>
+    <!-- prepare next/prev navigation in given category -->
+    {% for post in site.categories[page.category] %}
+      {% if post.url == page.url %}
+        {% assign post_ind = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
+
+    {% assign max_ind = site.categories[page.category].size | minus: 1 %}
+    {% if post_ind > 0 %}
+      {% assign prev_ind = post_ind | minus: 1 %}
+      {% assign prev_url = site.categories[page.category][prev_ind].url %}
+    {% endif %}
+    {% if post_ind < max_ind %}
+      {% assign next_ind = post_ind | plus: 1 %}
+      {% assign next_url = site.categories[page.category][next_ind].url %}
+    {% endif %}
+
+   <!-- header section -->
+    <table id="header"> 
+      <tr id="header-top">
+        <td id="header-toplogo" rowspan="2">
+          <img height="80" src="/downloads/icons/retro-logo.svg"
+               alt="wfjm's retro logo">
+        </td>
+        <td id="header-toptitle" colspan="2">
+          {{ page.title }}
+        </td>
+      </tr>
+      <tr id="header-bot">
+        <td id="header-botpath">
+          {% assign headnavlink = "" %}
+          {% for e in pageplist %}
+            {% if e != "index.html" %}
+              {% assign headnavlink = headnavlink | append: "/" | append: e %}
+              / 
+              {% unless forloop.last %}
+                <a href="{{headnavlink}}"> {{e}} </a>
+              {% else %}
+                {{e}}
+              {% endunless %}
+            {% endif %}
+          {% endfor %}
+        </td>
+        <td id="header-botnav">
+          <a href="/">
+            <img src="/downloads/icons/i3ds/home.gif" alt="HOME"></a>
+          <a href="/blogs/{{page.category}}/">
+            <img src="/downloads/icons/i3ds/up.gif" alt="UP"></a>
+          {% if next_url %}
+            <a href="{{next_url}}">
+              <img src="/downloads/icons/i3ds/prev.gif" alt="PREV"></a>
+          {% endif %}
+          {% if prev_url %}
+            <a href="{{prev_url}}">
+              <img src="/downloads/icons/i3ds/next.gif" alt="NEXT"></a>
+          {% endif %}
+        </td>
+      </tr>
+    </table>
+   
+    <!-- content section -->
+    <div id="mainwrapper">
+      <div id="main">
+        <div class="marginwrapper">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+    
+    <!-- navigation bar -->
+    <div id="navbar"> 
+      <div class="marginwrapper">
+        <ul>
+        </ul>
+      </div>  
+    </div>
+
+    <!-- footer section -->
+    <div id="footer">
+      <table>
+        <tr>
+          <td id="footer-about">
+            <a class="abotton" href="/about/">about</a>
+          </td>
+          <td id="footer-time">
+            {% if page.lastchange %}
+              <em> updated {{page.lastchange}} </em>
+            {% endif %}
+          </td>
+          <td id="footer-nav">
+            <a href="/">
+              <img src="/downloads/icons/i3d/home.gif" alt="HOME"></a>
+            <a href="/blogs/{{page.category}}/">
+              <img src="/downloads/icons/i3d/up.gif" alt="UP"></a>
+            {% if next_url %}
+              <a href="{{next_url}}">
+                <img src="/downloads/icons/i3d/prev.gif" alt="PREV"></a>
+            {% endif %}
+            {% if prev_url %}
+              <a href="{{prev_url}}">
+                <img src="/downloads/icons/i3d/next.gif" alt="NEXT"></a>
+            {% endif %}
+  
+            <a href="https://validator.w3.org/check/referer">
+              <img height="40" width="40" alt="W3C validator"
+                   src="https://www.w3.org/html/logo/downloads/HTML5_Logo.svg">
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- debug footer section -->
+    {% if jekyll.environment == "development" %}
+      <div id="footer-debug">
+        <table class="trtoggle">
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+          {% for item in page %}
+            {% assign key = item %}
+            {% assign val = page[item] %}
+            <tr>
+              <td class="va-top">{{key}}</td>
+              <td>
+                {% case key %}
+                {% when "next" %}
+                  <a href="{{page.next.url}}">{{page.next.url}}</a>
+                {% when "previous" %}
+                  <a href="{{page.previous.url}}">{{page.previous.url}}</a>
+                {% when "content" %}
+                  <i>too long</i>
+                {% when "excerpt" %}
+                  {{page.excerpt | strip_html | truncate: 500 }}
+                {% else %}
+                  {% assign val_je = val | jsonify | replace: '":','" : '| 
+                       replace: ',"',' , "'| replace: '},{','} , {' %}
+                  {% assign val_je_tr = val_je | truncate: 200, "  ....." %}
+                  {% if val_je.size != val_je_tr.size %}
+                    {% assign val_je_tr = val_je_tr |
+                         append: "(" | append: val_je.size | append: ")" %}
+                  {% endif %}
+                  {{ val_je_tr }}
+                {% endcase %}
+              </td>
+            </tr>
+          {% endfor %}
+        </table>
+      </div>
+    {% endif %}
+  </body>
+
+</html>

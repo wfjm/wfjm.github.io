@@ -2,10 +2,4 @@
 layout: default
 title:  w11 blog
 ---
-<ul>
-  {% for post in site.categories.w11 %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-  {% endfor %}
-</ul>
+{% include blog_list.html cat="w11" %}
