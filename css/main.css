@@ -46,6 +46,26 @@ td {
   background: #fdfdfd;
 }
 
+.ha-left {
+  text-align: left;
+}
+.ha-center {
+  text-align: center;
+}
+.ha-right {
+  text-align: right;
+}
+
+.va-top {
+  vertical-align: top;
+}
+.va-mid {
+  vertical-align: middle;
+}
+.va-bot {
+  vertical-align: bottom;
+}
+
 /* re-define anchor basics     */
 /* - no underline              */
 /* - but stay with blue        */
@@ -277,3 +297,7 @@ a:active  {
   vertical-align: bottom;
 }
 
+#footer-debug {
+  margin-top: 10px;
+  margin-left: 10px;
+}

@@ -175,12 +175,31 @@
     <!-- debug footer section -->
     {% if jekyll.environment == "development" %}
       <div id="footer-debug">
-        {{ page.path }} 
-        ::
-        {{ pagelevel }} 
-        ::
-        {{ navindex }} 
-        ::
+        <table class="trtoggle">
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+          {% for e in page %}
+            {% assign key = e[0] %}
+            {% assign val = e[1] %}
+            {% unless key == "content" %}
+              <tr>
+                <td class="va-top">{{key}}</td>
+                <td>
+                  {% assign val_je = val | jsonify | replace: '":','" : '| 
+                       replace: ',"',' , "'| replace: '},{','} , {' %}
+                  {% assign val_je_tr = val_je | truncate: 200, "  ....." %}
+                  {% if val_je.size != val_je_tr.size %}
+                    {% assign val_je_tr = val_je_tr |
+                         append: "(" | append: val_je.size | append: ")" %}
+                  {% endif %}
+                  {{ val_je_tr }}
+                </td>
+              </tr>
+            {% endunless %}
+          {% endfor %}
+        </table>
       </div>
     {% endif %}
   </body>

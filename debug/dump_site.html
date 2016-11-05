@@ -21,18 +21,18 @@ title: Dump site
           {% when "html_pages" %}
             <i>too long</i>
           {% when "pages" %}
-            <i>too long</i>
+            <i>see <a href="list_pages.html">list_pages</a></i>
           {% when "posts" %}
             <i>too long</i>
           {% when "static_files" %}
             <i>too long</i>
           {% else %}
-            {% assign val = site[p] | inspect %}
-            {% assign val_tr = val | truncate: 500, "  ....." %}
+            {% assign val = site[p] | jsonify | replace: '":','" : '| 
+                 replace: ',"',' , "'| replace: '},{','} , {' %}
+            {% assign val_tr = val | truncate: 200, "  ....." %}
             {% if val.size != val_tr.size %}
-              {% assign val_tr = val_tr | append: "(" %}
-              {% assign val_tr = val_tr | append: val.size %}
-              {% assign val_tr = val_tr | append: ")" %}
+              {% assign val_tr = val_tr | 
+                   append: "("  | append: val.size | append: ")" %}
             {% endif %}
             {{ val_tr }}
         {% endcase %}
