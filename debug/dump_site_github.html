@@ -1,0 +1,31 @@
+---
+layout: plain
+title: Dump site.github
+---
+<table class="trtoggle">
+  <tr>
+    <th>key</th>
+    <th>val</th>
+  </tr>
+  {% for item in site.github %}
+    {% assign key = item[0] %}
+    {% assign val = item[1] %}
+    <tr>
+      <td class="va-top">{{key}}</td>
+      <td>
+        {% assign val_je = val | jsonify | replace: '":','" : '| 
+             replace: ',"',' , "'| replace: '},{','} , {' %}
+        {% assign val_je_tr = val | truncate: 200, "  ....." %}
+        {% if val_je.size != val_je_tr.size %}
+        {% assign val_je_tr = val_je_tr | 
+             append: "("  | append: val.size | append: ")" %}
+        {% endif %}
+        {{ val_je_tr }}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
+
+{% unless site.github %}
+  <b>site.github undefined</b>
+{% endunless %}
