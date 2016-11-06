@@ -29,15 +29,9 @@ title: Dump site
           {% when "github" %}
             <i>see <a href="dump_site_github.html">dump_site_github</a></i>
           {% else %}
-            {% assign val = site[p] | jsonify | replace: '":','" : '| 
-                 replace: ',"',' , "'| replace: '},{','} , {' %}
-            {% assign val_tr = val | truncate: 200, "  ....." %}
-            {% if val.size != val_tr.size %}
-              {% assign val_tr = val_tr | 
-                   append: "("  | append: val.size | append: ")" %}
-            {% endif %}
-            {{ val_tr }}
-        {% endcase %}
+            {% assign dump_value = site[p] %}
+            {% include dump_variable.html max="200" %}
+         {% endcase %}
       </td>
     </tr>
   {% endfor %}

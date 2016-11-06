@@ -187,14 +187,8 @@
               <tr>
                 <td class="va-top">{{key}}</td>
                 <td>
-                  {% assign val_je = val | jsonify | replace: '":','" : '| 
-                       replace: ',"',' , "'| replace: '},{','} , {' %}
-                  {% assign val_je_tr = val_je | truncate: 200, "  ....." %}
-                  {% if val_je.size != val_je_tr.size %}
-                    {% assign val_je_tr = val_je_tr |
-                         append: "(" | append: val_je.size | append: ")" %}
-                  {% endif %}
-                  {{ val_je_tr }}
+                  {% assign dump_value = val %}
+                  {% include dump_variable.html max="200" %}
                 </td>
               </tr>
             {% endunless %}

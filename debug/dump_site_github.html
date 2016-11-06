@@ -11,14 +11,8 @@ title: Dump site.github
     <tr>
       <td>{{key}}</td>
       <td>
-        {% assign val = site.github[key] | jsonify | replace: '":','" : '| 
-             replace: ',"',' , "'| replace: '},{','} , {' %}
-        {% assign val_tr = val | truncate: 200, "  ....." %}
-        {% if val.size != val_tr.size %}
-        {% assign val_tr = val_tr | 
-             append: "("  | append: val.size | append: ")" %}
-        {% endif %}
-        {{ val_tr }}
+        {% assign dump_value = site.github[key] %}
+        {% include dump_variable.html max="200" %}
       </td>
     </tr>
   {% endfor %}
