@@ -50,11 +50,11 @@ navbar:
  - text: Other FPGA PDP-11's
    link: home/w11/info/others.html
 
- - text: ouxr
-   link: home/ouxr/
-
- - text: 211bsd
-   link: home/211bsd/
+# - text: ouxr
+#   link: home/ouxr/
+#
+# - text: 211bsd
+#   link: home/211bsd/
 
  - text: Bogs
    link: blogs/
@@ -63,3 +63,6 @@ navbar:
    link: blogs/w11/
  - text: 2.11BSD
    link: blogs/211bsd/
+
+ - text: About
+   link: about/
