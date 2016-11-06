@@ -1,17 +1,25 @@
 {% comment %}
-  The variable 'val' will be jsonified. This often leads to a long string 
-  without blanks which can't be line wrapped by html, especially in a <td>. 
-  So with some replace blanks are added between syntactic elements. Finally 
-  the result is truncated to 'max', with the chopped length indicated.
+  Snipplet to convert a variable (scalar,hash,list) into html for dumping.
+  The variable 'val' will be jsonified. If it's a utl, it converted to an
+  a tag. The json output is often a long string  without blanks which can't 
+  be line wrapped by html, especially in a <table><td> environment. 
+  So with some replace filters blanks are added between syntactic elements. 
+  Finally the result is truncated to 'max', with the chopped length indicated.
 {% endcomment %}
 {% assign val_je = include.val | jsonify | 
     replace: '":','" : '| 
     replace: ',"',' , "'| 
     replace: '},{','} , {' %}
-{% assign val_je_tr = val_je | truncate: include.max, "  ....." %}
-{% assign nchop =  val_je.size | minus: val_je_tr.size %}
-{% if nchop > 0 %}
-  {% assign val_je_tr = val_je_tr | 
-        append: "(+"  | append: nchop | append: " chars)" %}
+{% assign prefix = val_je | replace_first: 'https://','http://' |
+                            slice: 1,7 %}
+{% if prefix == "http://" %}
+  <a href="{{include.val}}">{{include.val}}</a>
+{% else %}
+  {% assign val_je_tr = val_je | truncate: include.max, "  ....." %}
+  {% assign nchop =  val_je.size | minus: val_je_tr.size %}
+  {% if nchop > 0 %}
+    {% assign val_je_tr = val_je_tr | 
+          append: "<i>(+"  | append: nchop | append: " chars)</i>" %}
+  {% endif %}
+  {{ val_je_tr }}
 {% endif %}
-{{ val_je_tr }}
