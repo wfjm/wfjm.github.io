@@ -1,0 +1,21 @@
+---
+layout: plain
+title: Debug tools
+---
+{% assign pages_sorted = site.pages | sort: "url" %}
+<table class="trtoggle">
+  <tr>
+    <th>url</th>
+    <th>title</th>
+  </tr>
+  {% for p in pages_sorted %}
+    {% if page.dir == p.dir %}
+      {% unless p.name == "index.html" %}
+        <tr>
+          <td><a href="{{p.url}}">{{p.name}}</a></td>
+          <td>{{p.title}}</td>
+        </tr>
+      {% endunless %}
+    {% endif %}
+  {% endfor %}
+</table>
