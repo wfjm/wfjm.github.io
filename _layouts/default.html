@@ -55,7 +55,7 @@
               {% assign headnavlink = headnavlink | append: "/" | append: e %}
               / 
               {% unless forloop.last %}
-                <a href="{{headnavlink}}"> {{e}} </a>
+                <a href="{{headnavlink}}/"> {{e}} </a>
               {% else %}
                 {{e}}
               {% endunless %}
