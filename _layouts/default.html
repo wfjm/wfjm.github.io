@@ -187,8 +187,7 @@
               <tr>
                 <td class="va-top">{{key}}</td>
                 <td>
-                  {% assign dump_value = val %}
-                  {% include dump_variable.html max="200" %}
+                  {% include dump_variable.html val=val max="200" %}
                 </td>
               </tr>
             {% endunless %}

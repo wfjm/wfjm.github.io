@@ -7,11 +7,11 @@ title: Dump site
     <th>key</th>
     <th>val</th>
   </tr>
-  {% for p in site %}
+  {% for key in site %}
     <tr>
-      <td>{{p}}</td>
+      <td>{{key}}</td>
       <td>
-        {% case p %}
+        {% case key %}
           {% when "categories" %}
             <i>too long</i>
           {% when "collections" %}
@@ -29,8 +29,8 @@ title: Dump site
           {% when "github" %}
             <i>see <a href="dump_site_github.html">dump_site_github</a></i>
           {% else %}
-            {% assign dump_value = site[p] %}
-            {% include dump_variable.html max="200" %}
+            {% assign dval = site[key] %}
+            {% include dump_variable.html val=dval max="200" %}
          {% endcase %}
       </td>
     </tr>

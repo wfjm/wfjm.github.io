@@ -11,8 +11,8 @@ title: Dump site.github
     <tr>
       <td>{{key}}</td>
       <td>
-        {% assign dump_value = site.github[key] %}
-        {% include dump_variable.html max="200" %}
+        {% assign dval = site.github[key] %}
+        {% include dump_variable.html val=dval max="200" %}
       </td>
     </tr>
   {% endfor %}

@@ -1,11 +1,10 @@
 {% comment %}
-  ! unfortunately variables can't be passed as parameters to includes !
-  So the variable dump_value will be jsonified. This often leads to a long 
-  string without blanks which can't be line wrapped by html. So with some
-  replace some blanks are added between syntactic elements. Finally the
-  result is truncated to 'max', and the chopped length indicated.
+  The variable 'val' will be jsonified. This often leads to a long string 
+  without blanks which can't be line wrapped by html, especially in a <td>. 
+  So with some replace blanks are added between syntactic elements. Finally 
+  the result is truncated to 'max', with the chopped length indicated.
 {% endcomment %}
-{% assign val_je = dump_value | jsonify | 
+{% assign val_je = include.val | jsonify | 
     replace: '":','" : '| 
     replace: ',"',' , "'| 
     replace: '},{','} , {' %}
