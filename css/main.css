@@ -321,16 +321,23 @@ h6:hover .header-link {
   width: 100%;
   background: #dddddd;
 }
+
 #footer-about {
   width: 35%;
   text-align: left;
   vertical-align: center;
 }
+#footer-about-tools {
+  font-size:70%; 
+  padding-left:2em
+}
+
 #footer-time {
   width: 30%;
   text-align: center;
   vertical-align: bottom;
 }
+
 #footer-nav {
   width: 35%;
   text-align: right;
