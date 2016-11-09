@@ -1,5 +1,13 @@
 /* general style defs --------------------------------------------- */
 
+body {
+  font-family: sans-serif;
+}
+
+h1,h2 {
+  font-family: serif;
+}
+
 h1,h2,h3,h4 {
   color: #007000;
 }
@@ -85,7 +93,7 @@ a:active  {
   color:  #ff0000;
 }
 
-.abotton {
+.abutton {
   background: #eee;
   padding: 3px;
   border-style: ridge;
@@ -93,7 +101,7 @@ a:active  {
   border-radius: 5px; 
   border-color: #333;
 }
-.abotton:hover {
+.abutton:hover {
   background-color: #ccddcc;
   text-decoration: none;
 }
@@ -114,6 +122,34 @@ a:active  {
   margin-top: 0.5em;
 }
 
+.dttime {
+  padding-left: 0.5em;
+  font-size: 80%;
+  font-style: italic;
+}
+
+/* hover anchor links --------------------------------------------- */
+
+
+.header-link {
+  margin-left: 0.5em;
+  opacity: 0;
+
+  \-webkit-transition: opacity 0.2s ease-in-out 0.1s;
+  \-moz-transition: opacity 0.2s ease-in-out 0.1s;
+  \-ms-transition: opacity 0.2s ease-in-out 0.1s;
+}
+
+h2:hover .header-link,
+h3:hover .header-link,
+h4:hover .header-link,
+h5:hover .header-link,
+h6:hover .header-link {
+  opacity: 1;
+}
+
+
+
 /* header style defs ---------------------------------------------- */
 
 #header {
@@ -132,6 +168,8 @@ a:active  {
   height: 60px;
   font-size: 200%;
   font-weight: bold;
+  font-family: serif;
+  text-shadow: 1.5px 1.5px 1.5px;
   vertival-align: middle;
 }
 
@@ -242,6 +280,7 @@ a:active  {
 /* figure style defs ---------------------------------------------- */
 
 .figureframe {
+  clear: right;
   float:right; 
   width:260px; 
   margin:10px;
@@ -294,6 +333,7 @@ a:active  {
 #footer-nav {
   width: 35%;
   text-align: right;
+  font-size: 150%;
   vertical-align: bottom;
 }
 
