@@ -15,8 +15,10 @@ w3c_clink: "https://validator.w3.org/checklink"
   {% for p in pages_sorted %}
     <tr>
       <td><a href="{{p.url}}">{{p.url}}</a></td>
-      <td><a href="{{page.w3c_chtml}}?uri={{site.url}}{{p.url}}">val</a></td>
-      <td><a href="{{page.w3c_clink}}?uri={{site.url}}{{p.url}}">lck</a></td>
+      <td><a href="{{page.w3c_chtml}}?uri={{site.url}}{{p.url}}">
+          <i class="fa fa-html5 abutton"></i></a></td>
+      <td><a href="{{page.w3c_clink}}?uri={{site.url}}{{p.url}}">
+          <i class="fa fa-link abutton"></i></a></td>
       <td>{{p.title}}</td>
     </tr>
   {% endfor %}
