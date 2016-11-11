@@ -249,7 +249,7 @@ releases:
 Major releases are labeled with bold <b>tag</b> fields, while minor
 releases are labeled with italic <i>tag</i> fields.
 
-<table border="0" cellspacing="3">
+<table>
   <tr>
     <th valign="top" align="center"><b>Release</b></th>
     <th valign="top" align="center"><b>Date</b></th>
@@ -273,19 +273,19 @@ releases are labeled with italic <i>tag</i> fields.
     {% endif %}
 
   <tr class={{trclass}}>
-    <td valign="top"><a href="{{page.w11_tag}}/{{rel.tag}}">
+    <td class="va-top"><a href="{{page.w11_tag}}/{{rel.tag}}">
         {{rel_tembeg}}{{rel.tag}}{{rel_temend}}&nbsp;</a>
     </td>
-    <td valign="top">
+    <td class="va-top">
       &nbsp;{{rel.dat}}&nbsp;
     </td>
-    <td valign="top" align="center">
+    <td class="va-top ha-center">
       &nbsp;<a href="{{page.w11_comm}}/{{rel.com}}">{{rel_coms}}</a>&nbsp;
     </td>
-    <td valign="top" align="center">
+    <td class="va-top ha-center">
       &nbsp;<a href="{{page.w11_blob}}/{{rel.com}}/{{rel.fil}}">{{rel.nam}}</a>&nbsp;
     </td>
-    <td valign="top">
+    <td class="va-top">
       {{rel.txt}}
     </td>
   </tr>

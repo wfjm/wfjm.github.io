@@ -68,7 +68,7 @@ so far were:
   {% for ms in page.milestones %}
     {% capture trclass %}{% cycle 'treven', 'trodd' %}{% endcapture %}
   <tr class={{trclass}}>
-    <td align="right" valign="top"><b>{{ms.dat}}</b></td>
+    <td class="ha-right va-top"><b>{{ms.dat}}</b></td>
     <td>{{ms.txt}}</td>
   </tr>
   {% endfor %}

@@ -171,7 +171,7 @@ h6:hover .header-link {
   font-weight: bold;
   font-family: serif;
   text-shadow: 1.5px 1.5px 1.5px;
-  vertival-align: middle;
+  vertical-align: middle;
 }
 
 #header-botpath {
@@ -325,8 +325,9 @@ h6:hover .header-link {
 #footer-about {
   width: 35%;
   text-align: left;
-  vertical-align: center;
+  vertical-align: middle;
 }
+
 #footer-about-tools {
   font-size:70%; 
   padding-left:2em
