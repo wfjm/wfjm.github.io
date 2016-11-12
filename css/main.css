@@ -340,7 +340,7 @@ dt:hover .hover-link {
 /* footer style defs ---------------------------------------------- */
 
 #footer {
-  clear: left;
+  clear: both;
   width: 100%;
   background: #dddddd;
 }
@@ -377,4 +377,9 @@ dt:hover .hover-link {
 #footer-debug {
   margin-top: 10px;
   margin-left: 10px;
+  margin-right: 10px;
+  border-top: 6px solid #ffb166;
+  border-left: 6px solid #ffb166;
+  background-color: #ffecd9;
+  font-size: 80%;
 }
