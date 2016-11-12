@@ -104,9 +104,7 @@
             </span>
           </td>
           <td id="footer-time">
-            {% if page.lastchange %}
-              <em> updated {{page.lastchange}} </em>
-            {% endif %}
+            <em> posted on {{page.date | slice: 0,10}} </em>
           </td>
           <td id="footer-nav">
             <a href="/">
