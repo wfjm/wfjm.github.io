@@ -41,18 +41,12 @@ td {
   padding-right:  5px;
 }
 
-.trodd { 
-  background: #ededed;
-}
-.treven { 
+/* toggle tr background, but only for decendants of tbody */
+.trtoggle tbody>tr:nth-child(odd) {
   background: #fdfdfd;
 }
-
-.trtoggle tr:nth-child(odd) {
+.trtoggle tbody>tr:nth-child(even) {
   background: #ededed;
-}
-.trtoggle tr:nth-child(even) {
-  background: #fdfdfd;
 }
 
 .ha-left {

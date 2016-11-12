@@ -59,18 +59,20 @@ milestones:
 
 Being a 'leisture time project' things evolve at a modest pace. Key milestone
 so far were:
-<table>
-  <tr>
-    <th class="ha-right"><b>Date</b></th>
-    <th class="ha-left">&nbsp;&nbsp;&nbsp;&nbsp;Milestone</th>
-  </tr>
-
-  {% for ms in page.milestones %}
-    {% capture trclass %}{% cycle 'treven', 'trodd' %}{% endcapture %}
-  <tr class={{trclass}}>
-    <td class="ha-right va-top"><b>{{ms.dat}}</b></td>
-    <td>{{ms.txt}}</td>
-  </tr>
-  {% endfor %}
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th class="ha-right"><b>Date</b></th>
+      <th class="ha-left">Milestone</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for ms in page.milestones %}
+    <tr>
+      <td class="ha-right va-top"><b>{{ms.dat}}</b></td>
+      <td>{{ms.txt}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>
 

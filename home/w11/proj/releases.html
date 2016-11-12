@@ -249,46 +249,46 @@ releases:
 Major releases are labeled with bold <b>tag</b> fields, while minor
 releases are labeled with italic <i>tag</i> fields.
 
-<table>
-  <tr>
-    <th class="va-top ha-center"><b>Release</b></th>
-    <th class="va-top ha-center"><b>Date</b></th>
-    <th class="va-top ha-center"><b>commit</b></th>
-    <th class="va-top ha-center"><b>README</b></th>
-    <th class="va-top ha-left"><b>Comment</b></th>
-  </tr>
-
-  {% for rel in page.releases %}
-    {% capture trclass %}{% cycle 'treven', 'trodd' %}{% endcapture %}
-    {% assign rel_coms = rel.com | truncate: 7,"" %}
-    {% if rel.typ == "ma" %}
-      {% assign rel_tembeg = "<b>" %}
-      {% assign rel_temend = "</b>" %}
-    {% elsif rel.typ == "mi" %}
-      {% assign rel_tembeg = "<i>" %}
-      {% assign rel_temend = "</i>" %}
-    {% else %}
-      {% assign rel_tembeg = "" %}
-      {% assign rel_temend = "" %}
-    {% endif %}
-
-  <tr class={{trclass}}>
-    <td class="va-top"><a href="{{page.w11_tag}}/{{rel.tag}}">
-        {{rel_tembeg}}{{rel.tag}}{{rel_temend}}&nbsp;</a>
-    </td>
-    <td class="va-top">
-      &nbsp;{{rel.dat}}&nbsp;
-    </td>
-    <td class="va-top ha-center">
-      &nbsp;<a href="{{page.w11_comm}}/{{rel.com}}">{{rel_coms}}</a>&nbsp;
-    </td>
-    <td class="va-top ha-center">
-      &nbsp;<a href="{{page.w11_blob}}/{{rel.com}}/{{rel.fil}}">{{rel.nam}}</a>&nbsp;
-    </td>
-    <td class="va-top">
-      {{rel.txt}}
-    </td>
-  </tr>
-  {% endfor %}
-
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th class="va-top ha-center"><b>Release</b></th>
+      <th class="va-top ha-center"><b>Date</b></th>
+      <th class="va-top ha-center"><b>commit</b></th>
+      <th class="va-top ha-center"><b>README</b></th>
+      <th class="va-top ha-left"><b>Comment</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rel in page.releases %}
+      {% assign rel_coms = rel.com | truncate: 7,"" %}
+      {% if rel.typ == "ma" %}
+        {% assign rel_tembeg = "<b>" %}
+        {% assign rel_temend = "</b>" %}
+      {% elsif rel.typ == "mi" %}
+        {% assign rel_tembeg = "<i>" %}
+        {% assign rel_temend = "</i>" %}
+      {% else %}
+        {% assign rel_tembeg = "" %}
+        {% assign rel_temend = "" %}
+      {% endif %}
+    <tr>
+      <td class="va-top"><a href="{{page.w11_tag}}/{{rel.tag}}">
+          {{rel_tembeg}}{{rel.tag}}{{rel_temend}}</a>
+      </td>
+      <td class="va-top">
+        {{rel.dat}}
+      </td>
+      <td class="va-top ha-center">
+        <a href="{{page.w11_comm}}/{{rel.com}}">{{rel_coms}}</a>
+      </td>
+      <td class="va-top ha-center">
+        <a href="{{page.w11_blob}}/{{rel.com}}/{{rel.fil}}">{{rel.nam}}</a>
+      </td>
+      <td class="va-top">
+        {{rel.txt}}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>

@@ -189,47 +189,47 @@ A number of ready to use operating system images are provided for usage
 on w11a or on simh in a configuration equivalent to a w11a.
 
 <br>
-<table>
-  <tr>
-    <th class="va-top ha-center"><b>System</b></th>
-    <th class="va-top ha-center"><b>Disk</b></th>
-    <th class="va-top ha-center"><b>Tarball</b></th>
-    <th class="va-top ha-center"><b>Decription</b></th>
-    <th class="ha-center" colspan="2"><b>License</b></th>
-    <th class="va-top ha-left"><b>Comment</b></th>
-  </tr>
-  <tr>
-    <th class="ha-center"></th>
-    <th class="ha-center"><b>Type</b></th>
-    <th class="ha-center"></th>
-    <th class="ha-center"></th>
-    <th class="ha-center"><b>w11</b></th>
-    <th class="ha-center"><b>simh</b></th>
-    <th class="ha-left"></th>
-  </tr>
-
-  {% for osk in page.oskits %}
-    {% capture trclass %}{% cycle 'treven', 'trodd' %}{% endcapture %}
-    {% if osk.licw == "NONE" %}
-      {% assign licw_style = "font-weight:bold; background-color:mistyrose;" %}
-    {% else %}
-      {% assign licw_style = "" %}
-    {% endif %}
-
-  <tr class={{trclass}}>
-    <td class="ha-left"><b>{{osk.system}}</b></td>
-    <td class="ha-center">{{osk.vol}}</td>
-    <td class="ha-center">
-      <a href="{{page.oskit_url}}/{{osk.tar}}">{{osk.typ}}</a></td>
-    <td class="ha-center">
-      <a href="{{page.oskit_blob}}/{{osk.desc}}">README</a></td>
-    <td class="ha-center">
-      <span style="{{licw_style}}">{{osk.licw}}</span></td>
-    <td class="ha-center">{{osk.lics}}</td>
-    <td class="ha-left">{{osk.com}}</td>
-  </tr>
-  {% endfor %}
-
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th class="va-top ha-center"><b>System</b></th>
+      <th class="va-top ha-center"><b>Disk</b></th>
+      <th class="va-top ha-center"><b>Tarball</b></th>
+      <th class="va-top ha-center"><b>Decription</b></th>
+      <th class="ha-center" colspan="2"><b>License</b></th>
+      <th class="va-top ha-left"><b>Comment</b></th>
+    </tr>
+    <tr>
+      <th class="ha-center"></th>
+      <th class="ha-center"><b>Type</b></th>
+      <th class="ha-center"></th>
+      <th class="ha-center"></th>
+      <th class="ha-center"><b>w11</b></th>
+      <th class="ha-center"><b>simh</b></th>
+      <th class="ha-left"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for osk in page.oskits %}
+      {% if osk.licw == "NONE" %}
+        {% assign licw_style = "font-weight:bold; background-color:mistyrose;" %}
+      {% else %}
+        {% assign licw_style = "" %}
+      {% endif %}
+    <tr>
+      <td class="ha-left"><b>{{osk.system}}</b></td>
+      <td class="ha-center">{{osk.vol}}</td>
+      <td class="ha-center">
+        <a href="{{page.oskit_url}}/{{osk.tar}}">{{osk.typ}}</a></td>
+      <td class="ha-center">
+        <a href="{{page.oskit_blob}}/{{osk.desc}}">README</a></td>
+      <td class="ha-center">
+        <span style="{{licw_style}}">{{osk.licw}}</span></td>
+      <td class="ha-center">{{osk.lics}}</td>
+      <td class="ha-left">{{osk.com}}</td>
+    </tr>
+    {% endfor %}
+    <tbody>
 </table>
 
 <!--
