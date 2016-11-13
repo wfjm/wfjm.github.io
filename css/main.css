@@ -69,6 +69,10 @@ td {
   vertical-align: bottom;
 }
 
+.nowrap {
+  white-space: nowrap;
+}
+
 /* re-define anchor basics     */
 /* - no underline              */
 /* - but stay with blue        */
