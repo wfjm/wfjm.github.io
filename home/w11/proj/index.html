@@ -1,7 +1,9 @@
 ---
 layout: default
 title: Status
-lastchange: 2016-10-29
+#
+my:
+  changedate: 2016-10-29
 ---
 
 <h2 id="d_systems">Running Systems</h2>
@@ -25,7 +27,8 @@ including links to the disk sets.
 
 There are some known difference between w11a and 11/70 and also known
 bugs in the current w11a implementation (see 
-<a href="{{site.w11_blob}}/doc/w11a_known_issues.txt">w11a_known_issues.txt</a>).
+<a href="{{site.my.w11.blob}}/doc/w11a_known_issues.txt">
+  w11a_known_issues.txt</a>).
 They affect the behaviour in cases like fatal stack errors or certain
 double faults which don't occur in the normal operation of an operating
 system, and if they happen, in general lead to a crash anyway.

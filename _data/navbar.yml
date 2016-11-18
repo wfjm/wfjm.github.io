@@ -1,0 +1,61 @@
+# main navbar definitions
+#
+- text: wfjm's Home
+  path: 
+
+- text: Projects
+  path: home/
+
+- text: w11
+  path: home/w11/
+- text: Status
+  path: home/w11/proj/
+- text: Milestones
+  path: home/w11/proj/milestones.html
+- text: Releases
+  path: home/w11/proj/releases.html
+- text: Roadmap
+  path: home/w11/proj/roadmap.html
+- text: Credits
+  path: home/w11/proj/credits.html
+- text: Core and SoC
+  path: home/w11/impl/
+- text: Implementation
+  path: home/w11/impl/implementation.html
+- text: Performance
+  path: home/w11/impl/performance.html
+- text: Verification
+  path: home/w11/impl/verification.html
+- text: Installation & Usage
+  path: home/w11/inst/
+- text: Directory Structure
+  path: home/w11/inst/dirlayout.html
+- text: System Images
+  path: home/w11/inst/systems.html
+- text: Resources
+  path: home/w11/info/
+- text: DEC Manuals
+  path: home/w11/info/manuals.html
+- text: DEC Patents
+  path: home/w11/info/patents.html
+- text: Papers
+  path: home/w11/info/papers.html
+- text: Other FPGA PDP-11's
+  path: home/w11/info/others.html
+
+#- text: ouxr
+#  path: home/ouxr/
+#
+#- text: 211bsd
+#  path: home/211bsd/
+
+- text: Bogs
+  path: blogs/
+
+- text: w11
+  path: blogs/w11/
+- text: 2.11BSD
+  path: blogs/211bsd/
+
+- text: About
+  path: about/

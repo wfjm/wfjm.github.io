@@ -1,8 +1,11 @@
 ---
 layout: default
 title:  Implementation
-lastchange: 2016-10-29
+#
+my:
+  changedate: 2016-10-29
 ---
+
 <!-- Fig. I-1 -->
 <div class="figureframe-wide">
   <div class="figurebox">
@@ -13,7 +16,7 @@ lastchange: 2016-10-29
   <div class="figurecaption">
     Fig I-1: w11a main sequencer state flow.
     Description of symbol and color code 
-    <a href="{{site.w11_blob}}/doc/w11a_seq_flow.txt">see annotation</a>.
+    <a href="{{site.my.w11.blob}}/doc/w11a_seq_flow.txt">see annotation</a>.
     Also available in 
     <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_200dpi.png">
       high resolution png</a>
@@ -30,17 +33,21 @@ processor, the KB11-C CPU. Little parallelism and pipelining, just prefetch
 of the next instruction, and even that only when current instruction is 
 register destination. The goal was '<i>to get it working</i>'.
 The w11a core 
-(see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_core.vhd">pdp11_core.vhd</a>) 
+(see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_core.vhd">pdp11_core.vhd</a>) 
 is composed of four main units:
 <ul>
   <li>instruction decoder
-    (see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_decode.vhd">pdp11_decode.vhd</a>),</li>
+    (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_decode.vhd">
+      pdp11_decode.vhd</a>),</li>
   <li>sequencer 
-    (see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_sequencer.vhd">pdp11_sequencer.vhd</a>),</li>
+    (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_sequencer.vhd">
+      pdp11_sequencer.vhd</a>),</li>
   <li>data path
-    (see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_dpath.vhd">pdp11_dpath.vhd</a>),</li>
+    (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_dpath.vhd">
+      pdp11_dpath.vhd</a>),</li>
   <li>MMU and the external bus and memory interface control
-    (see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_vmbox.vhd">pdp11_vmbox.vhd</a>).</li>
+    (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_vmbox.vhd">
+      pdp11_vmbox.vhd</a>).</li>
 </ul>
 
 Main difference to the KB11-C is that the w11a is not a micro coded design
@@ -58,13 +65,14 @@ and
   pdf</a>).
 The symbols and color code used in this flow chart is explained in the
 document 
-<a href="{{site.w11_blob}}/doc/w11a_seq_flow.txt">w11a_seq_flow.txt</a>.
+<a href="{{site.my.w11.blob}}/doc/w11a_seq_flow.txt">w11a_seq_flow.txt</a>.
 
 <p>
 The strict separation of main state machine and data path helped a lot
 to control the length of logic path. The large number of control signals
 between these entities were packed into VHDL records 
-(see definitions in <a href="{{site.w11_blob}}/rtl/w11a/pdp11.vhd">pdp11.vhd</a>)
+(see definitions in 
+<a href="{{site.my.w11.blob}}/rtl/w11a/pdp11.vhd">pdp11.vhd</a>)
 so the port lists stayed at a resonable length.
 </p>
 
@@ -77,13 +85,13 @@ of a <a href="https://en.wikipedia.org/wiki/Unibus">UNIBUS</a>. To support
 the I/O emulation and the debug interface additional access modifiers 
 were added to distinguish between 'CPU', 'console' and 'remote access' cycles.
 The ibus (see definitions in 
-<a href="{{site.w11_blob}}/rtl/ibus/iblib.vhd">iblib.vhd</a>)
+<a href="{{site.my.w11.blob}}/rtl/ibus/iblib.vhd">iblib.vhd</a>)
 is implemented with two VHDL records, a master request and a slave response,
 giving very compact port maps. The slave responses are simply or'ed.
 The handling of interrupt request and acknowledge is done with separate
 signals, the interrupt line to vector/priority mapping is done by an
 arbiter module (see <a
-href="{{site.w11_blob}}/rtl/ibus/ib_intmap.vhd">ib_intmap.vhd</a>).
+href="{{site.my.w11.blob}}/rtl/ibus/ib_intmap.vhd">ib_intmap.vhd</a>).
 A system has one ibus per processor core, a multicore system will have
 multiple ibus'es, like the PDP-11/74 had a UNIBUS associated with each 
 processor.
@@ -93,9 +101,10 @@ A second very simple bus structure called <b>rbus</b> is used to connect the
 main components of a system to an external control entity. The rbus is again a
 simple synchronous single master - multiple slave bus with an implementation
 quite similar to the ibus (see definitions in 
-<a href="{{site.w11_blob}}/rtl/vlib/rbus/rblib.vhd">rblib.vhd</a>).
+<a href="{{site.my.w11.blob}}/rtl/vlib/rbus/rblib.vhd">rblib.vhd</a>).
 Via an rbus to w11a core 'control port' interface (see 
-<a href="{{site.w11_blob}}/rtl/w11a/pdp11_core_rbus.vhd">pdp11_core_rbus.vhd</a>)
+<a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_core_rbus.vhd">
+  pdp11_core_rbus.vhd</a>)
 the rbus master can control the CPU (start, stop, step ect) and access all
 processor and devices registers as well as the main memory. 
 This interface provides also a 32 words rbus to ibus or <b>rb2ib</b> window
@@ -108,8 +117,8 @@ CPU originated accesses. This is used to implement the I/O system emulation.
 A single rbus can handle up to four CPUs with their attached peripherals 
 plus additional auxiliary units like the 'human I/O interceptor' used on 
 the Digilent boards
-(see <a href="{{site.w11_blob}}/rtl/bplib/bpgen/sn_humanio_rbus.vhd">
-sn_humanio_rbus.vhd</a>).
+(see <a href="{{site.my.w11.blob}}/rtl/bplib/bpgen/sn_humanio_rbus.vhd">
+    sn_humanio_rbus.vhd</a>).
 The rbus has a simple interrupt mechanism. A slave can ask for 'attention' by
 asserting the LAM signal for a cycle (side note: LAM for 'look-at-me' is a 
 retro pun on 
@@ -122,24 +131,27 @@ The rbus can be used to build a direct 16 bit memory mapped interface to
 another processor. With the <b>rlink</b> protocol the rbus can also be 
 controlled via any bi-directional byte stream communication channel. 
 In this case the rlink-to-rbus bridge (see
-<a href="{{site.w11_blob}}/rtl/vlib/rlink/rlink_core.vhd">rlink_core.vhd</a>)
+<a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_core.vhd">rlink_core.vhd</a>)
 is the local rbus master which can be remote controlled from a
 <b>backend server</b> via the communication channel. The rlink protocol
 supports register reads and writes, block transfers, and a simple interrupt
 handling via 'attention' messages. It is protected with an 8 bit CRC (see 
-<a href="{{site.w11_blob}}/rtl/vlib/comlib/crc8.vhd">crc8.vhd</a>)
+<a href="{{site.my.w11.blob}}/rtl/vlib/comlib/crc8.vhd">crc8.vhd</a>)
 to detect transmission errors. The implementation is based on an extended symbol
 space with 261 symbols, 256 to represent the states of a data byte and 5
 additional symbols IDLE, SOP, EOP, NAK and ATTN used as packet delimiters
 and for other control purposes and was inspired by the usage of D- and 
 K-symbols in optical link protocols. The symbol space is mapped into a
-8 bit datastream with a simple escaping mechanism 
-(see <a href="{{site.w11_blob}}/rtl/vlib/comlib/cdata2byte.vhd">cdata2byte.vhd</a>
-and <a href="{{site.w11_blob}}/rtl/vlib/comlib/byte2cdata.vhd">byte2cdata.vhd</a>).
+8 bit datastream with a simple escaping mechanism (see 
+<a href="{{site.my.w11.blob}}/rtl/vlib/comlib/cdata2byte.vhd">cdata2byte.vhd</a>
+and 
+<a href="{{site.my.w11.blob}}/rtl/vlib/comlib/byte2cdata.vhd">
+  byte2cdata.vhd</a>).
 These 9 bit to 8 bit interface adapters provide a fifo buffered byte wide 
 rlink interface used in all systems
 (see also
-<a href="{{site.w11_blob}}/rtl/vlib/rlink/rlink_core8.vhd">rlink_core8.vhd</a>).
+<a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_core8.vhd">
+  rlink_core8.vhd</a>).
 </p>
 
 In the current systems the rlink communication is done via 
@@ -147,25 +159,29 @@ In the current systems the rlink communication is done via
 <li> an USB FIFO interface using the onboard
 <a href="http://www.cypress.com/products/ez-usb-fx2lp">Cypress FX2</a> USB controller 
 on Nexys2 and Nexys3 boards. The FPGA interface (see
-<a href="{{site.w11_blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
+<a href="{{site.my.w11.blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
 fx2_2fifoctl_ic.vhd</a>) 
 provides two end points and a data transfer speed of up to 30 MByte/sec
 and a request-response rate of 4 kHz, limited by the USB 2.0 timing structure.
 The FX2 firmware supports besides data transfers to a running FPGA design also
 the configuration of the FPGA via JTAG (see 
-<a href="{{site.w11_tree}}/tools/fx2/src">sources</a>
+<a href="{{site.my.w11.tree}}/tools/fx2/src">sources</a>
 and
-<a href="{{site.w11_tree}}/tools/fx2/bin">pre-build images</a>).
+<a href="{{site.my.w11.tree}}/tools/fx2/bin">pre-build images</a>).
 </li>
 
 <li> a real or USB-emulated serial port (see
-<a href="{{site.w11_blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">rlink_sp1c.vhd</a>).
-The UART (see <a href="{{site.w11_blob}}/rtl/vlib/serport/serport_uart_rx.vhd">serport_uart_rx.vhd</a>
+<a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">rlink_sp1c.vhd</a>).
+The UART (see 
+<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_rx.vhd">
+  serport_uart_rx.vhd</a>
 and
- <a href="{{site.w11_blob}}/rtl/vlib/serport/serport_uart_tx.vhd">serport_uart_tx.vhd</a>)
+<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_tx.vhd">
+serport_uart_tx.vhd</a>)
 supports baud rates up to 3 Mbaud. The baud rate is detected automatically
-by a BREAK + 0x80 sync character sequence 
-(see <a href="{{site.w11_blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">serport_uart_autobaud.vhd</a>).
+by a BREAK + 0x80 sync character sequence (see 
+<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
+  serport_uart_autobaud.vhd</a>).
 With the onboard RS232 ports of the s3board and the Nexys2 boards the maximal
 Baud rate is 460800 when a USB-RS232 adapter is directly connected. The rate 
 is limited by the RS232 transceivers. With on-board USB-UARTs like the FT232R
@@ -181,7 +197,7 @@ All device I/O is emulated, as already described under
 <a href="/home/w11/impl/">Features</a>. 
 A simple example is the transmit part
 of the <b>DL11</b> console interface 
-(see <a href="{{site.w11_blob}}/rtl/ibus/ibdr_dl11.vhd">ibdr_dl11.vhd</a>).
+(see <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_dl11.vhd">ibdr_dl11.vhd</a>).
 Sending a character to the emulated console involves the following steps:
 <ul>
   <li>the CPU writes the character to the xbuf (transmit buffer) register of 
@@ -202,15 +218,17 @@ Sending a character to the emulated console involves the following steps:
       enabled, set the interrupt request flop in the controller.</li>
 </ul>
 The DL11 receive logic is conceptually similar. The logic of the <b>LP11</b>
-line printer interface (see <a href="{{site.w11_blob}}/rtl/ibus/ibdr_lp11.vhd">ibdr_lp11.vhd</a>)
+line printer interface (see 
+<a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_lp11.vhd">ibdr_lp11.vhd</a>)
 and the <b>PC11</b>
-paper tape reader/puncher interface (see <a href="{{site.w11_blob}}/rtl/ibus/ibdr_pc11.vhd">ibdr_pc11.vhd</a>)
+paper tape reader/puncher interface (see 
+<a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_pc11.vhd">ibdr_pc11.vhd</a>)
 is analogous.
 
 <p>
 For mass storage peripherals the DMA transfers are emulated too. A simple
 example is a disk access of the <b>RK11</b> disk controller 
-(see <a href="{{site.w11_blob}}/rtl/ibus/ibdr_rk11.vhd">ibdr_rk11.vhd</a>).
+(see <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_rk11.vhd">ibdr_rk11.vhd</a>).
 Reading a disk block from a disk image handled by the backend server to 
 the w11a memory involves the following steps:
 </p>
@@ -248,15 +266,17 @@ The build system employed in this project is based on <b>vbom</b> or
 libraries and sources for the instantiated components, the later via their 
 vbom, and last but not least the name of the vhdl source file. All file names 
 are relative to the current directory (see for example the vbom's of
-<a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/sys_w11a_n2.vbom">sys_w11a_n2</a>
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/sys_w11a_n2.vbom">
+  sys_w11a_n2</a>
 and 
-<a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/tb/tb_w11a_n2.vbom">tb_w11a_n2</a>
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/tb/tb_w11a_n2.vbom">
+  tb_w11a_n2</a>
 ).
 A recursive traversal through all vbom's gives for each VHDL module all
 sources needed to compile it. The 
-<a href="{{site.w11_blob}}/tools/bin/vbomconv">vbomconv</a>
+<a href="{{site.my.w11.blob}}/tools/bin/vbomconv">vbomconv</a>
 script in 
-<a href="{{site.w11_tree}}/tools/bin">tools/bin</a>
+<a href="{{site.my.w11.tree}}/tools/bin">tools/bin</a>
 does  this, and generates, depending on options,
 <ul>
   <li> make dependency files</li>
@@ -266,14 +286,17 @@ does  this, and generates, depending on options,
   <li> ghdl commands for analysis, inspection and make step</li>
 </ul>
 The Makefile's in general just contain a few definitions and includes
-(see Makefile for <a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/Makefile">sys_w11a_n2</a>
+(see Makefile for 
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/Makefile">sys_w11a_n2</a>
 and
-<a href="{{site.w11_blob}}/rtl/sys_gen/w11a/nexys2/tb/Makefile">tb_w11a_n2</a>).
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/tb/Makefile">
+  tb_w11a_n2</a>).
 Two master Makefiles contain pattern rules for simulation and synthesis and 
-encapsulate all the <code>vbomconf</code> magic 
-(see <a href="{{site.w11_blob}}/rtl/make_ise/generic_ghdl.mk">generic_ghdl.mk</a>
+encapsulate all the <code>vbomconf</code> magic (see 
+<a href="{{site.my.w11.blob}}/rtl/make_ise/generic_ghdl.mk">generic_ghdl.mk</a>
 and
-<a href="{{site.w11_blob}}/rtl/make_ise/generic_xflow.mk">generic_xflow.mk</a>).
+<a href="{{site.my.w11.blob}}/rtl/make_ise/generic_xflow.mk">
+  generic_xflow.mk</a>).
 A full w11a system with USB support is build from about 100 vhdl source files,
 test benches from about 120 vhdl source files. Using the vbom's a large number
 of designs can be easily maintained.
@@ -283,17 +306,19 @@ So far the w11a has only been used on Xilinx Spartan-3 and Spartan-6 type
 FPGAs, but it is expected that porting to other Xilinx FPGAs like Virtex-6 
 or the Series-7 is easy. The only vendor specific constructs
 are the I/O buffers and the memories, both encapsulated in 
-<a href="{{site.w11_tree}}/rtl/vlib/memlib">memlib</a>
+<a href="{{site.my.w11.tree}}/rtl/vlib/memlib">memlib</a>
 and  
-<a href="{{site.w11_tree}}/rtl/vlib/xlib">xlib</a>
+<a href="{{site.my.w11.tree}}/rtl/vlib/xlib">xlib</a>
 , respectively. 
 The w11a uses distributed RAMs for the general purpose register file
-(see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_gpr.vhd">pdp11_gpr.vhd</a>)
-the SAR/SDR register file in the MMU 
-(see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_mmu_sadr.vhd">pdp11_mmu_sadr.vhd</a>)
-and small fifo's 
-(see <a href="{{site.w11_blob}}/rtl/vlib/memlib/fifo_1c_dram_raw.vhd">fifo_1c_dram_raw.vhd</a>).
-The cache implementation 
-(see <a href="{{site.w11_blob}}/rtl/w11a/pdp11_cache.vhd">pdp11_cache.vhd</a>)
+(see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_gpr.vhd">pdp11_gpr.vhd</a>)
+the SAR/SDR register file in the MMU (see 
+<a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_mmu_sadr.vhd">
+  pdp11_mmu_sadr.vhd</a>)
+and small fifo's (see 
+<a href="{{site.my.w11.blob}}/rtl/vlib/memlib/fifo_1c_dram_raw.vhd">
+  fifo_1c_dram_raw.vhd</a>).
+The cache implementation (see 
+<a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_cache.vhd">pdp11_cache.vhd</a>)
 uses dual ported block RAMs in "READ_FIRST" mode to implement a 'speculative
 write' which can be undone in the next cycle. 

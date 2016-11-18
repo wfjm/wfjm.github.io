@@ -1,63 +1,66 @@
 ---
 layout: default
 title:  Directory Layout
-lastchange: 2016-10-23
+#
+my:
+  changedate: 2016-10-23
 ---
+
 <h2>Directory Structure of the Repository</h2>
 
 <pre>
-   <a href="{{site.w11_tree}}/doc">doc</a>                          Documentation
-   <a href="{{site.w11_tree}}/rtl">rtl</a>                          VHDL sources
-   <a href="{{site.w11_tree}}/rtl/bplib">rtl/bplib</a>                    - board and component support libs
-   <a href="{{site.w11_tree}}/rtl/bplib/atlys">rtl/bplib/atlys</a>                - for Digilent Atlys board
-   <a href="{{site.w11_tree}}/rtl/bplib/fx2lib">rtl/bplib/fx2lib</a>               - for Cypress FX2 USB interface controller
-   <a href="{{site.w11_tree}}/rtl/bplib/issi">rtl/bplib/issi</a>                 - for ISSI parts
-   <a href="{{site.w11_tree}}/rtl/bplib/micron">rtl/bplib/micron</a>               - for Micron parts
-   <a href="{{site.w11_tree}}/rtl/bplib/basys3">rtl/bplib/basys3</a>               - for Digilent Basys3 board
-   <a href="{{site.w11_tree}}/rtl/bplib/nexys2">rtl/bplib/nexys2</a>               - for Digilent Nexsy2 board
-   <a href="{{site.w11_tree}}/rtl/bplib/nexys3">rtl/bplib/nexys3</a>               - for Digilent Nexsy3 board
-   <a href="{{site.w11_tree}}/rtl/bplib/nexys4">rtl/bplib/nexys4</a>               - for Digilent Nexsy4 board
-   <a href="{{site.w11_tree}}/rtl/bplib/s3board">rtl/bplib/s3board</a>              - for Digilent S3board
-   <a href="{{site.w11_tree}}/rtl/ibus">rtl/ibus</a>                     - ibus devices (UNIBUS peripherals)
-   <a href="{{site.w11_tree}}/rtl/sys_gen">rtl/sys_gen</a>                  - top level designs
-   <a href="{{site.w11_tree}}/rtl/sys_gen/tst_rlink">rtl/sys_gen/tst_rlink</a>          - top level designs for an rlink tester
-   <a href="{{site.w11_tree}}/rtl/sys_gen/tst_rlink_cuff">rtl/sys_gen/tst_rlink_cuff</a>     - top level designs for an rlink over FX2 tester
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a">rtl/sys_gen/w11a</a>               - top level designs for w11a SoC
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/basys3">rtl/sys_gen/w11a/basys3</a>          - w11a SoC for Digilent Basys3
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys2">rtl/sys_gen/w11a/nexys2</a>          - w11a SoC for Digilent Nexsy2
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys3">rtl/sys_gen/w11a/nexys3</a>          - w11a SoC for Digilent Nexsy3
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/nexys4">rtl/sys_gen/w11a/nexys4</a>          - w11a SoC for Digilent Nexsy4
-   <a href="{{site.w11_tree}}/rtl/sys_gen/w11a/s3board">rtl/sys_gen/w11a/s3board</a>         - w11a SoC for Digilent S3board
-   <a href="{{site.w11_tree}}/rtl/vlib">rtl/vlib</a>                     - VHDL component libs
-   <a href="{{site.w11_tree}}/rtl/vlib/comlib">rtl/vlib/comlib</a>                - communication
-   <a href="{{site.w11_tree}}/rtl/vlib/genlib">rtl/vlib/genlib</a>                - general
-   <a href="{{site.w11_tree}}/rtl/vlib/memlib">rtl/vlib/memlib</a>                - memory
-   <a href="{{site.w11_tree}}/rtl/vlib/rbus">rtl/vlib/rbus</a>                  - remote-register-interface - rbus 
-   <a href="{{site.w11_tree}}/rtl/vlib/rlink">rtl/vlib/rlink</a>                 - remote-register-interface - rlink
-   <a href="{{site.w11_tree}}/rtl/vlib/serport">rtl/vlib/serport</a>               - serial port (UART)
-   <a href="{{site.w11_tree}}/rtl/vlib/simlib">rtl/vlib/simlib</a>                - simulation helper lib
-   <a href="{{site.w11_tree}}/rtl/vlib/xlib">rtl/vlib/xlib</a>                  - Xilinx specific components
-   <a href="{{site.w11_tree}}/rtl/w11a">rtl/w11a</a>                     - w11a core
-   <a href="{{site.w11_tree}}/tools">tools</a>                        helper programs
-   <a href="{{site.w11_tree}}/tools/asm-11">tools/asm-11</a>                 - pdp-11 assembler code
-   <a href="{{site.w11_tree}}/tools/bin">tools/bin</a>                    - scripts and binaries
-   <a href="{{site.w11_tree}}/tools/dox">tools/dox</a>                    - Doxygen documentation configuration
-   <a href="{{site.w11_tree}}/tools/make">tools/make</a>                   - make includes
-   <a href="{{site.w11_tree}}/tools/fx2">tools/fx2</a>                    - Firmware for Cypress FX2 USB Interface
-   <a href="{{site.w11_tree}}/tools/fx2/bin">tools/fx2/bin</a>                  - pre-build firmware images in .ihx format
-   <a href="{{site.w11_tree}}/tools/fx2/src">tools/fx2/src</a>                  - C and asm sources
-   <a href="{{site.w11_tree}}/tools/fx2/sys">tools/fx2/sys</a>                  - udev rules for USB on fpga eval boards
-   <a href="{{site.w11_tree}}/tools/oskit">tools/oskit</a>                  - setup files for Operation System kits
-   <a href="{{site.w11_tree}}/tools/src">tools/src</a>                    - C++ sources
-   <a href="{{site.w11_tree}}/tools/src/librlink">tools/src/librlink</a>             - basic rlink interface
-   <a href="{{site.w11_tree}}/tools/src/librlinktpp">tools/src/librlinktpp</a>          - C++ to tcl binding for rlink interface
-   <a href="{{site.w11_tree}}/tools/src/librtcltools">tools/src/librtcltools</a>         - support classes to implement Tcl bindings
-   <a href="{{site.w11_tree}}/tools/src/librtools">tools/src/librtools</a>            - general support classes and methods
-   <a href="{{site.w11_tree}}/tools/src/librutiltpp">tools/src/librutiltpp</a>          - Tcl support commands implemented in C++
-   <a href="{{site.w11_tree}}/tools/src/librw11">tools/src/librw11</a>              - w11 over rlink interface
-   <a href="{{site.w11_tree}}/tools/src/librwxxtpp">tools/src/librwxxtpp</a>           - C++ to tcl binding for w11 over rlink iface
-   <a href="{{site.w11_tree}}/tools/tbench">tools/tbench</a>                 - w11 CPU test bench
-   <a href="{{site.w11_tree}}/tools/tcl">tools/tcl</a>                    - Tcl scripts
+   <a href="{{site.my.w11.tree}}/doc">doc</a>                          Documentation
+   <a href="{{site.my.w11.tree}}/rtl">rtl</a>                          VHDL sources
+   <a href="{{site.my.w11.tree}}/rtl/bplib">rtl/bplib</a>                    - board and component support libs
+   <a href="{{site.my.w11.tree}}/rtl/bplib/atlys">rtl/bplib/atlys</a>                - for Digilent Atlys board
+   <a href="{{site.my.w11.tree}}/rtl/bplib/fx2lib">rtl/bplib/fx2lib</a>               - for Cypress FX2 USB interface controller
+   <a href="{{site.my.w11.tree}}/rtl/bplib/issi">rtl/bplib/issi</a>                 - for ISSI parts
+   <a href="{{site.my.w11.tree}}/rtl/bplib/micron">rtl/bplib/micron</a>               - for Micron parts
+   <a href="{{site.my.w11.tree}}/rtl/bplib/basys3">rtl/bplib/basys3</a>               - for Digilent Basys3 board
+   <a href="{{site.my.w11.tree}}/rtl/bplib/nexys2">rtl/bplib/nexys2</a>               - for Digilent Nexsy2 board
+   <a href="{{site.my.w11.tree}}/rtl/bplib/nexys3">rtl/bplib/nexys3</a>               - for Digilent Nexsy3 board
+   <a href="{{site.my.w11.tree}}/rtl/bplib/nexys4">rtl/bplib/nexys4</a>               - for Digilent Nexsy4 board
+   <a href="{{site.my.w11.tree}}/rtl/bplib/s3board">rtl/bplib/s3board</a>              - for Digilent S3board
+   <a href="{{site.my.w11.tree}}/rtl/ibus">rtl/ibus</a>                     - ibus devices (UNIBUS peripherals)
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen">rtl/sys_gen</a>                  - top level designs
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/tst_rlink">rtl/sys_gen/tst_rlink</a>          - top level designs for an rlink tester
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/tst_rlink_cuff">rtl/sys_gen/tst_rlink_cuff</a>     - top level designs for an rlink over FX2 tester
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a">rtl/sys_gen/w11a</a>               - top level designs for w11a SoC
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a/basys3">rtl/sys_gen/w11a/basys3</a>          - w11a SoC for Digilent Basys3
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a/nexys2">rtl/sys_gen/w11a/nexys2</a>          - w11a SoC for Digilent Nexsy2
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a/nexys3">rtl/sys_gen/w11a/nexys3</a>          - w11a SoC for Digilent Nexsy3
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a/nexys4">rtl/sys_gen/w11a/nexys4</a>          - w11a SoC for Digilent Nexsy4
+   <a href="{{site.my.w11.tree}}/rtl/sys_gen/w11a/s3board">rtl/sys_gen/w11a/s3board</a>         - w11a SoC for Digilent S3board
+   <a href="{{site.my.w11.tree}}/rtl/vlib">rtl/vlib</a>                     - VHDL component libs
+   <a href="{{site.my.w11.tree}}/rtl/vlib/comlib">rtl/vlib/comlib</a>                - communication
+   <a href="{{site.my.w11.tree}}/rtl/vlib/genlib">rtl/vlib/genlib</a>                - general
+   <a href="{{site.my.w11.tree}}/rtl/vlib/memlib">rtl/vlib/memlib</a>                - memory
+   <a href="{{site.my.w11.tree}}/rtl/vlib/rbus">rtl/vlib/rbus</a>                  - remote-register-interface - rbus 
+   <a href="{{site.my.w11.tree}}/rtl/vlib/rlink">rtl/vlib/rlink</a>                 - remote-register-interface - rlink
+   <a href="{{site.my.w11.tree}}/rtl/vlib/serport">rtl/vlib/serport</a>               - serial port (UART)
+   <a href="{{site.my.w11.tree}}/rtl/vlib/simlib">rtl/vlib/simlib</a>                - simulation helper lib
+   <a href="{{site.my.w11.tree}}/rtl/vlib/xlib">rtl/vlib/xlib</a>                  - Xilinx specific components
+   <a href="{{site.my.w11.tree}}/rtl/w11a">rtl/w11a</a>                     - w11a core
+   <a href="{{site.my.w11.tree}}/tools">tools</a>                        helper programs
+   <a href="{{site.my.w11.tree}}/tools/asm-11">tools/asm-11</a>                 - pdp-11 assembler code
+   <a href="{{site.my.w11.tree}}/tools/bin">tools/bin</a>                    - scripts and binaries
+   <a href="{{site.my.w11.tree}}/tools/dox">tools/dox</a>                    - Doxygen documentation configuration
+   <a href="{{site.my.w11.tree}}/tools/make">tools/make</a>                   - make includes
+   <a href="{{site.my.w11.tree}}/tools/fx2">tools/fx2</a>                    - Firmware for Cypress FX2 USB Interface
+   <a href="{{site.my.w11.tree}}/tools/fx2/bin">tools/fx2/bin</a>                  - pre-build firmware images in .ihx format
+   <a href="{{site.my.w11.tree}}/tools/fx2/src">tools/fx2/src</a>                  - C and asm sources
+   <a href="{{site.my.w11.tree}}/tools/fx2/sys">tools/fx2/sys</a>                  - udev rules for USB on fpga eval boards
+   <a href="{{site.my.w11.tree}}/tools/oskit">tools/oskit</a>                  - setup files for Operation System kits
+   <a href="{{site.my.w11.tree}}/tools/src">tools/src</a>                    - C++ sources
+   <a href="{{site.my.w11.tree}}/tools/src/librlink">tools/src/librlink</a>             - basic rlink interface
+   <a href="{{site.my.w11.tree}}/tools/src/librlinktpp">tools/src/librlinktpp</a>          - C++ to tcl binding for rlink interface
+   <a href="{{site.my.w11.tree}}/tools/src/librtcltools">tools/src/librtcltools</a>         - support classes to implement Tcl bindings
+   <a href="{{site.my.w11.tree}}/tools/src/librtools">tools/src/librtools</a>            - general support classes and methods
+   <a href="{{site.my.w11.tree}}/tools/src/librutiltpp">tools/src/librutiltpp</a>          - Tcl support commands implemented in C++
+   <a href="{{site.my.w11.tree}}/tools/src/librw11">tools/src/librw11</a>              - w11 over rlink interface
+   <a href="{{site.my.w11.tree}}/tools/src/librwxxtpp">tools/src/librwxxtpp</a>           - C++ to tcl binding for w11 over rlink iface
+   <a href="{{site.my.w11.tree}}/tools/tbench">tools/tbench</a>                 - w11 CPU test bench
+   <a href="{{site.my.w11.tree}}/tools/tcl">tools/tcl</a>                    - Tcl scripts
 </pre>
 
 Some conventions used throughout the project:

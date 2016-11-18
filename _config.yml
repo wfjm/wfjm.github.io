@@ -1,68 +1,15 @@
+# jekyll (or plug-in defined) attributes
+#
 name: wfjm's retro computing corner
 url: https://wfjm.github.io
 email: w.f.j.mueller@gsi.de
 markdown: kramdown
 #
-w11_tree: https://github.com/wfjm/w11/tree/master
-w11_blob: https://github.com/wfjm/w11/blob/master
+# site-specific attributes (all in .my subspace)
 #
-navbar:
- - text: wfjm's Home
-   link: 
-
- - text: Projects
-   link: home/
-
- - text: w11
-   link: home/w11/
- - text: Status
-   link: home/w11/proj/
- - text: Milestones
-   link: home/w11/proj/milestones.html
- - text: Releases
-   link: home/w11/proj/releases.html
- - text: Roadmap
-   link: home/w11/proj/roadmap.html
- - text: Credits
-   link: home/w11/proj/credits.html
- - text: Core and SoC
-   link: home/w11/impl/
- - text: Implementation
-   link: home/w11/impl/implementation.html
- - text: Performance
-   link: home/w11/impl/performance.html
- - text: Verification
-   link: home/w11/impl/verification.html
- - text: Installation & Usage
-   link: home/w11/inst/
- - text: Directory Structure
-   link: home/w11/inst/dirlayout.html
- - text: System Images
-   link: home/w11/inst/systems.html
- - text: Resources
-   link: home/w11/info/
- - text: DEC Manuals
-   link: home/w11/info/manuals.html
- - text: DEC Patents
-   link: home/w11/info/patents.html
- - text: Papers
-   link: home/w11/info/papers.html
- - text: Other FPGA PDP-11's
-   link: home/w11/info/others.html
-
-# - text: ouxr
-#   link: home/ouxr/
-#
-# - text: 211bsd
-#   link: home/211bsd/
-
- - text: Bogs
-   link: blogs/
-
- - text: w11
-   link: blogs/w11/
- - text: 2.11BSD
-   link: blogs/211bsd/
-
- - text: About
-   link: about/
+my:
+  emptylist: []
+  emptyhash: {}
+  w11:
+    tree: https://github.com/wfjm/w11/tree/master
+    blob: https://github.com/wfjm/w11/blob/master
