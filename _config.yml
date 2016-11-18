@@ -5,6 +5,32 @@ url: https://wfjm.github.io
 email: w.f.j.mueller@gsi.de
 markdown: kramdown
 #
+defaults:
+#   default layouts
+  -
+    scope:
+      path: ""
+    values:
+      layout: "plain"
+  - 
+    scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - 
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "blog"
+  - 
+    scope:
+      path: "debug"
+    values:
+      layout: "plain"
+
+#
 # site-specific attributes (all in .my subspace)
 #
 my:
