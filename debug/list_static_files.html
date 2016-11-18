@@ -1,18 +1,34 @@
 ---
 layout: plain
 title: List site.static_files
+#
+my:
+  w3c_cxml: "https://validator.w3.org/check"
+  w3c_ccss: "https://jigsaw.w3.org/css-validator/validator"
 ---
+
 {% assign files_sorted = site.static_files | sort: "path" %}
 <table class="trtoggle">
   <tr>
     <th>path</th>
     <th>type</th>
+    <th>val</th>
     <th>last modified</th>
   </tr>
   {% for f in files_sorted %}
     <tr>
       <td><a href="{{f.path}}">{{f.path}}</a></td>
       <td>{{f.extname}}</td>
+      <td class="ha-center">
+        {% case f.extname %}
+          {% when '.css' %}
+            <a href="{{page.my.w3c_ccss}}?uri={{site.url}}{{f.path}}">
+              <i class="fa fa-css3 abutton"></i></a>
+          {% when '.svg' %}
+            <a href="{{page.my.w3c_cxml}}?uri={{site.url}}{{f.path}}">
+              <i class="fa fa-bullseye abutton"></i></a>
+        {% endcase %}
+      </td>
       <td>{{f.modified_time}}</td>
     </tr>
   {% endfor %}

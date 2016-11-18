@@ -1,9 +1,12 @@
 ---
 layout: plain
 title: List site.html_pages
-w3c_chtml: "https://validator.w3.org/check"
-w3c_clink: "https://validator.w3.org/checklink"
+#
+my:
+  w3c_chtml: "https://validator.w3.org/check"
+  w3c_clink: "https://validator.w3.org/checklink"
 ---
+
 {% assign pages_sorted = site.html_pages | sort: "url" %}
 <table class="trtoggle">
   <tr>
@@ -15,9 +18,11 @@ w3c_clink: "https://validator.w3.org/checklink"
   {% for p in pages_sorted %}
     <tr>
       <td><a href="{{p.url}}">{{p.url}}</a></td>
-      <td><a href="{{page.w3c_chtml}}?uri={{site.url}}{{p.url}}">
+      <td class="ha-center">
+        <a href="{{page.my.w3c_chtml}}?uri={{site.url}}{{p.url}}">
           <i class="fa fa-html5 abutton"></i></a></td>
-      <td><a href="{{page.w3c_clink}}?uri={{site.url}}{{p.url}}">
+      <td class="ha-center">
+        <a href="{{page.my.w3c_clink}}?uri={{site.url}}{{p.url}}">
           <i class="fa fa-link abutton"></i></a></td>
       <td>{{p.title}}</td>
     </tr>
