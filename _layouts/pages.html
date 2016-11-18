@@ -32,10 +32,12 @@
         {% assign navindex_prev = navindex | minus: 1 %}
         {% assign navindex_next = navindex | plus:  1 %}
         {% if navindex_prev >= 0 %}
-          {% assign navlink_prev = site.data.navbar[navindex_prev].path %}
+          {% assign navurl_prev = "/" | 
+               append: site.data.navbar[navindex_prev].path %}
         {% endif %}
         {% if navindex_next < navbarsize %}
-          {% assign navlink_next = site.data.navbar[navindex_next].path %}
+          {% assign navurl_next = "/" |
+               append: site.data.navbar[navindex_next].path %}
         {% endif %}
       {% endif %}
     {% endfor %}
@@ -67,17 +69,7 @@
           {% endfor %}
         </td>
         <td id="header-botnav">
-          {% unless page.path == "index.html" %}
-            <a href="/"><i class="fa fa-home abutton"></i></a>
-          {% endunless %}
-          {% if navlink_prev %}
-            <a href="/{{navlink_prev}}">
-              <i class="fa fa-arrow-left abutton"></i></a>
-          {% endif %}
-          {% if navlink_next %}
-            <a href="/{{navlink_next}}">
-              <i class="fa fa-arrow-right abutton"></i></a>
-          {% endif %}
+          {% include relnav.html prev=navurl_prev next=navurl_next %}
         </td>
       </tr>
     </table>
@@ -162,19 +154,8 @@
             {% endif %}
           </td>
           <td id="footer-nav">
-            {% unless page.path == "index.html" %}
-            <a href="/">
-              <i class="fa fa-home abutton"></i></a>
-            {% endunless %}
-            {% if navlink_prev %}
-              <a href="/{{navlink_prev}}">
-                <i class="fa fa-arrow-left abutton"></i></a>
-            {% endif %}
-            {% if navlink_next %}
-              <a href="/{{navlink_next}}">
-                <i class="fa fa-arrow-right abutton"></i></a>
-            {% endif %}
-            </td>
+            {% include relnav.html prev=navurl_prev next=navurl_next %}
+          </td>
         </tr>
       </table>
     </div>

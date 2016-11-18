@@ -13,21 +13,22 @@
   <body>
     <script src="{{site.my.url_jq}}"></script>
 
-    <!-- prepare next/prev navigation in given category -->
+    <!-- prepare up/next/prev navigation in given category -->
+    {% assign url_up = "/blogs/" | append: page.category | append: "/" %}
     {% for post in site.categories[page.category] %}
       {% if post.url == page.url %}
-        {% assign post_ind = forloop.index0 %}
+        {% assign ind_post = forloop.index0 %}
       {% endif %}
     {% endfor %}
 
-    {% assign max_ind = site.categories[page.category].size | minus: 1 %}
-    {% if post_ind > 0 %}
-      {% assign prev_ind = post_ind | minus: 1 %}
-      {% assign prev_url = site.categories[page.category][prev_ind].url %}
+    {% assign ind_max = site.categories[page.category].size | minus: 1 %}
+    {% if ind_post > 0 %}
+      {% assign ind_prev = ind_post | minus: 1 %}
+      {% assign url_prev = site.categories[page.category][ind_prev].url %}
     {% endif %}
-    {% if post_ind < max_ind %}
-      {% assign next_ind = post_ind | plus: 1 %}
-      {% assign next_url = site.categories[page.category][next_ind].url %}
+    {% if ind_post < ind_max %}
+      {% assign ind_next = ind_post | plus: 1 %}
+      {% assign url_next = site.categories[page.category][ind_next].url %}
     {% endif %}
 
    <!-- header section -->
@@ -57,18 +58,7 @@
           {% endfor %}
         </td>
         <td id="header-botnav">
-          <a href="/">
-            <i class="fa fa-home abutton"></i></a>
-          <a href="/blogs/{{page.category}}/">
-            <i class="fa fa-arrow-up abutton"></i></a>
-          {% if next_url %}
-            <a href="{{next_url}}">
-              <i class="fa fa-arrow-left abutton"></i></a>
-          {% endif %}
-          {% if prev_url %}
-            <a href="{{prev_url}}">
-              <i class="fa fa-arrow-right abutton"></i></a>
-          {% endif %}
+          {% include relnav.html up=url_up prev=url_next next=url_prev %}
         </td>
       </tr>
     </table>
@@ -109,19 +99,7 @@
             <em> posted on {{page.date | slice: 0,10}} </em>
           </td>
           <td id="footer-nav">
-            <a href="/">
-              <i class="fa fa-home abutton"></i></a>
-            <a href="/blogs/{{page.category}}/">
-              <i class="fa fa-arrow-up abutton"></i></a>
-            {% if next_url %}
-              <a href="{{next_url}}">
-                <i class="fa fa-arrow-left abutton"></i></a>
-            {% endif %}
-            {% if prev_url %}
-              <a href="{{prev_url}}">
-                <i class="fa fa-arrow-right abutton"></i></a>
-            {% endif %}
-  
+            {% include relnav.html up=url_up prev=url_next next=url_prev %}  
          </td>
         </tr>
       </table>

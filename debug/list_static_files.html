@@ -20,12 +20,12 @@ my:
       <td>{{f.extname}}</td>
       <td class="ha-center">
         {% case f.extname %}
-          {% when '.css' %}
-            <a href="{{page.my.w3c_ccss}}?uri={{site.url}}{{f.path}}">
-              <i class="fa fa-css3 abutton"></i></a>
-          {% when '.svg' %}
-            <a href="{{page.my.w3c_cxml}}?uri={{site.url}}{{f.path}}">
-              <i class="fa fa-bullseye abutton"></i></a>
+        {% when '.css' %}
+          <a href="{{page.my.w3c_ccss}}?uri={{site.url}}{{f.path}}">
+            <i class="fa fa-css3 abutton"></i></a>
+        {% when '.svg' %}
+          <a href="{{page.my.w3c_cxml}}?uri={{site.url}}{{f.path}}">
+            <i class="fa fa-bullseye abutton"></i></a>
         {% endcase %}
       </td>
       <td>{{f.modified_time}}</td>

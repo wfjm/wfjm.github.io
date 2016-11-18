@@ -1,0 +1,16 @@
+{% unless page.path == "index.html" %}
+  <a href="/">
+    <i class="fa fa-home abutton"></i></a>
+{% endunless %}
+{% if include.up %}
+  <a href="{{include.up}}">
+    <i class="fa fa-arrow-up abutton"></i></a>
+{% endif %}
+{% if include.prev %}
+  <a href="{{include.prev}}">
+    <i class="fa fa-arrow-left abutton"></i></a>
+{% endif %}
+{% if include.next %}
+  <a href="{{include.next}}">
+    <i class="fa fa-arrow-right abutton"></i></a>
+{% endif %}
