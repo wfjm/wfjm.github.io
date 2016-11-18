@@ -41,6 +41,9 @@
         {% endif %}
       {% endif %}
     {% endfor %}
+    {% if page.my.blogcat %}
+      {% assign navurl_down = site.categories[page.my.blogcat][0].url %}
+    {% endif %}
 
     <!-- header section -->
     <table id="header"> 
@@ -69,7 +72,8 @@
           {% endfor %}
         </td>
         <td id="header-botnav">
-          {% include relnav.html prev=navurl_prev next=navurl_next %}
+          {% include relnav.html down=navurl_down
+                                 prev=navurl_prev next=navurl_next %}
         </td>
       </tr>
     </table>
@@ -154,7 +158,8 @@
             {% endif %}
           </td>
           <td id="footer-nav">
-            {% include relnav.html prev=navurl_prev next=navurl_next %}
+            {% include relnav.html down=navurl_down
+                       prev=navurl_prev next=navurl_next %}
           </td>
         </tr>
       </table>
