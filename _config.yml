@@ -1,4 +1,5 @@
-# jekyll (or plug-in defined) attributes
+#
+# jekyll (or plug-in defined) attributes -------------------------------------
 #
 name: wfjm's retro computing corner
 url: https://wfjm.github.io
@@ -6,32 +7,44 @@ email: w.f.j.mueller@gsi.de
 markdown: kramdown
 #
 defaults:
-#   default layouts
+#   default for pages/posts: layout and permalink ---------
   -
     scope:
       path: ""
     values:
-      layout: "plain"
+      layout: plain
   - 
     scope:
       path: ""
-      type: "pages"
+      type: pages
     values:
-      layout: "default"
+      layout: pages
   - 
     scope:
       path: ""
-      type: "posts"
+      type: posts
     values:
-      layout: "blog"
+      layout: posts
+      permalink: /posts/:categories/:year-:month-:day-:title.html
   - 
     scope:
       path: "debug"
     values:
-      layout: "plain"
+      layout: plain
+#   default category for posts -----------------------------
+  - 
+    scope:
+      path: "_posts/211bsd"
+    values:
+      category: 211bsd
+  - 
+    scope:
+      path: "_posts/w11"
+    values:
+      category: w11
 
 #
-# site-specific attributes (all in .my subspace)
+# site-specific attributes (all in .my subspace) -----------------------------
 #
 my:
   emptylist: []
