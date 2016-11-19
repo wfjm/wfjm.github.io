@@ -1,3 +1,11 @@
+{% comment %}
+  Snipplet to add a home-up-down-prv-next nav button sequence. Parameters are
+    up      url for 'up'   nav button  (up arrow)
+    down    url for 'down' nav button  (down arrow)
+    prev    url for 'prev' nav button  (left arrow)
+    next    url for 'next' nav button  (right arrow)
+{% endcomment %}
+
 {% unless page.path == "index.html" %}
   <a href="/">
     <i class="fa fa-home abutton"></i></a>

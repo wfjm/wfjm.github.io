@@ -138,32 +138,8 @@
     </div>
 
     <!-- footer section -->
-    <div id="footer">
-      <table>
-        <tr>
-          <td id="footer-about">
-            <a class="abutton" href="/about/">about</a>
-            <span id="footer-about-tools">
-              <a href="/debug/">
-                <i class="fa fa-life-saver abutton"></i></a>
-              <a href="https://validator.w3.org/check/referer">
-                <i class="fa fa-html5 abutton"></i></a>
-              <a href="https://validator.w3.org/checklink?uri={{site.url}}{{page.url}}">
-                <i class="fa fa-link abutton"></i></a>
-            </span>
-          </td>
-          <td id="footer-time">
-            {% if page.my.changedate %}
-              <em> updated {{page.my.changedate}} </em>
-            {% endif %}
-          </td>
-          <td id="footer-nav">
-            {% include relnav.html down=navurl_down
-                       prev=navurl_prev next=navurl_next %}
-          </td>
-        </tr>
-      </table>
-    </div>
+    {% include footer-common.html down=navurl_down
+                                  prev=navurl_prev next=navurl_next %}
 
     <!-- debug footer section -->
     {% if jekyll.environment == "development" %}
