@@ -134,8 +134,8 @@ In this case the rlink-to-rbus bridge (see
 is the local rbus master which can be remote controlled from a
 <b>backend server</b> via the communication channel. The rlink protocol
 supports register reads and writes, block transfers, and a simple interrupt
-handling via 'attention' messages. It is protected with an 8 bit CRC (see 
-<a href="{{site.my.w11.blob}}/rtl/vlib/comlib/crc8.vhd">crc8.vhd</a>)
+handling via 'attention' messages. It is protected with a 18 bit CRC (see 
+<a href="{{site.my.w11.blob}}/rtl/vlib/comlib/crc16.vhd">crc16.vhd</a>)
 to detect transmission errors. The implementation is based on an extended symbol
 space with 261 symbols, 256 to represent the states of a data byte and 5
 additional symbols IDLE, SOP, EOP, NAK and ATTN used as packet delimiters
