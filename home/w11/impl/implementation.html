@@ -22,7 +22,7 @@ my:
 %}
 
 <h2 id="h_microarchitecture">The w11a microarchitecture</h2>
-
+<p>
 The microarchitecture of the w11a core is similar to the original 11/70 
 processor, the KB11-C CPU. Little parallelism and pipelining, just prefetch 
 of the next instruction, and even that only when current instruction is 
@@ -30,6 +30,7 @@ register destination. The goal was '<i>to get it working</i>'.
 The w11a core 
 (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_core.vhd">pdp11_core.vhd</a>) 
 is composed of four main units:
+</p>
 <ul>
   <li>instruction decoder
     (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_decode.vhd">
@@ -45,6 +46,7 @@ is composed of four main units:
       pdp11_vmbox.vhd</a>).</li>
 </ul>
 
+<p>
 Main difference to the KB11-C is that the w11a is not a micro coded design
 but based on a large sequencer state machine with currently 113 states and
 584 transitions. The number of states is significantly smaller than in the
@@ -61,6 +63,7 @@ and
 The symbols and color code used in this flow chart is explained in the
 document 
 <a href="{{site.my.w11.blob}}/doc/w11a_seq_flow.txt">w11a_seq_flow.txt</a>.
+</p>
 
 <p>
 The strict separation of main state machine and data path helped a lot
@@ -72,6 +75,7 @@ so the port lists stayed at a resonable length.
 </p>
 
 <h2 id="h_ibus">The Internal Bus - ibus</h2>
+<p>
 A very simple bus structure called <b>ibus</b> is used to connect the
 CPU with control registers within the processor, e.g. in the MMU, and in the
 peripherals. The ibus is a simple synchronous single master - multiple slave 
@@ -90,8 +94,10 @@ href="{{site.my.w11.blob}}/rtl/ibus/ib_intmap.vhd">ib_intmap.vhd</a>).
 A system has one ibus per processor core, a multicore system will have
 multiple ibus'es, like the PDP-11/74 had a UNIBUS associated with each 
 processor.
+</p>
 
 <h2 id="rbus">The Remote Register Interface - rbus and rlink</h2>
+<p>
 A second very simple bus structure called <b>rbus</b> is used to connect the
 main components of a system to an external control entity. The rbus is again a
 simple synchronous single master - multiple slave bus with an implementation
@@ -107,6 +113,7 @@ which maps a fixed part of the rbus address space into a selectable part of
 the ibus address space. ibus accesses via this window are marked as
 'remote' accesses (via the racc signal) and can be distinguished from
 CPU originated accesses. This is used to implement the I/O system emulation.
+</p>
 
 <p>
 A single rbus can handle up to four CPUs with their attached peripherals 
@@ -117,7 +124,8 @@ the Digilent boards
 The rbus has a simple interrupt mechanism. A slave can ask for 'attention' by
 asserting the LAM signal for a cycle (side note: LAM for 'look-at-me' is a 
 retro pun on 
-<a href="https://en.wikipedia.org/wiki/Computer_Automated_Measurement_and_Control">CAMAC</a>,
+<a href="https://en.wikipedia.org/wiki/Computer_Automated_Measurement_and_Control">
+  CAMAC</a>,
 an instrumentation standard very often used with a PDP-11 in DAQ systems).
 </p>
 
@@ -149,51 +157,56 @@ rlink interface used in all systems
   rlink_core8.vhd</a>).
 </p>
 
+<p>
 In the current systems the rlink communication is done via 
+</p>
 <ul>
-<li> an USB FIFO interface using the onboard
-<a href="http://www.cypress.com/products/ez-usb-fx2lp">Cypress FX2</a> USB controller 
-on Nexys2 and Nexys3 boards. The FPGA interface (see
-<a href="{{site.my.w11.blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
-fx2_2fifoctl_ic.vhd</a>) 
-provides two end points and a data transfer speed of up to 30 MByte/sec
-and a request-response rate of 4 kHz, limited by the USB 2.0 timing structure.
-The FX2 firmware supports besides data transfers to a running FPGA design also
-the configuration of the FPGA via JTAG (see 
-<a href="{{site.my.w11.tree}}/tools/fx2/src">sources</a>
-and
-<a href="{{site.my.w11.tree}}/tools/fx2/bin">pre-build images</a>).
-</li>
+  <li> an USB FIFO interface using the onboard
+    <a href="http://www.cypress.com/products/ez-usb-fx2lp">
+      Cypress FX2</a> USB controller 
+    on Nexys2 and Nexys3 boards. The FPGA interface (see
+    <a href="{{site.my.w11.blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
+      fx2_2fifoctl_ic.vhd</a>)
+    provides two end points and a data transfer speed of up to 30 MByte/sec and
+    a request-response rate of 4 kHz, limited by the USB 2.0 timing structure.
+    The FX2 firmware supports besides data transfers to a running FPGA design
+    also the configuration of the FPGA via JTAG (see
+    <a href="{{site.my.w11.tree}}/tools/fx2/src">sources</a>
+    and
+    <a href="{{site.my.w11.tree}}/tools/fx2/bin">pre-build images</a>).
+  </li>
 
-<li> a real or USB-emulated serial port (see
-<a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">rlink_sp1c.vhd</a>).
-The UART (see 
-<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_rx.vhd">
-  serport_uart_rx.vhd</a>
-and
-<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_tx.vhd">
-serport_uart_tx.vhd</a>)
-supports baud rates up to 3 Mbaud. The baud rate is detected automatically
-by a BREAK + 0x80 sync character sequence (see 
-<a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
-  serport_uart_autobaud.vhd</a>).
-With the onboard RS232 ports of the s3board and the Nexys2 boards the maximal
-Baud rate is 460800 when a USB-RS232 adapter is directly connected. The rate 
-is limited by the RS232 transceivers. With on-board USB-UARTs like the FT232R
-on the Nexys3 Baud rates of 2 MBaud are possible. The FT2232 on Nexys4 allows
-up to 12 MBaud (in w11a designs 10 MBaud possible).
-</li>
+  <li> a real or USB-emulated serial port (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">
+      rlink_sp1c.vhd</a>).
+    The UART (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_rx.vhd">
+      serport_uart_rx.vhd</a>
+    and
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_tx.vhd">
+      serport_uart_tx.vhd</a>)
+    supports baud rates up to 3 Mbaud. The baud rate is detected automatically
+    by a BREAK + 0x80 sync character sequence (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
+      serport_uart_autobaud.vhd</a>).
+    With the onboard RS232 ports of the s3board and the Nexys2 boards the maximal
+    Baud rate is 460800 when a USB-RS232 adapter is directly connected. The rate 
+    is limited by the RS232 transceivers. With on-board USB-UARTs like the FT232R
+    on the Nexys3 Baud rates of 2 MBaud are possible. The FT2232 on Nexys4 allows
+    up to 12 MBaud (in w11a designs 10 MBaud possible).
+  </li>
 
 </ul>
 
 <h2 id="h_io_emulation">The I/O System Emulation</h2>
-
+<p>
 All device I/O is emulated, as already described under 
 <a href="/home/w11/impl/">Features</a>. 
 A simple example is the transmit part
 of the <b>DL11</b> console interface 
 (see <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_dl11.vhd">ibdr_dl11.vhd</a>).
 Sending a character to the emulated console involves the following steps:
+</p>
 <ul>
   <li>the CPU writes the character to the xbuf (transmit buffer) register of 
       the DL11.</li>
@@ -212,6 +225,7 @@ Sending a character to the emulated console involves the following steps:
       server, set the xrdy bit in the csr, and in case interrupts were
       enabled, set the interrupt request flop in the controller.</li>
 </ul>
+<p>
 The DL11 receive logic is conceptually similar. The logic of the <b>LP11</b>
 line printer interface (see 
 <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_lp11.vhd">ibdr_lp11.vhd</a>)
@@ -219,6 +233,7 @@ and the <b>PC11</b>
 paper tape reader/puncher interface (see 
 <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_pc11.vhd">ibdr_pc11.vhd</a>)
 is analogous.
+</p>
 
 <p>
 For mass storage peripherals the DMA transfers are emulated too. A simple
@@ -245,6 +260,7 @@ the w11a memory involves the following steps:
       interrupts were enabled, the interrupt request flop is set in the 
       controller.</li>
 </ul>
+<p>
 Even though conceptually straight forward, the devil is in the details.
 Some of the device logic must be done in hardware to guarantee the timing 
 behavior expected by the original drivers. The 'remote' semantics of
@@ -253,9 +269,11 @@ of the 'local' semantics, like as the DL11 case, but quite different.
 For example, in the RK11 controller a write to the maintenance register rkmr
 is essentially a noop when done from the CPU but used for all kinds of 
 control functions when done via rbus.
+</p>
 
 <h2 id="h_build_system">The Build System</h2>
 
+<p>
 The build system employed in this project is based on <b>vbom</b> or 
 <i>"VHDL bill of material"</i> files which list for each vhdl source file the 
 libraries and sources for the instantiated components, the later via their 
@@ -273,6 +291,7 @@ sources needed to compile it. The
 script in 
 <a href="{{site.my.w11.tree}}/tools/bin">tools/bin</a>
 does  this, and generates, depending on options,
+</p>
 <ul>
   <li> make dependency files</li>
   <li> Vivado project definition files</li>
@@ -280,6 +299,7 @@ does  this, and generates, depending on options,
   <li> ISE ISim project files</li>
   <li> ghdl commands for analysis, inspection and make step</li>
 </ul>
+<p>
 The Makefile's in general just contain a few definitions and includes
 (see Makefile for 
 <a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/Makefile">sys_w11a_n2</a>
@@ -295,8 +315,10 @@ and
 A full w11a system with USB support is build from about 100 vhdl source files,
 test benches from about 120 vhdl source files. Using the vbom's a large number
 of designs can be easily maintained.
+</p>
 
 <h2 id="h_porting">Porting to other FPGA Families</h2>
+<p>
 So far the w11a has only been used on Xilinx Spartan-3 and Spartan-6 type
 FPGAs, but it is expected that porting to other Xilinx FPGAs like Virtex-6 
 or the Series-7 is easy. The only vendor specific constructs
@@ -317,3 +339,4 @@ The cache implementation (see
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_cache.vhd">pdp11_cache.vhd</a>)
 uses dual ported block RAMs in "READ_FIRST" mode to implement a 'speculative
 write' which can be undone in the next cycle. 
+</p>

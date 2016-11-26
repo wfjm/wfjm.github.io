@@ -6,24 +6,29 @@ my:
 ---
 
 <h2 id="h_systems">Running Systems</h2>
+<p>
 The project holds all the sources to synthesize a complete system. 
 Complete configurations for three boards are currently part of the project,
 the Digilent S3BOARD, Nexys2 and Nexys3 boards. 
 See section <a href="/home/w11/impl/#h_systems">
  Features: Complete Systems</a> for details.
-<br>
-<br>
+</p>
+<p>
 So far two UNIX systems have been successfully booted on the w11a:
+</p>
 <ul>
   <li><b>UNIX 5th edition</b>
   <li><b>2.11 BSD UNIX</b>
 </ul>
+<p>
 See section 
   <a href="/home/w11/inst/systems.html">Systems Images</a> for details,
 including links to the disk sets.
+</p>
 
 <h2 id="h_issues">Known Issues</h2>
 
+<p>
 There are some known difference between w11a and 11/70 and also known
 bugs in the current w11a implementation (see 
 <a href="{{site.my.w11.blob}}/doc/w11a_known_issues.txt">
@@ -31,12 +36,14 @@ bugs in the current w11a implementation (see
 They affect the behaviour in cases like fatal stack errors or certain
 double faults which don't occur in the normal operation of an operating
 system, and if they happen, in general lead to a crash anyway.
+</p>
 <p>
 The known differences are not considered worth fixing them, while the
 known bugs will be addressed in future versions of the w11a core.
 </p>
-
+<p>
 Given that the <b>w11a boots 2.11BSD</b> the cores are considered 
 <b>'Design Done'</b> and <b>'FPGA proven'</b>. The USB based Rlink
 interface and the backend software perform very well. Given the loose ends 
 listed above the project is still considered <b>'Beta'</b> quality.
+</p>

@@ -140,13 +140,12 @@ For project news look into the <a href="/blogs/w11">w11 blog</a>, the latest
 items are:
 </p>
 <ul>
-  {% for post in site.categories["w11"] %}
+  {% for post in site.categories["w11"] limit: 2 %}
     <li>
       {{ post.date | date: "%Y-%m-%d" }}:
       <a href="{{ post.url }}">{{ post.title }}</a> - 
       <i> {{ post.excerpt | strip_html | truncate: 80}} </i>
     </li>
-    {% if forloop.index0 >= 2 %} {% break %} {% endif %}
   {% endfor %}
 </ul>
 

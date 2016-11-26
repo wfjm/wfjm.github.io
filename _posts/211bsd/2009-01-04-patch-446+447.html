@@ -14,7 +14,9 @@ Steven was so kind to package them into two new patch files
   <li><b>447</b>: issued December 31, 2008</li>
 </ul>
 
+<p>
 Together, the patches address the following points
+</p>
 <ul>
   <li><code>ulrem.s</code>: the unsigned long modulo operator (%) was 
     broken in <code>libkern</code></li>
@@ -49,8 +51,10 @@ Together, the patches address the following points
   <li>some documentation corrections (<code>vmstat</code>, 
     <code>pstat</code>, <code>tcsh</code>)</li>
 </ul>
+<p>
 Note: In case you wonder, as I did, why 211BSD survived 20 years with a
        broken unsigned long % operator:
+</p>
 <ul>
   <li>only the non-FPP <code>libkern</code> implementation was affected</li>
   <li>the kernel simply doesn't have any unsigned long modulo's :)</li>
