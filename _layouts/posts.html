@@ -35,21 +35,19 @@
     {% include header-common.html  up=url_up
                                    prev=url_next next=url_prev %}
  
-    <!-- content section -->
-    <div id="mainwrapper">
-      <div id="main">
-        <div class="marginwrapper">
-          {{ content }}
-        </div>
-      </div>
-    </div>
-    
     <!-- navigation bar -->
     <div id="navbar"> 
       <div class="marginwrapper">
         <ul>
         </ul>
       </div>  
+    </div>
+
+    <!-- content section -->
+    <div id="main">
+      <div class="marginwrapper">
+        {{ content }}
+      </div>
     </div>
 
     <!-- footer section -->

@@ -49,15 +49,6 @@
                                    down=navurl_down
                                    prev=navurl_prev next=navurl_next %}
 
-    <!-- content section -->
-    <div id="mainwrapper">
-      <div id="main">
-        <div class="marginwrapper">
-          {{ content }}
-        </div>
-      </div>
-    </div>
-    
     <!-- navigation bar -->
     <div id="navbar"> 
       <div class="marginwrapper">
@@ -106,6 +97,13 @@
           {% endfor %}
         </ul>
       </div>  
+    </div>
+
+    <!-- content section -->
+    <div id="main">
+      <div class="marginwrapper">
+        {{ content }}
+      </div>
     </div>
 
     <!-- footer section -->

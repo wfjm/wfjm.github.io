@@ -23,7 +23,7 @@ code {
 /* - table headers have a blueish bachground          */
 /* - increase padding a bit to avoid to dense packing */
 table { 
- border: 5px black;
+  border: 5px black;
 }
 
 th { 
@@ -181,9 +181,13 @@ dt:hover .hover-link {
 /* header style defs ---------------------------------------------- */
 
 #header {
+  background: #e0e0ff;
+  margin-bottom: 2em;
+}
+
+#header-table {
   width: 100%;
   text-align: center;
-  background: #e0e0ff;
 }
 
 #header-toplogo {
@@ -211,19 +215,14 @@ dt:hover .hover-link {
   vertical-align: bottom;
 }
 
-#mainwrapper {
-  float: left;
-  width: 100%;
-}
+/* main style defs ------------------------------------------------ */
 
 #main {
-  margin-left: 200px;
-  font-size: 14px;
-/*  background: #eeeeff; */
+  margin-left: 16em;
 }
 
 .marginwrapper {
-  margin: 10px;
+  margin: 0.5em;
   margin-top: 0;
 }
 
@@ -231,10 +230,8 @@ dt:hover .hover-link {
 
 #navbar {
   float: left;
-  width: 200px; 
-  margin-left: -100%;
-  padding-top: 14px;
-  font-size: 14px;
+  width: 15em; 
+  margin-bottom: 1em;
 }
 
 #navbar ul { 
