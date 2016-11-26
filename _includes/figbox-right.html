@@ -1,0 +1,34 @@
+{% comment %}
+  sets up a floating figure, use with the parameters
+    id:       id of top level frame
+    width:    width of picture
+    height:   height of picture
+    figurl:   url of picture
+    figurlhr: url of picture (high resolution)
+    figalt:   alt text
+    caption:  caption text
+{% endcomment %}
+
+{% assign width="260" %}
+{% assign height="auto" %}
+{% if include.width %}  {% assign width=include.width %}   {% endif %}
+{% if include.heigth %} {% assign heigth=include.height %} {% endif %}
+
+{% assign figalt=include.figalt %}
+{% unless figalt %} {% assign figalt=include.id %} {% endunless %}
+{% unless figalt %} {% assign figalt=include.figurl %} {% endunless %}
+
+{% assign figurlhr=include.figurlhr %}
+{% unless figurlhr %} {% assign figurlhr=include.figurl %} {% endunless %}
+
+<div id="{{include.id}}" class="figureframe">
+  <div class="figurebox">
+    <a href="{{figurlhr}}"> 
+      <img width="{{width}}" height="{{height}}" 
+           alt="{{figalt}}" src="{{include.figurl}}">
+    </a>
+  </div>
+  <div class="figurecaption">
+    {{include.caption}}
+  </div>
+</div>

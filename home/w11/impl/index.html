@@ -4,17 +4,7 @@ title:  "Features"
 my:
   changedate: 2016-10-29
 ---
-
-<div class="figureframe">
-  <div class="figurebox">
-    <!-- Fig. F-1 -->
-    <a href="/downloads/w11/pictures/DaveMcGuire-DEC-PDP1170-KB11C-3.jpg">
-      <img id="Fig_F-1" width="228" height="172" 
-           alt="click for higher resolution"
-           src="/downloads/w11/pictures/DaveMcGuire-DEC-PDP1170-KB11C-3.jpg">
-    </a>
-  </div>
-  <div class="figurecaption">
+{% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
     build around 1976 in 
     <a href="https://en.wikipedia.org/wiki/7400_series">SN74Sxx</a> 
@@ -30,18 +20,13 @@ my:
     Picture courtesy of Dave McGuire, see also 
     <a href="http://www.neurotica.com/wiki/DEC_PDP-11/70">
       Dave's PDP-11/70 site</a>.
-  </div>
+{% endcapture %}
+{% include figbox-right.html id="Fig_F-1" width="228" height="172" 
+     figurl="/downloads/w11/pictures/DaveMcGuire-DEC-PDP1170-KB11C-3.jpg"
+     caption=caption_Fig_F_1
+%}
 
-  <hr>
-  <div class="figurebox">
-    <!-- Fig. F-2 -->
-    <a href="/downloads/w11/pictures/JohnHolden-11_70_rk05s.jpg">
-      <img id="Fig_F-2" width="230" height="362" 
-           alt="click for higher resolution" 
-           src="/downloads/w11/pictures/JohnHolden-11_70_rk05.jpg">
-    </a>
-    </div>
-  <div  class="figurecaption">
+{% capture caption_Fig_F_2 %}
     Fig F-2: PDP-11/70 Console with 2 RK05 drives with a UNIX 7th edition system
     (see disk labels in 
     <a href="/downloads/w11/pictures/JohnHolden-11_70_rk05s.jpg">
@@ -50,29 +35,28 @@ my:
     emulate a similar configuration. Picture courtesy of John Holden. 
     See also
     <a href="http://www.psych.usyd.edu.au/pdp-11/">John's PDP-11 Site</a>.
-  </div>
-  <hr>
-  <div class="figurebox">
-    <!-- Fig. F-3 -->
-    <a href="/downloads/w11/pictures/wfjm-2010-08-08-w11a_n2.jpg">
-      <img id="Fig_F-3" width="240" height="224" 
-           alt="click for higher resolution" 
-           src="/downloads/w11/pictures/wfjm-2010-08-08-w11a_n2.jpg">
-    </a>
-  </div>
-  <div  class="figurecaption">
-  Fig F-3: w11a running on a Digilent 
-  <a href="/home/w11/inst/boards.html#digi_nexys2">Nexys2</a> board. 
-  The board is powered over USB. FPGA configuration as
-  well as the rlink connection can be done via the 
-  <a href="http://www.cypress.com/products/ez-usb-fx2lp">Cypress FX2</a> USB 
-  controller available on the Nexys2. Alternatively, the rlink connection 
-  can be done via the RS232 port and a FTDI 
-  <a href="http://www.ftdichip.com/Products/EvaluationKits/USB-Serial.htm">
-  US232R-100</a> cable. 
-  </div>
+{% endcapture %}
+{% include figbox-right.html id="Fig_F-2" width="230" height="362"
+     figurl="/downloads/w11/pictures/JohnHolden-11_70_rk05.jpg"
+     figurlhr="/downloads/w11/pictures/JohnHolden-11_70_rk05s.jpg"
+     caption=caption_Fig_F_2
+%}
 
-</div>
+{% capture caption_Fig_F_3 %}
+    Fig F-3: w11a running on a Digilent 
+    <a href="/home/w11/inst/boards.html#digi_nexys2">Nexys2</a> board. 
+    The board is powered over USB. FPGA configuration as
+    well as the rlink connection can be done via the 
+    <a href="http://www.cypress.com/products/ez-usb-fx2lp">Cypress FX2</a> USB 
+    controller available on the Nexys2. Alternatively, the rlink connection 
+    can be done via the RS232 port and a FTDI 
+    <a href="http://www.ftdichip.com/Products/EvaluationKits/USB-Serial.htm">
+    US232R-100</a> cable. 
+{% endcapture %}
+{% include figbox-right.html id="Fig_F-3" width="230" height="362"
+     figurl="/downloads/w11/pictures/wfjm-2010-08-08-w11a_n2.jpg"
+     caption=caption_Fig_F_3
+%}
 
 <h2>The w11a CPU core</h2>
 The w11a CPU core has a functionality very close to a PDP-11/70 CPU (Model

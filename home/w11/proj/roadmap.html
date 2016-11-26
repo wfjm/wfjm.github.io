@@ -4,17 +4,7 @@ title:  "Roadmap"
 my:
   changedate: 2016-10-29
 ---
-
-<div class="figureframe">
-  <div class="figurebox">
-    <!-- Fig. R-1 -->
-    <a href="/downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg">
-      <img id="Fig_R-1" width="240" height="201" 
-           alt="click for higher resolution" 
-           src="/downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg">
-    </a>
-  </div>
-  <div class="figurecaption">
+{% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
     <a href="/home/w11/inst/boards.html#digi_s3board">
       S3BOARD</a> board with XC3S1000. The rlink connection is via the RS232 
@@ -29,25 +19,23 @@ my:
       link="http://www.ftdichip.com/Products/EvaluationKits/UM232R.htm"
       text="FTDI UM232R" %}
      module.
-  </div>
+{% endcapture %}
 
-  <hr>
-  <div class="figurebox">
-    <!-- Fig. R-2 -->
-    <a href="/downloads/w11/pictures/DaveCarrol-1174-cd-open.jpg">
-      <img id="Fig_R-2" width="240" height="180" 
-           alt="click for higher resolution" 
-           src="/downloads/w11/pictures/DaveCarrol-1174-cd-open.jpg">
-    </a>
-  </div>
-  <div class="figurecaption">
-    Fig R-2: Two of four processors of the 11/74 prototype PHEANX, which was
-    used up to the 90's for RSX builds. Earlier the machine was used under
-    the name CASTOR by DEC RSX Engineering in Maynard.
-    Picture courtesy of Dave Carroll.
-  </div>
+{% include figbox-right.html id="Fig_R-1" width="240" height="201"
+     figurl="/downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg"
+     caption=caption_Fig_R_1
+%}
 
-</div>
+{% capture caption_Fig_R_2 %}
+    Fig R-2: Two of four processors of the 11/74 prototype PHEANX, 
+    which was used up to the 90's for RSX builds. Earlier the
+    machine was used under the name CASTOR by DEC RSX Engineering 
+    in Maynard. Picture courtesy of Dave Carroll.
+{% endcapture %}
+{% include figbox-right.html id="Fig_R-2" width="240" height="180"
+     figurl="/downloads/w11/pictures/DaveCarrol-1174-cd-open.jpg"
+     caption=caption_Fig_R_2
+%}
 
 <h2 id="d_short">Short term (in work)</h2>
 <ul>

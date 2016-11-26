@@ -100,23 +100,18 @@ my:
 
 ---
 
-<div id="Fig_S-1" class="figureframe-wide">
-  <!-- Fig. S-1 -->
-  <div class="figurebox">
-  <a href="/downloads/w11/pictures/wfjm-2010-08-08-screenshot.jpg">
-  <img width="256" height="192" alt="click for higher resolution"
-  src="/downloads/w11/pictures/wfjm-2010-08-08-screenshot.jpg">
-  </a>
-  </div>
-  <div class="figurecaption">
+{% capture caption_Fig_S_1 %}
     Fig S-1: Screen shot of 2.11BSD boot sequence and some commands on a w11a_s3 
     system. The output of the two DL11 is directed in the DL0/DL1 windows. 
     In the bottom right corner is a window with messages of the backend server
     process visible. See also
     <a href="/downloads/w11/pictures/wfjm-2010-08-08-screenshot.jpg">
       hi-res jpg</a>.
-  </div>
-</div>
+{% endcapture %}
+{% include figbox-right.html id="Fig_S-1" width="256" height="192"
+     figurl="/downloads/w11/pictures/wfjm-2010-08-08-screenshot.jpg"
+     caption=caption_Fig_S_1
+%}
 
 <h2>Running Systems</h2>
 

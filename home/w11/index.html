@@ -5,23 +5,20 @@ my:
   changedate: 2016-11-06
 ---
 
-<h2>Description</h2>
-
 <!-- Fig. D-1 -->
-<div id="Fig_D-1" class="figureframe">
-  <div class="figurebox">
-    <a href="/downloads/w11/pictures/HenkGooijen-pdp11-70-front.jpg"> 
-      <img width="234" height="116" alt="Fig_D-1"
-         src="/downloads/w11/pictures/HenkGooijen-pdp11-70-front.jpg">
-    </a>
-  </div>
-  <div class="figurecaption">
-    Fig D-1: A PDP-11/70 Console. These display and switch consoles were the 
-    hallmark of the PDP-11 computers in the 70ties.
-    Picture courtesy of Henk Gooijen, see also 
+{% capture caption_Fig_D_1 %}
+    Fig D-1: A PDP-11/70 Console.These display and switch consoles 
+    were the hallmark of the PDP-11 computers in the 70ties.
+    Picture courtesy of Henk Gooijen, see also
     <a href="http://www.pdp-11.nl/">Henk's PDP-11 collection</a>.
-  </div>
-</div>
+{% endcapture %}
+
+{% include figbox-right.html id="Fig_D-1"  width="234" height="116"
+     figurl="/downloads/w11/pictures/HenkGooijen-pdp11-70-front.jpg"
+     caption=caption_Fig_D_1
+%}
+
+<h2>Description</h2>
 
 The project contains a complete
 <a href="https://en.wikipedia.org/wiki/Digital_Equipment_Corporation">DEC</a> 

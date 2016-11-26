@@ -3,7 +3,8 @@
 	"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" 
      xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="142" height="167">
+     viewBox="0 0 142 167"
+     width="100%" height="100%">
 
 <path d="M 107,0
          L 107,95

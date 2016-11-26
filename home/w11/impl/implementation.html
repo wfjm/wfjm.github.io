@@ -5,14 +5,7 @@ my:
   changedate: 2016-10-29
 ---
 
-<!-- Fig. I-1 -->
-<div class="figureframe-wide">
-  <div class="figurebox">
-    <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_200dpi.png">
-      <img id="Fig_I-1" alt="click for higher resolution" 
-           src="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_32dpi.png"></a>
-  </div>
-  <div class="figurecaption">
+{% capture caption_Fig_I_1 %}
     Fig I-1: w11a main sequencer state flow.
     Description of symbol and color code 
     <a href="{{site.my.w11.blob}}/doc/w11a_seq_flow.txt">see annotation</a>.
@@ -22,8 +15,11 @@ my:
     and 
     <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_a4wrap.pdf">
       pdf</a>.
-  </div>
-</div>
+{% endcapture %}
+{% include figbox-right.html id="Fig_I-1" 
+     figurl="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_200dpi.png"
+     caption=caption_Fig_I_1
+%}
 
 <h2>The w11a CPU Core</h2>
 
