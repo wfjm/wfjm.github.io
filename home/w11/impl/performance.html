@@ -5,7 +5,7 @@ my:
   changedate: 2016-10-29
 ---
 
-<h2>Microarchitecture</h2>
+<h2 id="h_microarchitecture">Microarchitecture</h2>
 Because the w11a microarchitecture is very similar to the original 11/70 
 processor, the KB11-C CPU, the instruction timing in clock cycles is also very
 similar.  A register-register operation takes two clock cycles, more a
@@ -13,7 +13,7 @@ involved case like an "<code>add @r1,a(r2)</code>" for example takes 12 cycles.
 Notable exceptions are the MUL (5 instead of 22 cycles) and DIV (23
 instead of 46 cycles) instructions.
 
-<h2>Clock Rate</h2>
+<h2 id="h_clock">Clock Rate</h2>
 On Spartan/Artix classs FPGA's the w11a systems run with at a clock frequency
 of at <b>least 50 MHz</b>. Specifically:
 <pre>
@@ -26,7 +26,7 @@ of at <b>least 50 MHz</b>. Specifically:
   xc3s1000-4    S3board   w11a_s3       50 MHz   no DCM
 </pre>
 
-<h2>Expected Performance</h2>
+<h2 id="h_performance">Expected Performance</h2>
 <p>
 <b>Compared to KB11-C CPU</b>: The KB11-C CPU had a 150 ns micro cycle time. 
 Both the w11a and the 11/70 have a cache, which greatly reduces the impact
@@ -45,7 +45,7 @@ the PDP-11/93.
 
 </p>
 
-<h2>Benchmarks</h2>
+<h2 id="h_benchmarks">Benchmarks</h2>
 The 
 <a href="https://en.wikipedia.org/wiki/Dhrystone"><b>Dhrystone 2</b></a> 
 and 

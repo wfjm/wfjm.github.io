@@ -57,31 +57,35 @@
     {% if jekyll.environment == "development" %}
       <div id="footer-debug">
         <table class="trtoggle">
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-          </tr>
-          {% for item in page %}
-            {% assign key = item %}
-            {% assign val = page[item] %}
+          <thead>
             <tr>
-              <td class="va-top">{{key}}</td>
-              <td>
-                {% case key %}
-                {% when "next" %}
-                  <a href="{{page.next.url}}">{{page.next.url}}</a>
-                {% when "previous" %}
-                  <a href="{{page.previous.url}}">{{page.previous.url}}</a>
-                {% when "content" %}
-                  <i>too long</i>
-                {% when "excerpt" %}
-                  {{page.excerpt | strip_html | truncate: 500 }}
-                {% else %}
-                  {% include dump_variable.html val=val max="200" %}
-                {% endcase %}
-              </td>
+              <th>Property</th>
+              <th>Value</th>
             </tr>
-          {% endfor %}
+          </thead>
+          <tbody>
+            {% for item in page %}
+              {% assign key = item %}
+              {% assign val = page[item] %}
+              <tr>
+                <td class="va-top">{{key}}</td>
+                <td>
+                  {% case key %}
+                  {% when "next" %}
+                    <a href="{{page.next.url}}">{{page.next.url}}</a>
+                  {% when "previous" %}
+                    <a href="{{page.previous.url}}">{{page.previous.url}}</a>
+                  {% when "content" %}
+                    <i>too long</i>
+                  {% when "excerpt" %}
+                    {{page.excerpt | strip_html | truncate: 500 }}
+                  {% else %}
+                  {% include dump_variable.html val=val max="200" %}
+                  {% endcase %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
         </table>
       </div>
     {% endif %}

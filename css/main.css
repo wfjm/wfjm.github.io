@@ -206,7 +206,7 @@ dt:hover .hover-link {
 }
 
 #header-botpath {
-  font-size: 80%;
+  font-size: 83%;
   text-align: left;
   vertical-align: bottom;
 }
@@ -294,7 +294,7 @@ dt:hover .hover-link {
 }
 
 #navbar .navlvl4 {
-  font-size: 80%;
+  font-size: 83%;
   padding-left: 25px;
 }
 
@@ -308,8 +308,8 @@ dt:hover .hover-link {
   clear: right;
   float: right; 
   width: 260px; 
-  margin: 10px;
-  margin-top: 0px;
+  margin-left: 1em;
+  margin-bottom: 10px;
   background-color: #f0f0ff;
 }
 
@@ -371,5 +371,5 @@ dt:hover .hover-link {
   border-top: 6px solid #ffb166;
   border-left: 6px solid #ffb166;
   background-color: #ffecd9;
-  font-size: 80%;
+  font-size: 83%;
 }

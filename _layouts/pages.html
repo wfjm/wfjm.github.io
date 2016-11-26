@@ -114,22 +114,26 @@
     {% if jekyll.environment == "development" %}
       <div id="footer-debug">
         <table class="trtoggle">
-          <tr>
-            <th>Property</th>
-            <th>Value</th>
-          </tr>
-          {% for item in page %}
-            {% assign key = item[0] %}
-            {% assign val = item[1] %}
-            {% unless key == "content" %}
-              <tr>
-                <td class="va-top">{{key}}</td>
-                <td>
-                  {% include dump_variable.html val=val max="200" %}
-                </td>
-              </tr>
-            {% endunless %}
-          {% endfor %}
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in page %}
+              {% assign key = item[0] %}
+              {% assign val = item[1] %}
+              {% unless key == "content" %}
+                <tr>
+                  <td class="va-top">{{key}}</td>
+                  <td>
+                    {% include dump_variable.html val=val max="200" %}
+                  </td>
+                </tr>
+              {% endunless %}
+            {% endfor %}
+          </tbody>
         </table>
       </div>
     {% endif %}

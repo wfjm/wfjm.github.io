@@ -58,7 +58,7 @@ my:
      caption=caption_Fig_F_3
 %}
 
-<h2>The w11a CPU core</h2>
+<h2 id="h_w11_core">The w11a CPU core</h2>
 The w11a CPU core has a functionality very close to a PDP-11/70 CPU (Model
 KB11-B or KB11-C) and supports with very few exceptions everything the
 <a href="https://en.wikipedia.org/wiki/PDP-11_architecture">
@@ -77,7 +77,7 @@ All fits today easily in a fraction of a modest size low cost FPGA.
 The original 11/70 CPU was implemented in TTL, see
 <a href="#Fig_F-1">Figure F-1</a> for comparison.
 
-<h2 id="p_IO_System">The I/O System</h2>
+<h2 id="h_io_system">The I/O System</h2>
 Project goal was to create a retro-computing platform able to run the 
 historical UNIX systems and other original software. The I/O system is 
 therefore setup to have the same register model and semantics as the 
@@ -123,7 +123,7 @@ Currently available is a basic set of UNIBUS peripherals which is, apart from
         not used so far, but was fun to do...)</li>
 </ul>
 
-<h2 id="p_Complete_Systems">Complete Systems</h2>
+<h2 id="h_systems">Complete Systems</h2>
 
 The project holds all the sources to synthesize a complete system. The systems
 are comprised of
@@ -164,7 +164,7 @@ The Digilent
 has no memory external to the FPGA. The memory seen by the w11a core is build
 from BRAMs, with a total size of 176 kB.
 
-<h2>System Configuration</h2>
+<h2 id="h_system_config">System Configuration</h2>
 All systems have the following configuration for the UNIBUS peripherals:
 <pre>
   Controller Name                    CSR  VEC PRI    Device Names
