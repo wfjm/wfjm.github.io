@@ -10,8 +10,6 @@
   path: home/w11/
 - text: Status
   path: home/w11/proj/
-- text: Milestones
-  path: home/w11/proj/milestones.html
 - text: Releases
   path: home/w11/proj/releases.html
 - text: Roadmap
