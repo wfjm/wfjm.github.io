@@ -1,0 +1,42 @@
+{% comment %}
+  Snipplet to add a standard header. Parameters are
+    plist   '/' split path name 
+    up      url for 'up'   nav button
+    down    url for 'down' nav button
+    prev    url for 'prev' nav button
+    next    url for 'next' nav button
+{% endcomment %}
+
+<div>
+  <table id="header"> 
+    <tr id="header-top">
+      <td id="header-toplogo" rowspan="2">
+        <img height="80" src="/downloads/icons/retro-logo.svg"
+             alt="wfjm's retro logo">
+      </td>
+      <td id="header-toptitle" colspan="2">
+        {{ page.title }}
+      </td>
+    </tr>
+    <tr id="header-bot">
+      <td id="header-botpath">
+        {% assign headnavlink = "" %}
+        {% for e in include.plist %}
+          {% if e != "index.html" %}
+            {% assign headnavlink = headnavlink | append: "/" | append: e %}
+            / 
+            {% unless forloop.last %}
+              <a href="{{headnavlink}}/"> {{e}} </a>
+            {% else %}
+              {{ e }}
+            {% endunless %}
+          {% endif %}
+        {% endfor %}
+      </td>
+      <td id="header-botnav">
+        {% include relnav.html up=include.up down=include.down
+                               prev=include.prev next=include.next %}
+      </td>
+    </tr>
+  </table>
+</div>
