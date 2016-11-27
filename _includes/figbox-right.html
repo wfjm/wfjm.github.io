@@ -9,10 +9,13 @@
     caption:  caption text
 {% endcomment %}
 
-{% assign width="260" %}
-{% assign height="auto" %}
-{% if include.width %}  {% assign width=include.width %}   {% endif %}
-{% if include.heigth %} {% assign heigth=include.height %} {% endif %}
+{% assign imgwidth='width="260"' %}
+{% if include.width %}
+  {% assign imgwidth='width="' | append: include.width | append: '"'%}
+{% endif %}
+{% if include.height %}
+  {% assign imgheight='height="' | append: include.height | append: '"'%}
+{% endif %}
 
 {% assign figalt=include.figalt %}
 {% unless figalt %} {% assign figalt=include.id %} {% endunless %}
@@ -24,7 +27,7 @@
 <div id="{{include.id}}" class="figureframe">
   <div class="figurebox">
     <a href="{{figurlhr}}"> 
-      <img width="{{width}}" height="{{height}}" 
+      <img {{imgwidth}} {{imgheight}}
            alt="{{figalt}}" src="{{include.figurl}}">
     </a>
   </div>
