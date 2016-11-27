@@ -1,0 +1,80 @@
+---
+title: "2.11BSD source code browser and xref"
+#
+my:
+  ouxrbase: http://www.retro11.de/ouxr/211bsd
+---
+<p>
+When searching lately a lot through the UNIX 2.11bsd source code I
+wanted many times a hyperlinked and cross referenced rendition of the
+sources, much like doxygen or lxr does it. For kernel, lib and user
+code, for c and assembler.
+</p>
+<p>
+Since none of the existing tools seemed to do what I wanted, I wrote
+a perl script generating such a html'ized version of the source code.
+</p>
+The tool far from finished, but might already be useful. For a tour
+start for example with the code of the 'cp' command
+</p>
+<pre>
+  <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html</a>
+</pre>
+and click along. The links connect C and asm code, the user land code,
+libc and kernel code. Look to the readdir() call in line 197, a click
+gets you into the libc module implementing readdir(). A further click
+on read() into the assembler stub doing the system call, and a click
+on the kernel handler listed there gets you into the kernel source.
+Here the links of the tour
+<pre>
+  <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197</a>
+  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir">{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir</a>
+  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read">{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read</a>
+  <a href="{{page.my.ouxrbase}}/usr/src/sys/sys/sys_generic.c.html#s:_read">{{page.my.ouxrbase}}/usr/src/sys/sys/sys_generic.c.html#s:_read</a>
+</pre>
+<p>
+The background color tells you in which territory you are in
+</p>
+<pre>
+  <span class="ouxr-cboot">magenta</span>   boot and standalone code
+  <span class="ouxr-ckern">red    </span>   kernel
+  <span class="ouxr-cnet">gold   </span>   network code (running in supervisor)
+  <span class="ouxr-clib">green  </span>   libraries
+  <span class="ouxr-cuser">blue   </span>   user level code
+</pre>
+<p>
+If you want a kernel tour, start at
+</p>
+<pre>
+  <a href="{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html">{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html</a>
+</pre>
+<p>
+Clicking on a symbol definition (or the X in the sidebar) gets you to the
+cross referencing info's. To see for example who is using setjmp see
+</p>
+<pre>
+  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp</a>
+</pre>
+or who is including nlist.h see
+<pre>
+  <a href="{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h">{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h</a>
+</pre>
+<p>
+As said, it's beta stage, the style sheet is still the debug version,
+not all links end where they should, not all is parsed as it should.
+</p>
+<p>
+Hope you enjoy it.
+</p>
+
+<div class="notebox">
+  For original note to 2.11BSD users see
+  {% include wbm-link.html 
+  date="20141006194042"
+  link="http://www.classiccmp.org/pipermail/cctech/2007-March/037360.html"
+  text="posting to cctech@classiccmp.org" %}
+  . That started a nice thread back in 2007.
+  <br>
+  Note that in this cctech posting an old and by now obsolete server
+  address was used. The text above points to a currently reachable server.  
+</div>

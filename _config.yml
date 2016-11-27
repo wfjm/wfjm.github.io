@@ -39,6 +39,11 @@ defaults:
       category: 211bsd
   - 
     scope:
+      path: "_posts/ouxr"
+    values:
+      category: ouxr
+  - 
+    scope:
       path: "_posts/w11"
     values:
       category: w11

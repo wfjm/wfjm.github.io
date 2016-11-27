@@ -54,6 +54,8 @@
   path: blogs/w11/
 - text: 2.11BSD
   path: blogs/211bsd/
+- text: ouxr
+  path: blogs/ouxr/
 
 - text: About
   path: about/
