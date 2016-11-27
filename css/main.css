@@ -26,6 +26,17 @@ p:first-letter {
   font-size: 115%;
 }
 
+/* lists */
+
+ul.bigli li {
+  margin-top:  0.5ex;
+  margin-bottom:  0.5ex;
+}
+ol.bigli li {
+  margin-top:  0.5ex;
+  margin-bottom:  0.5ex;
+}
+
 /* tables */
 
 /* define table basics                                */
