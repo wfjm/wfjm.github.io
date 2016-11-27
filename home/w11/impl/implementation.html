@@ -1,5 +1,5 @@
 ---
-title:  "Implementation"
+title:  "Architecture"
 #
 my:
   changedate: 2016-10-29
@@ -9,15 +9,16 @@ my:
     Fig I-1: w11a main sequencer state flow.
     Description of symbol and color code 
     <a href="{{site.my.w11.blob}}/doc/w11a_seq_flow.txt">see annotation</a>.
-    Also available in 
-    <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_200dpi.png">
-      high resolution png</a>
+    Also available as 
+    <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569.svg">
+      svg</a>
     and 
     <a href="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_a4wrap.pdf">
       pdf</a>.
 {% endcapture %}
 {% include figbox-right.html id="Fig_I-1" 
-     figurl="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569_200dpi.png"
+     width=240
+     figurl="/downloads/w11/pictures/wfjm-w11a_seq_flow_rev569.svg"
      caption=caption_Fig_I_1
 %}
 
@@ -67,7 +68,7 @@ document
 
 <p>
 The strict separation of main state machine and data path helped a lot
-to control the length of logic path. The large number of control signals
+to control the logic path length. The large number of control signals
 between these entities were packed into VHDL records 
 (see definitions in 
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11.vhd">pdp11.vhd</a>)

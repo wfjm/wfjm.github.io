@@ -16,9 +16,9 @@
   path: home/w11/proj/roadmap.html
 - text: Credits
   path: home/w11/proj/credits.html
-- text: Core and SoC
-  path: home/w11/impl/
 - text: Implementation
+  path: home/w11/impl/
+- text: Architecture
   path: home/w11/impl/implementation.html
 - text: Performance
   path: home/w11/impl/performance.html
