@@ -16,14 +16,15 @@ my:
     <th>title</th>
   </tr>
   {% for p in posts_sorted reversed %}
+    {% assign checkuri = site.url | append: p.url | url_param_escape %}
     <tr>
       <td><a href="{{p.url}}">{{p.url}}</a></td>
       <td>{{p.date | slice: 0,10}}</td>
       <td class="ha-center">
-        <a href="{{page.my.w3c_chtml}}?uri={{site.url}}{{p.url}}">
+        <a href="{{page.my.w3c_chtml}}?uri={{checkuri}}">
           <i class="fa fa-html5 abutton"></i></a></td>
       <td class="ha-center">
-        <a href="{{page.my.w3c_clink}}?uri={{site.url}}{{p.url}}">
+        <a href="{{page.my.w3c_clink}}?uri={{checkuri}}">
           <i class="fa fa-link abutton"></i></a></td>
       <td>{{p.title}}</td>
     </tr>
