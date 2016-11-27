@@ -93,6 +93,13 @@ td {
   white-space: nowrap;
 }
 
+.tag {
+  background-color: blue;
+  color: white;
+  padding-left: 0.5ex;
+  padding-right: 0.5ex;
+}
+
 /* re-define anchor basics     */
 /* - no underline              */
 /* - but stay with blue        */

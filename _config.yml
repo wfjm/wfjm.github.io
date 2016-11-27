@@ -60,3 +60,4 @@ my:
   w11:
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
+    raw:  https://raw.githubusercontent.com/wfjm/w11/master

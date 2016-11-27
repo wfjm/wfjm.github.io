@@ -61,7 +61,8 @@
           {% for t in page.tags %}
             <tr>
               <td>{% if forloop.first %}Tags:{% endif %}</td>
-              <td>{{t}}</td>
+              <td><a href="/blogs/posts-by-tags.html#{{t}}">
+                  <span class="tag">{{t}}</span></a></td>
             </tr>
           {% endfor %}
         </tbody></table>

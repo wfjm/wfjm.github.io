@@ -1,0 +1,26 @@
+---
+title:  "Posts by Tags"
+---
+
+{% for t in site.tags %}
+  <h2 id="{{t[0]}}"> <span class="tag">{{ t[0] }}</span></h2>
+
+  <table class="trtoggle">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Title</th>
+        <th>Excerpt</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in t[1] %}
+        <tr>
+          <td>{{ post.date | date: "%Y-%m-%d" }}</td>
+          <td><a href="{{ post.url }}">{{ post.title }}</a></td>
+          <td>{{ post.excerpt | strip_html | truncate: 80}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
