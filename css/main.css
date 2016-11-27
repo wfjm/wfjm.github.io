@@ -43,7 +43,7 @@ ol.bigli li {
 /* - table headers have a blueish bachground          */
 /* - increase padding a bit to avoid to dense packing */
 table { 
-  border: 5px black;
+  border: 0px;
 }
 
 th { 
@@ -322,6 +322,15 @@ dt:hover .hover-link {
   background-color: #ccddcc;
 }
 
+/* navbar style defs for posts -------------------------- */
+#navbar td {
+  padding:    0px;
+}
+#navbar td:nth-child(1) {
+  padding-right:  5px;
+  font-weight: bold;
+}
+
 /* figure style defs ---------------------------------------------- */
 
 .figureframe {
@@ -398,6 +407,7 @@ dt:hover .hover-link {
   width: 30%;
   text-align: center;
   vertical-align: bottom;
+  font-style: italic;
 }
 
 #footer-nav {

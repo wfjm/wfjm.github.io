@@ -23,10 +23,12 @@
       </td>
       <td id="footer-time">
         {% if page.date %}
-          <em> posted on {{page.date | slice: 0,10}} </em>
-        {% elsif page.my.changedate %}
-          <em> updated {{page.my.changedate}} </em>
-         {% endif %}
+          posted&nbsp;{{page.date | slice: 0,10}}
+        {% endif %}
+        {% if page.my.changedate %}
+          {% if page.date %} &amp; {% endif %}
+          updated&nbsp;{{page.my.changedate}}
+        {% endif %}
       </td>
       <td id="footer-nav">
         {% include relnav.html up=include.up down=include.down

@@ -1,7 +1,9 @@
 ---
 title: "2.11BSD source code browser and xref"
+tags:  ["ouxr", "211bsd"]
 #
 my:
+  changedate: 2016-11-27
   ouxrbase: http://www.retro11.de/ouxr/211bsd
 ---
 <p>
@@ -14,18 +16,19 @@ code, for c and assembler.
 Since none of the existing tools seemed to do what I wanted, I wrote
 a perl script generating such a html'ized version of the source code.
 </p>
+<p>
 The tool far from finished, but might already be useful. For a tour
-start for example with the code of the 'cp' command
+start for example with the code of the <code>cp</code> command
 </p>
 <pre>
   <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html</a>
 </pre>
 and click along. The links connect C and asm code, the user land code,
-libc and kernel code. Look to the readdir() call in line 197, a click
-gets you into the libc module implementing readdir(). A further click
-on read() into the assembler stub doing the system call, and a click
-on the kernel handler listed there gets you into the kernel source.
-Here the links of the tour
+libc and kernel code. Look to the <code>readdir()</code> call in line 197,
+a click gets you into the libc module implementing <code>readdir()</code>.
+A further click on <code>read()</code> into the assembler stub doing the
+system call, and a click on the kernel handler listed there gets you into
+the kernel source. Here the links of the tour
 <pre>
   <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197</a>
   <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir">{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir</a>
@@ -49,13 +52,13 @@ If you want a kernel tour, start at
   <a href="{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html">{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html</a>
 </pre>
 <p>
-Clicking on a symbol definition (or the X in the sidebar) gets you to the
-cross referencing info's. To see for example who is using setjmp see
+Clicking on a symbol definition (or the X in the sidebar) gets you to the cross
+referencing info's. To see for example who is using <code>setjmp</code> see
 </p>
 <pre>
   <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp</a>
 </pre>
-or who is including nlist.h see
+or who is including <code>nlist.h</code> see
 <pre>
   <a href="{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h">{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h</a>
 </pre>
@@ -74,7 +77,8 @@ Hope you enjoy it.
   link="http://www.classiccmp.org/pipermail/cctech/2007-March/037360.html"
   text="posting to cctech@classiccmp.org" %}
   . That started a nice thread back in 2007.
-  <br>
-  Note that in this cctech posting an old and by now obsolete server
-  address was used. The text above points to a currently reachable server.  
+</div>
+<div class="notebox">
+  2016-11-27: the original posting refered to a not longer been used server.
+  Updated the post to the current server used to host the ouxr pages.
 </div>

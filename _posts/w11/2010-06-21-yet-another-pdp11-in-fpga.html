@@ -36,7 +36,8 @@ The implementation was verified against many XXDP maindec's. There are
 some open issues, especially some details of trap and double error
 handling aren't correct yet. In practice this is of little importance,
 the FPGA system happily boots and runs BSD 2.11, a system using 22bit 
-addressing and split I&amp;D space. {Note: you need patch 447 for 2.11BSD 
+addressing and split I&amp;D space. {Note: you need
+<a href="/posts/211bsd/2009-01-04-patch-446+447.html">patch 447 for 2.11BSD</a>
 to get FPP emulation and RK support working}
 </p>
 <p>
@@ -59,8 +60,8 @@ benches, backend) available on 'OpenCores'.
 Finally a comment to Dave Mitton's remark
 </p>
 <pre>
-  > Now what would be really cool would be to make 4 CPUs and re-create 
-  > an 11/74 quad.
+  > Now what would be really cool would be to make 4 CPUs
+  > and re-create an 11/74 quad.
 </pre>
 The reason why I picked a 11/70 and not a J11 as target is because my 
 goal is a 11/74. I've implemented the IIST already and tested against 

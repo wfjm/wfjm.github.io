@@ -37,10 +37,54 @@
                                    prev=url_next next=url_prev %}
  
     <!-- navigation bar -->
+    {% assign cat = page.category %}
+    {% for post in site.categories[cat] %}
+      {% if post.url == page.url %}
+        {% assign ind_cur = forloop.index0 %}
+      {% endif %}
+    {% endfor %}
+
     <div id="navbar"> 
       <div class="marginwrapper">
-        <ul>
-        </ul>
+        <hr>
+        <table><tbody>
+          <tr>
+            <td>Posted:</td>
+            <td>{{page.date | slice: 0,10}}</td>
+          </tr>
+          {% if page.my.changedate %}
+            <tr>
+              <td>Update:</td>
+              <td>{{page.my.changedate | slice: 0,10}}</td>
+            </tr>
+          {% endif %}
+          {% for t in page.tags %}
+            <tr>
+              <td>{% if forloop.first %}Tags:{% endif %}</td>
+              <td>{{t}}</td>
+            </tr>
+          {% endfor %}
+        </tbody></table>
+        <hr>
+        {% if site.categories[cat].size > 1 %}
+          <b>Post Navigation:</b>
+          <table><tbody>
+            {% for post in site.categories[cat] %}
+              {% assign mark = '' %}
+              {% if forloop.first %} {% assign mark = 'Newest:' %} {% endif %}
+              {% if forloop.last %}  {% assign mark = 'Oldest:' %} {% endif %}
+              <tr>
+                <td>{{ mark }}</td>
+                {% if forloop.index0 == ind_cur %}
+                  <td>{{post.date | slice: 0,10 }}</td>
+                {% else %}
+                  <td><a href="{{post.url}}" title="{{page.title}}">
+                    {{post.date | slice: 0,10 }}</a></td>
+                {% endif %}
+              </tr>
+            {% endfor %}
+          </tbody></table>
+        {% endif %}
       </div>  
     </div>
 
