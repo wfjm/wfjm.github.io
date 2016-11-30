@@ -23,6 +23,7 @@ p,ul,ol {
 }
 
 p:first-letter {
+  font-family: serif;
   font-size: 115%;
 }
 

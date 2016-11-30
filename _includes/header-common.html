@@ -28,7 +28,12 @@
             {% unless forloop.last %}
               <a href="{{headnavlink}}/"> {{e}} </a>
             {% else %}
-              {{ e }}
+              {% if page.date %}
+                {% assign le = e | slice: 0,10 | append: "..." %}
+                {{ le }}
+              {% else %}
+                {{ e }}
+              {% endif %}
             {% endunless %}
           {% endif %}
         {% endfor %}

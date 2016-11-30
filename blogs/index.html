@@ -3,16 +3,44 @@ title:  "Blogs"
 ---
 
 <p>
-The blog is organized in categories, which follow the project structure
+The blogs are organized in categories, which follow the project structure: 
+{% for c in site.categories %}
+  {% unless forloop.first %} , {% endunless %}
+  {% if forloop.last %} and {% endif %}
+  <a href="/blogs/{{c[0]}}"> {{c[0]}} </a>
+{% endfor %} .
 </p>
-<dl>
-  <dt><a href="/blogs/w11/">w11</a>:</dt>
-  <dd>all news on the github w11 project</dd>
 
-  <dt><a href="/blogs/211bsd/">211bsd</a>:</dt>
-  <dd>all news on 2.11BSD related activities</dd>
-
-  <dt><a href="/blogs/ouxr/">ouxr</a>:</dt>
-  <dd>all news on Old Unix XRef related activities</dd>
-     
-</dl>
+<p>
+They are best navigated via associated 
+<a href="/blogs/posts-by-tags.html">tags</a>:
+</p>
+<table class="trtoggle">
+  <thead>
+    <th>tag</th>
+    <th>newest</th>
+    <th>oldest</th>
+    <th>Comment</th>
+  </thead><tbody>
+    {% for t in site.tags %}
+     {% assign tag = t[0] %}
+      <tr>
+        <td class="ha-center"><a href="/blogs/posts-by-tags.html#{{t[0]}}">
+            <span class="tag">{{t[0]}}</span></td>
+        <td>
+          {% assign pnewest = t[1][0] %}
+          {% assign date = pnewest.date | slice: 0,10 %}
+          <a href="{{pnewest.url}}">{{date}}</a>
+        </td>
+        <td>
+          {% assign poldest = t[1][-1] %}
+          {% assign date = poldest.date | slice: 0,10 %}
+          {% if pnewest.url != poldest.url %}
+          <a href="{{poldest.url}}">{{date}}</a>
+          {% endif %}
+        </td>
+        <td>{{site.data.tags[tag]}}
+      </tr>
+    {% endfor %} 
+  </tbody>
+</table>
