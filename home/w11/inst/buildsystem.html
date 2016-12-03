@@ -1,0 +1,51 @@
+---
+title:  "Build System"
+#
+my:
+  changedate: 2016-12-03
+---
+<h2 id="h_build_system">The Build System</h2>
+
+<p>
+The build system employed in this project is based on <b>vbom</b> or 
+<i>"VHDL bill of material"</i> files which list for each vhdl source file the 
+libraries and sources for the instantiated components, the later via their 
+vbom, and last but not least the name of the vhdl source file. All file names 
+are relative to the current directory (see for example the vbom's of
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/sys_w11a_n2.vbom">
+  sys_w11a_n2</a>
+and 
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/tb/tb_w11a_n2.vbom">
+  tb_w11a_n2</a>
+).
+A recursive traversal through all vbom's gives for each VHDL module all
+sources needed to compile it. The 
+<a href="{{site.my.w11.blob}}/tools/bin/vbomconv">vbomconv</a>
+script in 
+<a href="{{site.my.w11.tree}}/tools/bin">tools/bin</a>
+does  this, and generates, depending on options,
+</p>
+<ul>
+  <li> make dependency files</li>
+  <li> Vivado project definition files</li>
+  <li> ISE xst project files</li>
+  <li> ISE ISim project files</li>
+  <li> ghdl commands for analysis, inspection and make step</li>
+</ul>
+<p>
+The Makefile's in general just contain a few definitions and includes
+(see Makefile for 
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/Makefile">sys_w11a_n2</a>
+and
+<a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys2/tb/Makefile">
+  tb_w11a_n2</a>).
+Two master Makefiles contain pattern rules for simulation and synthesis and 
+encapsulate all the <code>vbomconf</code> magic (see 
+<a href="{{site.my.w11.blob}}/rtl/make_ise/generic_ghdl.mk">generic_ghdl.mk</a>
+and
+<a href="{{site.my.w11.blob}}/rtl/make_ise/generic_xflow.mk">
+  generic_xflow.mk</a>).
+A full w11a system with USB support is build from about 100 vhdl source files,
+test benches from about 120 vhdl source files. Using the vbom's a large number
+of designs can be easily maintained.
+</p>

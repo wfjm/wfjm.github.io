@@ -8,6 +8,7 @@
 
 - text: w11
   path: home/w11/
+
 - text: Status
   path: home/w11/proj/
 - text: Releases
@@ -16,6 +17,7 @@
   path: home/w11/proj/roadmap.html
 - text: Credits
   path: home/w11/proj/credits.html
+
 - text: Implementation
   path: home/w11/impl/
 - text: Architecture
@@ -24,12 +26,16 @@
   path: home/w11/impl/performance.html
 - text: Verification
   path: home/w11/impl/verification.html
+- text: Directory Structure
+  path: home/w11/impl/dirlayout.html
+
 - text: Installation & Usage
   path: home/w11/inst/
-- text: Directory Structure
-  path: home/w11/inst/dirlayout.html
+- text: Build System
+  path: home/w11/inst/buildsystem.html
 - text: System Images
   path: home/w11/inst/systems.html
+
 - text: Resources
   path: home/w11/info/
 - text: DEC Manuals
