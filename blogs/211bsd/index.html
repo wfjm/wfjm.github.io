@@ -1,8 +1,7 @@
 ---
 title:  "2.11BSD blog"
 #
-my:
-  blogcat: 211bsd
 ---
 
-{% include blog_list.html %}
+{% assign posts = site.categories["211bsd"] %}
+{% include blog_list.html posts=posts %}
