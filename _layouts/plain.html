@@ -15,10 +15,9 @@
   <body>
 
     <!-- prepare for header and next/prev navigation -->
-    {% assign pageplist  = page.path  | split: "/" %}
 
     <!-- header section -->
-    {% include header-common.html plist=pageplist %}
+    {% include header-common.html %}
    
     <!-- content section -->
     {{ content }}

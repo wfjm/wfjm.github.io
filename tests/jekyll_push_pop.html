@@ -2,7 +2,8 @@
 title: "Test Jekyll push,pop,shift,unshift Filters"
 #
 my:
-  list: ['a','b','c','d']
+  list:  ['a','b','c','d']
+  list1: ['Seattle', 'Tacoma']
 ---
 
 jekyll: {{site.github.versions.jekyll}}
@@ -46,4 +47,31 @@ liquid: {{site.github.versions.liquid}}
   list.first: {{list.first | jsonify}}
   <br>
   list.last:  {{list.last  | jsonify}}
+</div>
+
+<hr>
+
+<h3><code>list1 = ['Seattle', 'Tacoma', 'Spokane']</code></h3>
+<div class="indent">
+  list1: {{page.my.list1 | jsonify}}
+</div>
+
+<h3><code>list1 | push: "Spokane"</code></h3>
+<div class="indent">
+  unshift: {{page.my.list1 | push: "Spokane" | jsonify}}
+</div>
+
+<h3><code>list1 | pop</code></h3>
+<div class="indent">
+  pop: {{page.my.list1 | pop | jsonify}}
+</div>
+
+<h3><code>list1 | shift</code></h3>
+<div class="indent">
+  shift: {{page.my.list1 | shift | jsonify}}
+</div>
+
+<h3><code>list1 | unshift: "Olympia"</code></h3>
+<div class="indent">
+  unshift: {{page.my.list1 | unshift: "Olympia" | jsonify}}
 </div>

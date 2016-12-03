@@ -15,7 +15,6 @@
   <body>
 
     <!-- prepare up/next/prev navigation in given category -->
-    {% assign pageplist  = page.url | slice: 1,1000  | split: "/" %}
     {% assign url_up = "/blogs/" | append: page.category | append: "/" %}
     {% for post in site.categories[page.category] %}
       {% if post.url == page.url %}
@@ -34,7 +33,7 @@
     {% endif %}
 
     <!-- header section -->
-    {% include header-common.html  plist=pageplist up=url_up
+    {% include header-common.html  up=url_up
                                    prev=url_next next=url_prev %}
  
     <!-- navigation bar -->

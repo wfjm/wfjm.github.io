@@ -1,11 +1,17 @@
 {% comment %}
   Snipplet to add a standard header. Parameters are
-    plist   '/' split path name 
     up      url for 'up'   nav button
     down    url for 'down' nav button
     prev    url for 'prev' nav button
     next    url for 'next' nav button
+
+    Note: the code uses that split keeps an empty first element but drops
+          an empty last element. "/a/b/" gives ["","a","b"]. The loop over
+          plist skips the first element (always empty) and uses forloop.last
+          to detect the name component (not trailing "" !).
 {% endcomment %}
+
+{% assign plist = page.url | split: "/" %}
 
 <div id="header">
   <table id="header-table">
@@ -21,12 +27,12 @@
     <tr id="header-bot">
       <td id="header-botpath">
         {% assign headnavlink = "" %}
-        {% for e in include.plist %}
+        {% for e in plist offset: 1%}
           {% if e != "index.html" %}
             {% assign headnavlink = headnavlink | append: "/" | append: e %}
             / 
             {% unless forloop.last %}
-              <a href="{{headnavlink}}/"> {{e}} </a>
+              <a href="{{headnavlink}}/">{{e}}</a>
             {% else %}
               {% if page.date %}
                 {% assign le = e | slice: 0,10 | append: "..." %}
