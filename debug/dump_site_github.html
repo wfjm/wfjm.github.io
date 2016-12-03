@@ -22,7 +22,7 @@ title: "Dump site.github"
             {% endfor %}
             <br>
             <a href="dump_site_github_contr.html">
-              <em>see dump_site_github_contributors</em></a>
+              <em>see dump_site_github_contr</em></a>
           {% when "public_repositories" %}
             {% for r in site.github.public_repositories %}
               <a href="r.html_url">{{r.name}}</a>
@@ -30,7 +30,7 @@ title: "Dump site.github"
             {% endfor %}
             <br>
             <a href="dump_site_github_repos.html">
-              <em>see dump_site_github_contributors</em></a>
+              <em>see dump_site_github_repos</em></a>
           {% when "versions" %}
             {% for v in site.github.versions %}
               {{v[0]}} : {{v[1]}}
