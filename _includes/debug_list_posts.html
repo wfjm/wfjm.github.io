@@ -1,0 +1,31 @@
+{% comment %}
+  Create a tabular list of of posts for debug purposes
+    posts:    list of posts
+{% endcomment %}
+
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th>url</th>
+      <th>date</th>
+      <th>val</th>
+      <th>lck</th>
+      <th>title</th>
+    </tr>
+  </thead><tbody>
+    {% for p in include.posts reversed %}
+      {% assign checkuri = site.url | append: p.url | url_param_escape %}
+      <tr>
+        <td><a href="{{p.url}}">{{p.url}}</a></td>
+        <td>{{p.date | slice: 0,10}}</td>
+        <td class="ha-center">
+          <a href="{{site.my.w3c_chtml}}?uri={{checkuri}}">
+            <i class="fa fa-html5 abutton"></i></a></td>
+        <td class="ha-center">
+          <a href="{{site.my.w3c_clink}}?uri={{checkuri}}">
+            <i class="fa fa-link abutton"></i></a></td>
+        <td>{{p.title}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

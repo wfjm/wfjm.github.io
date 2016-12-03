@@ -1,0 +1,12 @@
+---
+title: "List site.categories"
+---
+
+{% for t in site.categories %}
+  {% assign name = t[0] %}
+  {% assign list = t[1] | sort: "date" %}
+
+  <h2 id="{{name}}">Category: {{name}}</h2>
+  {% include debug_list_posts.html posts=list %}
+
+{% endfor %}

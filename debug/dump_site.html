@@ -3,21 +3,25 @@ title: "Dump site"
 ---
 
 <table class="trtoggle">
-  <tr>
-    <th>key</th>
-    <th>val</th>
-  </tr>
-  {% for key in site %}
+  <thead>
     <tr>
-      <td>{{key}}</td>
-      <td>
-        {% case key %}
+      <th>key</th>
+      <th>val</th>
+    </tr>
+  </thead><tbody>
+    {% for key in site %}
+      <tr>
+        <td>{{key}}</td>
+        <td>
+          {% case key %}
           {% when "categories" %}
-            <i>too long</i>
+            <i>see <a href="list_categories.html">list_categories</a></i>
           {% when "collections" %}
             <i>too long</i>
           {% when "documents" %}
             <i>too long</i>
+          {% when "github" %}
+            <i>see <a href="dump_site_github.html">dump_site_github</a></i>
           {% when "html_pages" %}
             <i>see <a href="list_html_pages.html">list_html_pages</a></i>
           {% when "pages" %}
@@ -26,13 +30,14 @@ title: "Dump site"
             <i>see <a href="list_posts.html">list_posts</a></i>
           {% when "static_files" %}
             <i>see <a href="list_static_files.html">list_static_files</a></i>
-          {% when "github" %}
-            <i>see <a href="dump_site_github.html">dump_site_github</a></i>
+          {% when "tags" %}
+            <i>see <a href="list_tags.html">list_tags</a></i>
           {% else %}
             {% assign dval = site[key] %}
             {% include dump_variable.html val=dval max="200" %}
          {% endcase %}
-      </td>
-    </tr>
-  {% endfor %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
 </table>

@@ -1,32 +1,6 @@
 ---
 title: "List site.posts"
-#
-my:
-  w3c_chtml: "https://validator.w3.org/check"
-  w3c_clink: "https://validator.w3.org/checklink"
 ---
 
 {% assign posts_sorted = site.posts | sort: "date" %}
-<table class="trtoggle">
-  <tr>
-    <th>url</th>
-    <th>date</th>
-    <th>val</th>
-    <th>lck</th>
-    <th>title</th>
-  </tr>
-  {% for p in posts_sorted reversed %}
-    {% assign checkuri = site.url | append: p.url | url_param_escape %}
-    <tr>
-      <td><a href="{{p.url}}">{{p.url}}</a></td>
-      <td>{{p.date | slice: 0,10}}</td>
-      <td class="ha-center">
-        <a href="{{page.my.w3c_chtml}}?uri={{checkuri}}">
-          <i class="fa fa-html5 abutton"></i></a></td>
-      <td class="ha-center">
-        <a href="{{page.my.w3c_clink}}?uri={{checkuri}}">
-          <i class="fa fa-link abutton"></i></a></td>
-      <td>{{p.title}}</td>
-    </tr>
-  {% endfor %}
-</table>
+{% include debug_list_posts.html posts=posts_sorted %}
