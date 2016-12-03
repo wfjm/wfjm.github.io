@@ -4,6 +4,13 @@ title: "Test Jekyll push,pop,shift,unshift Filters"
 my:
   list: ['a','b','c','d']
 ---
+
+jekyll: {{site.github.versions.jekyll}}
+<br>
+liquid: {{site.github.versions.liquid}}
+<br>
+
+
 <h3><code>list = ['a','b','c','d']</code></h3>
 <div class="indent">
   {% assign list = page.my.list %}

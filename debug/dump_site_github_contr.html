@@ -1,0 +1,30 @@
+---
+title: "Dump site.github.contributors"
+---
+
+{% for c in site.github.contributors %}
+  <h2 id="{{c.login}}">{{c.login}}</h2>
+
+  <table class="trtoggle">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead><tbody>
+      {% for ckv in c %}
+      <tr>
+        <td>{{ckv[0]}}</td>
+        <td>
+          {% assign dval = ckv[1] %}
+          {% include dump_variable.html val=dval max="500" %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+{% unless site.github %}
+  <b>site.github undefined</b>
+{% endunless %}

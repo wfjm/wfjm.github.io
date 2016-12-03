@@ -1,0 +1,30 @@
+---
+title: "Dump site.github.public_repositories"
+---
+
+{% for r in site.github.public_repositories %}
+  <h2 id="{{r.name}}">{{r.name}}</h2>
+
+  <table class="trtoggle">
+    <thead>
+      <tr>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead><tbody>
+      {% for rkv in r %}
+      <tr>
+        <td>{{rkv[0]}}</td>
+        <td>
+          {% assign dval = rkv[1] %}
+          {% include dump_variable.html val=dval max="500" %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endfor %}
+
+{% unless site.github %}
+  <b>site.github undefined</b>
+{% endunless %}
