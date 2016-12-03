@@ -57,6 +57,9 @@ my:
   url_fa: "/tools/fa/fa-4.7.0/css/font-awesome.min.css"
   url_jq: "/tools/jq/jq-3.1.1/jquery-3.1.1.min.js"
 #
+  w3c_chtml: "https://validator.w3.org/check"
+  w3c_clink: "https://validator.w3.org/checklink"
+#
   w11:
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
