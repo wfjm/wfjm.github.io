@@ -3,19 +3,30 @@ title: "Dump site.github"
 ---
 
 <table class="trtoggle">
-  <tr>
-    <th>key</th>
-    <th>val</th>
-  </tr>
-  {% for key in site.github %}
+  <thead>
     <tr>
-      <td>{{key}}</td>
-      <td>
-        {% assign dval = site.github[key] %}
-        {% include dump_variable.html val=dval max="200" %}
-      </td>
+      <th>Key</th>
+      <th>Value</th>
     </tr>
-  {% endfor %}
+  </thead><tbody>
+    {% for key in site.github %}
+      <tr>
+        <td>{{key}}</td>
+        <td>
+          {% assign dval = site.github[key] %}
+          {% case key %}
+          {% when "versions" %}
+            {% for v in site.github.versions %}
+              {{v[0]}} : {{v[1]}}
+              {% unless forloop.last %} <br> {% endunless %}
+            {% endfor %}
+          {% else %}
+            {% include dump_variable.html val=dval max="500" %}
+          {% endcase %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
 </table>
 
 {% unless site.github %}

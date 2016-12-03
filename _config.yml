@@ -31,6 +31,12 @@ defaults:
       path: "debug"
     values:
       layout: plain
+  - 
+    scope:
+      path: "tests"
+    values:
+      layout: plain
+#
 #   default category for posts -----------------------------
   - 
     scope:

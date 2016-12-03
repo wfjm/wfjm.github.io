@@ -1,0 +1,42 @@
+---
+title: "Test Jekyll push,pop,shift,unshift Filters"
+#
+my:
+  list: ['a','b','c','d']
+---
+<h3><code>list = ['a','b','c','d']</code></h3>
+<div class="indent">
+  {% assign list = page.my.list %}
+  list: {{list | jsonify}}
+</div>
+
+<h3><code>list = list | push: 'y'</code></h3>
+<div class="indent">
+  {% assign list = list | push: 'y' %}
+  list: {{list | jsonify}}
+</div>
+
+<h3><code>list = list | unshift: 'x'</code></h3>
+<div class="indent">
+  {% assign list = list | unshift: 'x' %}
+  list: {{list | jsonify}}
+</div>
+
+<h3><code>list = list | pop</code></h3>
+<div class="indent">
+  {% assign list = list | pop %}
+  list: {{list | jsonify}}
+</div>
+
+<h3><code>list = list | shift</code></h3>
+<div class="indent">
+  {% assign list = list | shift %}
+  list: {{list | jsonify}}
+</div>
+
+<h3><code>list.first; list.last</code></h3>
+<div class="indent">
+  list.first: {{list.first | jsonify}}
+  <br>
+  list.last:  {{list.last  | jsonify}}
+</div>

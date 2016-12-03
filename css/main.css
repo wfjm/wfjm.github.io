@@ -90,6 +90,10 @@ td {
   vertical-align: bottom;
 }
 
+.indent {
+  margin-left: 2em;
+}
+
 .nowrap {
   white-space: nowrap;
 }
@@ -396,6 +400,7 @@ dt:hover .hover-link {
 }
 
 #footer table {
+  margin-top: 1em;
   width: 100%;
   background: #dddddd;
 }

@@ -1,0 +1,25 @@
+{% comment %}
+  creates tabular list of pages in current directory
+{% endcomment %}
+
+{% assign pages_sorted = site.pages | sort: "url" %}
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th>URL</th>
+      <th>Title</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in pages_sorted %}
+      {% if page.dir == p.dir %}
+        {% unless p.name == "index.html" %}
+          <tr>
+            <td><a href="{{p.url}}">{{p.name}}</a></td>
+            <td>{{p.title}}</td>
+          </tr>
+        {% endunless %}
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>

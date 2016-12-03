@@ -1,0 +1,31 @@
+---
+title: "Test Jekyll split Filter"
+my:
+  tests:
+    - "a/b/c"
+    - "/a/b/c"
+    - "a/b/c/"
+    - "/a/b/c/"
+    - "/a/b/c/ "
+---
+
+jekyll: {{site.github.versions.jeyll}}
+<br>
+liquid: {{site.github.versions.liquid}}
+<br>
+
+{% for t in page.my.tests %}
+  <h3>Case: <code>'{{t}}'</code></h3>
+  {% assign list = t | split: "/" %}
+  {% assign text = list | join: "/" %}
+  <div class="indent">
+    size: {{list.size}}
+    <br>
+    list: {{list | jsonify}}
+    <br>
+    join: <code>{{ text }}</code>
+    {% if t != text %} 
+      <br><em style="color: red">split-join difference !!</em> 
+    {% endif %}
+  </div>
+{% endfor %}
