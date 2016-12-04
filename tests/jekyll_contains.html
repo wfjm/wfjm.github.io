@@ -1,0 +1,28 @@
+---
+title: "Test Jekyll contains"
+my:
+  tests:
+    - ["a","b"]
+    - ["aba","b"]
+    - ["aba","a"]
+    - ["@/home/w11/","@/blogs/"]
+    - ["@/home/w11/","@/home/"]
+    - ["@/home/w11/","@/home/w11/"]
+    - ["@/home/w11/","@/home/w11/impl"]
+---
+
+jekyll: {{site.github.versions.jekyll}}
+<br>
+liquid: {{site.github.versions.liquid}}
+<br>
+
+{% for t in page.my.tests %}
+  <h3>Case: <code>'{{t[0]}}' contains '{{t[1]}}'</code></h3>
+  <div class="indent">
+    {% if t[0] contains t[1] %}
+    yes
+    {% else %}
+    no
+    {% endif %}
+  </div>
+{% endfor %}

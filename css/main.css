@@ -27,6 +27,13 @@ p:first-letter {
   font-size: 115%;
 }
 
+blockquote {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+  margin-left: 3em;
+  margin-right: 3em;
+}
+
 /* lists */
 
 ul.bigli li {

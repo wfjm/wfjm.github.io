@@ -1,6 +1,9 @@
 ---
 title:  "w11 blog"
+#
+my:
+  blogcat: "w11"
 ---
 
-{% assign posts = site.categories["w11"] %}
+{% assign posts = site.categories[page.my.blogcat] %}
 {% include blog_list.html %}

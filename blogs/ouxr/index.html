@@ -1,6 +1,9 @@
 ---
 title:  "Old Unix XRef (ourx) blog"
+#
+my:
+  blogcat: "ouxr"
 ---
 
-{% assign posts = site.categories["ouxr"] %}
+{% assign posts = site.categories[page.my.blogcat] %}
 {% include blog_list.html %}

@@ -1,67 +1,67 @@
 # main navbar definitions
 #
 - text: wfjm's Home
-  path: 
+  url:  /
 
 - text: Projects
-  path: home/
+  url:  /home/
 
 - text: w11
-  path: home/w11/
+  url:  /home/w11/
 
 - text: Status
-  path: home/w11/proj/
+  url:  /home/w11/proj/
 - text: Releases
-  path: home/w11/proj/releases.html
+  url:  /home/w11/proj/releases.html
 - text: Roadmap
-  path: home/w11/proj/roadmap.html
+  url:  /home/w11/proj/roadmap.html
 - text: Credits
-  path: home/w11/proj/credits.html
+  url:  /home/w11/proj/credits.html
 
 - text: Implementation
-  path: home/w11/impl/
+  url:  /home/w11/impl/
 - text: Architecture
-  path: home/w11/impl/architecture.html
+  url:  /home/w11/impl/architecture.html
 - text: Performance
-  path: home/w11/impl/performance.html
+  url:  /home/w11/impl/performance.html
 - text: Verification
-  path: home/w11/impl/verification.html
+  url:  /home/w11/impl/verification.html
 - text: Directory Structure
-  path: home/w11/impl/dirlayout.html
+  url:  /home/w11/impl/dirlayout.html
 
 - text: Installation & Usage
-  path: home/w11/inst/
+  url:  /home/w11/inst/
 - text: Build System
-  path: home/w11/inst/buildsystem.html
+  url:  /home/w11/inst/buildsystem.html
 - text: System Images
-  path: home/w11/inst/systems.html
+  url:  /home/w11/inst/systems.html
 
 - text: Resources
-  path: home/w11/info/
+  url:  /home/w11/info/
 - text: DEC Manuals
-  path: home/w11/info/manuals.html
+  url:  /home/w11/info/manuals.html
 - text: DEC Patents
-  path: home/w11/info/patents.html
+  url:  /home/w11/info/patents.html
 - text: Papers
-  path: home/w11/info/papers.html
+  url:  /home/w11/info/papers.html
 - text: Other FPGA PDP-11's
-  path: home/w11/info/others.html
+  url:  /home/w11/info/others.html
 
 #- text: ouxr
-#  path: home/ouxr/
+#  url:  /home/ouxr/
 #
 #- text: 211bsd
-#  path: home/211bsd/
+#  url:  /home/211bsd/
 
 - text: Blogs
-  path: blogs/
+  url:  /blogs/
 
 - text: w11
-  path: blogs/w11/
+  url:  /blogs/w11/
 - text: 2.11BSD
-  path: blogs/211bsd/
+  url:  /blogs/211bsd/
 - text: ouxr
-  path: blogs/ouxr/
+  url:  /blogs/ouxr/
 
 - text: About
-  path: about/
+  url:  /about/
