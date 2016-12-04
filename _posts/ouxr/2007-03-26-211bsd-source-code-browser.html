@@ -4,8 +4,9 @@ tags:  ["ouxr", "211bsd"]
 #
 my:
   changedate: 2016-11-27
-  ouxrbase: http://www.retro11.de/ouxr/211bsd
 ---
+{% assign url_211bsd = site.my.ouxr.url_211bsd %}
+
 <p>
 When searching lately a lot through the UNIX 2.11BSD source code I
 wanted many times a hyperlinked and cross referenced rendition of the
@@ -22,7 +23,7 @@ The tool far from finished, but might already be useful. For a tour
 start for example with the code of the <code>cp</code> command
 </p>
 <pre>
-  <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html</a>
+  <a href="{{url_211bsd}}/usr/src/bin/cp.c.html">{{url_211bsd}}/usr/src/bin/cp.c.html</a>
 </pre>
 and click along. The links connect C and asm code, the user land code,
 libc and kernel code. Look to the <code>readdir()</code> call in line 197,
@@ -31,10 +32,10 @@ A further click on <code>read()</code> into the assembler stub doing the
 system call, and a click on the kernel handler listed there gets you into
 the kernel source. Here the links of the tour
 <pre>
-  <a href="{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197">{{page.my.ouxrbase}}/usr/src/bin/cp.c.html#n:197</a>
-  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir">{{page.my.ouxrbase}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir</a>
-  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read">{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read</a>
-  <a href="{{page.my.ouxrbase}}/usr/src/sys/sys/sys_generic.c.html#s:_read">{{page.my.ouxrbase}}/usr/src/sys/sys/sys_generic.c.html#s:_read</a>
+  <a href="{{url_211bsd}}/usr/src/bin/cp.c.html#n:197">{{url_211bsd}}/usr/src/bin/cp.c.html#n:197</a>
+  <a href="{{url_211bsd}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir">{{url_211bsd}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir</a>
+  <a href="{{url_211bsd}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read">{{url_211bsd}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read</a>
+  <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#s:_read">{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#s:_read</a>
 </pre>
 <p>
 The background color tells you in which territory you are in
@@ -50,18 +51,18 @@ The background color tells you in which territory you are in
 If you want a kernel tour, start at
 </p>
 <pre>
-  <a href="{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html">{{page.my.ouxrbase}}/usr/src/sys/sys/init_main.c.html</a>
+  <a href="{{url_211bsd}}/usr/src/sys/sys/init_main.c.html">{{url_211bsd}}/usr/src/sys/sys/init_main.c.html</a>
 </pre>
 <p>
 Clicking on a symbol definition (or the X in the sidebar) gets you to the cross
 referencing info's. To see for example who is using <code>setjmp</code> see
 </p>
 <pre>
-  <a href="{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">{{page.my.ouxrbase}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp</a>
+  <a href="{{url_211bsd}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">{{url_211bsd}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp</a>
 </pre>
 or who is including <code>nlist.h</code> see
 <pre>
-  <a href="{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h">{{page.my.ouxrbase}}/usr/include/nlist.h.html#xref:i:nlist.h</a>
+  <a href="{{url_211bsd}}/usr/include/nlist.h.html#xref:i:nlist.h">{{url_211bsd}}/usr/include/nlist.h.html#xref:i:nlist.h</a>
 </pre>
 <p>
 As said, it's beta stage, the style sheet is still the debug version,

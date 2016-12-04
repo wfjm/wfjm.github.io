@@ -70,3 +70,10 @@ my:
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
     raw:  https://raw.githubusercontent.com/wfjm/w11/master
+#
+  ouxr:
+    url_base:   http://www.retro11.de/ouxr
+    url_211bsd: http://www.retro11.de/ouxr/211bsd
+    url_29bsd:  http://www.retro11.de/ouxr/29bsd
+    url_u6ed:   http://www.retro11.de/ouxr/u6ed
+    url_u7ed:   http://www.retro11.de/ouxr/u6ed

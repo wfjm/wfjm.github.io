@@ -4,10 +4,45 @@ title:  "Old Unix XRef"
 my:
   changedate: 2016-12-04
 #
-  table: xxx
+  coltable:
+  - color: magenta
+    class: ouxr-cboot
+    text:  boot/standalone
+    code:  /usr/src/sys/pdpstand/boot.c
+  - color: red
+    class: ouxr-ckern
+    text:  kernel
+    code:  /usr/src/sys/sys/sys_generic.c
+  - color: gold
+    class: ouxr-cnet
+    text:  network
+    code:  /usr/src/sys/netinet/ip_icmp.c
+  - color: green
+    class: ouxr-clib
+    text:  libraries
+    code:  /usr/src/lib/libc/gen/readdir.c
+  - color: blue
+    class: ouxr-cuser
+    text:  user level
+    code:  /usr/src/bin/cp.c
+#
+  ostable:
+  - tag: u6ed
+    txt: Unix 6th Edition
+    com: "still preliminary"
+  - tag: u7ed
+    txt: Unix 7th Edition
+    com: "still preliminary"
+  - tag: 29bsd
+    txt: 2.9BSD
+    com: "still preliminary"
+  - tag: 211bsd
+    txt: 2.11BSD
+    com: ""
 ---
+{% assign url_211bsd = site.my.ouxr.url_211bsd %}
 
-<h2 id="motivation">Motivation</h2>
+<h2 id="overview">Overview</h2>
 
 <p>
 The bring-up of UNIX 2.11BSD on the <a href="/home/w11/">w11</a> system
@@ -27,14 +62,81 @@ The desired features were:
     user code, through the library layer, through the kernel interface, to
     the kernel code by just following hyperlinks</li>
 </ul>
-
-<h2 id="implementation">Implementation</h2>
 <p>
 Since none of the existing tools seemed to match that profile a new tool
-was written. The task is strongly simplified by the facts
+was written. The task is strongly simplified by the facts that the code
+base is quasi static and that the size of the code base is small by today's
+standards, which allows to hold the full code base in memory for analysis.
+The tool takes the whole file system and creates at set of static html files
+which show all sources with proper hyperlinks. In each source file the
+background color tells you in which territory you are in
+</p>
+<table class="trtoggle indent">
+  <thead>
+    <tr>
+      <th>Color</th>
+      <th>Territory</th>
+      <th>2.11BSD Example</th>
+    </tr>
+  </thead><tbody>
+    {% for r in page.my.coltable %}
+      <tr>
+        <td class="{{r.class}} ha-center">{{r.color}}</td>
+        <td class="{{r.class}} ha-center">{{r.text}}</td>
+        <td><a href="{{url_211bsd}}{{r.code}}.html">
+            <code>{{r.code}}</code></a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>
+Key features of the htlmized source files are, using
+<code>sys_generic.c</code> of 2.11BSD in examples:
 </p>
 <ul>
-  <li>the code base is quasi static, very low update rate</li>
-  <li>the size of the code base is small by today's standards and allows
-    to hold the full code base in memory for analysis</li>
+  <li>a navigation bar lists all defined functions, global variables, macros
+    and structs. Clicking the name leads to the line of definition, clicking
+    the 'X' to the cross reference listing.</li>
+  <li>the cross reference listing shows were the item is used, in the
+    current source as well as in the whole system.</li>
+  <li>each symbol can be reached via <code>#s:&ltname&gt;</code>, like
+    definition of
+    <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#s:_select">
+      <code>_select</code></a>.</li>
+  <li>each source code line can be reached via <code>#n:&ltnumber&gt;</code>,
+    like <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#n:286">
+      line 286</a>.</li>
+  <li>each cross reference section can be reached via
+    <code>#xref:s:&ltname&gt;</code>, like xref of
+    <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#xref:s:_select">
+      <code>_select</code></a>.</li>
 </ul>
+
+<h2 id="systems">Available Systems</h2>
+<p>
+Even though the original motivation was to understand the 2.11BSD system,
+the tool was design such that all UNIX systems with similar structure can be
+processed. So far the 2.11BSD configuration is certainly the most advanced
+with best interlinking, but the view for the other systems is also useful.
+</p>
+<table class="trtoggle indent">
+  <thead>
+    <tr>
+      <th>System</th>
+      <th>Source<br>Root</th>
+      <th>Guided<br>Tours</th>
+      <th>Comment</th>
+    </tr>
+  </thead><tbody>
+    {% for r in page.my.ostable %}
+      <tr>
+        <td>{{r.txt}}</td>
+        <td class="ha-center">
+          <a href="{{site.my.ouxr.url_base}}/{{r.tag}}">
+            <i class="fa fa-link abutton"></i></a></td>
+        <td></td>
+        <td>{{r.com}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
