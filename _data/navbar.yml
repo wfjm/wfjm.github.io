@@ -47,8 +47,8 @@
 - text: Other FPGA PDP-11's
   url:  /home/w11/info/others.html
 
-#- text: ouxr
-#  url:  /home/ouxr/
+- text: ouxr
+  url:  /home/ouxr/
 #
 #- text: 211bsd
 #  url:  /home/211bsd/

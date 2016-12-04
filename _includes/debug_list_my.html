@@ -1,0 +1,15 @@
+{% comment %}
+  Create table rows for 'my' elements in site and page for debug purposes
+    my:    'my' hash
+{% endcomment %}
+
+{% for item in include.my %}
+  {% assign key = item[0] %}
+  {% assign val = item[1] %}
+  <tr>
+    <td class="va-top">my.{{key}}</td>
+    <td>
+      {% include dump_variable.html val=val max="200" %}
+    </td>
+  </tr>
+{% endfor %}

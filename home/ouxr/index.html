@@ -1,8 +1,40 @@
 ---
-title:  "Old Unix Cross Reference"
+title:  "Old Unix XRef"
 #
 my:
-  changedate: 2016-10-23
+  changedate: 2016-12-04
+#
+  table: xxx
 ---
 
-under construction
+<h2 id="motivation">Motivation</h2>
+
+<p>
+The bring-up of UNIX 2.11BSD on the <a href="/home/w11/">w11</a> system
+required a lot of very detailed studies of the source code. That called
+quickly for a hyperlinked and cross referenced rendition of the sources,
+much like <a href="http://www.doxygen.org/">doxygen</a> or
+<a href="http://lxr.free-electrons.com/">lxr</a> does it.
+The desired features were:
+</p>
+<ul>
+  <li>cover boot, kernel, networking, library and user level code</li>
+  <li>cover C, assembler and other relevant languages</li>
+  <li>provide 'what is used where' information, over the whole system</li>
+  <li>provide hyperlinks for a fast code path analysis, especially
+    across the user,library,kernel interfaces</li>
+  <li>support to follow the execution logic of a system call starting from
+    user code, through the library layer, through the kernel interface, to
+    the kernel code by just following hyperlinks</li>
+</ul>
+
+<h2 id="implementation">Implementation</h2>
+<p>
+Since none of the existing tools seemed to match that profile a new tool
+was written. The task is strongly simplified by the facts
+</p>
+<ul>
+  <li>the code base is quasi static, very low update rate</li>
+  <li>the size of the code base is small by today's standards and allows
+    to hold the full code base in memory for analysis</li>
+</ul>

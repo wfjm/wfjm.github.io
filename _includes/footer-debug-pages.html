@@ -14,7 +14,7 @@
         {% for item in page %}
           {% assign key = item[0] %}
           {% assign val = item[1] %}
-          {% unless key == "content" %}
+          {% unless key == "content" or key == "my" %}
             <tr>
               <td class="va-top">{{key}}</td>
               <td>
@@ -23,6 +23,7 @@
             </tr>
           {% endunless %}
         {% endfor %}
+        {% if page.my %} {% include debug_list_my.html my=page.my %} {% endif %}
       </tbody>
     </table>
   </div>

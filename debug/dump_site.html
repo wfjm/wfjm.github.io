@@ -5,11 +5,12 @@ title: "Dump site"
 <table class="trtoggle">
   <thead>
     <tr>
-      <th>key</th>
-      <th>val</th>
+      <th>Key</th>
+      <th>Value</th>
     </tr>
   </thead><tbody>
     {% for key in site %}
+      {% if key == "my" %} {% continue %} {% endif %}
       <tr>
         <td>{{key}}</td>
         <td>
@@ -18,6 +19,8 @@ title: "Dump site"
             <i>see <a href="list_categories.html">list_categories</a></i>
           {% when "collections" %}
             <i>too long</i>
+          {% when "data" %}
+            <i>see <a href="dump_site_data.html">dump_site_data</a></i>
           {% when "documents" %}
             <i>too long</i>
           {% when "github" %}
@@ -39,5 +42,6 @@ title: "Dump site"
         </td>
       </tr>
     {% endfor %}
+    {% if site.my %} {% include debug_list_my.html my=site.my %} {% endif %}
   </tbody>
 </table>

@@ -1,0 +1,26 @@
+---
+title: "Dump site.data"
+---
+
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead><tbody>
+    {% for d in site.data %}
+      <tr>
+        <td>{{d[0]}}</td>
+        <td>
+          {% assign dval = d[1] %}
+          {% include dump_variable.html val=dval max="500" %}
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% unless site.data %}
+  <b>site.data undefined</b>
+{% endunless %}
