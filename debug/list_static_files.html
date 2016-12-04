@@ -8,28 +8,31 @@ my:
 
 {% assign files_sorted = site.static_files | sort: "path" %}
 <table class="trtoggle">
-  <tr>
-    <th>path</th>
-    <th>type</th>
-    <th>val</th>
-    <th>last modified</th>
-  </tr>
-  {% for f in files_sorted %}
-    {% assign checkuri = site.url | append: f.path | url_param_escape %}
+  <thead>
     <tr>
-      <td><a href="{{f.path}}">{{f.path}}</a></td>
-      <td>{{f.extname}}</td>
-      <td class="ha-center">
-        {% case f.extname %}
-        {% when '.css' %}
-          <a href="{{page.my.w3c_ccss}}?uri={{checkuri}}">
-            <i class="fa fa-css3 abutton"></i></a>
-        {% when '.svg' %}
-          <a href="{{page.my.w3c_cxml}}?uri={{checkuri}}">
-            <i class="fa fa-bullseye abutton"></i></a>
-        {% endcase %}
-      </td>
-      <td>{{f.modified_time}}</td>
+      <th>path</th>
+      <th>type</th>
+      <th>val</th>
+      <th>last modified</th>
     </tr>
-  {% endfor %}
+  </thead><tbody>
+    {% for f in files_sorted %}
+      {% assign checkuri = site.url | append: f.path | url_param_escape %}
+      <tr>
+        <td><a href="{{f.path}}">{{f.path}}</a></td>
+        <td>{{f.extname}}</td>
+        <td class="ha-center">
+          {% case f.extname %}
+          {% when '.css' %}
+            <a href="{{page.my.w3c_ccss}}?uri={{checkuri}}">
+              <i class="fa fa-css3 abutton"></i></a>
+          {% when '.svg' %}
+            <a href="{{page.my.w3c_cxml}}?uri={{checkuri}}">
+              <i class="fa fa-bullseye abutton"></i></a>
+          {% endcase %}
+        </td>
+        <td>{{f.modified_time}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
 </table>
