@@ -7,7 +7,7 @@ The blogs are organized in categories, which follow the project structure:
 {% for c in site.categories %}
   {% unless forloop.first %} , {% endunless %}
   {% if forloop.last %} and {% endif %}
-  <a href="/blogs/{{c[0]}}"> {{c[0]}} </a>
+  <a href="/blogs/{{c[0]}}/"> {{c[0]}} </a>
 {% endfor %} .
 </p>
 
@@ -17,16 +17,19 @@ They are best navigated via associated
 </p>
 <table class="trtoggle">
   <thead>
-    <th>tag</th>
-    <th>newest</th>
-    <th>oldest</th>
-    <th>Comment</th>
+    <tr>
+      <th>tag</th>
+      <th>newest</th>
+      <th>oldest</th>
+      <th>Comment</th>
+    </tr>
   </thead><tbody>
     {% for t in site.tags %}
      {% assign tag = t[0] %}
       <tr>
         <td class="ha-center"><a href="/blogs/posts-by-tags.html#{{t[0]}}">
-            <span class="tag">{{t[0]}}</span></td>
+            <span class="tag">{{t[0]}}</span></a>
+        </td>
         <td>
           {% assign pnewest = t[1][0] %}
           {% assign date = pnewest.date | slice: 0,10 %}
@@ -39,7 +42,7 @@ They are best navigated via associated
           <a href="{{poldest.url}}">{{date}}</a>
           {% endif %}
         </td>
-        <td>{{site.data.tags[tag]}}
+        <td>{{site.data.tags[tag]}}</td>
       </tr>
     {% endfor %} 
   </tbody>
