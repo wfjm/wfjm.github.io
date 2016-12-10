@@ -43,16 +43,19 @@ defaults:
       path: "_posts/211bsd"
     values:
       category: 211bsd
+      sdef_blog_proj: 211bsd
   - 
     scope:
       path: "_posts/ouxr"
     values:
       category: ouxr
+      sdef_blog_proj: ouxr
   - 
     scope:
       path: "_posts/w11"
     values:
       category: w11
+      sdef_blog_proj: w11
 
 #
 # site-specific attributes (all in .my subspace) -----------------------------

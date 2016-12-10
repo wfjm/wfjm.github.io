@@ -2,7 +2,55 @@
 title:  "2.11BSD"
 #
 my:
-  changedate: 2016-10-23
+  changedate: 2016-12-10
 ---
 
-under construction
+<h2 id="h_overview">Overview</h2>
+<p>
+Released in 1992, this end-point of historical UNIX development on PDP-11's
+uses almost all features (22 bit addressing, separate I/D space, 3 processor
+modes) to squeeze a full UNIX with most of the 4.3 BSD features into a 16 bit
+machine. This operating system can be freely used under the
+<a href="http://minnie.tuhs.org/Archive/Caldera-license.pdf">
+  Caldera license</a>
+and is therefore the prime operating system for the
+<a href="/home/w11/">w11</a> project.
+
+<h3 id="h_patches">2.11BSD Patches</h3>
+<p>
+When bringing up 2.11BSD in the <a href="/home/w11">w11a</a> CPU two loose
+ends in the kernel showed up and were fixed with a patch
+</p>
+<ul>
+  <li>the floating point emulator FPSIM didn't work. Fixed with
+    <a href="/blogs/211bsd/2007-01-03-patch-445.html">
+      patch #445</a>.</li>
+  <li>boot from a RK05 wasn't possible. Fixed, together with several other
+    little issues, with
+    <a href="/blogs/211bsd/2009-01-04-patch-446+447.html">
+      patch #446+447</a>.</li>
+</ul>
+
+<h3 id="h_ouxr">2.11BSD Source Code Viewer</h3>
+<p>
+The work on the patches mentioned above required a lot of detail studies
+of the 2.11BSD source code, so it was natural to look for fully htmlized
+and cross-references source code view. Since none of the available tooks
+covered the requirements a new tool was was written. For more info see
+</p>
+<ul>
+  <li>project <a href="/home/ouxr/">
+      <b>O</b>ld <b>U</b>nix <b>XR</b>ef home page</a></li>
+  <li>ouxr view of the <a href="{{site.my.ouxr.url_211bsd}}/">
+      2.11 BSD code base</a></li>
+  <li>a nice <a href="/home/ouxr/#h_example">guided tour</a>
+</ul>
+
+<h3 id="h_images">2.11BSD System Images</h3>
+<p>
+A number of ready to use 2.11BSD system images are provided for usage on w11a
+or on simh in a configuration equivalent to a w11a.
+Details are provided in the
+<a href="/home/w11/inst/systems.html#h_os_kits">
+  w11 project, section OS Kits</a>.
+</p>

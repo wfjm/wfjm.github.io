@@ -1,0 +1,8 @@
+{% comment %}
+  Snipplet to add a <dt> section for 211bsd flow lists. Parameters:
+    col   class name of color
+    path  2.11bsd code parh (with leading '/' and trailing qualifier
+{% endcomment %}
+<dt><a class="{{include.col}}" 
+       href="{{site.my.ouxr.url_211bsd}}{{include.path}}">
+       {{include.path}}</a></dt>

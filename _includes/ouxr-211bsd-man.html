@@ -1,0 +1,7 @@
+{% comment %}
+  Snipplet to add a link to ouxr 2.11bsd manual pages. Parameters:
+    n     name
+    s     section
+{% endcomment %}
+<a href="{{site.my.ouxr.url_211bsd}}/usr/man/cat{{include.s}}/{{include.n}}.0.html">
+  {{include.n}}({{include.s}})</a>

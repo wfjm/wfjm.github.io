@@ -46,6 +46,11 @@
 
     <div id="navbar"> 
       <div class="marginwrapper">
+        {% if page.sdef_blog_proj %}
+          <hr>
+          <b>To project:</b> <a href="/home/{{page.sdef_blog_proj}}">
+            {{page.sdef_blog_proj}}</a>
+        {% endif %}
         <hr>
         <table><tbody>
           <tr>
@@ -79,7 +84,7 @@
                 {% if forloop.index0 == ind_cur %}
                   <td>{{post.date | slice: 0,10 }}</td>
                 {% else %}
-                  <td><a href="{{post.url}}" title="{{page.title}}">
+                  <td><a href="{{post.url}}" title="{{post.title}}">
                     {{post.date | slice: 0,10 }}</a></td>
                 {% endif %}
               </tr>

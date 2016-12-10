@@ -12,12 +12,15 @@
       <td id="footer-about">
         <a class="abutton" href="/about/">about</a>
         <span id="footer-about-tools">
-          <a href="/debug/">
-            <i class="fa fa-life-saver abutton"></i></a>
-          <a href="https://validator.w3.org/check/referer">
+          <a href="/debug/"
+             title="Site debug tools">
+            <i class="fa fa-wrench abutton"></i></a>
+          <a href="https://validator.w3.org/check/referer"
+             title="Validate HTML">
             <i class="fa fa-html5 abutton"></i></a>
           {% assign checkuri = site.url | append: page.url | url_param_escape %}
-          <a href="https://validator.w3.org/checklink?uri={{checkuri}}">
+          <a href="https://validator.w3.org/checklink?uri={{checkuri}}"
+             title="Validate links">
             <i class="fa fa-link abutton"></i></a>
         </span>
       </td>

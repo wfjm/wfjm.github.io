@@ -5,28 +5,28 @@ my:
   changedate: 2016-12-04
 #
   langtable:
-  - ext: .c .h
+  - ext: ".c .h"
     lan: C
     exa: /usr/src/bin/ed.c
-  - ext: .c
+  - ext: ".c"
     lan: C (ALGOL style)
     exa: /usr/src/bin/sh/service.c
-  - ext: .s
+  - ext: ".s"
     lan: assembler (unix style)
     exa: /usr/src/sys/pdp/mch_trap.s
-  - ext: .m11
+  - ext: ".m11"
     lan: assembler (DEC style)
     exa: /usr/src/new/m11/mac.m11
-  - ext: .y
+  - ext: ".y"
     lan: yacc
     exa: /usr/src/bin/expr.y
-  - ext: .f .F
+  - ext: ".f .F"
     lan: Fortran
     exa: /usr/src/new/PORT/dungeon/objcts.F
-  - ext: .p
+  - ext: ".p"
     lan: Pascal
     exa: /usr/src/ucb/PORT/pascal/pdx/test/parall.p
-  - ext: .0
+  - ext: ".0"
     lan: man pages
     exa: /usr/man/cat1/awk.0
 #
@@ -85,8 +85,8 @@ my:
     exam:  /usr/src/sys/h/dir.h.html#xref:m:MAXNAMLEN
     comm: "where is <code>MAXNAMLEN</code> used"
   - type: "include"
-    url:  "#i:<name>"
-    exam:  /usr/src/sys/h/dir.h.html#i:dir.h
+    url:  "#xref:i:<name>"
+    exam:  /usr/src/sys/h/dir.h.html#xref:i:dir.h
     comm: "where is <code>dir.h</code> used"
 #
   coltable:
@@ -108,7 +108,7 @@ my:
 ---
 {% assign url_211bsd = site.my.ouxr.url_211bsd %}
 
-<h2 id="overview">Overview</h2>
+<h2 id="h_overview">Overview</h2>
 
 <p>
 The bring-up of UNIX 2.11BSD on the <a href="/home/w11/">w11</a> system
@@ -143,67 +143,65 @@ that's why in the following all examples refer to the
 <a href="{{url_211bsd}}/">2.11BSD code base</a>.
 </p>
 
-<h2 id="example">Brief Example</h2>
+<h2 id="h_example">Brief Example</h2>
 <p>
 It's very easy to follow the execution flow, even across user-kernel boundary.
 A simple example starts in the code of the
-<a href="{{url_211bsd}}/usr/man/cat1/dd.0.html">dd(1)</a> command
+{% include ouxr-211bsd-man.html n="dd" s="1" %} 
+command
 </p>
 <dl class="ouxr-flow indent">
-  <dt><a class="ouxr-cuser"
-         href="{{url_211bsd}}/usr/src/bin/dd.c.html#n:310">
-      /usr/src/bin/dd.c.html#n:310</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-cuser"  path="/usr/src/bin/dd.c.html#n:310" %} 
   <dd>in line 310 the <code>read()</code> function is called. 
     A click on <code>read()</code> leads to
   </dd>
 
-  <dt><a class="ouxr-clib" 
-         href="{{url_211bsd}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read">
-      /usr/src/lib/libc/pdp/sys/__read.s.html#s:_read</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-clib"  path="/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read" %}
   <dd>which is an assembler stub in <code>libc</code> which implements the
     user land side of the 
-    <a href="{{url_211bsd}}/usr/man/cat2/read.0.html">read(2)</a> system call.
+    {% include ouxr-211bsd-man.html n="read" s="2" %}
+    system call.
     The comments summarize the control flow via <code>trap</code> instruction,
     <code>syscall()</code> handler, <code>sysent[]</code> dispatcher, to
     the <code>read</code> kernel function. A click on <code>read</code>
     leads to the kernel handler
   </dd>
 
-  <dt><a class="ouxr-ckern"
-         href="{{url_211bsd}}/usr/src/sys/pdpstand/sys.c.html#s:_read">
-      /usr/src/sys/pdpstand/sys.c.html#s:_read</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/sys.c.html#s:_read" %}
   <dd>
     in case it is a raw block device read the kernel will call
     <code>devread()</code> in line 413
   </dd>
 
-  <dt><a class="ouxr-ckern"
-         href="{{url_211bsd}}/usr/src/sys/pdpstand/conf.c.html#s:_devread">
-      /usr/src/sys/pdpstand/conf.c.html#s:_devread</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/conf.c.html#s:_devread" %}
   <dd>
     which will call the <code>strategy</code> entry of the driver via
     device switch. So a click on <code>devsw</code> leads to
   </dd>
 
-  <dt><a class="ouxr-ckern"
-         href="{{url_211bsd}}/usr/src/sys/pdpstand/conf.c.html#s:_devsw">
-      /usr/src/sys/pdpstand/conf.c.html#s:_devsw</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/conf.c.html#s:_devsw" %}
   <dd>
     the central device switch, an array of structs. Click on
     <a href="{{url_211bsd}}/usr/src/sys/pdpstand/saio.h.html#sd:devsw">devsw</a>
     right after struct to see the definition, <code>dv_strategy</code> is the
-    2nd member of the struct. Assume it was a RK05 type disk, in this case
+    2nd member of the struct. Assume that a
+    {% include ouxr-211bsd-man.html n="rk" s="4" %}
+    type disk is involved, in this case
     <code>rkstrategy</code> is the handler being used, a click on it leads to
   </dd>
 
-  <dt><a class="ouxr-ckern"
-         href="{{url_211bsd}}/usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy">
-      /usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy</a></dt>
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy" %}
   <dd>
-    which is the block device driver function to start a read or write
+    the block device driver function to start a read or write
   </dd>
 </dl>
-and ends after a tour through the kernel in a device driver.
+so the tour started in user land and ended in a device driver.
 <p>
 Each source is full cross referenced, with the whole system code base.
 Clicking on a symbol definition (or the X in the sidebar) gets you to the
@@ -220,8 +218,8 @@ cross referencing info's. That gives comprehensive answers to questions like
       where is nlist.h included ?</a></li>
 </ul>
 
-<h2 id="uguide">Brief User Guide</h2>
-<h3 id="languages">Supported languages and file formats</h3>
+<h2 id="h_uguide">Brief User Guide</h2>
+<h3 id="h_languages">Supported languages and file formats</h3>
 <p>
 Essentially all the languages used in the UNIX system code base are supported,
 some other file formats too:
@@ -263,7 +261,7 @@ The language sources are syntax highlighted with the common color code:
   </tbody>
 </table>
 
-<h3 id="navi">Navigation</h3>
+<h3 id="h_navi">Navigation</h3>
 <p>
 A navigation bar lists all defined functions, global variables, macros
 and structs. Clicking the name leads to the line of definition, clicking
@@ -309,12 +307,11 @@ The background color tells in which territory you are in:
   </tbody>
 </table>
 
-<h3 id="xref">Cross Reference</h3>
+<h3 id="h_xref">Cross Reference</h3>
 <p>
 The cross reference listing shows where global symbols, macro's and struct's
 are defined and where they are used, in the current source as well as in the
 whole system:
-</p>
 </p>
 <table class="trtoggle indent">
   <thead>
