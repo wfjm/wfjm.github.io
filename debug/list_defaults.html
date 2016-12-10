@@ -1,0 +1,39 @@
+---
+title: "List site.defaults"
+---
+
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th colspan="2">Scope</th>
+      <th colspan="2">Defaults</th>
+    </tr>
+    <tr>
+      <th>Path</th>
+      <th>Type</th>
+      <th>Key</th>
+      <th>Value</th>
+    </tr>
+  </thead><tbody>
+    {% for r in site.defaults %}
+      {% for d in r.values %}
+      <tr>
+        {% if forloop.first %}
+          {% assign path = '*' %}
+          {% if r.scope.path and r.scope.path != "" %}
+            {% assign path = r.scope.path %}
+          {% endif %}
+          {% assign type = '*' %}
+          {% if r.scope.type and r.scope.type != "" %}
+            {% assign type = r.scope.type %}
+          {% endif %}
+          <td class="th-bg-col va-top" rowspan="{{r.values.size}}">{{path}}</td>
+          <td class="th-bg-col va-top" rowspan="{{r.values.size}}">{{type}}</td>
+        {% endif %}
+        <td>{{d[0]}}</td>
+        <td>{{d[1]}}</td>
+      </tr>
+      {% endfor %}
+    {% endfor %}
+  </tbody>
+</table>
