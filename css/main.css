@@ -398,6 +398,33 @@ dt:hover .hover-link {
 .ouxr-clib  {background-color:#c0ffc0;}       /* light green */
 .ouxr-cuser {background-color:#e0e0ff;}       /* light blue  */
 
+.ouxr-sstr {color:Red;}
+.ouxr-slit {color:Red;}
+.ouxr-skey {color:Orange;}
+.ouxr-styp {color:#00008B;}                 /* is a DarkBlue */
+.ouxr-sdir {color:#008000;}                 /* is a DarkGreen */
+.ouxr-snum {color:#A000A0;}                 /* is a DarkMagenta */
+.ouxr-scom {
+  color:#808080;                            /* is a Grey */
+  font-style: italic;
+}
+.ouxr-sbad {background-color:Silver;}
+
+.ouxr-flow dt {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
+.ouxr-flow dd {
+  margin-left: 2em;
+}
+.ouxr-flow dt a {
+  padding-left: 1ex;
+  padding-right: 1ex;
+  padding-top: 0.3ex;
+  padding-bottom: 0.3ex;
+  border-radius: 1ex;
+}
+
 /* footer style defs ---------------------------------------------- */
 
 #footer {

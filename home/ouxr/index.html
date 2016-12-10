@@ -4,41 +4,107 @@ title:  "Old Unix XRef"
 my:
   changedate: 2016-12-04
 #
+  langtable:
+  - ext: .c .h
+    lan: C
+    exa: /usr/src/bin/ed.c
+  - ext: .c
+    lan: C (ALGOL style)
+    exa: /usr/src/bin/sh/service.c
+  - ext: .s
+    lan: assembler (unix style)
+    exa: /usr/src/sys/pdp/mch_trap.s
+  - ext: .m11
+    lan: assembler (DEC style)
+    exa: /usr/src/new/m11/mac.m11
+  - ext: .y
+    lan: yacc
+    exa: /usr/src/bin/expr.y
+  - ext: .f .F
+    lan: Fortran
+    exa: /usr/src/new/PORT/dungeon/objcts.F
+  - ext: .p
+    lan: Pascal
+    exa: /usr/src/ucb/PORT/pascal/pdx/test/parall.p
+  - ext: .0
+    lan: man pages
+    exa: /usr/man/cat1/awk.0
+#
+  syncoltable:
+  - type: string literal
+    class: ouxr-sstr
+    exam: '"some string"'
+  - type: character literal
+    class: ouxr-slit
+    exam: "'a'"
+  - type: number literal
+    class: ouxr-snum
+    exam: "0x123"
+  - type: keyword
+    class: ouxr-skey
+    exam: "if then else"
+  - type: type
+    class: ouxr-styp
+    exam: "int char float"
+  - type: directive
+    class: ouxr-sdir
+    exam: ".data .globl"
+  - type: comment
+    class: ouxr-scom
+    exam: "/* this is a comment */"
+#
+  objtable:
+  - type: "source code line"
+    url:  "#n:<number>"
+    exam:  /usr/src/sys/sys/sys_generic.c.html#n:126
+    comm: "source line 126"
+  - type: "symbol definition"
+    url:  "#s:<name>"
+    exam:  /usr/src/sys/sys/sys_generic.c.html#s:_ioctl
+    comm: "definition <code>ioctl()</code>"
+  - type: "struct definition"
+    url:  "#sd:<name>"
+    exam:  /usr/src/sys/h/file.h.html#sd:fileops
+    comm: "definition <code>struct fileops</code>"
+  - type: "macro definition"
+    url:  "#m:<name>"
+    exam:  /usr/src/sys/h/dir.h.html#m:MAXNAMLEN
+    comm: "#define MAXNAMLEN"
+#
+  xreftable:
+  - type: "symbol"
+    url:  "#xref:s:<name>"
+    exam:  /usr/src/lib/libc/gen/readdir.c.html#xref:s:_readdir
+    comm: "where is <code>readdir()</code> used"
+  - type: "struct"
+    url:  "#xref:sd:<name>"
+    exam:  /usr/src/sys/h/mbuf.h.html#xref:sd:mbuf
+    comm: "where is <code>struct mbuf</code> used"
+  - type: "macro"
+    url:  "#xref:m:<name>"
+    exam:  /usr/src/sys/h/dir.h.html#xref:m:MAXNAMLEN
+    comm: "where is <code>MAXNAMLEN</code> used"
+  - type: "include"
+    url:  "#i:<name>"
+    exam:  /usr/src/sys/h/dir.h.html#i:dir.h
+    comm: "where is <code>dir.h</code> used"
+#
   coltable:
-  - color: magenta
-    class: ouxr-cboot
+  - class: ouxr-cboot
     text:  boot/standalone
     code:  /usr/src/sys/pdpstand/boot.c
-  - color: red
-    class: ouxr-ckern
+  - class: ouxr-ckern
     text:  kernel
     code:  /usr/src/sys/sys/sys_generic.c
-  - color: gold
-    class: ouxr-cnet
+  - class: ouxr-cnet
     text:  network
     code:  /usr/src/sys/netinet/ip_icmp.c
-  - color: green
-    class: ouxr-clib
+  - class: ouxr-clib
     text:  libraries
     code:  /usr/src/lib/libc/gen/readdir.c
-  - color: blue
-    class: ouxr-cuser
+  - class: ouxr-cuser
     text:  user level
     code:  /usr/src/bin/cp.c
-#
-  ostable:
-  - tag: u6ed
-    txt: Unix 6th Edition
-    com: "still preliminary"
-  - tag: u7ed
-    txt: Unix 7th Edition
-    com: "still preliminary"
-  - tag: 29bsd
-    txt: 2.9BSD
-    com: "still preliminary"
-  - tag: 211bsd
-    txt: 2.11BSD
-    com: ""
 ---
 {% assign url_211bsd = site.my.ouxr.url_211bsd %}
 
@@ -47,14 +113,15 @@ my:
 <p>
 The bring-up of UNIX 2.11BSD on the <a href="/home/w11/">w11</a> system
 required a lot of very detailed studies of the source code. That called
-quickly for a hyperlinked and cross referenced rendition of the sources,
+quickly for a hyper-linked and cross referenced rendition of the sources,
 much like <a href="http://www.doxygen.org/">doxygen</a> or
 <a href="http://lxr.free-electrons.com/">lxr</a> does it.
 The desired features were:
 </p>
 <ul>
   <li>cover boot, kernel, networking, library and user level code</li>
-  <li>cover C, assembler and other relevant languages</li>
+  <li>cover C, assembler and other relevant languages with syntax
+    highlighting</li>
   <li>provide 'what is used where' information, over the whole system</li>
   <li>provide hyperlinks for a fast code path analysis, especially
     across the user,library,kernel interfaces</li>
@@ -68,20 +135,172 @@ was written. The task is strongly simplified by the facts that the code
 base is quasi static and that the size of the code base is small by today's
 standards, which allows to hold the full code base in memory for analysis.
 The tool takes the whole file system and creates at set of static html files
-which show all sources with proper hyperlinks. In each source file the
-background color tells you in which territory you are in
+which show all sources with proper hyperlinks.
+Even though the original motivation was to understand the 2.11BSD system,
+the tool was design such that all UNIX systems with similar structure can be
+processed. So far the 2.11BSD configuration is certainly the most advanced,
+that's why in the following all examples refer to the
+<a href="{{url_211bsd}}/">2.11BSD code base</a>.
+</p>
+
+<h2 id="example">Brief Example</h2>
+<p>
+It's very easy to follow the execution flow, even across user-kernel boundary.
+A simple example starts in the code of the
+<a href="{{url_211bsd}}/usr/man/cat1/dd.0.html">dd(1)</a> command
+</p>
+<dl class="ouxr-flow indent">
+  <dt><a class="ouxr-cuser"
+         href="{{url_211bsd}}/usr/src/bin/dd.c.html#n:310">
+      /usr/src/bin/dd.c.html#n:310</a></dt>
+  <dd>in line 310 the <code>read()</code> function is called. 
+    A click on <code>read()</code> leads to
+  </dd>
+
+  <dt><a class="ouxr-clib" 
+         href="{{url_211bsd}}/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read">
+      /usr/src/lib/libc/pdp/sys/__read.s.html#s:_read</a></dt>
+  <dd>which is an assembler stub in <code>libc</code> which implements the
+    user land side of the 
+    <a href="{{url_211bsd}}/usr/man/cat2/read.0.html">read(2)</a> system call.
+    The comments summarize the control flow via <code>trap</code> instruction,
+    <code>syscall()</code> handler, <code>sysent[]</code> dispatcher, to
+    the <code>read</code> kernel function. A click on <code>read</code>
+    leads to the kernel handler
+  </dd>
+
+  <dt><a class="ouxr-ckern"
+         href="{{url_211bsd}}/usr/src/sys/pdpstand/sys.c.html#s:_read">
+      /usr/src/sys/pdpstand/sys.c.html#s:_read</a></dt>
+  <dd>
+    in case it is a raw block device read the kernel will call
+    <code>devread()</code> in line 413
+  </dd>
+
+  <dt><a class="ouxr-ckern"
+         href="{{url_211bsd}}/usr/src/sys/pdpstand/conf.c.html#s:_devread">
+      /usr/src/sys/pdpstand/conf.c.html#s:_devread</a></dt>
+  <dd>
+    which will call the <code>strategy</code> entry of the driver via
+    device switch. So a click on <code>devsw</code> leads to
+  </dd>
+
+  <dt><a class="ouxr-ckern"
+         href="{{url_211bsd}}/usr/src/sys/pdpstand/conf.c.html#s:_devsw">
+      /usr/src/sys/pdpstand/conf.c.html#s:_devsw</a></dt>
+  <dd>
+    the central device switch, an array of structs. Click on
+    <a href="{{url_211bsd}}/usr/src/sys/pdpstand/saio.h.html#sd:devsw">devsw</a>
+    right after struct to see the definition, <code>dv_strategy</code> is the
+    2nd member of the struct. Assume it was a RK05 type disk, in this case
+    <code>rkstrategy</code> is the handler being used, a click on it leads to
+  </dd>
+
+  <dt><a class="ouxr-ckern"
+         href="{{url_211bsd}}/usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy">
+      /usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy</a></dt>
+  <dd>
+    which is the block device driver function to start a read or write
+  </dd>
+</dl>
+and ends after a tour through the kernel in a device driver.
+<p>
+Each source is full cross referenced, with the whole system code base.
+Clicking on a symbol definition (or the X in the sidebar) gets you to the
+cross referencing info's. That gives comprehensive answers to questions like
+</p>
+<ul>
+  <li><a href="{{url_211bsd}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">
+      where is setjmp() called ?</a></li>
+  <li><a href="{{url_211bsd}}//usr/src/sys/pdpstand/saio.h.html#xref:sd:iob">
+      where is struct iob used ?</a></li>
+  <li><a href="{{url_211bsd}}/usr/src/sys/pdp/machparam.h.html#xref:m:NBPG">
+      where is macro NBPG used ?</a></li>
+  <li><a href="{{url_211bsd}}/usr/include/nlist.h.html#xref:i:nlist.h">
+      where is nlist.h included ?</a></li>
+</ul>
+
+<h2 id="uguide">Brief User Guide</h2>
+<h3 id="languages">Supported languages and file formats</h3>
+<p>
+Essentially all the languages used in the UNIX system code base are supported,
+some other file formats too:
 </p>
 <table class="trtoggle indent">
   <thead>
     <tr>
-      <th>Color</th>
+      <th>File Type</th>
+      <th>Language</th>
+      <th>Example</th>
+    </tr>
+  </thead><tbody>
+    {% for r in page.my.langtable %}
+      <tr>
+        <td>{{r.ext}}</td>
+        <td>{{r.lan}}</td>
+        <td><a href="{{url_211bsd}}{{r.exa}}.html">
+            {{r.exa}}</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>
+The language sources are syntax highlighted with the common color code:
+</p>
+<table class="trtoggle indent">
+  <thead>
+     <tr>
+      <th>Token Type</th>
+      <th>Example</th>
+    </tr>
+  </thead><tbody>
+    {% for r in page.my.syncoltable %}
+      <tr>
+        <td>{{r.type}}</td>
+        <td class="{{r.class}}">{{r.exam}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h3 id="navi">Navigation</h3>
+<p>
+A navigation bar lists all defined functions, global variables, macros
+and structs. Clicking the name leads to the line of definition, clicking
+the 'X' to the cross reference listing.
+Each relevant object in a htlmized source file can be addressed via an URL:
+</p>
+<table class="trtoggle indent">
+  <thead>
+     <tr>
+      <th>Object</th>
+      <th>#....</th>
+      <th>Example</th>
+      <th>Comment</th>
+    </tr>
+  </thead><tbody>
+    {% for r in page.my.objtable %}
+      <tr>
+        <td>{{r.type}}</td>
+        <td><code>{{r.url | xml_escape}}</code></td>
+        <td><a href="{{url_211bsd}}{{r.exam}}">{{r.exam}}</a></td>
+        <td>{{r.comm}}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>
+The background color tells in which territory you are in:
+</p>
+<table class="trtoggle indent">
+  <thead>
+    <tr>
       <th>Territory</th>
       <th>2.11BSD Example</th>
     </tr>
   </thead><tbody>
     {% for r in page.my.coltable %}
       <tr>
-        <td class="{{r.class}} ha-center">{{r.color}}</td>
         <td class="{{r.class}} ha-center">{{r.text}}</td>
         <td><a href="{{url_211bsd}}{{r.code}}.html">
             <code>{{r.code}}</code></a></td>
@@ -89,53 +308,29 @@ background color tells you in which territory you are in
     {% endfor %}
   </tbody>
 </table>
-<p>
-Key features of the htlmized source files are, using
-<code>sys_generic.c</code> of 2.11BSD in examples:
-</p>
-<ul>
-  <li>a navigation bar lists all defined functions, global variables, macros
-    and structs. Clicking the name leads to the line of definition, clicking
-    the 'X' to the cross reference listing.</li>
-  <li>the cross reference listing shows were the item is used, in the
-    current source as well as in the whole system.</li>
-  <li>each symbol can be reached via <code>#s:&ltname&gt;</code>, like
-    definition of
-    <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#s:_select">
-      <code>_select</code></a>.</li>
-  <li>each source code line can be reached via <code>#n:&ltnumber&gt;</code>,
-    like <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#n:286">
-      line 286</a>.</li>
-  <li>each cross reference section can be reached via
-    <code>#xref:s:&ltname&gt;</code>, like xref of
-    <a href="{{url_211bsd}}/usr/src/sys/sys/sys_generic.c.html#xref:s:_select">
-      <code>_select</code></a>.</li>
-</ul>
 
-<h2 id="systems">Available Systems</h2>
+<h3 id="xref">Cross Reference</h3>
 <p>
-Even though the original motivation was to understand the 2.11BSD system,
-the tool was design such that all UNIX systems with similar structure can be
-processed. So far the 2.11BSD configuration is certainly the most advanced
-with best interlinking, but the view for the other systems is also useful.
+The cross reference listing shows where global symbols, macro's and struct's
+are defined and where they are used, in the current source as well as in the
+whole system:
+</p>
 </p>
 <table class="trtoggle indent">
   <thead>
-    <tr>
-      <th>System</th>
-      <th>Source<br>Root</th>
-      <th>Guided<br>Tours</th>
+     <tr>
+      <th>Object</th>
+      <th>#....</th>
+      <th>Example</th>
       <th>Comment</th>
     </tr>
   </thead><tbody>
-    {% for r in page.my.ostable %}
+    {% for r in page.my.xreftable %}
       <tr>
-        <td>{{r.txt}}</td>
-        <td class="ha-center">
-          <a href="{{site.my.ouxr.url_base}}/{{r.tag}}">
-            <i class="fa fa-link abutton"></i></a></td>
-        <td></td>
-        <td>{{r.com}}</td>
+        <td>{{r.type}}</td>
+        <td><code>{{r.url | xml_escape}}</code></td>
+        <td><a href="{{url_211bsd}}{{r.exam}}">{{r.exam}}</a></td>
+        <td>{{r.comm}}</td>
       </tr>
     {% endfor %}
   </tbody>
