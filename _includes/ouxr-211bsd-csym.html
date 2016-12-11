@@ -1,0 +1,8 @@
+{% comment %}
+  Snipplet to add a link to ouxr 2.11bsd C symbol. Parameters:
+    p     path to code (with leading '/', without trailing '.html'
+    s     symbol (without leading '_')
+    d     decoration (e.g. '()' or '[]'
+{% endcomment %}
+<a href="{{site.my.ouxr.url_211bsd}}{{include.p}}.html#s:_{{include:s}}">
+  <code>{{include.s}}{{include.d}}</code></a>

@@ -1,6 +1,10 @@
 ---
 title: "2.11BSD Patch 445"
 tags:  ["211bsd"]
+#
+my:
+  changedate: 2016-12-11
+  patch_url:  http://www.retro11.de/data/211bsd/patches
 ---
 
 <h2>FPSIM fixed; 211bsd runs on systems without FPP</h2>
@@ -14,13 +18,18 @@ and unsupported, and indeed it didn't work.
 Robin Birch some time ago fixed part of the issues, see patch 434,
 but still the kernel paniced when the very first program was started.
 I managed to localize and fix the problem in <code>sys/pdp/mch_fpsim.s</code>.
+Steven Schultz right away issued a patch
 </p>
+<ul>
+  <li><a href="{{page.my.patch_url}}/445">
+      <b>445</b>: issued December 26, 2006</a></li>
+</ul>
 <p>
-Steven Schultz right away issued 2.11BSD patch #445. All patches
+All patches
 up to and including 445 are provided by Steven under
 </p>
 <pre>
-   ftp://sg-1.ims.ideas.gd-ais.com/pub/2.11BSD
+   <a href="ftp://moe.2bsd.com/pub/2.11BSD/">ftp://moe.2bsd.com/pub/2.11BSD/</a>
 </pre>
 A patch level 445 system will now boot on simh for example on a
 <pre>
@@ -32,6 +41,10 @@ It should thus also work on a real 11/70 without FPP. I heard
 of some 11/70 with non-working FPP's, so this maybe good news
 for the owners.
 </p>
+
+<div class="notebox">
+  <b>2016-12-11:</b> Update the URL of the patch archive.
+</div>
 
 <div class="notebox">
   For original note to 2.11BSD users see

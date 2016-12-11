@@ -1,6 +1,10 @@
 ---
 title: "2.11BSD Patch 446+447"
 tags:  ["211bsd"]
+#
+my:
+  changedate: 2016-12-11
+  patch_url:  http://www.retro11.de/data/211bsd/patches
 ---
 
 <h2>fixes for ulrem,umount,tar,tcsh,ps,vmstat,apropos,pstat,rk</h2>
@@ -11,8 +15,10 @@ xmas break I finally found the time to communicate them to Steven Schultz.
 Steven was so kind to package them into two new patch files
 </p>
 <ul>
-  <li><b>446</b>: issued December 27, 2008</li>
-  <li><b>447</b>: issued December 31, 2008</li>
+  <li><a href="{{page.my.patch_url}}/446">
+      <b>446</b>: issued December 27, 2008</a></li>
+  <li><a href="{{page.my.patch_url}}/447">
+      <b>447</b>: issued December 31, 2008</a></li>
 </ul>
 
 <p>
@@ -53,7 +59,7 @@ Together, the patches address the following points
     <code>pstat</code>, <code>tcsh</code>)</li>
 </ul>
 <p>
-Note: In case you wonder, as I did, why 211BSD survived 20 years with a
+Note: In case you wonder, as I did, why 2.11BSD survived 20 years with a
        broken unsigned long % operator:
 </p>
 <ul>
@@ -72,10 +78,13 @@ Note, that Steven changed the packaging some time ago, the patches are
 now packed in bzip'ed tarballs in groups of ten patches. So you'll have
 to look into
 </p>
-<ul>
-  <li>ftp://moe.2bsd.com/pub/2.11BSD/440-447.tar.bz2</li>
-  <li>ftp://ftp.wx.gd-ais.com/pub/2.11BSD/440-447.tar.bz2</li>
-</ul>
+<pre>
+  <a href="ftp://moe.2bsd.com/pub/2.11BSD/440-447.tar.bz2">ftp://moe.2bsd.com/pub/2.11BSD/440-447.tar.bz2</a>
+</pre>
+
+<div class="notebox">
+  <b>2016-12-11:</b> Remove not longer accessible URL of patch archive.
+</div>
 
 <div class="notebox">
   For original note to 2.11BSD users see

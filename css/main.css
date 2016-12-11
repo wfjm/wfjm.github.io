@@ -21,6 +21,10 @@ p,ul,ol {
   margin-top: 1ex;
   margin-bottom: 1ex;
 }
+pre {
+  margin-top: 1ex;
+  margin-bottom: 1ex;
+}
 
 p:first-letter {
   font-family: serif;

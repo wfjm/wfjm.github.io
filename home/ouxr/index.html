@@ -9,10 +9,10 @@ my:
     lan: C
     exa: /usr/src/bin/ed.c
   - ext: ".c"
-    lan: C (ALGOL style)
+    lan: C (Bourne style)
     exa: /usr/src/bin/sh/service.c
   - ext: ".s"
-    lan: assembler (unix style)
+    lan: assembler (UNIX style)
     exa: /usr/src/sys/pdp/mch_trap.s
   - ext: ".m11"
     lan: assembler (DEC style)
@@ -105,6 +105,7 @@ my:
   - class: ouxr-cuser
     text:  user level
     code:  /usr/src/bin/cp.c
+#
 ---
 {% assign url_211bsd = site.my.ouxr.url_211bsd %}
 
@@ -147,61 +148,67 @@ that's why in the following all examples refer to the
 <p>
 It's very easy to follow the execution flow, even across user-kernel boundary.
 A simple example starts in the code of the
-{% include ouxr-211bsd-man.html n="dd" s="1" %} 
+{% include ouxr-211bsd-man.html n="telnet" s="1" %}
 command
 </p>
 <dl class="ouxr-flow indent">
   {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-cuser"  path="/usr/src/bin/dd.c.html#n:310" %} 
-  <dd>in line 310 the <code>read()</code> function is called. 
-    A click on <code>read()</code> leads to
+     col="ouxr-cuser"  path="/usr/src/ucb/telnet.c.html" %}
+  <dd>It opens the required socket for communication with a call of
+      {% include ouxr-211bsd-man.html n="socket" s="2" %}
+      in line 2079
   </dd>
 
   {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-clib"  path="/usr/src/lib/libc/pdp/sys/__read.s.html#s:_read" %}
+     col="ouxr-cuser"  path="/usr/src/ucb/telnet.c.html#n:2079" %}
+
+  <dd>A click on <code>socket()</code> leads to
+  </dd>
+
+  {% include ouxr-211bsd-flow-dt.html
+     col="ouxr-clib"  path="/usr/src/lib/libc/pdp/sys/__socket.s.html#s:_socket" %}
   <dd>which is an assembler stub in <code>libc</code> which implements the
     user land side of the 
-    {% include ouxr-211bsd-man.html n="read" s="2" %}
+    {% include ouxr-211bsd-man.html n="socket" s="2" %}
     system call.
     The comments summarize the control flow via <code>trap</code> instruction,
-    <code>syscall()</code> handler, <code>sysent[]</code> dispatcher, to
-    the <code>read</code> kernel function. A click on <code>read</code>
+    {% include ouxr-211bsd-csym.html
+       p="/usr/src/sys/pdp/trap.c" s="syscall" d="()" %}
+    handler,
+    {% include ouxr-211bsd-csym.html
+       p="/usr/src/sys/sys/init_sysent.c" s="sysent" d="[]" %}
+    dispatcher, to
+    the <code>socket</code> kernel function. A click on <code>socket</code>
     leads to the kernel handler
   </dd>
 
   {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/sys.c.html#s:_read" %}
+     col="ouxr-ckern"  path="/usr/src/sys/sys/uipc_syscalls.c.html#s:_socket" %}
   <dd>
-    in case it is a raw block device read the kernel will call
-    <code>devread()</code> in line 413
+    this routine another interface layer needed to reach the networking code
+    which resides in supervisor space and is executed in supervisor mode.
+    This switch is done by <code>SOCREATE</code>, a click on it leads
+    to
   </dd>
 
   {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/conf.c.html#s:_devread" %}
+     col="ouxr-cnet"  path="/usr/src/sys/pdp/net_mac.h.html#m:SOCREATE" %}
   <dd>
-    which will call the <code>strategy</code> entry of the driver via
-    device switch. So a click on <code>devsw</code> leads to
+    and shows that it is a macro, which uses
+    {% include ouxr-211bsd-csym.html
+       p="/usr/src/sys/pdp/mch_KScall.s" s="KScall" d="()" %}
+    to switch from kernel to supervisor mode and call <code>socreate</code>.
+    A click on <code>socreate</code> finally leads to
   </dd>
 
   {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/conf.c.html#s:_devsw" %}
+     col="ouxr-cnet"  path="/usr/src/sys/sys/uipc_socket.c.html#s:_socreate" %}
   <dd>
-    the central device switch, an array of structs. Click on
-    <a href="{{url_211bsd}}/usr/src/sys/pdpstand/saio.h.html#sd:devsw">devsw</a>
-    right after struct to see the definition, <code>dv_strategy</code> is the
-    2nd member of the struct. Assume that a
-    {% include ouxr-211bsd-man.html n="rk" s="4" %}
-    type disk is involved, in this case
-    <code>rkstrategy</code> is the handler being used, a click on it leads to
-  </dd>
-
-  {% include ouxr-211bsd-flow-dt.html
-     col="ouxr-ckern"  path="/usr/src/sys/pdpstand/rk.c.html#s:_rkstrategy" %}
-  <dd>
-    the block device driver function to start a read or write
+    which is finally the handler doing the work.
   </dd>
 </dl>
-so the tour started in user land and ended in a device driver.
+so the tour started in user land and went through kernel mode to a handler
+executing in supervisor mode.
 <p>
 Each source is full cross referenced, with the whole system code base.
 Clicking on a symbol definition (or the X in the sidebar) gets you to the
