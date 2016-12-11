@@ -1,0 +1,78 @@
+---
+title: "w11 project moved to GitHub"
+tags:  ["w11"]
+---
+<p>
+To say something nice first:
+<i><a href="http://opencores.org/">OpenCores</a> is a very nice directory 
+  service for open source hardware IP-cores</i>.
+</p>
+<p>
+But the repository and project page services haven't been updated for many
+years. In addition, OpenCores suffered two major breakdowns lately:
+</p>
+<ul>
+  <li>Access was instable or failed totally between about February 27th and 
+    March 9th 2015.</li>
+  <li>Access was instable after about October 2nd 2016. The whole service
+    was finally re-located from servers in Sweden to the Amazon Cloud. After
+    October 15th 2016 OpenCores was reachable again.</li>
+</ul>
+<p>
+But the re-installed OpenCores featured the same out-dated services, 
+essentially a plain subversion server with a 
+<a href="http://www.websvn.info/">WebSVN</a> based viewer (in version 2.1.0
+released 2008 !), a very rudimentary and restricted CMS for the project pages, 
+and very little project tools.
+</p>
+
+<p>
+So it was natural, and even overdue, to move from OpenCores to GitHub:
+</p>
+<ul>
+  <li>the repository was converted with 
+    <a href="https://git-scm.com/docs/git-svn"><code>git svn</code></a>,
+    so all commits done at OpenCores are also visible in the git repository.
+    Since the handling of file moves is quite different between svn and git
+    and the commits were very coarse garnular some file history might have
+    been lost.
+  </li>
+  <li>the project pages have been convered into Jekyll based GitHub-Pages.
+    Taking the opportunity pages for the 
+    <a href="https://wfjm.github.io/home/211bsd/">2.11BSD</a> and 
+    <a href="https://wfjm.github.io/home/ouxr/">
+      <b>O</b>ld <b>U</b>nix <b>XR</b>ef</a> activities
+    were also setup, all with associated blogs.
+  </li>
+</ul>
+
+<p>
+The bottom line is easy to descibe:
+</p>
+<table class="indent"><tbody>
+    <tr>
+      <td>w11 repository:</td>
+      <td><a href="https://github.com/wfjm/w11">
+          https://github.com/wfjm/w11</a></td>
+    </tr>
+    <tr>
+      <td>w11 project pages:</td>
+      <td><a href="https://wfjm.github.io/home/w11/">
+          https://wfjm.github.io/home/w11/</a></td>
+    </tr>
+</tbody></table>
+
+<p>
+The <a href="http://opencores.org/project,w11">OpenCores w11</a>
+project stays as 'frozen project' and entry in the IP-cores directory.
+</p>
+
+<div class="notebox">
+  <b>Note:</b> The last productive state of the w11 pages on OpenCores
+  is caputured by the 
+  <a href="https://archive.org/">Internet Archive</a>, see 
+  {% include wbm-link.html 
+     date="20161118170116"
+     link="http://opencores.org/project,w11"
+     text="snapshot taken on November 18th, 2016" %}.
+</div>
