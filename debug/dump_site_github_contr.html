@@ -2,8 +2,15 @@
 title: "Dump site.github.contributors"
 ---
 
+site.github.contributors:
+<ul>
+  {% for c in site.github.contributors %}
+    <li><a href="#{{c.login}}">{{c.login}}</a></li>
+  {% endfor %}
+</ul>
+
 {% for c in site.github.contributors %}
-  <h2 id="{{c.login}}">{{c.login}}</h2>
+  <h3 id="{{c.login}}">{{c.login}}</h3>
 
   <table class="trtoggle">
     <thead>

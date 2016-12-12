@@ -2,6 +2,12 @@
 title: "Dump site"
 ---
 
+{% assign klist = site.my.emptylist %}
+{% for key in site %}
+  {% assign klist = klist | push: key %}
+{% endfor %}
+{% assign klist = klist | sort %}
+
 <table class="trtoggle">
   <thead>
     <tr>
@@ -9,7 +15,7 @@ title: "Dump site"
       <th>Value</th>
     </tr>
   </thead><tbody>
-    {% for key in site %}
+    {% for key in klist %}
       {% if key == "my" %} {% continue %} {% endif %}
       <tr>
         <td>{{key}}</td>

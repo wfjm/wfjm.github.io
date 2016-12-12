@@ -2,8 +2,15 @@
 title: "Dump site.github.public_repositories"
 ---
 
+site.github.public_repositories:
+<ul>
+  {% for r in site.github.public_repositories %}
+    <li><a href="#{{r.name}}">{{r.name}}</a></li>
+  {% endfor %}
+</ul>
+
 {% for r in site.github.public_repositories %}
-  <h2 id="{{r.name}}">{{r.name}}</h2>
+  <h3 id="{{r.name}}">{{r.name}}</h3>
 
   <table class="trtoggle">
     <thead>
