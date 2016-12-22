@@ -2,7 +2,7 @@
 title: "Dump site.github.contributors"
 ---
 
-site.github.contributors:
+site.github.contributors captured on {{site.time | slice: 0,10}}:
 <ul>
   {% for c in site.github.contributors %}
     <li><a href="#{{c.login}}">{{c.login}}</a></li>
