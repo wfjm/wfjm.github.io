@@ -2,7 +2,7 @@
 title: "Releases"
 #
 my:
-  changedate: 2016-10-29
+  changedate: 2016-12-22
 #
   w11_tag:  https://github.com/wfjm/w11/releases/tag
   w11_comm: https://github.com/wfjm/w11/commit
@@ -265,6 +265,16 @@ releases are labeled with italic <i>tag</i> fields.
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td class="va-top ha-center nowrap"><i>master</i></td>
+      <td class="va-top nowrap">{{site.time | slice: 0,10}}</td>
+      <td class="va-top ha-center nowarp">-</td>
+      <td class="va-top ha-center">
+        <a href="{{page.my.w11_blob}}/master/doc/CHANGELOG.md">CHANGELOG</a>
+      </td>
+      <td class="va-top"><i>state of master, the bleeding edge</i></td>
+    </tr>
+
     {% for rel in page.my.releases %}
       {% assign rel_coms = rel.com | truncate: 7,"" %}
       {% if rel.typ == "ma" %}
