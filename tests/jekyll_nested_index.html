@@ -1,0 +1,27 @@
+---
+title: "Test Jekyll split Filter"
+my:
+  hash:
+    key1 : "value for key1"
+    key2 : "value for key2"
+    key3 : "value for key3"
+    key4 : "value for key4"
+  list : ["key4","key3","key2","key1"]
+---
+
+{% include tests_tools_version.html %}
+<hr>
+
+hash: {{ page.my.hash | jsonify}}
+<br>
+list: {{ page.my.list | jsonify}}
+<br>
+
+hash.key1: {{ page.my.hash["key1"] }}
+<br>
+hash["key2"]: {{ page.my.hash["key2"] }}
+<br>
+hash[my.list.first]: {{ page.my.hash[page.my.list.first] }}
+<br>
+hash[my.list[0]]: {{ page.my.hash[page.my.list[0]] }}
+<br>

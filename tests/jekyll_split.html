@@ -9,10 +9,7 @@ my:
     - "/a/b/c/ "
 ---
 
-jekyll: {{site.github.versions.jekyll}}
-<br>
-liquid: {{site.github.versions.liquid}}
-<br>
+{% include tests_tools_version.html %}
 
 {% for t in page.my.tests %}
   <h3>Case: <code>'{{t}}'</code></h3>

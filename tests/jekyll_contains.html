@@ -11,10 +11,7 @@ my:
     - ["@/home/w11/","@/home/w11/impl"]
 ---
 
-jekyll: {{site.github.versions.jekyll}}
-<br>
-liquid: {{site.github.versions.liquid}}
-<br>
+{% include tests_tools_version.html %}
 
 {% for t in page.my.tests %}
   <h3>Case: <code>'{{t[0]}}' contains '{{t[1]}}'</code></h3>
