@@ -1,5 +1,5 @@
 ---
-title: "Test Jekyll split Filter"
+title: "Test Jekyll nested index like 'hash[list[0]]'"
 my:
   hash:
     key1 : "value for key1"
@@ -21,7 +21,7 @@ hash.key1: {{ page.my.hash["key1"] }}
 <br>
 hash["key2"]: {{ page.my.hash["key2"] }}
 <br>
-hash[my.list.first]: {{ page.my.hash[page.my.list.first] }}
+hash[list.first]: {{ page.my.hash[page.my.list.first] }}
 <br>
-hash[my.list[0]]: {{ page.my.hash[page.my.list[0]] }}
+hash[list[0]]: {{ page.my.hash[page.my.list[0]] }}
 <br>
