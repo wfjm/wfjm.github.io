@@ -18,28 +18,28 @@ my.list: {{ page.my.list | jsonify}}
 <br>
 
 {% raw %}
-<h3><code>{{page.my.hash["key1"]}}</code></h3>
+<h3><code>{{ page.my.hash["key1"] }}</code></h3>
 {% endraw %}
 hash["key1"]: {{ page.my.hash["key1"] }}
 
 {% raw %}
-<h3><code>{{page.my.hash[page.my.list.first]}}</code></h3>
+<h3><code>{{ page.my.hash[page.my.list.first] }}</code></h3>
 {% endraw %}
 hash[list.first]: {{ page.my.hash[page.my.list.first] }}
 
 {% raw %}
-<h3><code>{{page.my.hash[page.my.list[0]]}}</code></h3>
+<h3><code>{{ page.my.hash[page.my.list[0]] }}</code></h3>
 {% endraw %}
 hash[list[0]]: {{ page.my.hash[page.my.list[0]] }}
 
 {% raw %}
-<h3><code>val = page.my.hash[page.my.list[0]]; {{val}}</code></h3>
+<h3><code>val = page.my.hash[page.my.list[0]]; {{ val }}</code></h3>
 {% endraw %}
 {% assign val = page.my.hash[page.my.list[0]] %}
 hash[list[0]] via assign: {{ val }}
 
 {% raw %}
-<h3><code>ind = page.my.list[0]; {{page.my.hash[ind]}}</code></h3>
+<h3><code>key = page.my.list[0]; {{ page.my.hash[key] }}</code></h3>
 {% endraw %}
-{% assign ind = page.my.list[0] %}
-hash[ind] with ind = list[0]: {{ page.my.hash[ind] }}
+{% assign key = page.my.list[0] %}
+hash[key] with key = list[0]: {{ page.my.hash[key] }}
