@@ -2,7 +2,7 @@
 title:  "Performance"
 #
 my:
-  changedate: 2016-10-29
+  changedate: 2017-01-14
 ---
 
 <h2 id="h_microarchitecture">Microarchitecture</h2>
@@ -21,13 +21,14 @@ On Spartan/Artix classs FPGA's the w11a systems run with at a clock frequency
 of at <b>least 50 MHz</b>. Specifically:
 </p>
 <pre>
-  FPGA          board     system        clock   comment
-  xc7a35t-1     Arty      w11a_br_arty  80 MHz   uses MMCM (with Vivado 2016.2)
-  xc7a35t-1     Basys3    w11a_b3       80 MHz   uses MMCM (with Vivado 2016.2)
-  xc7a100t-1    Nexys4    w11a_n4       80 MHz   uses MMCM (with Vivado 2016.2)
-  xc6slx16-2    Nexys3    w11a_n3       64 MHz   uses DCM  (with ISE 14.7)
-  xc3s1200e-4   Nexys2    w11a_n2       52 MHz   uses DCM
-  xc3s1000-4    S3board   w11a_s3       50 MHz   no DCM
+  FPGA          Board       System        Clock    Comment
+  xc7a35t-1     Arty        w11a_br_arty  80 MHz   uses MMCM (Vivado 2016.4)
+  xc7a35t-1     Basys3      w11a_b3       80 MHz   uses MMCM (Vivado 2016.4)
+  xc7a100t-1    Nexys4 DDR  w11a_br_n4d   80 MHz   uses MMCM (Vivado 2016.4)
+  xc7a100t-1    Nexys4      w11a_n4       80 MHz   uses MMCM (Vivado 2016.4)
+  xc6slx16-2    Nexys3      w11a_n3       64 MHz   uses DCM  (ISE 14.7)
+  xc3s1200e-4   Nexys2      w11a_n2       52 MHz   uses DCM
+  xc3s1000-4    S3board     w11a_s3       50 MHz   no DCM
 </pre>
 
 <h2 id="h_performance">Expected Performance</h2>

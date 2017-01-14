@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2016-10-29
+  changedate: 2017-01-14
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -39,14 +39,13 @@ my:
 
 <h2 id="h_short">Short term (in work)</h2>
 <ul>
-  <li>proper integration of <b>CPU monitoring unit</b> (dmcmon) and
-      <b>hardware break point unit</b> (dmhbpt) with w11 core and back end
-      software.
-  <li>lots of verification topics</li>
+  <li>document Tcl API</li>
+  <li>support DDR memory on Arty and Nexys4 DDR</li>
 </ul>
 
 <h2 id="h_mid">Mid term</h2>
 <ul>
+  <li>lots of verification topics</li>
   <li><b>DEUNA</b> Ethernet; 2.11BSD on w11a on the internet.</li>
   <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
   <li><b>fifo buffered</b> implementation of <b>character devices</b> 
@@ -102,13 +101,14 @@ my:
     <tr>
       <td class="va-top ha-center">V0.80</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">verification: fix known CPU and IO issues</td>
+      <td class="va-top">documentation and DDR support</td>
     </tr>
     <!-- v0.9 -->
     <tr>
       <td class="va-top ha-center">V0.90</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">communication: DZ11; DEUNA;</td>
+      <td class="va-top">verification: fix known CPU and IO issues<br>
+                         communication: DZ11; DEUNA;</td>
     </tr>
     <!-- v1.0 -->
     <tr>

@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2016-10-29
+  changedate: 2017-01-14
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -43,7 +43,7 @@ my:
 %}
 
 {% capture caption_Fig_F_3 %}
-    Fig F-3: w11a running on a Digilent 
+    Fig F-3: w11a running on a Digilent
     <a href="/home/w11/inst/boards.html#digi_nexys2">Nexys2</a> board. 
     The board is powered over USB. FPGA configuration as
     well as the rlink connection can be done via the 
@@ -151,18 +151,19 @@ are comprised of
 Complete configurations for five boards are currently part of the project:
 </p>
 <pre>
-  Name              Board    FPGA       Clock   #flop #luts  #slices
-                                        [MHz]    
-  sys_w11a_br_arty  Arty     XC7A35T      80     2226  5217  1603(20%)
-  sys_w11a_b3       Basys3   XC7A35T      80     2361  5326  1615(20%)
-  sys_w11a_n4       Nexys4   XC7A100T     80     2566  5593  1759(11%)
-  sys_w11a_n3       Nexys3   XC6SLX16     64     2671  5166  1875(82%)
-  sys_w11a_n2       Nexys2   XC3S1200E    52     2689  8248  4819(55%)
-  sys_w11a_s3       S3board  XC3S1000     50     2551  7943  4668(60%)
+  Name              Board       FPGA       Clock  Memory  --- Resource Usage ---
+                                           [MHz]    [kB]   flop  luts  slices
+  sys_w11a_br_arty  Arty        XC7A35T      80      176   2226  5217  1603(20%)
+  sys_w11a_b3       Basys3      XC7A35T      80      176   2361  5326  1615(20%)
+  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2491  5473  1728(11%)
+  sys_w11a_n4       Nexys4      XC7A100T     80     3840   2566  5593  1759(11%)
+  sys_w11a_n3       Nexys3      XC6SLX16     64     3840   2671  5166  1875(82%)
+  sys_w11a_n2       Nexys2      XC3S1200E    52     3840   2689  8248  4819(55%)
+  sys_w11a_s3       S3board     XC3S1000     50     1024   2551  7943  4668(60%)
 </pre>
 
 <p>
-The Digilent 
+The Digilent
 <a href="/home/w11/inst/boards.html#digi_nexys2">Nexys2</a>, 
 <a href="/home/w11/inst/boards.html#digi_nexys3">Nexys3</a>
 and
@@ -175,6 +176,11 @@ The Digilent
 <a href="/home/w11/inst/boards.html#digi_basys3">Basys3</a>
 has no memory external to the FPGA. The memory seen by the w11a core is build
 from BRAMs, with a total size of 176 kB.
+The DDR memory on the Digilent
+<a href="/home/w11/inst/boards.html#digi_arty">Arty</a>, and
+<a href="/home/w11/inst/boards.html#digi_nexys4d">Nexys4 DDR</a>
+is not yet supported. Designs which use, like for Basys3, the BRAMs
+are provided and offer limited memory visible to the w11a core.
 </p>
 
 <h2 id="h_system_config">System Configuration</h2>
