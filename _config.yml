@@ -73,6 +73,7 @@ my:
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
     raw:  https://raw.githubusercontent.com/wfjm/w11/master
+    manp: http://www.retro11.de/manp/w11/man
 #
   ouxr:
     url_base:   http://www.retro11.de/ouxr
