@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2017-01-14
+  changedate: 2017-01-29
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -37,44 +37,55 @@ my:
      caption=caption_Fig_R_2
 %}
 
+<h2 id="h_perm">Permanent Tasks</h2>
+<ul>
+  <li>improve documentation, especially Tcl API</li>
+  <li>improve verification, e.g. test benches</li>
+  <li>resolve known issues</li>
+</ul>
+
 <h2 id="h_short">Short term (in work)</h2>
 <ul>
-  <li>document Tcl API</li>
-  <li>support DDR memory on Arty and Nexys4 DDR</li>
+  <li>support <b>DDR memory</b> on Arty and Nexys4 DDR</li>
+  <li><b>DEUNA</b> Ethernet; 2.11BSD on w11a on the internet.</li>
 </ul>
 
 <h2 id="h_mid">Mid term</h2>
 <ul>
-  <li>lots of verification topics</li>
-  <li><b>DEUNA</b> Ethernet; 2.11BSD on w11a on the internet.</li>
-  <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
   <li><b>fifo buffered</b> implementation of <b>character devices</b> 
-      (DL11,PC11,LP11).</li>
+      (DL11,LP11, maybe PC11 too).</li>
+  <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
   <li><b>KW11P:</b> programmable clock (needed for 2.11BSD kernel 
       profiling).</li>
-  <li><b>CPU throttling</b> mechanism (some old code, especially tests
-         with timing loops, has problems on a <i>fast</i> machine...).</li>
-  <li>port to <a href="http://www.ztex.de/usb-fpga-2/usb-fpga-2.13.e.html">
-      ZTEX <b>USB-FPGA Module 2.13</b></a>. The ZTEX 2.13 combines Atrix-7 
-      and Cypress FX2, and has a fast JTAG over USB, and is therefore a good 
-      candidate for 'yet another port'.</li>
+  <li><b>TOY clock</b>: the time-of-year clock was never part of a 11/70
+    system, but it is very convenient to have.</li>    
 </ul>
 
 <h2 id="h_long">Long term</h2>
 <ul>
-  <li>the current <b>w11a</b> system will be frozen when the above
-    mentions I/O system components are implemented.</li>
-  <li><b>w11f</b>: a w11a plus a <b>FPP Floating Point Processor</b>.
+  <li><b>FPP Floating Point Processor</b>:
     The FPP will be <b>asynchronous</b>, with a more efficient coupling
     than in the original KB11-C CPU plus FP11-C FPP combination.</li>
-  <li><b>w11m</b>: a w11f with a <b>new cache system</b>, now <b>write-back</b>,
-    wider cache lines, suitable to build a 
-    <b>11/70MP multiprocessor system</b>. In contrast to the original 11/70MP 
-    a state-of-the-art <b>cache coherence</b> will be implemented.</li>
-  <li><b>w11e</b>:a stripped down w11a optimized as an <b>embedded</b> console 
-    and IO processor in larger systems.</li>
-  <li><b>w11n</b>: a w11m with a w11e as CIOP (console and IO processor)
-    which can be operated <b>stand-alone</b> without a backend server.</li>
+  <li><b>new cache system</b>: now <b>write-back</b>, wider cache lines,
+    suitable to build a  <b>11/70MP multiprocessor system</b>. 
+    In contrast to the original 11/70MP a state-of-the-art 
+    <b>cache coherence</b> will be implemented.</li>
+  <li><b>configurable CPU</b>: make CPU features build-time configurable,
+    for example to generate stripped down w11a versions optimized as an 
+    <b>embedded</b> console and IO processor in larger systems.</li>
+  <li><b>stand-alone system</b>: a system with an additional w11a CPU
+    acting as CIOP (console and IO processor) which can be operated 
+    without a backend server.</li>
+  <li><b>CPU throttling</b>: some old code, especially tests with timing loops,
+    has problems on a <i>fast</i> machine....</li>
+</ul>
+
+<h2 id="h_beyond">Beyond long term</h2>
+<ul>
+  <li>port to <a href="http://www.ztex.de/usb-fpga-2/usb-fpga-2.13.e.html">
+      ZTEX <b>USB-FPGA Module 2.13</b></a>. The ZTEX 2.13 combines Atrix-7 
+      and Cypress FX2, and has a fast JTAG over USB, and is therefore a good 
+      candidate for 'yet another port'.</li>
   <li><b>w11p</b>: new CPU with a much <b>improved micro architecture</b>. 
     With <b>micro- and macro-pipelining</b> and a <b>significantly improved 
     <a href="https://en.wikipedia.org/wiki/Cycles_per_instruction">CPI</a></b>, 
@@ -101,20 +112,20 @@ my:
     <tr>
       <td class="va-top ha-center">V0.80</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">documentation and DDR support</td>
+      <td class="va-top">I/O complete (DEUNA, DZ11, buffered DL11,LP11)
+      </td>
     </tr>
     <!-- v0.9 -->
     <tr>
       <td class="va-top ha-center">V0.90</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">verification: fix known CPU and IO issues<br>
-                         communication: DZ11; DEUNA;</td>
+      <td class="va-top">CPU complete (FPP, write-back cache,...)</td>
     </tr>
     <!-- v1.0 -->
     <tr>
       <td class="va-top ha-center">V1.00</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">cleanups: e.g. buffered DL11,PC11,LP11; </td>
+      <td class="va-top">cleanups</td>
     </tr>
     </tbody>
 </table>
