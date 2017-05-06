@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2017-01-29
+  changedate: 2017-05-06
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -37,6 +37,38 @@ my:
      caption=caption_Fig_R_2
 %}
 
+<h2 id="h_stra">Strategy</h2>
+Long term goal is to re-create a PDP-11/70MP (aka 11/74) system. 
+This up to 4 CPU 
+<a href="https://en.wikipedia.org/wiki/Symmetric_multiprocessing">
+symmetric multiprocessor system</a> was developed in the 
+late '70's by DEC, but was never marketed. See article 
+{% include wbm-link.html 
+   date="20160529061435"
+   link="http://www.village.org/pdp11/faq.pages/never11s.html"
+   text="The Never 11's" %}.
+A few prototypes were build, see
+<a href="#Fig_R-2">Figure R-2</a> for a picture of
+PHEANX/CASTOR. Some documentation has survived, like the preliminary DEC 
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/1174/EK-70MP-TM_PRE_1170mp_Prelim_Technical_Manual_1977.pdf">
+11/70MP system manual</a>, see also a
+<a href="http://www.miim.com/faq/hardware/multipro.html">historical summary</a>.
+Full SMP support was added around 1980 to the RSX-11M-PLUS V2.0 
+operating system, 
+see for example the set and remove affinity system calls in the
+<a href="http://www.bitsavers.org/pdf/dec/pdp11/rsx11/RSX11M_V4.1_Apr83/4_ProgramDevelopment/AA-L675A-TC_execRef_Nov81.pdf">
+Executive Manual</a> (STAF$ on p 5-193 and RMAF$ on p 5-128).
+Worth to note in this context is that already in 1972 a 16 node SMP
+system based on PDP-11 CPU's was build by
+<a href="https://en.wikipedia.org/wiki/William_Wulf">W. Wulf</a> and 
+<a href="https://en.wikipedia.org/wiki/Gordon_Bell">G. Bell</a>
+at Carnegie Mellon, the <a href="https://en.wikipedia.org/wiki/C.mmp">C.mmp</a>,
+see their paper 
+<a href="http://research.microsoft.com/en-us/um/people/gbell/CGB%20Files/Cmmp%20Multi-Mini-Processor%20ComConference%201972%20c.pdf">
+"C.mmp--A Multi-mini-processor"</a>
+for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
+
+    
 <h2 id="h_perm">Permanent Tasks</h2>
 <ul>
   <li>improve documentation, especially Tcl API</li>
@@ -80,20 +112,22 @@ my:
     has problems on a <i>fast</i> machine....</li>
 </ul>
 
-<h2 id="h_beyond">Beyond long term</h2>
+<h2 id="h_boards">Boards</h2>
+Ports to new boards will be done when interesting products show up. Tempting
+boards are:
 <ul>
-  <li>port to <a href="http://www.ztex.de/usb-fpga-2/usb-fpga-2.13.e.html">
-      ZTEX <b>USB-FPGA Module 2.13</b></a>. The ZTEX 2.13 combines Atrix-7 
-      and Cypress FX2, and has a fast JTAG over USB, and is therefore a good 
-      candidate for 'yet another port'.</li>
-  <li><b>w11p</b>: new CPU with a much <b>improved micro architecture</b>. 
-    With <b>micro- and macro-pipelining</b> and a <b>significantly improved 
-    <a href="https://en.wikipedia.org/wiki/Cycles_per_instruction">CPI</a></b>, 
-    better than the J11.
-    Much faster than the w11a and derivatives, but also significantly higher 
-    resource consumption. Will implement, finally, the 11/44 and J11 special 
-    instructions (MFPT, MTPS, MFPS, TSTSET, WRTLCK), and make the
-    <b>processor type selectable</b>.</li>
+  <li><a href="http://store.digilentinc.com/cmod-a7-breadboardable-artix-7-fpga-module/">
+      Digilent Cmod A7</a>:
+    allows a w11a with 640 kB (512 from SRAM + 128 from BRAM)
+  </li>
+  <li><a href="https://shop.trenz-electronic.de/de/TE0725-03-35-2C-Xilinx-Artix-7-2x50-Pin-FPGA-Modul-mit-XC7A35T-2CSG324C">
+      Trenz TE0725-03-35</a>:
+    low cost, w11a with full 4 MB
+  </li>
+  <li><a href="https://shop.trenz-electronic.de/en/TE0712-02-100-2C-Artix-7-100T-Micromodule-with-Xilinx-XC7A100T-2C-Size-4-x-5-cm-com.temp.range">
+      Trenz TE0712-02-xxx</a>:
+    good price/performance for 200 die size
+  </li>
 </ul>
 
 <h2 id="h_plan">Release plan for w11a</h2>
@@ -130,34 +164,3 @@ my:
     </tbody>
 </table>
 
-<p>
-Long term goal is to re-create a PDP-11/70MP (aka 11/74) system. 
-This up to 4 CPU 
-<a href="https://en.wikipedia.org/wiki/Symmetric_multiprocessing">
-symmetric multiprocessor system</a> was developed in the 
-late '70's by DEC, but was never marketed. See article 
-{% include wbm-link.html 
-   date="20160529061435"
-   link="http://www.village.org/pdp11/faq.pages/never11s.html"
-   text="The Never 11's" %}.
-A few prototypes were build, see
-<a href="#Fig_R-2">Figure R-2</a> for a picture of
-PHEANX/CASTOR. Some documentation has survived, like the preliminary DEC 
-<a href="http://www.bitsavers.org/pdf/dec/pdp11/1174/EK-70MP-TM_PRE_1170mp_Prelim_Technical_Manual_1977.pdf">
-11/70MP system manual</a>, see also a
-<a href="http://www.miim.com/faq/hardware/multipro.html">historical summary</a>.
-Full SMP support was added around 1980 to the RSX-11M-PLUS V2.0 
-operating system, 
-see for example the set and remove affinity system calls in the
-<a href="http://www.bitsavers.org/pdf/dec/pdp11/rsx11/RSX11M_V4.1_Apr83/4_ProgramDevelopment/AA-L675A-TC_execRef_Nov81.pdf">
-Executive Manual</a> (STAF$ on p 5-193 and RMAF$ on p 5-128).
-Worth to note in this context is that already in 1972 a 16 node SMP
-system based on PDP-11 CPU's was build by
-<a href="https://en.wikipedia.org/wiki/William_Wulf">W. Wulf</a> and 
-<a href="https://en.wikipedia.org/wiki/Gordon_Bell">G. Bell</a>
-at Carnegie Mellon, the <a href="https://en.wikipedia.org/wiki/C.mmp">C.mmp</a>,
-see their paper 
-<a href="http://research.microsoft.com/en-us/um/people/gbell/CGB%20Files/Cmmp%20Multi-Mini-Processor%20ComConference%201972%20c.pdf">
-"C.mmp--A Multi-mini-processor"</a>
-for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
-</p>
