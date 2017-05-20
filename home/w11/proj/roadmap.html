@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2017-05-06
+  changedate: 2017-05-20
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -89,8 +89,6 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
   <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
   <li><b>KW11P:</b> programmable clock (needed for 2.11BSD kernel 
       profiling).</li>
-  <li><b>TOY clock</b>: the time-of-year clock was never part of a 11/70
-    system, but it is very convenient to have.</li>    
 </ul>
 
 <h2 id="h_long">Long term</h2>
@@ -112,13 +110,23 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
     has problems on a <i>fast</i> machine....</li>
 </ul>
 
+<h2 id="h_maybe">Maybe term</h2>
+Nice ideas, maybe they are realized, maybe not
+<ul>
+  <li><b>TOY clock</b>: the time-of-year clock was never part of a 11/70
+    system, but it is very convenient to have.</li>    
+  <li><b>DMC-11</b>: the old way to interconnect nodes via point-to-point
+    connections. Can be used with 211bsd to transport ethernet frames.</li>
+</ul>
+
+
 <h2 id="h_boards">Boards</h2>
 Ports to new boards will be done when interesting products show up. Tempting
 boards are:
 <ul>
   <li><a href="http://store.digilentinc.com/cmod-a7-breadboardable-artix-7-fpga-module/">
       Digilent Cmod A7</a>:
-    allows a w11a with 640 kB (512 from SRAM + 128 from BRAM)
+    allows a w11a with 672 kB (512 from SRAM + 160 from BRAM)
   </li>
   <li><a href="https://shop.trenz-electronic.de/de/TE0725-03-35-2C-Xilinx-Artix-7-2x50-Pin-FPGA-Modul-mit-XC7A35T-2CSG324C">
       Trenz TE0725-03-35</a>:
