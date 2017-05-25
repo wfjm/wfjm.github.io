@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2017-01-14
+  changedate: 2017-05-25
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -112,20 +112,20 @@ I/O hardware all I/O transactions are <b>emulated</b> by a
 </ul>
 <p>
 Currently available is a basic set of UNIBUS peripherals which is, apart from
-    the IIST, quite similar to a baseline configuration of the late '70ties
-    and early '80ties:
+    the IIST, quite similar to a full configuration of the early '80ties:
 </p>
 <ul>
   <li><b>KW11L:</b> line frequency clock</li>
   <li><b>DL11:</b> console interface</li>
   <li><b>LP11:</b> line printer</li>
   <li><b>PC11:</b> paper tape reader/puncher</li>
+  <li><b>DEUNA:</b> Ethernet interface</li>
   <li><b>RK11:</b> disk controller with <b>8 RK05 drives</b> 
             (2.4 MByte capacity each)</li>
   <li><b>RL11:</b> disk controller with <b>4 RL02 or RL01 drives</b> 
-            (10 or MByte capacity each)</li>
+            (10 or 5 MByte capacity each)</li>
   <li><b>RH70:</b> massbus adaptor with <b>4 RP or RM drives</b> (with 66 to
-  500 MByte capacity each)</li>
+  504 MByte capacity each)</li>
   <li><b>TM11:</b> tape controller with <b>4 TU10 drives</b></li>
   <li><b>IIST:</b> interprocessor interrupt and sanity timer (operationally
         not used so far, but was fun to do...)</li>
@@ -148,18 +148,18 @@ are comprised of
         for I/O emulation</li>
 </ul>
 <p>
-Complete configurations for five boards are currently part of the project:
+Complete configurations for seven boards are currently part of the project:
 </p>
 <pre>
   Name              Board       FPGA       Clock  Memory  --- Resource Usage ---
                                            [MHz]    [kB]   flop  luts  slices
-  sys_w11a_br_arty  Arty        XC7A35T      80      176   2226  5217  1603(20%)
-  sys_w11a_b3       Basys3      XC7A35T      80      176   2361  5326  1615(20%)
-  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2491  5473  1728(11%)
-  sys_w11a_n4       Nexys4      XC7A100T     80     3840   2566  5593  1759(11%)
-  sys_w11a_n3       Nexys3      XC6SLX16     64     3840   2671  5166  1875(82%)
-  sys_w11a_n2       Nexys2      XC3S1200E    52     3840   2689  8248  4819(55%)
-  sys_w11a_s3       S3board     XC3S1000     50     1024   2551  7943  4668(60%)
+  sys_w11a_br_arty  Arty        XC7A35T      80      176   2275  5104  1611(20%)
+  sys_w11a_b3       Basys3      XC7A35T      80      176   2412  5228  1608(20%)
+  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2541  5500  1750(11%)
+  sys_w11a_n4       Nexys4      XC7A100T     80     3840   2862  5859  1900(11%)
+  sys_w11a_n3       Nexys3      XC6SLX16     64     3840   2790  5352  1943(85%)
+  sys_w11a_n2       Nexys2      XC3S1200E    52     3840   2806  7865  5043(55%)
+  sys_w11a_s3       S3board     XC3S1000     50     1024   2576  7471  4716(61%)
 </pre>
 
 <p>
@@ -196,6 +196,7 @@ All systems have the following configuration for the UNIBUS peripherals:
   RK11    disk controller         177400  220  5     rkxh    DKx:      (x=0..7)
   RH/RP   disk controller         176700  254  5     xpxa    DBx:,DRx: (x=0..3)
   TM11    tape controller         172520  224  5     mt      MTx:      (x=0..3)
+  DEUNA   ethernet interface      174510  120  5     de 0    XE0:
   DL11    console                 177560  060  4     cn 0    TT0:
   DL11    2nd console             176500  300  4     cn 1    TT1:
   PC11    papertape read/punch    177550  070  4     -       PP:,PR:
