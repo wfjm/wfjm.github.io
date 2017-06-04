@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2017-05-25
+  changedate: 2017-06-03
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -78,17 +78,21 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
 
 <h2 id="h_short">Short term (in work)</h2>
 <ul>
+  <li>support <a href="http://store.digilentinc.com/cmod-a7-breadboardable-artix-7-fpga-module/">
+      <b>Digilent Cmod A7</b></a>:
+    allows a w11a with 672 kB (512 from onboard SRAM + 160 from BRAM)
+  </li>
   <li>support <b>DDR memory</b> on Arty and Nexys4 DDR</li>
-  <li><b>DEUNA</b> Ethernet; 2.11BSD on w11a on the internet.</li>
 </ul>
 
 <h2 id="h_mid">Mid term</h2>
 <ul>
   <li><b>fifo buffered</b> implementation of <b>character devices</b> 
       (DL11,LP11, maybe PC11 too).</li>
-  <li><b>DZ11</b> terminal multiplexer; classical multiuser operation.</li>
-  <li><b>KW11P:</b> programmable clock (needed for 2.11BSD kernel 
+  <li><b>DZ11</b>: terminal multiplexer; classical multiuser operation.</li>
+  <li><b>KW11P</b>: programmable clock (needed for 2.11BSD kernel 
       profiling).</li>
+  <li><b>DEUNA</b>: add loopback, chaining ect; support OS beyond 211bsd</li>
 </ul>
 
 <h2 id="h_long">Long term</h2>
@@ -125,10 +129,6 @@ Nice ideas, maybe they are realized, maybe not
 Ports to new boards will be done when interesting products show up. Tempting
 boards are:
 <ul>
-  <li><a href="http://store.digilentinc.com/cmod-a7-breadboardable-artix-7-fpga-module/">
-      Digilent Cmod A7</a>:
-    allows a w11a with 672 kB (512 from onboard SRAM + 160 from BRAM)
-  </li>
   <li><a href="https://shop.trenz-electronic.de/de/TE0725-03-35-2C-Xilinx-Artix-7-2x50-Pin-FPGA-Modul-mit-XC7A35T-2CSG324C">
       Trenz TE0725-03-35</a>:
     low cost, w11a with full 4 MB (from 8 MB onboard HyperRAM)
