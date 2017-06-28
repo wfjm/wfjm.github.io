@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2017-05-25
+  changedate: 2017-06-28
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -152,7 +152,8 @@ Complete configurations for seven boards are currently part of the project:
 </p>
 <pre>
   Name              Board       FPGA       Clock  Memory  --- Resource Usage ---
-                                           [MHz]    [kB]   flop  luts  slices
+                                           [MHz]    [kB]   flop  luts  slices 
+  sys_w11a_c7       CmodA7      XC7A35T      80      672   2823  5827  1814(22%)
   sys_w11a_br_arty  Arty        XC7A35T      80      176   2275  5104  1611(20%)
   sys_w11a_b3       Basys3      XC7A35T      80      176   2412  5228  1608(20%)
   sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2541  5500  1750(11%)
@@ -170,6 +171,8 @@ and
 <a href="/home/w11/inst/boards.html#digi_nexys4">Nexys4</a>
 boards have 16 MByte PSRAM (mt45w8mw16b) of which only 4 MByte, the maximum
 a PDP-11 can address, are used.
+The Digilent <a href="/home/w11/inst/boards.html#digi_cmoda7">Cmod A7</a>
+has a 512 kByte SRAM (is61lv25616), which is extended by 160 kByte from BRAM.
 The Digilent <a href="/home/w11/inst/boards.html#digi_s3board">S3board</a> 
 has 1 MByte SRAM (is61lv2561).
 The Digilent 
