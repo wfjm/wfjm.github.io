@@ -2,18 +2,28 @@
 title:  "System Images"
 #
 my:
-  changedate: 2016-12-22
+  changedate: 2017-07-02
 #
   oskit_url:  http://www.retro11.de/data/oc_w11/oskits
   oskit_blob: https://github.com/wfjm/w11/blob/master/tools/oskit
   oskits:
 
-# Unix V5 rkset
-  - system: Unix V5
+# Unix 5th Edition rkset
+  - system: Unix 5th Ed.
     vol: RK05
     typ: rkset
-    tar: unix_v5_rkset.tgz
-    desc: unix-v5_rk/README.md
+    tar: u5ed_rkset.tgz
+    desc: u5ed_rk/README.md
+    licw: Caldera
+    lics: Caldera
+    com:
+
+# Unix 7th Edition rkset
+  - system: Unix 7th Ed.
+    vol: RP04
+    typ: rpset
+    tar: u7ed_rpset.tgz
+    desc: u7ed_rp/README.md
     licw: Caldera
     lics: Caldera
     com:
@@ -120,30 +130,41 @@ The most stringent test so far is that the following operating systems are
 known to boot:
 </p>
 <ul class="bigli">
-  <li><b>UNIX 5th edition</b>. Released in June 1974 this very early UNIX uses
-        only a fraction of the hardware capabilities, and also works happily 
-        on a CPU with out FPP. This system fits on a single RK05 volume
-        (<a href="http://www.retro11.de/data/oc_w11/oskits/unix_v5_rkset.tgz">
-          download disk image</a>; under Caldera license).</li>
-  <li><b>2.11 BSD UNIX</b>. Released in 1992, this end-point of historical UNIX
-        development on PDP-11's uses almost all features (22 bit addressing,
-        separate I/D space, 3 processor modes) to squeeze a full UNIX with 
-        most of the 4.3 BSD features into a 16 bit machine. A system with the 
-        latest patches is needed to get the
-        <a href="/blogs/211bsd/2007-01-03-patch-445.html">
-          kernel FPP emulation (patch 445)</a>
-        and 
-        <a href="/blogs/211bsd/2009-01-04-patch-446+447.html">
-          RK05 as boot device (patch 446/447)</a>
-        to work.
-        The current w11a system has only RK11 or RL02 disks, so a very limited 
-        subset
-        of the full 2.11BSD distribution was packed onto 5 RK05 disk volumes
-        or a single RL02 disk volume. Both disk sets are available for
-        download, see below under <a href="#h_os_kits">OS Kits</a>.
-        See <a href="#Fig_S-1">Figure S-1</a> for a
-        screen shot of a 2.11BSD boot sequence on a w11a system.
-    </li>
+  <li><b>UNIX 5th edition</b>. Released in June 1974. This very early UNIX uses
+    only a fraction of the hardware capabilities, and also works happily 
+    on a CPU with out FPP. This system fits on a single RK05 volume
+    (<a href="http://www.retro11.de/data/oc_w11/oskits/u5ed_rkset.tgz">
+      download disk image</a>; under Caldera license).
+  </li>
+  <li><b>UNIX 7th edition</b>. Released in January 1979. In many ways the
+    first fully functional UNIX, with a full set of tools. Can use
+    separate I/D space and 22 bit addressing and large disks (RP04/RP06).
+    This system fits on a single RP04 volume
+    (<a href="http://www.retro11.de/data/oc_w11/oskits/u7ed_rpset.tgz">
+      download disk image</a>; under Caldera license).
+    <br />
+    <i>!! So far only very preliminaty support, not yet fully ported
+      to the w11a environment without FPP !!</i>
+  </li>
+  <li><b>2.11 BSD UNIX</b>. Released in 1992. This end-point of historical UNIX
+    development on PDP-11's uses almost all features (22 bit addressing,
+    separate I/D space, 3 processor modes) to squeeze a full UNIX with 
+    most of the 4.3 BSD features into a 16 bit machine. A system with the 
+    latest patches is needed to get the
+    <a href="/blogs/211bsd/2007-01-03-patch-445.html">
+      kernel FPP emulation (patch 445)</a>
+    and 
+    <a href="/blogs/211bsd/2009-01-04-patch-446+447.html">
+      RK05 as boot device (patch 446/447)</a>
+    to work.
+    The current w11a system has only RK11 or RL02 disks, so a very limited 
+    subset
+    of the full 2.11BSD distribution was packed onto 5 RK05 disk volumes
+    or a single RL02 disk volume. Both disk sets are available for
+    download, see below under <a href="#h_os_kits">OS Kits</a>.
+    See <a href="#Fig_S-1">Figure S-1</a> for a
+    screen shot of a 2.11BSD boot sequence on a w11a system.
+  </li>
 </ul>
 
 <p>
