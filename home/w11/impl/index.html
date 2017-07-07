@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2017-06-28
+  changedate: 2017-07-07
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -53,7 +53,7 @@ my:
     <a href="http://www.ftdichip.com/Products/EvaluationKits/USB-Serial.htm">
     US232R-100</a> cable. 
 {% endcapture %}
-{% include figbox-right.html id="Fig_F-3" width="230" height="362"
+{% include figbox-right.html id="Fig_F-3" width="230" height="246"
      figurl="/downloads/w11/pictures/wfjm-2010-08-08-w11a_n2.jpg"
      caption=caption_Fig_F_3
 %}
@@ -200,8 +200,15 @@ All systems have the following configuration for the UNIBUS peripherals:
   RH/RP   disk controller         176700  254  5     xpxa    DBx:,DRx: (x=0..3)
   TM11    tape controller         172520  224  5     mt      MTx:      (x=0..3)
   DEUNA   ethernet interface      174510  120  5     de 0    XE0:
-  DL11    console                 177560  060  4     cn 0    TT0:
-  DL11    2nd console             176500  300  4     cn 1    TT1:
+  DL11    console                 177560  060  4     cn 0    YL0:
+  DL11    2nd console             176500  300  4     ttyl 1  YL1:
   PC11    papertape read/punch    177550  070  4     -       PP:,PR:
   LP11    line printer            177514  200  4     lp 0    LP:
+
+<i>  devices yet to be implemented:
+  CR11    card reader             177160  230  6     -       CR:
+  DU11    synchronous interface   160040  310  5     -       XU:
+  DMC11   interprocessor link     160110  320  5     dmc     XM:
+  DZ11    terminal interface      160130  330  5     tty *   YZx:      (x=0..7)
+</i>    
 </pre>
