@@ -46,6 +46,12 @@ defaults:
       sdef_blog_proj: 211bsd
   - 
     scope:
+      path: "_posts/mvs"
+    values:
+      category: mvs
+      sdef_blog_proj: mvs
+  - 
+    scope:
       path: "_posts/ouxr"
     values:
       category: ouxr
@@ -56,7 +62,6 @@ defaults:
     values:
       category: w11
       sdef_blog_proj: w11
-
 #
 # site-specific attributes (all in .my subspace) -----------------------------
 #
@@ -81,3 +86,7 @@ my:
     url_29bsd:  http://www.retro11.de/ouxr/29bsd
     url_u6ed:   http://www.retro11.de/ouxr/u6ed
     url_u7ed:   http://www.retro11.de/ouxr/u6ed
+#
+  mvs_lt:
+    tree: https://github.com/wfjm/mvs38j-langtest/tree/master
+    blob: https://github.com/wfjm/mvs38j-langtest/blob/master

@@ -1,0 +1,9 @@
+---
+title:  "mvs blog"
+#
+my:
+  blogcat: "mvs"
+---
+
+{% assign posts = site.categories[page.my.blogcat] %}
+{% include blog_list.html %}
