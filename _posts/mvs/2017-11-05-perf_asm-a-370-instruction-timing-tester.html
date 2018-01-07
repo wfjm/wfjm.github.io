@@ -1,0 +1,90 @@
+---
+title: "perf_asm - V0.1 of a 370 instruction timing tester"
+tags:  ["mvs"]
+---
+
+<p>
+I stumbled some time ago a page about
+<a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>
+instruction timing, didn't bookmark it properly, and failed to find it again.
+</p>
+<p>
+I'm fully aware of
+</p>
+<ul>  
+  <li>all the pitfalls of synthetic benchmarks</li>
+  <li>that the concept of <i>instruction timing</i> is not meaningful for
+    modern CPUs with multi-issue and out-of-order capabilities</li>
+  <li>that <i>instruction timing</i> on an emulator is very different from what
+    one might see on a real CPU</li>
+</ul>
+
+<p>
+Despite all these provisos I wrote a small synthetic benchmark to
+determine the 370 instruction timing. It covers most non-privileged
+instructions in a total of 124 individual tests. The assembler source
+and a result file is uploaded under
+<a href="http://groups.yahoo.com/group/turnkey-mvs/files/perf_asm.zip">
+perf_asm.zip</a>.
+</p>
+
+<p>
+The job <code>perf_asm.jcl</code> runs about 2 minutes on a modern x86 CPU.
+I've executed the job on a
+<a href="http://wotho.ethz.ch/tk4-/">Turnkey 4- system</a> under Linux.
+So the results reflect the performance of the
+Hercules
+version bundles with Juergen Winkelmann's TK4- distribution.
+</p>
+
+<p>
+The results files <code>perf_asm.txt</code> lists the test tag name 'Tnnn',
+a short description of the instruction tested.
+</p>
+<ul>
+  <li>The column <code>med</code> gives the time in ns per instruction.</li>
+  <li>The column <code>n-rr</code> gives the time normalized to "T100 : LR R,R",
+    the fastest simple register-register instruction.</li>
+  <li>The column <code>n-rx</code> gives the time normalized to "T102 : L R,m"
+    which is a typical fast instruction with a single memory access.</li>
+</ul>
+
+<p>
+The timing is actually measured with <code>STCK</code>, which is a 'time of day'
+clock, The tests were done on a otherwise idle MVS system, and on an
+otherwise idle host system. The job <code>perf_asm.jcl</code> was executed
+29 times, the value shown in column 'med' are median values of these 29 runs to
+have an estimate robust against outliers.
+</p>
+
+<p>
+There are many obvious and expected trends and relations, but also a
+few surprises (at least for me).
+</p>
+
+<p>
+I consider this <b>V0.1</b> of this code, it needs further refinement and
+cross-checking. I'd very much appreciate
+<p>
+<ul>
+  <li>any comment on the test code itself</li>
+  <li>any comment on the results</li>
+  <li>any references to other similar tests</li>
+</ul>
+
+<div class="notebox">
+  <b>2018-01-06:</b> The code was renamed to <code>s370-perf</code> and is now
+  the central element of a a separate GitHub project
+  <a href="https://github.com/wfjm/s370-perf">wfjm/s370-perf</a>.
+</div>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/turnkey-mvs/info">
+    Yahoo! Group - turnkey-MVS</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/turnkey-mvs/conversations/messages/10720">thread 10720</a>. Login required.
+  A zip archive with code and sample output was uploaded to
+<a href="http://groups.yahoo.com/group/turnkey-mvs/files/perf_asm.zip">
+  turnkey-mvs/files/perf_asm.zip</a>.
+</div>
