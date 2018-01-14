@@ -1,0 +1,80 @@
+---
+title: "Impact of Meltdown kernel updates on Hercules performance"
+tags:  ["mvs"]
+---
+
+<p>
+The Kernel page-table isolation
+(<a href="https://en.wikipedia.org/wiki/Kernel_page-table_isolation">KPTI</a>)
+patches recently introduced to mitigate the
+<a href="https://en.wikipedia.org/wiki/Meltdown_(security_bug)">Meltdown</a>
+security vulnerability increases the overhead seen by system calls and will
+thus impact system performance.
+I wondered whether that can be seen with
+<a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>,
+and indeed there are cases where the instruction timing
+<i>increases by more than a factor of two</i> !
+</p>
+
+<p>
+I used the
+<a href="https://github.com/wfjm/s370-perf/blob/master/README.md">s370_perf</a>
+instruction time benchmark, now available as GitHub project
+<a href="https://github.com/wfjm/s370-perf">wfjm/s370_perf</a>. 
+</p>
+
+<p>
+I ran the benchmark, under <code>MVS 3.8J</code> with
+<a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>
+as included in
+<a href="http://wotho.ethz.ch/tk4-/">tk4-</a>,
+in a dual CPU configuration (<code>NUMCPU=2 MAXCPU=2</code>) before and after
+the updates fighting Spectre/Meltdown were installed.
+The <code>CS</code>, <code>CDS</code> and <code>TS</code> tests in the
+<i>lock missed</i> configuration show a clear effect, times are up by
+more than a factor two, all other tests stay the same within measurement
+precision. See the test reports
+</p>
+<ul>
+  <li><a href="https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-a.dat">https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-a.dat</a></li>
+  <li><a href="https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-b.dat">https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-b.dat</a></li>
+</ul>
+
+and inspect tests <code>T292</code>, <code>T297</code>, and <code>T621</code>.
+Summarized
+<pre>
+  Tag   Comment                :    before     after
+  T292  LR;CS R,R,m (ne)       :    333.92    726.15
+  T297  LR;CDS R,R,m (ne)      :    334.79    742.46
+  T621  MVI;TS m (ones)        :    342.58    729.77
+</pre>
+
+<p>
+As said, all other instruction times are essentially unchanged.
+What happened is easy to explain.
+The <code>CS</code>, <code>CDS</code> and <code>TS</code> emulation
+code contains
+</p>
+<pre>
+  if (sysblk.cpus > 1)  <a href="http://man7.org/linux/man-pages/man2/sched_yield.2.html">sched_yield()</a>;
+</pre>
+to get spin locks in the <i>lock missed</i> case efficiently handled.
+That's why the lock missed case shows a  substantially slower instruction
+time than the lock taken case (which takes only about 80-90 usec). So this
+test is essentially a system call benchmark, thus very sensitive to the
+KPTI patch.
+
+<p>
+Really nice to see this with such clarity.
+The practical impact for normal code is likely negligible though,
+that's why I resisted the temptation to title the thread
+<i>'Hercules a factor 2 slower'</i> :).
+</p>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/info">
+    Yahoo! Group - Hercules-390</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/messages/82874">thread 82874</a>. 
+</div>
