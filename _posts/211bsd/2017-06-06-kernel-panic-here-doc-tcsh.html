@@ -1,0 +1,311 @@
+---
+title: "2.11BSD: kernel panic after a 'here document' in tcsh"
+tags:  ["211bsd"]
+#
+my:
+  changedate: 2018-01-27
+  ouxr_base: http://www.retro11.de/ouxr/211bsd/usr
+  tuhs_base: http://minnie.tuhs.org/pipermail/tuhs
+  tree_base: https://github.com/wfjm/w11/tree/master/rtl/w11a
+---
+
+<h2>2.11BSD: kernel panic after a 'here document' in tcsh</h2>
+<h3>Detecting the problem (2017-06-06)</h3>
+
+<p>
+Using 2.11BSD Version 447 I found that a <i>'here document'</i> in
+<code>tcsh</code> leads to a kernel panic.
+It's absolutely reproducible on my system, both
+when run it on my FPGA PDP-11
+<a href="https://wfjm.github.io/home/w11/">w11a</a>
+or in <code>simh</code>. Just doing
+</p>
+<pre>
+   tcsh
+   cat &lt;&lt; EOF
+</pre>
+is enough, and I get
+<pre>
+     ka6 31333 aps 147472
+     pc 161324 ps 30004
+     ov 4
+     cpuerr 20
+     trap type 0
+     panic: trap
+     syncing disks... done
+</pre>
+looking at the crash dump gives
+<pre>
+   cd /etc/crash
+   ./why 4
+     Backtrace:
+     0147372: _boot(05000,0100) from    ~panic+072
+     0147414: _etext(011350) from ~trap+0350
+     0147450: ~trap() from call+040
+     0147516: _psignal(0101520,0160750) from ~trap+0364
+     0147554: ~trap() from call+040
+</pre>
+so the crash is in <code>psignal</code>, which is afaik the kernel internal
+mechanism to dispatch signals.
+
+<h3>Refining the problem description (2017-06-08)</h3>
+
+<i>'here documents'</i> are available and work fine in <code>sh</code> and
+<code>csh</code>. And are in fact used, examples
+<pre>
+   /usr/adm/daily     (a /bin/sh script)
+     su uucp &lt;&lt; EOF
+           /etc/uucp/clean.daily
+     EOF
+
+   /usr/crash/why     (a /bin/csh script)
+     adb -k {unix,core}.$1 &lt;&lt; 'EOF'
+     version/sn"Backtrace:"n
+     $c
+     'EOF'
+</pre>
+
+<p>
+211bsd uses split I/D space and uses all 64 kB I space for code.
+The top 8 kB are in fact  the overlay area, and the crash happened
+in overlay 4 (as indicated by ov 4). With a simple
+</p>
+<pre>
+   nm /unix | sort | grep " 4"
+</pre>
+one gets
+<pre>
+   161254 t ~psignal 4
+   162302 t ~issignal 4
+</pre>
+so the crash is just 050 bytes after the entry point of <code>psignal</code>.
+So the PC address is fine and not the problem. For <code>psignal</code> look at
+<pre>
+   <a href="{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#s:_psignal">{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#s:_psignal</a>
+</pre>
+the crash must be one of the first lines. <code>psignal</code> is an internal
+kernel function, called from
+<pre>
+  <a href=" {{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#xref:s:_psignal">{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#xref:s:_psignal</a>
+</pre>
+and has nothing to do with the <code>libc</code> function <code>psignal</code>,
+see the man page
+<a href="{{page.my.ouxr_base}}/man/cat3/psignal.0.html">psignal.0.html</a>
+and the source
+<a href="{{page.my.ouxr_base}}/src/lib/libc/gen/psignal.c.html">
+  psignal.c.html</a>.
+
+<p>
+Whatever <code>tcsh</code> does, it should not lead to a kernel panic, and if it does,
+it is primarily a bug of the kernel. It looks like there are two issues,
+one in <code>tcsh</code>, and one in the kernel. I've a hunch were this might come from,
+but that will take a weekend or two to check on.
+</p>
+
+<h3>Finding the problem(s) (2017-06-10)</h3>
+
+Two remarks by Johnny Billquist on
+<a href="{{page.my.tuhs_base}}/2017-June/010039.html">June 7th</a>
+and
+<a href="{{page.my.tuhs_base}}/2017-June/010081.html">June 9th</a>
+where very helpful, the essential hint was Johnny's observation that on
+his system he gets an <i>"Illegal instruction - core dumped"</i>
+and no kernel panic.
+
+<p>
+I'm using a self-build PDP 11/70 on an FPGA, see
+<a href="https://github.com/wfjm/w11/">GitHub w11 project</a>
+and
+<a href="https://wfjm.github.io/home/w11/">w11 home page</a>,
+which doesn't have a floating point unit (yet). Therefore the kernel is build
+with floating point emulation, thus with
+<pre>
+   FPSIM   YES      # floating point simulator
+</pre>
+
+<p>
+In a kernel with <code>FPSIM</code> activated the trap handler
+<code>trap()</code>, see
+<a href="{{page.my.ouxr_base}}/src/sys/pdp/trap.c.html">trap.c.html</a>,
+calls for each user mode illegal instruction trap <code>fpsim()</code>. In case
+it was a floating point instruction <code>fpsim()</code> emulates it, returns 0,
+and <code>trap()</code> simply returns. If not, <code>fpsim()</code> returns
+the abort signal type, and <code>trap()</code> calls <code>psignal()</code>
+with this signal type, which in general will terminate the offending process.
+
+<p>
+The kernel panic is due to a coding error in <code>mch_fpsim.s</code>.
+Look in the source code
+<a href="{{page.my.ouxr_base}}/src/sys/pdp/mch_fpsim.s.html">mch_fpsim.s.html</a>
+after label <code>badins</code>:
+<pre>
+    badins:                         / Illegal Instruction
+            mov     $SIGILL.,r0
+            br      2b
+</pre>
+The constant <code>SIGILL</code> is defined in <code>assym.h</code> as
+<pre>
+    #define SIGILL 4.
+</pre>
+Thus after substitution the mov instruction is
+<pre>
+            mov     $4..,r0
+</pre>
+with <b>*two dots* !!!</b> The <code>as</code> assembler generates from this
+<pre>
+            mov #160750,r0
+</pre>
+
+<p>
+So <code>r0</code> will contain a invalid signal number, which is returned
+by <code>fpsim()</code> to <code>trap()</code>.
+This signal number is passed to <code>psignal()</code>, which starts with
+</p>
+<pre>
+      mask = sigmask(sig);
+      prop = sigprop[sig];
+</pre>
+The access to <code>sigprop[sig]</code> results into an address in IO space,
+causes an UNIBUS timeout, and in consequence the kernel panic.
+
+<p>
+After fixing the "$SIGILL." to "$SIGILL"  (removing the extraneous '.') and
+three similar cases the kernel doesn't panic anymore, <code>tcsh</code> crashed with an
+illegal instruction trap.
+</p>
+<p>
+Remains the question why <code>tcsh</code> runs onto an illegal instruction.
+Getting now a tcsh core dump <code>adb</code> gives the answer
+</p>
+<pre>
+   adb tcsh tcsh.core
+     $c
+       0172774: _rscan(0176024,0174434) from ~heredoc+0246
+       0176040: _heredoc(067676) from ~execute+0234
+       0176126: _execute(067040,01512,0,0) from ~execute+03410
+       0176222: _execute(066754,01512,0,0) from ~process+01224
+       0176274: _process(01) from ~main+06030
+       0177414: _main() from start+0104
+</pre>
+<code>heredoc()</code>, which is located in <code>OV1</code>,
+calls <code>rscan()</code>, which is in <code>OV6</code> with
+<pre>
+    rscan(Dv, Dtestq);
+</pre>
+where <code>Dtestq</code> is a function pointer to <code>Dtestq()</code>,
+which is as <code>heredoc()</code> in <code>OV1</code>.
+<code>rscan()</code>, which has the signature
+<pre>
+      rscan(t, f)
+           register Char **t;
+           void    (*f) ();
+</pre>
+uses <code>f</code> in the statement
+<pre>
+       (*f) (*p++);
+</pre>
+
+<p>
+The problem is that
+</p>
+<ul>  
+  <li><code>heredoc()</code> and <code>Dtestq()</code> are in
+    <code>OV1</code></li>
+  <li>that's why in the end <code>~Dtestq</code> is used a function pointer,
+    like for all overlay internal function invocations</li>
+  <li><code>rscan()</code> is in <code>OV6</code>, when it's called,
+    overlay is switched <code>OV1</code> -> <code>OV6</code></li>
+  <li>this invalidates the function pointer, which points to some random
+     code location, which happens to hold '000045', causing a trap.</li>
+</ul>
+
+<p>
+It is clear that in this context <code>_Dtestq</code>, the forwarder in the
+base, must be used and not <code>~Dtestq</code>, the entry point in the
+overlay. The generated code for <code>rscan(Dv, Dtestq)</code> is
+</p>
+<pre>
+       ~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
+       ~heredoc+0234:  mov     r5,-(sp)
+       ~heredoc+0236:  add     $0177764,(sp)         # arg Dv
+       ~heredoc+0242:  jsr     pc,*$_rscan
+</pre>
+Since <code>rscan()</code> is very small and only used by
+<code>heredoc()</code> I simply moved the code of <code>rscan()</code>
+from <code>sh.glob.c</code> (<code>OV6</code>) to <code>sh.dol.c</code>
+where also <code>heredoc()</code> and <code>Dtestq()</code> is defined.
+
+<p>
+After that <code>tcsh</code> works fine with here documents
+</p>
+<pre>
+   ./tcsh
+   cat >x.x &lt;&lt; EOF
+   1
+   $TERM
+   $PWD
+   EOF
+
+   cat x.x
+     1
+     vt100-long
+     /usr/src/bin/tcsh
+</pre>
+
+<p>
+Bottom line
+</p>
+<ul>
+  <li><code>fpsim</code> was broken all the time</li>
+  <li><code>tcsh</code> was broken all the time</li>
+</ul>
+
+<p>
+I'll convert this into proper patches and send them to Steven, but this will
+take some time because I've to tidy up my system to be again in the
+position to provide proper and clean patch sets.
+</p>
+
+P.S.: debugging the kernel issue was quite easy because the w11a CPU has
+three essential <i>build into the CPU</i> debug tools:
+<ul>
+  <li>a <i>CPU monitor</i>, which records 144 bits of processor state for the
+    last 256 instructions or vector fetches, see
+    <a href="{{page.my.tree_base}}/pdp11_dmcmon.vhd">pdp11_dmcmon.vhd</a>.</li>
+  <li>a <i>breakpoint unit</i> which allows to set instruction or data
+    breakpoints.</li>
+  <li>an <i>ibus monitor</i> which records the last 512 ibus
+    transactions.</li>
+</ul>
+After setting a breakpoint on the trap 004/010 handler an inspection of the
+instruction trace gave the essential information. Below a very condensed
+and annotated excerpt
+<pre>
+    nc ....pc cprptnzvc ..dsrc ..ddst ..dres      vmaddr vmdata
+  #
+  # the "(*f) (*p++)" in tcsh, running onto an illegal instruction
+  #
+    15 145210 uu00-.... 000105 173052 000105 w  d 173052 000105 mov r0,(sp)
+    25 145212 uu00-.... 173050 174434 174434 w  d 173050 145216 jsr pc, at n(r5)
+    19 174434 uu00-.... 000010 173064 000010 r  i 174434 000045 ?000045?
+     1 174434 uu00-.... 000012 173064 000012 r  d 000010 000045 !VFETCH 010 RIT
+  #
+  # the "mov $SIGILL.,r0" in fpsim(), load 160750 instead of 000004
+  #
+    17 160744 ku00-n..c 160750 000045 160750 r  i 160746 160750 mov #n,r0
+    14 160750 ku00-n..c 160752 160750 160732 r  i 160750 000770 br .-14
+  #
+  # the "sigprop[sig]" access in psignal(), which accesses 174036
+  # which leads to a external bus (or UNIBUS) time out and IIT trap
+  #
+    23 161314 ku00-.z.. 000000 147500 000000 w  d 147500 000000 mov r1,n(r5)
+     9 161320 ku00-.z.. 174036 000000 000000 Ebto 174036 013066 movb n(r3),r0
+     3 161320 ku00-.z.. 000006 000000 000006 r  d 000004 013066 !VFETCH 004 IIT
+</pre>
+
+<div class="notebox">
+  For original thread on
+  <a href="{{page.my.tuhs_base}}/">TUHS</a> see
+  <a href="{{page.my.tuhs_base}}/2017-June/010033.html">posting 010033</a>
+  and follow the <i>Next message</i> links.
+</div>
