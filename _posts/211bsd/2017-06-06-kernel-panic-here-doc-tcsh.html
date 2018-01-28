@@ -1,12 +1,10 @@
 ---
-title: "2.11BSD: kernel panic after a 'here document' in tcsh"
+title: "Kernel panic, tcsh, and here documents"
 tags:  ["211bsd"]
 #
 my:
   changedate: 2018-01-27
-  ouxr_base: http://www.retro11.de/ouxr/211bsd/usr
   tuhs_base: http://minnie.tuhs.org/pipermail/tuhs
-  tree_base: https://github.com/wfjm/w11/tree/master/rtl/w11a
 ---
 
 <h2>2.11BSD: kernel panic after a 'here document' in tcsh</h2>
@@ -81,18 +79,18 @@ one gets
 so the crash is just 050 bytes after the entry point of <code>psignal</code>.
 So the PC address is fine and not the problem. For <code>psignal</code> look at
 <pre>
-   <a href="{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#s:_psignal">{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#s:_psignal</a>
+   <a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/sys/kern_sig.c.html#s:_psignal">{{site.my.ouxr.url_211bsd}}/usr/src/sys/sys/kern_sig.c.html#s:_psignal</a>
 </pre>
 the crash must be one of the first lines. <code>psignal</code> is an internal
 kernel function, called from
 <pre>
-  <a href=" {{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#xref:s:_psignal">{{page.my.ouxr_base}}/src/sys/sys/kern_sig.c.html#xref:s:_psignal</a>
+   <a href=" {{site.my.ouxr.url_211bsd}}/usr/src/sys/sys/kern_sig.c.html#xref:s:_psignal">{{site.my.ouxr.url_211bsd}}/usr/src/sys/sys/kern_sig.c.html#xref:s:_psignal</a>
 </pre>
 and has nothing to do with the <code>libc</code> function <code>psignal</code>,
 see the man page
-<a href="{{page.my.ouxr_base}}/man/cat3/psignal.0.html">psignal.0.html</a>
+<a href="{{site.my.ouxr.url_211bsd}}/usr/man/cat3/psignal.0.html">psignal.0.html</a>
 and the source
-<a href="{{page.my.ouxr_base}}/src/lib/libc/gen/psignal.c.html">
+<a href="{{site.my.ouxr.url_211bsd}}/usr/src/lib/libc/gen/psignal.c.html">
   psignal.c.html</a>.
 
 <p>
@@ -126,7 +124,7 @@ with floating point emulation, thus with
 <p>
 In a kernel with <code>FPSIM</code> activated the trap handler
 <code>trap()</code>, see
-<a href="{{page.my.ouxr_base}}/src/sys/pdp/trap.c.html">trap.c.html</a>,
+<a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/pdp/trap.c.html">trap.c.html</a>,
 calls for each user mode illegal instruction trap <code>fpsim()</code>. In case
 it was a floating point instruction <code>fpsim()</code> emulates it, returns 0,
 and <code>trap()</code> simply returns. If not, <code>fpsim()</code> returns
@@ -136,7 +134,7 @@ with this signal type, which in general will terminate the offending process.
 <p>
 The kernel panic is due to a coding error in <code>mch_fpsim.s</code>.
 Look in the source code
-<a href="{{page.my.ouxr_base}}/src/sys/pdp/mch_fpsim.s.html">mch_fpsim.s.html</a>
+<a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/pdp/mch_fpsim.s.html">mch_fpsim.s.html</a>
 after label <code>badins</code>:
 <pre>
     badins:                         / Illegal Instruction
@@ -271,7 +269,8 @@ three essential <i>build into the CPU</i> debug tools:
 <ul>
   <li>a <i>CPU monitor</i>, which records 144 bits of processor state for the
     last 256 instructions or vector fetches, see
-    <a href="{{page.my.tree_base}}/pdp11_dmcmon.vhd">pdp11_dmcmon.vhd</a>.</li>
+    <a href="{{site.my.w11.blob}}/rtl/w11a//pdp11_dmcmon.vhd">
+      pdp11_dmcmon.vhd</a>.</li>
   <li>a <i>breakpoint unit</i> which allows to set instruction or data
     breakpoints.</li>
   <li>an <i>ibus monitor</i> which records the last 512 ibus

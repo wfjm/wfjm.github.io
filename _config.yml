@@ -90,3 +90,11 @@ my:
   mvs_lt:
     tree: https://github.com/wfjm/mvs38j-langtest/tree/master
     blob: https://github.com/wfjm/mvs38j-langtest/blob/master
+#
+  mvs_sp:
+    tree: https://github.com/wfjm/s370-perf/tree/master
+    blob: https://github.com/wfjm/s370-perf/blob/master
+#
+  mvs_ht:
+    tree: https://github.com/wfjm/herc-tools/tree/master
+    blob: https://github.com/wfjm/herc-tools/blob/master
