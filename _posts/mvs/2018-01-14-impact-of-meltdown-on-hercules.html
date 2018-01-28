@@ -1,7 +1,12 @@
 ---
-title: "Impact of Meltdown kernel updates on Hercules performance"
+title: "Meltdown patches and Hercules performance"
 tags:  ["mvs"]
+my:
+  changedate: 2018-01-28
 ---
+
+<h2>Impact of Meltdown kernel updates on Hercules performance</h2>
+<h3>First data (2018-01-14)</h3>
 
 <p>
 The Kernel page-table isolation
@@ -18,7 +23,7 @@ and indeed there are cases where the instruction timing
 
 <p>
 I used the
-<a href="https://github.com/wfjm/s370-perf/blob/master/README.md">s370_perf</a>
+<a href="{{site.my.mvs_sp.blob}}/README.md">s370_perf</a>
 instruction time benchmark, now available as GitHub project
 <a href="https://github.com/wfjm/s370-perf">wfjm/s370_perf</a>. 
 </p>
@@ -36,8 +41,8 @@ more than a factor two, all other tests stay the same within measurement
 precision. See the test reports
 </p>
 <ul>
-  <li><a href="https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-a.dat">https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-a.dat</a></li>
-  <li><a href="https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-b.dat">https://github.com/wfjm/s370-perf/blob/master/data/2018-01-14_sys1-b.dat</a></li>
+  <li><a href="{{site.my.mvs_sp.blob}}/data/2018-01-14_sys1-a.dat">{{site.my.mvs_sp.blob}}/data/2018-01-14_sys1-a.dat</a></li>
+  <li><a href="{{site.my.mvs_sp.blob}}/data/2018-01-14_sys1-b.dat">{{site.my.mvs_sp.blob}}/data/2018-01-14_sys1-b.dat</a></li>
 </ul>
 
 and inspect tests <code>T292</code>, <code>T297</code>, and <code>T621</code>.
@@ -69,6 +74,111 @@ Really nice to see this with such clarity.
 The practical impact for normal code is likely negligible though,
 that's why I resisted the temptation to title the thread
 <i>'Hercules a factor 2 slower'</i> :).
+</p>
+
+<h3>More data and analysis (2018-01-28)</h3>
+
+<p>
+The Meltdown vulnerability is caused by a combination of
+</p>
+<ul>
+  <li>out-of-order execution</li>
+  <li>speculative execution</li>
+  <li>sub-optimal handling of L1 cache and TLB</li>
+  <li>which leads to delayed exceptions</li>
+  <li>which allow a side-channel attack</li>
+</ul>
+
+<p>
+The key culprit are the delayed exceptions. This is a feature of the concrete
+implementation of a processor architecture, not of a processor architecture
+itself. Therefore for example Intel has this unfortunate feature, while
+AMD claims it has not.
+</p>
+
+<p>
+Vulnerable is the host CPU and of course not an emulated CPU. The side channel
+attack requires good time resolution, so it's imho unlikely that System/390
+code executed by Hercules can be either source or target of an attack.
+</p>
+
+<p>
+What one sees is only the performance impact coming from the mitigation action.
+The Kernel page-table isolation (KPTI) patches rolled out by all OS vendors
+slow down system calls, the amount depends on CPU generation and OS version.
+Newer Intel CPUs, Haswell or later, support Process Context Identifiers (PCID),
+and newer Kernels, like Linux 4.14.11 and later, can use this to reduce the
+performance impact of KPTI. In general older CPUs with older OS versions will
+take a bigger performance hit than newer CPUs with newer Kernel versions.
+</p>
+
+<p>
+The text case <code>sys1</code> shown in the last posting was generated on
+</p>
+<ul>
+  <li>Intel(R) Core(TM)2 Duo CPU  E8400</li>
+  <li>Ubuntu 16.04 LTS with a 4.4.0 Linux Kernel</li>
+</ul>
+
+I've done another test case <code>nbk2</code> on
+<ul>
+  <li>Intel(R) Core(TM) i5 CPU M520</li>
+  <li>Ubuntu 14.04 LTS with a 3.13.0 Linux Kernel</li>
+  <li>VitualBox 5.0.12 r104815</li>
+  <li>Windows 7</li>
+</ul>
+
+<p>
+The test reports are under
+</p>
+<ul>
+  <li><a href="{{site.my.mvs_sp.blob}}/data/2018-01-21_nbk2-a.dat">{{site.my.mvs_sp.blob}}/data/2018-01-21_nbk2-a.dat</a></li>
+  <li><a href="{{site.my.mvs_sp.blob}}/data/2018-01-21_nbk2-b.dat">{{site.my.mvs_sp.blob}}/data/2018-01-21_nbk2-b.dat</a></li>
+</ul>
+
+<p>
+In this case one gets (instruction times in ns)
+</p>
+<pre>
+  Tag   Comment                :    before     after
+  T292  LR;CS R,R,m (ne)       :   2291.28   3854.92
+  T297  LR;CDS R,R,m (ne)      :   2295.46   3831.74
+  T621  MVI;TS m (ones)        :   2320.39   3812.82
+</pre>
+
+<p>
+Comparing both systems with
+<a href="{{site.my.mvs_sp.blob}}/bin/s370_perf_sum">s370_perf_sum</a> gives
+</p>
+<pre>
+  Tag   Comment                :    sys1-a    sys1-b    nbk2-a    nbk2-b
+  T100  LR R,R                 :      3.07      3.06      3.53      3.56
+  T101  LA R,n                 :      3.91      3.90      4.07      4.09
+  T102  L R,m                  :     12.81     12.80     11.86     11.90
+  T110  ST R,m                 :     12.79     12.79     12.32     12.23
+  ...
+  T292  LR;CS R,R,m (ne)       :    333.92    726.15   2291.28   3854.92
+  T297  LR;CDS R,R,m (ne)      :    334.79    742.46   2295.46   3831.74
+  T621  MVI;TS m (ones)        :    342.58    729.77   2320.39   3812.82
+</pre>
+
+<p>
+Observations are
+</p>
+<ul>
+  <li>simple instructions, like <code>LR</code>, <code>LA</code>,
+    <code>L</code>, or <code>ST</code>, have very similar speed on both
+    systems.</li>
+  <li>lock misses are apparently more costly in a Linux under VitualBox under
+    Windows environment. Not too astonishing, most likely all three layers
+    get into action to process the <code>sched_yield()</code>.</li>
+  <li>the relative KPTI patch impact is smaller on the nbk2 system,
+    which is slow anyway. So hard to judge what's behind this.</li>
+</ul>
+  
+<p>
+Both systems fall likely in the <i>'old CPU'</i> plus <i>'old Kernel'</i>
+category and thus show the worst case impact of the KPTI kernel patches.
 </p>
 
 <div class="notebox">
