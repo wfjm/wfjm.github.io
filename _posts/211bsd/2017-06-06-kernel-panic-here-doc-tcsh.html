@@ -18,12 +18,12 @@ when run it on my FPGA PDP-11
 <a href="https://wfjm.github.io/home/w11/">w11a</a>
 or in <code>simh</code>. Just doing
 </p>
-<pre>
+<pre class="code">
    tcsh
    cat &lt;&lt; EOF
 </pre>
 is enough, and I get
-<pre>
+<pre class="code">
      ka6 31333 aps 147472
      pc 161324 ps 30004
      ov 4
@@ -33,7 +33,7 @@ is enough, and I get
      syncing disks... done
 </pre>
 looking at the crash dump gives
-<pre>
+<pre class="code">
    cd /etc/crash
    ./why 4
      Backtrace:
@@ -50,7 +50,7 @@ mechanism to dispatch signals.
 
 <i>'here documents'</i> are available and work fine in <code>sh</code> and
 <code>csh</code>. And are in fact used, examples
-<pre>
+<pre class="code">
    /usr/adm/daily     (a /bin/sh script)
      su uucp &lt;&lt; EOF
            /etc/uucp/clean.daily
@@ -68,11 +68,11 @@ mechanism to dispatch signals.
 The top 8 kB are in fact  the overlay area, and the crash happened
 in overlay 4 (as indicated by ov 4). With a simple
 </p>
-<pre>
+<pre class="code">
    nm /unix | sort | grep " 4"
 </pre>
 one gets
-<pre>
+<pre class="code">
    161254 t ~psignal 4
    162302 t ~issignal 4
 </pre>
@@ -117,7 +117,7 @@ and
 <a href="https://wfjm.github.io/home/w11/">w11 home page</a>,
 which doesn't have a floating point unit (yet). Therefore the kernel is build
 with floating point emulation, thus with
-<pre>
+<pre class="code">
    FPSIM   YES      # floating point simulator
 </pre>
 
@@ -136,21 +136,21 @@ The kernel panic is due to a coding error in <code>mch_fpsim.s</code>.
 Look in the source code
 <a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/pdp/mch_fpsim.s.html">mch_fpsim.s.html</a>
 after label <code>badins</code>:
-<pre>
+<pre class="code">
     badins:                         / Illegal Instruction
             mov     $SIGILL.,r0
             br      2b
 </pre>
 The constant <code>SIGILL</code> is defined in <code>assym.h</code> as
-<pre>
+<pre class="code">
     #define SIGILL 4.
 </pre>
 Thus after substitution the mov instruction is
-<pre>
+<pre class="code">
             mov     $4..,r0
 </pre>
 with <b>*two dots* !!!</b> The <code>as</code> assembler generates from this
-<pre>
+<pre class="code">
             mov #160750,r0
 </pre>
 
@@ -159,7 +159,7 @@ So <code>r0</code> will contain a invalid signal number, which is returned
 by <code>fpsim()</code> to <code>trap()</code>.
 This signal number is passed to <code>psignal()</code>, which starts with
 </p>
-<pre>
+<pre class="code">
       mask = sigmask(sig);
       prop = sigprop[sig];
 </pre>
@@ -175,7 +175,7 @@ illegal instruction trap.
 Remains the question why <code>tcsh</code> runs onto an illegal instruction.
 Getting now a tcsh core dump <code>adb</code> gives the answer
 </p>
-<pre>
+<pre class="code">
    adb tcsh tcsh.core
      $c
        0172774: _rscan(0176024,0174434) from ~heredoc+0246
@@ -187,19 +187,19 @@ Getting now a tcsh core dump <code>adb</code> gives the answer
 </pre>
 <code>heredoc()</code>, which is located in <code>OV1</code>,
 calls <code>rscan()</code>, which is in <code>OV6</code> with
-<pre>
+<pre class="code">
     rscan(Dv, Dtestq);
 </pre>
 where <code>Dtestq</code> is a function pointer to <code>Dtestq()</code>,
 which is as <code>heredoc()</code> in <code>OV1</code>.
 <code>rscan()</code>, which has the signature
-<pre>
+<pre class="code">
       rscan(t, f)
            register Char **t;
            void    (*f) ();
 </pre>
 uses <code>f</code> in the statement
-<pre>
+<pre class="code">
        (*f) (*p++);
 </pre>
 
@@ -222,7 +222,7 @@ It is clear that in this context <code>_Dtestq</code>, the forwarder in the
 base, must be used and not <code>~Dtestq</code>, the entry point in the
 overlay. The generated code for <code>rscan(Dv, Dtestq)</code> is
 </p>
-<pre>
+<pre class="code">
        ~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
        ~heredoc+0234:  mov     r5,-(sp)
        ~heredoc+0236:  add     $0177764,(sp)         # arg Dv
@@ -236,7 +236,7 @@ where also <code>heredoc()</code> and <code>Dtestq()</code> is defined.
 <p>
 After that <code>tcsh</code> works fine with here documents
 </p>
-<pre>
+<pre class="code">
    ./tcsh
    cat >x.x &lt;&lt; EOF
    1

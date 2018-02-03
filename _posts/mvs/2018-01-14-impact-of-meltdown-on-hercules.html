@@ -60,7 +60,7 @@ What happened is easy to explain.
 The <code>CS</code>, <code>CDS</code> and <code>TS</code> emulation
 code contains
 </p>
-<pre>
+<pre class="code">
   if (sysblk.cpus > 1)  <a href="http://man7.org/linux/man-pages/man2/sched_yield.2.html">sched_yield()</a>;
 </pre>
 to get spin locks in the <i>lock missed</i> case efficiently handled.
