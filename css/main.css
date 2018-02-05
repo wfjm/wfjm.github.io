@@ -175,7 +175,10 @@ a:active  {
 }
 
 .code {
-  background-color: WhiteSmoke ;
+  background-color: WhiteSmoke;
+  border: 1px solid LightGray;
+  padding: 0.3em;
+  line-height: 1.2em;
 }
 
 /* hover anchor links --------------------------------------------- */

@@ -118,7 +118,7 @@ and
 which doesn't have a floating point unit (yet). Therefore the kernel is build
 with floating point emulation, thus with
 <pre class="code">
-   FPSIM   YES      # floating point simulator
+  FPSIM   YES      # floating point simulator
 </pre>
 
 <p>
@@ -138,20 +138,20 @@ Look in the source code
 after label <code>badins</code>:
 <pre class="code">
     badins:                         / Illegal Instruction
-            mov     $SIGILL.,r0
-            br      2b
+      mov     $SIGILL.,r0
+      br      2b
 </pre>
 The constant <code>SIGILL</code> is defined in <code>assym.h</code> as
 <pre class="code">
-    #define SIGILL 4.
+      #define SIGILL 4.
 </pre>
 Thus after substitution the mov instruction is
 <pre class="code">
-            mov     $4..,r0
+      mov     $4..,r0
 </pre>
 with <b>*two dots* !!!</b> The <code>as</code> assembler generates from this
 <pre class="code">
-            mov #160750,r0
+      mov #160750,r0
 </pre>
 
 <p>
@@ -176,19 +176,19 @@ Remains the question why <code>tcsh</code> runs onto an illegal instruction.
 Getting now a tcsh core dump <code>adb</code> gives the answer
 </p>
 <pre class="code">
-   adb tcsh tcsh.core
-     $c
-       0172774: _rscan(0176024,0174434) from ~heredoc+0246
-       0176040: _heredoc(067676) from ~execute+0234
-       0176126: _execute(067040,01512,0,0) from ~execute+03410
-       0176222: _execute(066754,01512,0,0) from ~process+01224
-       0176274: _process(01) from ~main+06030
-       0177414: _main() from start+0104
+  adb tcsh tcsh.core
+    $c
+      0172774: _rscan(0176024,0174434) from ~heredoc+0246
+      0176040: _heredoc(067676) from ~execute+0234
+      0176126: _execute(067040,01512,0,0) from ~execute+03410
+      0176222: _execute(066754,01512,0,0) from ~process+01224
+      0176274: _process(01) from ~main+06030
+      0177414: _main() from start+0104
 </pre>
 <code>heredoc()</code>, which is located in <code>OV1</code>,
 calls <code>rscan()</code>, which is in <code>OV6</code> with
 <pre class="code">
-    rscan(Dv, Dtestq);
+      rscan(Dv, Dtestq);
 </pre>
 where <code>Dtestq</code> is a function pointer to <code>Dtestq()</code>,
 which is as <code>heredoc()</code> in <code>OV1</code>.
@@ -200,7 +200,7 @@ which is as <code>heredoc()</code> in <code>OV1</code>.
 </pre>
 uses <code>f</code> in the statement
 <pre class="code">
-       (*f) (*p++);
+      (*f) (*p++);
 </pre>
 
 <p>
@@ -223,10 +223,10 @@ base, must be used and not <code>~Dtestq</code>, the entry point in the
 overlay. The generated code for <code>rscan(Dv, Dtestq)</code> is
 </p>
 <pre class="code">
-       ~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
-       ~heredoc+0234:  mov     r5,-(sp)
-       ~heredoc+0236:  add     $0177764,(sp)         # arg Dv
-       ~heredoc+0242:  jsr     pc,*$_rscan
+  ~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
+  ~heredoc+0234:  mov     r5,-(sp)
+  ~heredoc+0236:  add     $0177764,(sp)         # arg Dv
+  ~heredoc+0242:  jsr     pc,*$_rscan
 </pre>
 Since <code>rscan()</code> is very small and only used by
 <code>heredoc()</code> I simply moved the code of <code>rscan()</code>
@@ -237,17 +237,17 @@ where also <code>heredoc()</code> and <code>Dtestq()</code> is defined.
 After that <code>tcsh</code> works fine with here documents
 </p>
 <pre class="code">
-   ./tcsh
-   cat >x.x &lt;&lt; EOF
-   1
-   $TERM
-   $PWD
-   EOF
-
-   cat x.x
-     1
-     vt100-long
-     /usr/src/bin/tcsh
+  ./tcsh
+  cat >x.x &lt;&lt; EOF
+  1
+  $TERM
+  $PWD
+  EOF
+  
+  cat x.x
+    1
+    vt100-long
+    /usr/src/bin/tcsh
 </pre>
 
 <p>
@@ -279,7 +279,7 @@ three essential <i>build into the CPU</i> debug tools:
 After setting a breakpoint on the trap 004/010 handler an inspection of the
 instruction trace gave the essential information. Below a very condensed
 and annotated excerpt
-<pre>
+<pre class="code">
     nc ....pc cprptnzvc ..dsrc ..ddst ..dres      vmaddr vmdata
   #
   # the "(*f) (*p++)" in tcsh, running onto an illegal instruction
