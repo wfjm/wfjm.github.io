@@ -19,29 +19,29 @@ when run it on my FPGA PDP-11
 or in <code>simh</code>. Just doing
 </p>
 <pre class="code">
-   tcsh
-   cat &lt;&lt; EOF
+tcsh
+cat &lt;&lt; EOF
 </pre>
 is enough, and I get
 <pre class="code">
-     ka6 31333 aps 147472
-     pc 161324 ps 30004
-     ov 4
-     cpuerr 20
-     trap type 0
-     panic: trap
-     syncing disks... done
+ka6 31333 aps 147472
+pc 161324 ps 30004
+ov 4
+cpuerr 20
+trap type 0
+panic: trap
+syncing disks... done
 </pre>
 looking at the crash dump gives
 <pre class="code">
-   cd /etc/crash
-   ./why 4
-     Backtrace:
-     0147372: _boot(05000,0100) from    ~panic+072
-     0147414: _etext(011350) from ~trap+0350
-     0147450: ~trap() from call+040
-     0147516: _psignal(0101520,0160750) from ~trap+0364
-     0147554: ~trap() from call+040
+cd /etc/crash
+./why 4
+  Backtrace:
+  0147372: _boot(05000,0100) from    ~panic+072
+  0147414: _etext(011350) from ~trap+0350
+  0147450: ~trap() from call+040
+  0147516: _psignal(0101520,0160750) from ~trap+0364
+  0147554: ~trap() from call+040
 </pre>
 so the crash is in <code>psignal</code>, which is afaik the kernel internal
 mechanism to dispatch signals.
@@ -51,16 +51,16 @@ mechanism to dispatch signals.
 <i>'here documents'</i> are available and work fine in <code>sh</code> and
 <code>csh</code>. And are in fact used, examples
 <pre class="code">
-   /usr/adm/daily     (a /bin/sh script)
-     su uucp &lt;&lt; EOF
-           /etc/uucp/clean.daily
-     EOF
+/usr/adm/daily     (a /bin/sh script)
+  su uucp &lt;&lt; EOF
+        /etc/uucp/clean.daily
+  EOF
 
-   /usr/crash/why     (a /bin/csh script)
-     adb -k {unix,core}.$1 &lt;&lt; 'EOF'
-     version/sn"Backtrace:"n
-     $c
-     'EOF'
+/usr/crash/why     (a /bin/csh script)
+  adb -k {unix,core}.$1 &lt;&lt; 'EOF'
+  version/sn"Backtrace:"n
+  $c
+  'EOF'
 </pre>
 
 <p>
@@ -69,12 +69,12 @@ The top 8 kB are in fact  the overlay area, and the crash happened
 in overlay 4 (as indicated by ov 4). With a simple
 </p>
 <pre class="code">
-   nm /unix | sort | grep " 4"
+nm /unix | sort | grep " 4"
 </pre>
 one gets
 <pre class="code">
-   161254 t ~psignal 4
-   162302 t ~issignal 4
+161254 t ~psignal 4
+162302 t ~issignal 4
 </pre>
 so the crash is just 050 bytes after the entry point of <code>psignal</code>.
 So the PC address is fine and not the problem. For <code>psignal</code> look at
@@ -118,7 +118,7 @@ and
 which doesn't have a floating point unit (yet). Therefore the kernel is build
 with floating point emulation, thus with
 <pre class="code">
-  FPSIM   YES      # floating point simulator
+FPSIM   YES      # floating point simulator
 </pre>
 
 <p>
@@ -137,13 +137,13 @@ Look in the source code
 <a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/pdp/mch_fpsim.s.html">mch_fpsim.s.html</a>
 after label <code>badins</code>:
 <pre class="code">
-    badins:                         / Illegal Instruction
+badins:                         / Illegal Instruction
       mov     $SIGILL.,r0
       br      2b
 </pre>
 The constant <code>SIGILL</code> is defined in <code>assym.h</code> as
 <pre class="code">
-      #define SIGILL 4.
+#define SIGILL 4.
 </pre>
 Thus after substitution the mov instruction is
 <pre class="code">
@@ -176,14 +176,14 @@ Remains the question why <code>tcsh</code> runs onto an illegal instruction.
 Getting now a tcsh core dump <code>adb</code> gives the answer
 </p>
 <pre class="code">
-  adb tcsh tcsh.core
-    $c
-      0172774: _rscan(0176024,0174434) from ~heredoc+0246
-      0176040: _heredoc(067676) from ~execute+0234
-      0176126: _execute(067040,01512,0,0) from ~execute+03410
-      0176222: _execute(066754,01512,0,0) from ~process+01224
-      0176274: _process(01) from ~main+06030
-      0177414: _main() from start+0104
+adb tcsh tcsh.core
+  $c
+    0172774: _rscan(0176024,0174434) from ~heredoc+0246
+    0176040: _heredoc(067676) from ~execute+0234
+    0176126: _execute(067040,01512,0,0) from ~execute+03410
+    0176222: _execute(066754,01512,0,0) from ~process+01224
+    0176274: _process(01) from ~main+06030
+    0177414: _main() from start+0104
 </pre>
 <code>heredoc()</code>, which is located in <code>OV1</code>,
 calls <code>rscan()</code>, which is in <code>OV6</code> with
@@ -194,13 +194,13 @@ where <code>Dtestq</code> is a function pointer to <code>Dtestq()</code>,
 which is as <code>heredoc()</code> in <code>OV1</code>.
 <code>rscan()</code>, which has the signature
 <pre class="code">
-      rscan(t, f)
-           register Char **t;
-           void    (*f) ();
+rscan(t, f)
+   register Char **t;
+   void    (*f) ();
 </pre>
 uses <code>f</code> in the statement
 <pre class="code">
-      (*f) (*p++);
+   (*f) (*p++);
 </pre>
 
 <p>
@@ -223,10 +223,10 @@ base, must be used and not <code>~Dtestq</code>, the entry point in the
 overlay. The generated code for <code>rscan(Dv, Dtestq)</code> is
 </p>
 <pre class="code">
-  ~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
-  ~heredoc+0234:  mov     r5,-(sp)
-  ~heredoc+0236:  add     $0177764,(sp)         # arg Dv
-  ~heredoc+0242:  jsr     pc,*$_rscan
+~heredoc+0230:  mov     $0174434,(sp)         # arg Dtestq: uses ~Dtestq
+~heredoc+0234:  mov     r5,-(sp)
+~heredoc+0236:  add     $0177764,(sp)         # arg Dv
+~heredoc+0242:  jsr     pc,*$_rscan
 </pre>
 Since <code>rscan()</code> is very small and only used by
 <code>heredoc()</code> I simply moved the code of <code>rscan()</code>
@@ -237,17 +237,17 @@ where also <code>heredoc()</code> and <code>Dtestq()</code> is defined.
 After that <code>tcsh</code> works fine with here documents
 </p>
 <pre class="code">
-  ./tcsh
-  cat >x.x &lt;&lt; EOF
+./tcsh
+cat >x.x &lt;&lt; EOF
   1
   $TERM
   $PWD
   EOF
   
-  cat x.x
-    1
-    vt100-long
-    /usr/src/bin/tcsh
+cat x.x
+  1
+  vt100-long
+  /usr/src/bin/tcsh
 </pre>
 
 <p>
@@ -280,26 +280,26 @@ After setting a breakpoint on the trap 004/010 handler an inspection of the
 instruction trace gave the essential information. Below a very condensed
 and annotated excerpt
 <pre class="code">
-    nc ....pc cprptnzvc ..dsrc ..ddst ..dres      vmaddr vmdata
-  #
-  # the "(*f) (*p++)" in tcsh, running onto an illegal instruction
-  #
-    15 145210 uu00-.... 000105 173052 000105 w  d 173052 000105 mov r0,(sp)
-    25 145212 uu00-.... 173050 174434 174434 w  d 173050 145216 jsr pc, at n(r5)
-    19 174434 uu00-.... 000010 173064 000010 r  i 174434 000045 ?000045?
-     1 174434 uu00-.... 000012 173064 000012 r  d 000010 000045 !VFETCH 010 RIT
-  #
-  # the "mov $SIGILL.,r0" in fpsim(), load 160750 instead of 000004
-  #
-    17 160744 ku00-n..c 160750 000045 160750 r  i 160746 160750 mov #n,r0
-    14 160750 ku00-n..c 160752 160750 160732 r  i 160750 000770 br .-14
-  #
-  # the "sigprop[sig]" access in psignal(), which accesses 174036
-  # which leads to a external bus (or UNIBUS) time out and IIT trap
-  #
-    23 161314 ku00-.z.. 000000 147500 000000 w  d 147500 000000 mov r1,n(r5)
-     9 161320 ku00-.z.. 174036 000000 000000 Ebto 174036 013066 movb n(r3),r0
-     3 161320 ku00-.z.. 000006 000000 000006 r  d 000004 013066 !VFETCH 004 IIT
+  nc ....pc cprptnzvc ..dsrc ..ddst ..dres      vmaddr vmdata
+#
+# the "(*f) (*p++)" in tcsh, running onto an illegal instruction
+#
+  15 145210 uu00-.... 000105 173052 000105 w  d 173052 000105 mov r0,(sp)
+  25 145212 uu00-.... 173050 174434 174434 w  d 173050 145216 jsr pc, at n(r5)
+  19 174434 uu00-.... 000010 173064 000010 r  i 174434 000045 ?000045?
+   1 174434 uu00-.... 000012 173064 000012 r  d 000010 000045 !VFETCH 010 RIT
+#
+# the "mov $SIGILL.,r0" in fpsim(), load 160750 instead of 000004
+#
+  17 160744 ku00-n..c 160750 000045 160750 r  i 160746 160750 mov #n,r0
+  14 160750 ku00-n..c 160752 160750 160732 r  i 160750 000770 br .-14
+#
+# the "sigprop[sig]" access in psignal(), which accesses 174036
+# which leads to a external bus (or UNIBUS) time out and IIT trap
+#
+  23 161314 ku00-.z.. 000000 147500 000000 w  d 147500 000000 mov r1,n(r5)
+   9 161320 ku00-.z.. 174036 000000 000000 Ebto 174036 013066 movb n(r3),r0
+   3 161320 ku00-.z.. 000006 000000 000006 r  d 000004 013066 !VFETCH 004 IIT
 </pre>
 
 <div class="notebox">

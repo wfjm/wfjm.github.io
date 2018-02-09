@@ -48,10 +48,10 @@ precision. See the test reports
 and inspect tests <code>T292</code>, <code>T297</code>, and <code>T621</code>.
 Summarized
 <pre class="code">
-  Tag   Comment                :    before     after
-  T292  LR;CS R,R,m (ne)       :    333.92    726.15
-  T297  LR;CDS R,R,m (ne)      :    334.79    742.46
-  T621  MVI;TS m (ones)        :    342.58    729.77
+Tag   Comment                :    before     after
+T292  LR;CS R,R,m (ne)       :    333.92    726.15
+T297  LR;CDS R,R,m (ne)      :    334.79    742.46
+T621  MVI;TS m (ones)        :    342.58    729.77
 </pre>
 
 <p>
@@ -140,10 +140,10 @@ The test reports are under
 In this case one gets (instruction times in ns)
 </p>
 <pre class="code">
-  Tag   Comment                :    before     after
-  T292  LR;CS R,R,m (ne)       :   2291.28   3854.92
-  T297  LR;CDS R,R,m (ne)      :   2295.46   3831.74
-  T621  MVI;TS m (ones)        :   2320.39   3812.82
+Tag   Comment                :    before     after
+T292  LR;CS R,R,m (ne)       :   2291.28   3854.92
+T297  LR;CDS R,R,m (ne)      :   2295.46   3831.74
+T621  MVI;TS m (ones)        :   2320.39   3812.82
 </pre>
 
 <p>
@@ -151,15 +151,15 @@ Comparing both systems with
 <a href="{{site.my.mvs_sp.blob}}/bin/s370_perf_sum">s370_perf_sum</a> gives
 </p>
 <pre class="code">
-  Tag   Comment                :    sys1-a    sys1-b    nbk2-a    nbk2-b
-  T100  LR R,R                 :      3.07      3.06      3.53      3.56
-  T101  LA R,n                 :      3.91      3.90      4.07      4.09
-  T102  L R,m                  :     12.81     12.80     11.86     11.90
-  T110  ST R,m                 :     12.79     12.79     12.32     12.23
-  ...
-  T292  LR;CS R,R,m (ne)       :    333.92    726.15   2291.28   3854.92
-  T297  LR;CDS R,R,m (ne)      :    334.79    742.46   2295.46   3831.74
-  T621  MVI;TS m (ones)        :    342.58    729.77   2320.39   3812.82
+Tag   Comment                :    sys1-a    sys1-b    nbk2-a    nbk2-b
+T100  LR R,R                 :      3.07      3.06      3.53      3.56
+T101  LA R,n                 :      3.91      3.90      4.07      4.09
+T102  L R,m                  :     12.81     12.80     11.86     11.90
+T110  ST R,m                 :     12.79     12.79     12.32     12.23
+...
+T292  LR;CS R,R,m (ne)       :    333.92    726.15   2291.28   3854.92
+T297  LR;CDS R,R,m (ne)      :    334.79    742.46   2295.46   3831.74
+T621  MVI;TS m (ones)        :    342.58    729.77   2320.39   3812.82
 </pre>
 
 <p>

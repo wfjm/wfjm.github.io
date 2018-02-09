@@ -177,7 +177,11 @@ a:active  {
 .code {
   background-color: WhiteSmoke;
   border: 1px solid LightGray;
-  padding: 0.3em;
+  padding-left: 1em;
+  padding-top: 0.3em;
+  padding-bottom: 0.3em;
+  margin-left: 1em;
+  margin-right: 1em;
   line-height: 1.2em;
 }
 
