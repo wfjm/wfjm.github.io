@@ -2,9 +2,9 @@
 title:  "Source Code Viewer"
 #
 my:
-  changedate: 2016-12-10
+  changedate: 2018-02-10
+  doxy_base:  https://www.retro11.de/doxy/w11
 ---
-{% assign doxy_base = "http://www.retro11.de/doxy/w11" %}
 <p>
 A <a href="http://www.stack.nl/~dimitri/doxygen/">doxygen</a>
 generated code browsing available for vhdl and C++ sources. 
@@ -12,10 +12,10 @@ No documentation text added so far, but helpful to navigate through the code.
 Good starting points are
 </p>
 <ul>
-  <li><a href="{{doxy_base}}/vhd/html/hierarchy.html">
+  <li><a href="{{page.my.doxy_base}}/vhd/html/hierarchy.html">
       vhdl module list</a></li>
-  <li><a href="{{doxy_base}}/vhd/html/sys__w11a__n3_8vhd_source.html">
+  <li><a href="{{page.my.doxy_base}}/vhd/html/sys__w11a__n3_8vhd_source.html">
       sys_w11a_n3 source</a></li>
-  <li><a href="{{doxy_base}}/cpp/html/hierarchy.html">
+  <li><a href="{{page.my.doxy_base}}/cpp/html/hierarchy.html">
       C++ class list</a></li>
 </ul>

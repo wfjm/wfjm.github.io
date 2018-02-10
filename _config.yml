@@ -78,14 +78,14 @@ my:
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
     raw:  https://raw.githubusercontent.com/wfjm/w11/master
-    manp: http://www.retro11.de/manp/w11/man
+    manp: https://www.retro11.de/manp/w11/man
 #
   ouxr:
-    url_base:   http://www.retro11.de/ouxr
-    url_211bsd: http://www.retro11.de/ouxr/211bsd
-    url_29bsd:  http://www.retro11.de/ouxr/29bsd
-    url_u6ed:   http://www.retro11.de/ouxr/u6ed
-    url_u7ed:   http://www.retro11.de/ouxr/u6ed
+    url_base:   https://www.retro11.de/ouxr
+    url_211bsd: https://www.retro11.de/ouxr/211bsd
+    url_29bsd:  https://www.retro11.de/ouxr/29bsd
+    url_u6ed:   https://www.retro11.de/ouxr/u6ed
+    url_u7ed:   https://www.retro11.de/ouxr/u6ed
 #
   mvs_lt:
     tree: https://github.com/wfjm/mvs38j-langtest/tree/master
