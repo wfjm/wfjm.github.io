@@ -1,0 +1,69 @@
+---
+title: "GitHub herc-tools V1.0 released"
+tags:  ["mvs"]
+my:
+  changedate: 2018-04-29
+---
+
+<h2>GitHub herc-tools V1.0 released</h2>
+
+<p>
+My small collection of tools for
+<a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>
+and <code>MVS 3.8J</code> Turnkey Systems is now available on GitHub as project
+<a href="https://github.com/wfjm/herc-tools">wfjm/herc-tools</a>
+in release 1.0.
+</p>
+
+<p>The project contains tools for the handling of batch jobs in a Hercules plus MVS 3.8J environment, specifically
+</p>
+<ul>
+  <li><a href="{{site.my.mvs_ht.blob}}/doc/hercjis.md">hercjis</a> -
+    batch job preprocessor and submission tool, supports
+    variable substitution and file inclusion and allows to build jobs on the
+    fly from modular building blocks. Can submit directly to a
+    <code>sockdev</code> reader
+    or write the created JCL to a file.</li>
+  <li><a href="{{site.my.mvs_ht.blob}}/doc/hercjos.md">hercjos</a> -
+    yet another <code>sockdev</code> printer.</li>
+  <li><a href="{{site.my.mvs_ht.blob}}/doc/hercjsu.md">hercjsu</a> -
+    analyses batch job output files and generates compact summaries. Very
+    helpful when a larger number of job outputs have to be
+    checked.</li>
+</ul>
+
+<code>hercjis</code> should work with all OS running on Hercules.
+<code>hercjos</code> and <code>hercjsu</code> handle, at this point, only
+output from <code>MVS 3.8J</code> systems with the <code>JES2</code>
+configuration distributed with the Turnkey Systems,
+<a href="http://www.bsp-gmbh.com/turnkey/">tk3</a> and
+<a href="http://wotho.ethz.ch/tk4-/">tk4-</a>.
+
+<p>
+The tools were initially developed in the context of the
+<a href="https://github.com/wfjm/mvs38j-langtest">wfjm/mvs38j-langtest</a> and
+<a href="https://github.com/wfjm/s370-perf">wfjm/s370-perf</a>
+GitHub projects which now include to <code>herc-tools</code> as
+<a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">submodule</a>.
+</p>
+
+<p>
+The large number of different batch jobs created in the
+<code>mvs38j-langtest</code> project called for a tools to build them on the
+fly form building blocks, and after a few design iterations hercjis was born.
+</p>
+
+<p>
+Both <code>mvs38j-langtest</code> and <code>s370-perf</code> involve a large
+number of jobs. Checking them manually quickly gets boring,
+so <code>hercjsu</code> was developed to quickly analyze the job output,
+check for aborted steps, and to create compact summaries.
+</p>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/info">
+    Yahoo! Group - Hercules-390</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/messages/83266">thread 83266</a>. 
+</div>
