@@ -1,0 +1,84 @@
+---
+title: "Hercules vs z/PDT - some observations"
+tags:  ["mvs"]
+my:
+  changedate: 2018-05-26
+---
+
+<h2>Hercules vs z/PDT - some observations</h2>
+
+<p>
+I received some time ago results from a handful of
+<a href="{{site.my.mvs_sp.blob}}/README.md">s370_perf</a>
+runs done on a <code>z/PDT V1.7</code> system. Took some time to analyze,
+the data and full analysis is now under
+</p>
+<div class="indent">
+  <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md">
+    {{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md</a>
+</div>
+<p>
+Performance testing of z/PDT is explicitly disallowed in the z/PDT license
+conditions. s370_perf would be not the proper tool any way. The page cited
+above merely gives some observations on general features of z/PDT, the key
+ones are repeated here
+</p>
+<ul>
+  <li>z/PDT is based on on-the-fly binary translation, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-back">
+      background</a>.</li>
+  <li>z/PDT does an optimizing compilation, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-opt">
+      code optimization</a>.</li>
+  <li>the same code is sometimes compiled, sometimes not, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-comp">
+    to compile or not to compile</a>.</li>
+  <li>if code is compiled, compilation can happen with substantial delay,
+    see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-compdel">
+    compilation delay</a>.</li>
+  <li>performance in plain interpretive mode seems similar to Hercules, see
+    section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-inter">
+    interpreter mode performance</a>.</li>
+  <li>RR instructions is the easy part, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-rr">
+    RR instructions</a>.</li>
+  <li>RX instructions is the hard part, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-rx">
+    RX instructions</a>.</li>
+  <li>z/PDT vs Hercules comparisons difficult to interpret, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-sum">
+      z/PDT vs Hercules</a>.</li>
+  <li>little gain for floating point arithmetic, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-float">
+    floating point performance</a>.</li>
+  <li>a bit faster for decimal packed arithmetic, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-dec">
+    decimal packed performance</a>.</li>
+  <li><code>EX</code> is apparently always interpreted, see section
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-ex">
+      EX instruction</a>.</li>
+  <li>z/PDT performs well for some instructions which are slow on Hercules,
+    see sections
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-clcl">CLCL</a>,
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-mvcin">MVCIN</a>, and
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-trt">TRT</a>.</li>
+  <li>overall JIT gain depends heavily on workload, see
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-10_zpdt.md#user-content-obs-bline">
+    bottom line</a>.</li>
+</ul>
+
+<p>
+For any further background and detail follow the links.
+<br />  
+Any remarks and comments are very welcome.
+</p>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/info">
+    Yahoo! Group - Hercules-390</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/messages/83576">thread 83576</a>. 
+</div>
