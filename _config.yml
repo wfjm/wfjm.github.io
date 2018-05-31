@@ -74,7 +74,10 @@ my:
   w3c_chtml: "https://validator.w3.org/check"
   w3c_clink: "https://validator.w3.org/checklink"
 #
+  gh_wfjm: https://github.com/wfjm
+#
   w11:
+    top:  https://github.com/wfjm/w11
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
     raw:  https://raw.githubusercontent.com/wfjm/w11/master
@@ -88,13 +91,16 @@ my:
     url_u7ed:   https://www.retro11.de/ouxr/u6ed
 #
   mvs_lt:
+    top:  https://github.com/wfjm/mvs38j-langtest
     tree: https://github.com/wfjm/mvs38j-langtest/tree/master
     blob: https://github.com/wfjm/mvs38j-langtest/blob/master
 #
   mvs_sp:
+    top:  https://github.com/wfjm/s370-perf
     tree: https://github.com/wfjm/s370-perf/tree/master
     blob: https://github.com/wfjm/s370-perf/blob/master
 #
   mvs_ht:
+    top:  https://github.com/wfjm/herc-tools
     tree: https://github.com/wfjm/herc-tools/tree/master
     blob: https://github.com/wfjm/herc-tools/blob/master
