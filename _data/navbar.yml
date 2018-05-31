@@ -3,9 +3,11 @@
 - text: wfjm's Home
   url:  /
 
+# -- Projects ----------------------------------------------
 - text: Projects
   url:  /home/
 
+# -- Projects/w11 --------------------------------
 - text: w11
   url:  /home/w11/
 
@@ -51,15 +53,19 @@
 - text: Other FPGA PDP-11's
   url:  /home/w11/info/others.html
 
-#
+# -- Projects/211bsd -----------------------------
 - text: 211bsd
   url:  /home/211bsd/
 
-#
+# -- Projects/ouxr -------------------------------
 - text: ouxr
   url:  /home/ouxr/
 
-#
+# -- Projects/mvs --------------------------------
+- text: mvs
+  url:  /home/mvs/
+
+# -- Blogs -------------------------------------------------
 - text: Blogs
   url:  /blogs/
 
@@ -72,5 +78,6 @@
 - text: mvs
   url:  /blogs/mvs/
 
+# -- About -------------------------------------------------
 - text: About
   url:  /about/
