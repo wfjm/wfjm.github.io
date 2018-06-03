@@ -1,0 +1,123 @@
+---
+title: "hercexport and tk4- takeout"
+tags:  ["mvs"]
+my:
+#  changedate: 2018-06-03
+---
+
+<h3>hercexport - tool to list and unload a set of DASD</h3>
+<p>
+I wanted to have access to all text files of my <code>MVS 3.8J</code>
+system on my Linux host system, so that I can inspect them with the usual
+Unix tools like <code>grep</code>.
+The <code>dasdpdsu</code> program unloads one
+<a href="https://en.wikipedia.org/wiki/Data_set_(IBM_mainframe)#Partitioned_data_sets">PDS</a>,
+and <code>dasdls</code> lists all datasets of a volume. So it's in principle
+straightforward to write a script which
+</p>
+<ul>
+  <li>iterates over a set of volumes</li>
+  <li>generates a dataset listing for each volume</li>
+  <li>selects PDS datasets with <code>FB 80</code> record format</li>
+  <li>optionally accepts or rejects PDS based on filter rules</li>
+  <li>and finally unloads the PDS members into individual ASCII files</li>
+</ul>
+<p>
+The script <code>hercexport</code>, which I just added to the
+<a href="{{site.my.mvs_ht.top}}">wfjm/herc-tools</a> project,
+does exactly this. Consult the
+<a href="{{site.my.mvs_ht.blob}}/doc/hercexport.md">
+  hercexport documentation</a>
+for further information on
+<a href="{{site.my.mvs_ht.blob}}/doc/hercexport.md#user-content-description">
+  functionality</a>
+and available
+<a href="{{site.my.mvs_ht.blob}}/doc/hercexport.md#user-content-options">
+  options</a>.
+</p>
+
+<p>
+<code>hercexport</code> requires a
+<a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>
+version which supports the
+extended listing options of <code>dasdls</code>, especially <code>-hdr</code>.
+It works with the <code>dasdls</code> coming with
+<a href="https://github.com/fish-git/hyperion">Fish-Git/hyperion</a>
+and
+<a href="https://github.com/rbowler/spinhawk">rbowler/spinhawk</a>
+(but see <a href="https://github.com/rbowler/spinhawk/issues/80">issue</a>)
+and does not work with
+<a href="https://github.com/hercules-390/hyperion">hercules-390/hyperion</a>
+as of today
+(see <a href="https://github.com/hercules-390/hyperion/issues/160">issue</a>)
+and <a href="http://wotho.ethz.ch/tk4-/">tk4-</a>
+as of update 08. 
+</p>
+
+<p>
+In case the Hercules installation used for normal operations does not provide
+the required <code>dasdls</code> functionality, it is possible to use
+<code>dasdls</code> and <code>dasdpdsu</code> from a different path.
+If the environment variable <code>DASDTOOLS_PATH</code> is defined, these
+two utility programs will be taken from there and not searched via
+<code>PATH</code>.
+</p>
+
+<p>
+<code>hercexport</code> is currently at alpha-level at best, has been tested
+</p>
+<ul>
+  <li>under Linux</li>
+  <li>with the DASD from tk4- update 08</li>
+  <li>using <code>dasdls</code> from Fish-Git/hyperion</li>
+</ul>
+There is certainly plenty of room for improvement, so feel free to clone the
+<a href="{{site.my.mvs_ht.top}}">wfjm/herc-tools</a> project,
+add enhancements, and send me a
+<a href="https://help.github.com/articles/about-pull-requests/">
+  pull request</a>.
+
+<h3>hercexport and tk4- takeout</h3>
+<p>
+A complete export of a <a href="http://wotho.ethz.ch/tk4-/">tk4-</a>
+update 08 system is available under
+</p>
+<div class="indent">
+  <a href="https://www.retro11.de/data/mvs/tk4m_08_pdsexp.tbz">
+    https://www.retro11.de/data/mvs/tk4m_08_pdsexp.tbz</a>
+</div>
+
+<p>
+The compressed tarball is 148 MB and will expand to 61000 files and 1249 MB.
+It contains all PDS members from
+</p>
+<ul>
+  <li><code>tk4-_v1.00_current.zip</code></li>
+  <li><code>tk4-cbt.zip</code></li>
+  <li><code>tk4-source.zip</code></li>
+</ul>
+See section
+<a href="{{site.my.mvs_ht.blob}}/doc/hercexport.md#user-content-usage">
+  Usage - Full export</a> in the
+<a href="{{site.my.mvs_ht.blob}}/doc/hercexport.md">
+  hercexport documentation</a>
+for further information.
+
+<p>
+I find it highly convenient to have the full MVS code base easily accessible
+on my host system and hope you enjoy this too.
+</p>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/info">
+    Yahoo! Group - Hercules-390</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/83578">thread 83578</a>.
+  <br />
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/turnkey-mvs/info">
+    Yahoo! Group - Turnkey-MVS</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/turnkey-mvs/conversations/topics/10884">thread 10884</a>. 
+</div>
