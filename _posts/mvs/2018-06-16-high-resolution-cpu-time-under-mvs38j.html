@@ -1,0 +1,175 @@
+---
+title: "Reliable High-Resolution CPU time under MVS 3.8J"
+tags:  ["mvs"]
+my:
+#  changedate: 2018-06-16
+---
+
+<h3>Reliable high-resolution CPU TIME retrieval under MVS 3.8J</h3>
+<p>
+The <code>s370_perf</code> instruction time benchmark (see
+<a href="{{site.my.mvs_sp.top}}">project</a> and
+<a href="https://wfjm.github.io/blogs/mvs/2018-05-06-hercules-instruction-times-first-analysis.html">posting</a>)
+uses currently the elapsed time retrieved with <code>STCK</code> for all
+timing measurements. Mark L. Gaubatz commented rightfully that CPU time
+should be used as the basis of all performance measurements (see
+<a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/messages/83140">message</a>, see
+<a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/83139">topic</a>).
+To implement this one needs a low overhead method to access the task CPU time with high resolution, best with microsecond precision.
+</p>
+
+<p>
+<code>s370_perf</code> is designed to run on <code>MVS 3.8J</code>, as freely
+available with the
+<a href="http://wotho.ethz.ch/tk4-/">Tur(n)key 4- System</a>
+distribution. The methods used for CPU time retrieval on modern MVS systems
+are not available, most notably
+</p>
+<ul>
+  <li><code>TIMEUSED</code> macro not available (was introduced later)</li>
+  <li><code>TCBTTIME</code> field in <code>TCB</code> not available
+    (was introduced later)</li>
+</ul>
+
+<p>
+Tom Armstrong pointed me to a function <code>CPUTIM</code> which is included
+in the Algol F IVP code <code>IEXSAMP4</code> and used for algorithm timing.
+It essentially returns the sum of the <code>ACB</code> fields
+<code>ASCBEJST</code> and <code>ASCBSRBT</code>. The essential drawback is
+that these fields are only updated after each dispatch, and a test quickly
+showed that the CPU time retrieved this way has errors of up to 170 msec
+(seen on a 2 CPU systems with only one user job active).
+</p>
+
+<p>
+When searching for other <i>'cpu time from ASCBEJST'</i> methods I stumbled
+across the <code>TIMED</code> function included in the 1998 edition of the
+<code>KERNLIB</code> section of the <code>CERN PACKLIB</code> (see
+<a href="https://accserv.lepp.cornell.edu/svn/packages/cern/98/src/packlib/kernlib/kerngen/obsolete/kernibm/symvs/timexxa.s">sourcecode</a>).
+This function calls the <code>SVC CALLDISP</code> to force an update of
+<code>ASCBEJST</code>. Turns out that this works under <code>MVS/SE</code>,
+but not under <code>MVS 3.8J</code>. A <code>WAIT</code> on a fall-through
+<code>ECB</code> (see
+<a href="https://groups.google.com/forum/#!topic/bit.listserv.ibm-main/FRuYz33wUGs">posting</a>)
+also doesn't work under <code>MVS 3.8J</code>.
+</p>
+
+<p>
+A comment in the <code>TIMED</code> function finally pointed me to the proper solution. The comment states effectively:
+</p>
+<div class="indent">
+  for on non-SE systems use <code>ASCBEJST + (TOD - LCCADTOD)</code>.
+</div>
+
+<p>
+<code>LCCADTOD</code> is a <code>LCCA</code> field which holds the TOD
+of the last dispatch. So I searched the whole <code>MVS 3.8J</code> code base
+for code using <code>LCCADTOD</code>. Easy to do after a full export with the
+hercexport tool (see posting on
+<a href="https://wfjm.github.io/blogs/mvs/2018-06-03-hercexport-and-tk4m-takeout.html">
+hercexport and tk4- takeout</a>) and a simple
+</p>
+<pre class="code">
+  find -name "*.mac" -type f -print0 | xargs -0 grep -l ",LCCADTOD"
+</pre>
+lists all PDS members with code accessing directly <code>LCCADTOD</code>.
+The essential hits are 
+<div class="indent">
+  <code>./cbt001.341/cbtcov.file185/cputime.mac</code>
+  <br />
+  <code>./cbt001.341/cbtcov.file185/cputim.mac</code>
+</div>
+which contain two versions of a <code>CPUTIM</code> function from a CBT
+volume, one for FORTRAN and one for PL/I. The essential core of both
+implementations is
+<pre class="code">
+  STCK  TOD
+  LM    R4,R5,TOD
+  $SLD  R4,LCCADTOD
+  $ALD  R4,ASCBEJST
+</pre>
+where <code>$ALD</code> and <code>$SLD</code> are macros for double word
+integer add/sub (available on the same CBT volume in PDS
+<code>cbtcov.file188</code>). A quick test immediately shows that this works
+fine and returns a high resolution CPU time.
+
+<p>
+However, the key trick of this method, that the time since last dispatch
+is added, causes also a vulnerability. If a dispatch occurs between the
+subtract of <code>LCCADTOD</code> and the add of <code>ASCBEJST</code> the
+CPU time spend during the previous dispatch is double counted. Not very likely
+to happen, but possible, especially on a single CPU system with some I/O load.
+To protect against this vulnerability, I store the <code>LCCADTOD</code> value
+at the beginning of the function, and check after all arithmetic whether the
+<code>LCCADTOD</code> value changed. If yes, a dispatch happened, and the
+whole procedure is simply re-tried. Taken all together the core of my
+<code>CPUTIM</code> method looks like
+</p>
+<pre class="code">
+         L     R6,PSALCCAV        get LCCA ptr
+         L     R7,PSAAOLD         get ASCB ptr
+         LA    R10,9              init retry loop count
+*
+CPUTIMR  LM    R8,R9,LCCADTOD     get initial LCCADTOD
+         STM   R8,R9,SAVDTOD      and save it
+*
+         STCK  CKBUF              store TOD
+         LM    R0,R1,CKBUF
+         SLR   R1,R9              low order:  sum=TOD-LCCADTOD
+         BC    3,*+4+4            check for borrow
+         SL    R0,=F'1'           and correct if needed
+         SLR   R0,R8              high order: sum=TOD-LCCADTOD
+*
+         LM    R8,R9,ASCBEJST     load ASCBEJST
+         ALR   R1,R9              low order:  sum+=ASCBEJST
+         BC    12,*+4+4           check for carry
+         AL    R0,=F'1'           and correct if needed
+         ALR   R0,R8              high order: sum+=ASCBEJST
+*
+         LM    R8,R9,ASCBSRBT     load ASCBSRBT
+         ALR   R1,R9              low order:  sum+=ASCBSRBT
+         BC    12,*+4+4           check for carry
+         AL    R0,=F'1'           and correct if needed
+         ALR   R0,R8              high order: sum+=ASCBSRBT
+*
+         LM    R8,R9,LCCADTOD     get final LCCADTOD
+         C     R9,SAVDTOD+4       check low order
+         BNE   CPUTIMN            if ne, dispatch detected
+         C     R8,SAVDTOD         check high order
+         BE    CPUTIME            if eq, all fine
+*
+CPUTIMN  BCT   R10,CPUTIMR        retry in case dispatch detected
+*
+CPUTIME  &lt;return handling&gt;        CPUTIM in register pair R0,R1
+...
+CKBUF    DS    1D
+SAVDTOD  DS    1D
+</pre>
+
+<p>
+Any comments on the function logic are very much appreciated, especially on
+</p>
+<ul>
+  <li>is this solution portable also to current MVS versions ?</li>
+  <li>is there still any hidden vulnerability which affects timing
+    precision ?</li>
+  <li>should the <code>SRB</code> time be included (like in the ALGOL
+    example), or not (like in CERNLIB and CBT) ?</li>
+</ul>
+
+<p>
+A test code with the logic described above as available as part of
+<a href="{{site.my.mvs_sp.top}}">s370_perf project</a>, see
+<a href="{{site.my.mvs_sp.blob}}/codes/test_cputime.asm">source file</a>
+and
+<a href="{{site.my.mvs_sp.blob}}/codes/test_cputime.JES">JCL template</a>
+, to be used with the
+<a href="{{site.my.mvs_ht.blob}}/doc/hercjis.md">hercjis</a> preprocessor.
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/H390-MVS/info">
+    Yahoo! Group - H390-MVS</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/H390-MVS/conversations/topics/18217">topic 18217</a>.
+</div>
