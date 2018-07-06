@@ -1,0 +1,30 @@
+<script>
+  $(document).ready(function() {
+    "use strict";
+    var $navbar = $('#navbar');
+    var $main   = $('#main');
+    var $footer = $('#footer');
+    var $window = $(window);
+    
+    if ($navbar.innerHeight() < $main.innerHeight()) {
+  
+      var navbarHeight = $navbar.innerHeight();
+      var navbarTop    = $navbar.offset().top;
+      var navbarOffset = $navbar.offset().left;
+      var footerTop    = $footer.offset().top;
+      var stop   = footerTop - navbarHeight - navbarOffset;
+      var diff   = stop - navbarOffset;
+  
+      $(window).scroll(function(){ // scroll event
+        var windowTop = $(window).scrollTop();
+        if (stop < windowTop) {
+          $navbar.css({ position: 'absolute', top: diff });
+        } else if (navbarTop < windowTop+navbarOffset) {
+          $navbar.css({ position: 'fixed', top: navbarOffset });
+        } else {
+          $navbar.css({position: 'absolute', top: 'initial'});
+        }
+      });
+    }
+  });
+</script>
