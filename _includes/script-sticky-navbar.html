@@ -14,8 +14,7 @@
       var footerTop    = $footer.offset().top;
       var stop   = footerTop - navbarHeight - navbarOffset;
       var diff   = stop - navbarOffset;
-  
-      $(window).scroll(function(){ // scroll event
+      var stickyUpdate = function() {
         var windowTop = $(window).scrollTop();
         if (stop < windowTop) {
           $navbar.css({ position: 'absolute', top: diff });
@@ -24,7 +23,9 @@
         } else {
           $navbar.css({position: 'absolute', top: 'initial'});
         }
-      });
+      }
+      stickyUpdate();
+      $(window).scroll(function() { stickyUpdate() });
     }
   });
 </script>
