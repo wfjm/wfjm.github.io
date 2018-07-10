@@ -482,6 +482,13 @@ dt:hover .hover-link {
   vertical-align: bottom;
 }
 
+#footer-disclaimer {
+  text-align: center;
+  font-size: 65%;
+  vertical-align: bottom;
+  background: #cccccc;
+}
+
 #footer-debug {
   margin-top: 10px;
   margin-left: 10px;
