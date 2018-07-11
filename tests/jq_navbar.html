@@ -1,0 +1,126 @@
+---
+title: "Test navbar layout and events response"
+---
+
+<div id="navbar"> 
+  <div class="marginwrapper">
+    <div>NavBar Section:</div>
+    <div id="np1">n.top: -    </div>
+    <div id="np2">n.left: -   </div>
+    <div id="np3">n:width: -  </div>
+    <div id="np4">n:height: - </div>
+  </div>  
+</div>
+
+<div id="main">
+  <div class="marginwrapper">
+    <div>Main Section:</div>
+    <div id="mp1">m.top: -     </div>
+    <div id="mp2">m.left: -    </div>
+    <div id="mp3">m.width: -   </div>
+    <div id="mp4">m.height: -  </div>
+    <div id="mre1">#resize: -  </div>
+    <div id="mse1">#scroll: -  </div>
+    <div id="mse2">se.pageX: - </div>
+    <div id="mse3">se.pageY: - </div>
+    <div id="mte1">#tstart: -  </div>
+    <div id="mte2">#tmove: -   </div>
+    <div id="mte3">#tend: -    </div>
+    <div id="mte4">#tcancel: - </div>
+    <div id="mte5">t0.pageX: - </div>
+    <div id="mte6">t0.pageY: - </div>
+    <div id="mte7">t1.pageX: - </div>
+    <div id="mte8">t1.pageY: - </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    var $navbar  = $('#navbar');
+    var $main    = $('#main');
+    var nResize  = 0;
+    var nScroll  = 0;
+    var nTStart  = 0;
+    var nTMove   = 0;
+    var nTEnd    = 0;
+    var nTCancel = 0;
+    var doUpdate = function() {
+      $('#np1').text( "n.top: "    + $navbar.offset().top.toFixed(2) );
+      $('#np2').text( "n.left: "   + $navbar.offset().left.toFixed(2) );
+      $('#np3').text( "n.width: "  + $navbar.innerWidth().toFixed(2) );
+      $('#np4').text( "n.height: " + $navbar.innerHeight().toFixed(2) );
+  
+      $('#mp1').text( "m.top: "    + $main.offset().top.toFixed(2) );
+      $('#mp2').text( "m.left: "   + $main.offset().left.toFixed(2) );
+      $('#mp3').text( "m.width: "  + $main.innerWidth().toFixed(2) );
+      $('#mp4').text( "m.height: " + $main.innerHeight().toFixed(2) );
+
+      $('#mre1').text( "#resize: " + nResize );
+      $('#mse1').text( "#scroll: " + nScroll );
+  
+      $('#mte1').text( "#tstart: "  + nTStart );
+      $('#mte2').text( "#tmove: "   + nTMove );
+      $('#mte3').text( "#tend: "    + nTEnd );
+      $('#mte4').text( "#tcancel: " + nTCancel );
+
+    }
+  
+    var doTouch = function(e) {
+      if (e.touches.length > 0) {
+        var touch0 = e.touches[0];
+        $('#mte5').text( "t0.pageX: " + touch0.pageX );
+        $('#mte6').text( "t0.pageY: " + touch0.pageY );
+      } else {
+        $('#mte5').text( "t0.pageX: --");
+        $('#mte6').text( "t0.pageY: --");
+      }
+      if (e.touches.length > 1) {
+        var touch1 = e.touches[1];
+        $('#mte7').text( "t1.pageX: " + touch1.pageX );
+        $('#mte8').text( "t1.pageY: " + touch1.pageY );
+      } else {
+        $('#mte7').text( "t1.pageX: --");
+        $('#mte8').text( "t1.pageY: --");
+      }
+    }
+  
+    doUpdate();
+  
+    $(window).resize(function(e) {
+      nResize += 1;
+      doUpdate();
+    });
+  
+    $(window).scroll(function(e) {
+      nScroll += 1;
+      doUpdate();
+      $('#mse2').text( "se.pageX: " + e.originalEvent.pageX );
+      $('#mse3').text( "se.pageY: " + e.originalEvent.pageY );
+    });
+  
+    $(document).on('touchstart',function(e){
+      nTStart += 1;
+      doUpdate();
+      doTouch(e);
+    });
+  
+    $(document).on('touchmove',function(e){
+      nTMove += 1;
+      doUpdate();
+      doTouch(e);
+    });
+  
+    $(document).on('touchend',function(e){
+      nTEnd += 1;
+      doUpdate();
+      doTouch(e);
+    });
+  
+    $(document).on('touchcancel',function(e){
+      nTCancel += 1;
+      doUpdate();
+      doTouch(e);
+    });
+
+  });
+</script>
