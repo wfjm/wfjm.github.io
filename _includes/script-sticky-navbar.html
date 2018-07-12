@@ -10,20 +10,22 @@
   
       var navbarHeight = $navbar.innerHeight();
       var navbarTop    = $navbar.offset().top;
-      var navbarOffset = $navbar.offset().left;
+      var navbarLeft   = $navbar.offset().left;
       var footerTop    = $footer.offset().top;
-      var stop   = footerTop - navbarHeight - navbarOffset;
-      var diff   = stop - navbarOffset;
+      var stop   = footerTop - navbarHeight - navbarLeft;
+      var diff   = stop - navbarLeft;
+
       var stickyUpdate = function() {
         var windowTop = $(window).scrollTop();
         if (stop < windowTop) {
-          $navbar.css({ position: 'absolute', top: diff });
-        } else if (navbarTop < windowTop+navbarOffset) {
-          $navbar.css({ position: 'fixed', top: navbarOffset });
+          $navbar.css({ position: 'absolute', top: diff, left: navbarLeft });
+        } else if (navbarTop < windowTop+navbarLeft) {
+          $navbar.css({ position: 'fixed', top: navbarLeft, left: navbarLeft });
         } else {
-          $navbar.css({position: 'absolute', top: 'auto'});
+          $navbar.css({position: 'absolute', top: 'auto', left: 'auto'});
         }
       }
+
       stickyUpdate();
       $(window).scroll(function() { stickyUpdate() });
     }
