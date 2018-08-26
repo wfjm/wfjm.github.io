@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2017-07-07
+  changedate: 2018-08-11
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -154,6 +154,7 @@ Complete configurations for seven boards are currently part of the project:
   Name              Board       FPGA       Clock  Memory  --- Resource Usage ---
                                            [MHz]    [kB]   flop  luts  slices 
   sys_w11a_c7       Cmod A7     XC7A35T      80      672   2823  5827  1814(22%)
+  sys_w11a_br_as7   Arty S7     XC7S50       80      256   2271  5083  1560(19%)
   sys_w11a_br_arty  Arty A7     XC7A35T      80      176   2275  5104  1611(20%)
   sys_w11a_b3       Basys3      XC7A35T      80      176   2412  5228  1608(20%)
   sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2541  5500  1750(11%)
@@ -180,7 +181,9 @@ The Digilent
 has no memory external to the FPGA. The memory seen by the w11a core is build
 from BRAMs, with a total size of 176 kB.
 The DDR memory on the Digilent
-<a href="/home/w11/inst/boards.html#digi_arty">Arty A7</a>, and
+<a href="/home/w11/inst/boards.html#digi_arty">Arty A7</a>,
+<a href="/home/w11/inst/boards.html#digi_artys7">Arty S7</a>,
+and
 <a href="/home/w11/inst/boards.html#digi_nexys4d">Nexys4 DDR</a>
 is not yet supported. Designs which use, like for Basys3, the BRAMs
 are provided and offer limited memory visible to the w11a core.
