@@ -1,0 +1,235 @@
+---
+title: "vivado 2018.2 much slower than 2017.2"
+tags:  ["w11"]
+#
+my:
+  changedate: 2018-09-27
+  figpath : ../../downloads/posts/w11/2018-09-01
+---
+<h2>vivado 2018.2 much slower than 2017.2</h2>
+<h3>Detecting the problem (2018-08-26)</h3>
+<p>
+I see much longer elapsed times for vivado 2018.2 compared to 2017.2 on a
+Linux system.
+I use <code>Ubuntu 2016.04 LTS</code>, thus a system supported for vivado.
+I have cross checked on a <code>Debian Wheezy</code> system, with very
+compatible trends.
+</p><p>
+It's most pronounced for small designs, the elapsed time shown in the GUI is
+</p>
+<pre class="code">
+             2017.2    2018.2
+    synth_1    0:51      1:31
+    impl_1     1:04      2:57
+</pre>
+so both synthesis step as well as implementation are much slower in 2018.2
+than they are in 2017.2.
+
+<p>
+Usually I use a fully scripted implementation flow.
+The elapsed times for a somewhat larger design, but still small by today's
+standards, for synthesis only, synthesis and implementation, and full
+synthesis+implementation+bitgen are
+</p>
+<pre class="code">
+                      2017.2    2018.2
+    synth            1m08.6s   2m16.6s
+    synth+impl       3m10.6s   6m56.1s
+    synth+impl+bit   3m50.1s   9m16.1s
+</pre>
+From this it's clear that all three steps are substantially slower.
+
+<p>
+When looking at a CPU monitor (like good old <code>xosview</code>) one
+immediately sees that for 2018.2 runs vivado uses a lot of system state time.
+In certain phases, which last for half a minute, one sees 75% system time.
+This is not observed for 2017.2.
+Needless to say that tests were done on an otherwise idle machine, and that
+no significant paging was visible.
+</p>
+<p>
+I used <code>pidstat</code> to trace user and system state time and got for
+full synth+impl+bit runs
+<pre class="code">
+  very small design
+    2017.1: usr:   136.07   sys:     6.36   tot:   142.43
+    2018.2: usr:   180.85   sys:   190.21   tot:   371.06
+
+  small design
+    2017.1: usr:   492.83   sys:    19.99   tot:   512.82
+    2018.2: usr:   853.77   sys:   224.00   tot:  1077.77
+</pre>
+It is clearly visible that <code>usr</code> time slightly increases,
+and <code>sys</code> time explodes by more that an order of magnitude.
+<p>
+Last but not least I checked in which phases vivado 2018.2 behaves
+differently that vivado 2017.2
+<pre class="code">
+  --- synth step ---
+    INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+      --&gt; 75-80% system time
+
+  --- impl step ---
+    INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+      --&gt; 75-80% system time
+
+    Starting Cache Timing Information Task
+      --&gt; 55-80% system time
+
+    report writing
+    INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+      --&gt; 75-80% system time
+    INFO: [Timing 38-478] Restoring timing data from binary archive.
+      --&gt; 75-80% system time
+
+  --- bitgen ---
+    INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+      --&gt; 75-80% system time
+    INFO: [Timing 38-478] Restoring timing data from binary archive.
+      --&gt; 75-80% system time
+    INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'Vivado/2018.2/data/ip'.
+      --&gt; is simply idle for quite some time
+</pre>
+From all the above the bottom line is:
+<ol>
+  <li>it seems that a very inefficient I/O library is used</li>
+  <li>it seems that vivado waits for something when loading the IP
+    repository</li>
+</ol>
+
+<p>
+The effects I've seen are quite drastic, and reproducible on two Linux systems
+(one being a supported Ubuntu 2016.04 LTS).
+</p>
+
+<h3>Refining the problem description (2018-09-01)</h3>
+
+<p>
+I've done a little bit more research on this issue. I've tested two designs
+</p>
+<pre class="code">
+  snhumaio     ~190 LUT;    ~160 Flops;    ~1% slice of 7a35 (Basys3)
+  w11a        ~5700 LUT;   ~2400 Flops;   ~20% slice of 7a35 (Basys3)
+</pre>
+so one 'null-design' and one small design, both for a Digilent Basys3 board on
+two systems
+<ul>
+  <li><code>sys1</code>: Ubuntu 16.04 LTS;  dual core</li>
+  <li><code>sys2</code>: Debian 7; XEON quad core with hyper-threading</li>
+</ul>
+which both have Vivado versions from 2016.4 up to 2018.2 installed, and get as
+elapsed times for my scripted build flow (syn+imp+bit)
+<pre class="code">
+                 --  snhumanio --    -----  w11a -----
+                    sys1     sys2       sys1      sys2
+
+      2016.4     3m44.2s  2m34.2s    8m00.0s   5m00.5s
+      2017.1     3m28.5s  2m19.6s    8m00.6s   4m50.9s
+      2017.2     3m43.6s     n/a     8m35.9s      n/a
+      2017.3        n/a   6m12.1s       n/a    9m09.1s
+      2017.4     9m36.5s  7m17.7s   15m14.7s  10m10.1s
+      2018.1     9m30.4s  7m47.8s   14m08.9s  10m20.5s
+      2018.2     8m55.2s  7m19.3s   13m47.6s  10m01.8s
+</pre>
+The snhumanio essentially measures general setup overhead, because there is
+little to compile or route.
+<p>
+From this is apparent that
+<ul>
+  <li><b>the main performance drop came with the 2017.2 to
+      2017.3 transition</b></li>
+  <li>a second smaller drop came with 2017.4</li>
+  <li>while 2018.2 brought a mild improvement</li>
+</ul>
+As stated before, watching a process monitor, like <code>xosview</code>,
+shows for 2018.2
+<ul>
+  <li>often extended periods of 75% system time</li>
+  <li>some times extended idle times</li>
+</ul>
+
+<p>
+I used <code>pipstat</code> to trace this, and tried to visualize this with
+<code>gnuplot</code>. Four figures show the CPU utilization (in %) over time,
+red is system state time, green is user state time.
+Click on figure for full size display:
+<table>
+  <thead>
+    <tr>
+      <th style="width: 2em"></th>
+      <th style="width: 47%">snhumanio_b3</th>
+      <th style="width: 47%">w11a_b3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ha-center">2<br />0<br />1<br />7<br />.<br />1</td>
+      <td>
+        <a href="{{page.my.figpath}}/snhumanio_b3_2017.1.png">
+          <img src="{{page.my.figpath}}/snhumanio_b3_2017.1.png" width="100%">
+        </a>
+      </td>
+      <td>
+        <a href="{{page.my.figpath}}/w11a_b3_2017.1.png">
+          <img src="{{page.my.figpath}}/w11a_b3_2017.1.png" width="100%">
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="ha-center">2<br />0<br />1<br />8<br />.<br />2</td>
+      <td>
+        <a href="{{page.my.figpath}}/snhumanio_b3_2018.2.png">
+          <img src="{{page.my.figpath}}/snhumanio_b3_2018.2.png" width="100%">
+        </a>
+      </td>
+      <td>
+        <a href="{{page.my.figpath}}/w11a_b3_2018.2.png">
+          <img src="{{page.my.figpath}}/w11a_b3_2018.2.png" width="100%">
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>
+The transitions from synth to impl to bitgen phases are nicely visible,
+especially for the <code>w11a_b3</code> case.  
+</p>
+<p>
+It is striking that 2018.2 has extended times with about 75% system time,
+while 2017.1 shows only a very moderate system time fraction. The data for the
+pictures were taken on <code>sys2</code>, on an otherwise idle system,
+back-to-back in one session.
+</p>
+
+
+<div class="notebox">
+  For original posting to
+  <a href="https://forums.xilinx.com/">Xilinx Community Forums</a>
+  see
+  <a href="https://forums.xilinx.com/t5/Synthesis/vivado-2018-2-much-slower-than-2017-2-at-least-for-small-designs/m-p/884858">topic 884858</a>.
+</div>
+
+<div class="notebox">
+  <b>2018-09-03:</b> The issue was acknowledged by Xilinx, see
+  <a href="https://forums.xilinx.com/t5/Synthesis/vivado-2018-2-much-slower-than-2017-2-at-least-for-small-designs/m-p/886862#M27951">posting 886862</a>.
+</div>
+
+<div class="notebox">
+  <table><tbody>
+    <tr>
+      <td class="va-top">
+        <b>2018-09-27:</b> the posting earned within one month 10 Kudos,
+        made into the <code>HOT!! Kudos</code> classification, and was for
+        some time the top kudoed post in the whole Xilinx forum. See
+        screenshot taken on 2018-09-27.
+      </td>
+      <td>
+        <a href="{{page.my.figpath}}/2018-09-27-firefox-screen253.png">
+          <img src="{{page.my.figpath}}/2018-09-27-firefox-screen253.png"
+               width="191px" height="209px">
+        </a>
+      </td>
+    </tr>
+  </tbody></table>
+</div>
