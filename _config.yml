@@ -76,6 +76,10 @@ my:
 #
   gh_wfjm: https://github.com/wfjm
 #
+  bitsaver:
+    dec:   http://www.bitsavers.org/pdf/dec
+    pdp11: http://www.bitsavers.org/pdf/dec/pdp11
+#
   w11:
     top:  https://github.com/wfjm/w11
     tree: https://github.com/wfjm/w11/tree/master
