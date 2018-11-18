@@ -49,6 +49,15 @@ ol.bigli li {
   margin-bottom:  0.5ex;
 }
 
+ul.smali li {
+  margin-top:  0ex;
+  margin-bottom:  0ex;
+}
+ol.smali li {
+  margin-top:  0ex;
+  margin-bottom:  0ex;
+}
+
 /* tables */
 
 /* define table basics                                */
