@@ -1,0 +1,64 @@
+---
+title: "Hercules vs Sim390 - a comparison"
+tags:  ["mvs"]
+---
+
+<h2>Hercules vs Sim390 - a comparison</h2>
+
+<p>
+Michael Short was so kind to run a 
+<a href="{{site.my.mvs_sp.blob}}/doc/s370_perf.md">s370_perf</a>
+version ported to
+<a href="https://en.wikipedia.org/wiki/MUSIC/SP">MUSIC/SP</a>
+on his
+<a href="http://www.canpub.com/teammpg/de/sim390/">Sim390</a>
+emulator based system.
+The different OS should have no sizable impact on the measured instruction
+timings since <code>SVC</code> and privileged instructions, which depend on
+system response times, aren't covered.
+A reference run with Hercules 4.0 on the same host CPU is available too.
+The data and full analysis is under
+</p>
+<div class="indent">
+  <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-herc40.md">
+    {{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-herc40.md</a>
+  <br />
+  <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md">
+    {{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md</a>
+</div>
+<p>
+The key findings are
+</p>
+<ul>
+  <li>Sim390 is, on identical Host hardware, a factor is a factor 6.5 slower
+    than Hercules 4.0, based on the
+    <a href="{{site.my.mvs_sp.blob}}/narr/README_narr.md#user-content-lmark">
+      lmark</a>
+    MIPS ratio of 6.39 to 41.54.</li>
+  <li>simple instructions, like LR R,R, are about a factor 9 slower, see
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md#user-content-find-lr">
+      section LR timing</a>.</li>
+  <li>branch timing does not depend on same/different page, see
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md#user-content-find-btime">
+      section branch timing</a>.</li>
+  <li><code>CLCL</code> and <code>TRT</code> are much faster on Sim390, see
+    <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md#user-content-find-clcl-trt">
+      section CLCL+TRT performance</a>.</li>
+</ul>
+
+<p>
+The overall summary is that Hercules has a much more efficient handling of
+instruction fetch and decoding and virtual to real address mapping.
+</p>
+
+<p>
+Any remarks and comments are very welcome.
+</p>
+
+<div class="notebox">
+  For original posting to
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/info">
+    Yahoo! Group - Hercules-390</a>
+  see
+  <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/84175">topic 84175</a>. 
+</div>
