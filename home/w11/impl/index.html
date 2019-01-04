@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2018-12-29
+  changedate: 2019-01-03
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -156,13 +156,17 @@ Complete configurations for seven boards are currently part of the project:
                                            [MHz]    [kB]   flop  luts  slices 
   sys_w11a_c7       Cmod A7     XC7A35T      80      672   3107  6398  1864(22%)
   sys_w11a_br_as7   Arty S7     XC7S50       80      256   2556  5673  1666(20%)
-  sys_w11a_br_arty  Arty A7     XC7A35T      80      176   2560  5665  1720(21%)
+  sys_w11a_arty     Arty A7     XC7A35T      80     3840   6575 10610  3144(39%)
   sys_w11a_b3       Basys3      XC7A35T      80      176   2698  5806  1728(21%)
-  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2825  6025  1866(12%)
+  sys_w11a_n4d      Nexys4 DDR  XC7A100T     80     3840   2825  6025  1866(12%)
   sys_w11a_n4       Nexys4      XC7A100T     80     3840   3146  6410  1979(12%)
   sys_w11a_n3       Nexys3      XC6SLX16     64     3840   3059  6051  2064(90%)
   sys_w11a_n2       Nexys2      XC3S1200E    52     3840   3097  8994  5471(63%)
   sys_w11a_s3       S3board     XC3S1000     50     1024   2890  8663  5177(67%)
+
+  <i>legacy BRAM only versions</i>
+  sys_w11a_br_arty  Arty A7     XC7A35T      80      176   2560  5665  1720(21%)
+  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T     80      512   2825  6025  1866(12%)
 </pre>
 
 <p>
@@ -186,7 +190,7 @@ The DDR memory on the Digilent
 <a href="/home/w11/inst/boards.html#digi_artys7">Arty S7</a>,
 and
 <a href="/home/w11/inst/boards.html#digi_nexys4d">Nexys4 DDR</a>
-is not yet supported. Designs which use, like for Basys3, the BRAMs
+is now supported. In addition, designs which use only the BRAMs
 are provided and offer limited memory visible to the w11a core.
 </p>
 

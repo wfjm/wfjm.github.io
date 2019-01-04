@@ -3,7 +3,7 @@ title: "vivado 2018.2 much slower than 2017.2"
 tags:  ["w11"]
 #
 my:
-  changedate: 2018-12-29
+  changedate: 2019-01-03
   figpath : ../../downloads/posts/w11/2018-09-01
 ---
 <h2>vivado 2018.2 much slower than 2017.2</h2>
@@ -210,6 +210,73 @@ pictures were taken on <code>sys2</code>, on an otherwise idle system,
 back-to-back in one session.
 </p>
 
+<h3>Vivado 2018.3 update -- now a bit better (2019-01-03)</h3>
+I've retested the cases described on 2018-09-01 with Vivado 2018.3, the
+measured execution times for a syn+imp+bit build were
+
+<pre class="code">
+                 --  snhumanio --    -----  w11a -----
+                    sys1     sys2       sys1      sys2
+
+      2017.1     3m28.5s  2m19.6s    8m00.6s   4m50.9s
+      2017.2     3m43.6s     n/a     8m35.9s      n/a
+      2018.2     8m55.2s  7m19.3s   13m47.6s  10m01.8s
+      2018.3     4m32.2s  3m44.5s   12m01.7s   8m20.2s
+</pre>
+
+Vivado 2018.3 is a bit faster than 2018.2, but still significantly slower
+than 2017.1 or 2017.2. I've also repeated the `pipstat` traces. Vivado
+2018.3 does not longer show the excessive amount of system time seen
+in 2018.2. However, there is still an hard to explain idle time of
+several 10 secconds at the end of the bitgen phase. This was also observed
+for 2018.2, but not for 2017.1.
+
+<table>
+  <thead>
+    <tr>
+      <th style="width: 2em"></th>
+      <th style="width: 47%">snhumanio_b3</th>
+      <th style="width: 47%">w11a_b3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="ha-center">2<br />0<br />1<br />7<br />.<br />1</td>
+      <td>
+        <a href="{{page.my.figpath}}/snhumanio_b3_2017.1.png">
+          <img style="max-width: 100%; height: auto" alt="snhumanio_b3: 2017.1"
+               src="{{page.my.figpath}}/snhumanio_b3_2017.1.png"
+               width="1000" height="600">
+        </a>
+      </td>
+      <td>
+        <a href="{{page.my.figpath}}/w11a_b3_2017.1.png">
+          <img style="max-width: 100%; height: auto" alt="w11a_b3: 2017.1"
+               src="{{page.my.figpath}}/w11a_b3_2017.1.png"
+               width="1000" height="600">
+        </a>
+      </td>
+    </tr>
+    <tr>
+      <td class="ha-center">2<br />0<br />1<br />8<br />.<br />3</td>
+      <td>
+        <a href="{{page.my.figpath}}/snhumanio_b3_2018.3.png">
+          <img style="max-width: 100%; height: auto" alt="snhumanio_b3: 2018.3"
+               src="{{page.my.figpath}}/snhumanio_b3_2018.3.png"
+               width="1000" height="600">
+        </a>
+      </td>
+      <td>
+        <a href="{{page.my.figpath}}/w11a_b3_2018.3.png">
+          <img style="max-width: 100%; height: auto" alt="w11a_b3: 2018.3"
+               src="{{page.my.figpath}}/w11a_b3_2018.3.png"
+               width="1000" height="600">
+          </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
 
 <div class="notebox">
   For original posting to
@@ -241,4 +308,9 @@ back-to-back in one session.
       </td>
     </tr>
   </tbody></table>
+</div>
+
+<div class="notebox">
+  <b>2019-01-03:</b> Posted vivado 2018.3 update, see
+  <a href="https://forums.xilinx.com/t5/Synthesis/vivado-2018-2-much-slower-than-2017-2-at-least-for-small-designs/m-p/925575#M29456">posting 925575</a>.
 </div>
