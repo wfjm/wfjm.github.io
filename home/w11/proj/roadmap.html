@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2018-09-15
+  changedate: 2019-02-08
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -78,13 +78,12 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
 
 <h2 id="h_short">Short term (in work)</h2>
 <ul>
-  <li>support <b>DDR memory</b> on Arty and Nexys4 DDR</li>
+  <li><b>fifo buffered</b> implementation of <b>character devices</b>
+      (DL11,LP11,PC11).</li>
 </ul>
 
 <h2 id="h_mid">Mid term</h2>
 <ul>
-  <li><b>fifo buffered</b> implementation of <b>character devices</b> 
-      (DL11,LP11, maybe PC11 too).</li>
   <li><b>DZ11</b>: terminal multiplexer; classical multiuser operation.</li>
   <li><b>DEUNA</b>: add loopback, chaining ect; support OS beyond 211bsd</li>
 </ul>
@@ -164,13 +163,43 @@ boards are:
     <tr>
       <td class="va-top ha-center">V0.90</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">CPU complete (FPP, write-back cache,...)</td>
+      <td class="va-top">CPU complete (with FPP)</td>
     </tr>
     <!-- v1.0 -->
     <tr>
       <td class="va-top ha-center">V1.00</td>
       <td class="va-top ha-center">t.b.d.</td>
       <td class="va-top">cleanups</td>
+    </tr>
+    <!-- v1.1 -->
+    <tr>
+      <td class="va-top ha-center">V1.10</td>
+      <td class="va-top ha-center">t.b.d.</td>
+      <td class="va-top">move ISE designs into legancy branch; vhdl-2008 code base</td>
+    </tr>
+    <!-- v1.2 -->
+    <tr>
+      <td class="va-top ha-center">V1.20</td>
+      <td class="va-top ha-center">t.b.d.</td>
+      <td class="va-top">write-back cache</td>
+    </tr>
+    <!-- v1.3 -->
+    <tr>
+      <td class="va-top ha-center">V1.30</td>
+      <td class="va-top ha-center">t.b.d.</td>
+      <td class="va-top">multi-CPU systems</td>
+    </tr>
+    <!-- v1.4 -->
+    <tr>
+      <td class="va-top ha-center">V1.40</td>
+      <td class="va-top ha-center">t.b.d.</td>
+      <td class="va-top">systems with Maintenance and IO Processor (MIOP; local IO handling)</td>
+    </tr>
+    <!-- v1.5 -->
+    <tr>
+      <td class="va-top ha-center">V1.50</td>
+      <td class="va-top ha-center">t.b.d.</td>
+      <td class="va-top">stand-alone systems</td>
     </tr>
     </tbody>
 </table>

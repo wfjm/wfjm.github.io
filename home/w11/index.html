@@ -2,7 +2,7 @@
 title: "w11: PDP-11/70 CPU and SoC"
 #
 my:
-  changedate: 2019-01-03
+  changedate: 2019-01-27
 #
   milestones:
   - dat: Jan-2019
@@ -93,10 +93,10 @@ The project contains the VHDL code for a complete
 <a href="https://en.wikipedia.org/wiki/PDP-11">PDP-11</a> 
 system: a <b>PDP-11/70</b> CPU with memory management unit, but without 
 floating point unit, a complete set of mass storage peripherals (RK11/RK05,
-RL11/RL02, RK70/RP06, TM11/TU10) and a basic set of
+RL11/RL02, RK70/RP06, TM11/TU10) and a rather complete set of
 <a href="https://en.wikipedia.org/wiki/Unibus">UNIBUS</a> 
-peripherals (DL11, LP11, PC11), and last but not least a cache and 
-memory controllers for SRAM and PSRAM.
+peripherals (DL11, LP11, PC11, and DEUNA), and last but not least a cache
+and  memory controllers for SRAM, PSRAM, and SDRAM (via Xilinx MIG core).
 </p>
 <p>
 The design is <b>FPGA proven</b>, runs 
@@ -104,12 +104,15 @@ currently on Digilent
 <a href="/home/w11/inst/boards.html#digi_cmoda7">Cmod A7</a> ,
 <a href="/home/w11/inst/boards.html#digi_arty">Arty A7</a> ,
 <a href="/home/w11/inst/boards.html#digi_basys3">Basys3</a> ,
-<a href="/home/w11/inst/boards.html#digi_nexys4d">Nexys4 DDR</a> ,
 <a href="/home/w11/inst/boards.html#digi_nexys4">Nexys4</a> ,
 <a href="/home/w11/inst/boards.html#digi_nexys3">Nexys3</a> ,
 <a href="/home/w11/inst/boards.html#digi_nexys2">Nexys2</a> and
 <a href="/home/w11/inst/boards.html#digi_s3board">S3board</a>
 boards.
+Implementations for Digilent
+<a href="/home/w11/inst/boards.html#digi_artys7">Arty S7</a> and
+<a href="/home/w11/inst/boards.html#digi_nexys4d">Nexys4 DDR</a>
+are provided too, but are only simulation tested.
 See section <a href="/home/w11/impl/#h_systems">Complete Systems</a>
 for more information.
 </p>
