@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2019-02-08
+  changedate: 2019-04-05
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -21,7 +21,7 @@ my:
      module.
 {% endcapture %}
 
-{% include figbox-right.html id="Fig_R-1" width="240" height="201"
+{% include figbox-right.html id="Fig_R-1" width="1677" height="1398"
      figurl="/downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg"
      caption=caption_Fig_R_1
 %}
@@ -32,7 +32,7 @@ my:
     machine was used under the name CASTOR by DEC RSX Engineering 
     in Maynard. Picture courtesy of Dave Carroll.
 {% endcapture %}
-{% include figbox-right.html id="Fig_R-2" width="240" height="180"
+{% include figbox-right.html id="Fig_R-2" width="800" height="600"
      figurl="/downloads/w11/pictures/DaveCarrol-1174-cd-open.jpg"
      caption=caption_Fig_R_2
 %}
@@ -105,6 +105,9 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
     without a backend server.</li>
   <li><b>CPU throttling</b>: some old code, especially tests with timing loops,
     has problems on a <i>fast</i> machine....</li>
+  <li><b>PiDP-11</b>: support for Oscar Vermeulen's marvelous
+    <a href="https://obsolescence.wixsite.com/obsolescence/pidp-11">
+      PiDP-11 front panel</a>.</li>
 </ul>
 
 <h2 id="h_maybe">Maybe term</h2>
@@ -123,6 +126,7 @@ Nice ideas, maybe they are realized, maybe not
     <a href="https://en.wikipedia.org/wiki/IBM_mainframe">mainframe</a>
     emulated by <a href="http://www.hercules-390.org/">Hercules</a>;
     the purest nostalgia</li>
+  <li><b>UDA50</b>: MSCP disk controller, for disks like RA81. </li>
 </ul>
 
 
@@ -156,20 +160,20 @@ boards are:
     <tr>
       <td class="va-top ha-center">V0.80</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">I/O complete (DEUNA, DZ11, buffered DL11,LP11)
+      <td class="va-top">I/O complete (DEUNA, DZ11, buffered DL11,PC11,LP11)
       </td>
     </tr>
     <!-- v0.9 -->
     <tr>
       <td class="va-top ha-center">V0.90</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">CPU complete (with FPP)</td>
+      <td class="va-top">resolve device and cpu issues</td>
     </tr>
     <!-- v1.0 -->
     <tr>
       <td class="va-top ha-center">V1.00</td>
       <td class="va-top ha-center">t.b.d.</td>
-      <td class="va-top">cleanups</td>
+      <td class="va-top">Add FPP, CPU complete</td>
     </tr>
     <!-- v1.1 -->
     <tr>

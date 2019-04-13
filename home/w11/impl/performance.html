@@ -2,7 +2,7 @@
 title:  "Performance"
 #
 my:
-  changedate: 2019-01-27
+  changedate: 2019-04-05
 ---
 
 <h2 id="h_microarchitecture">Microarchitecture</h2>
@@ -122,16 +122,19 @@ was used,
 cpufreg</a> was fixed to 3 GHz.
 </p>
 <pre>
-  System       Platform              (MHz)  Dhry2    Hanoi  syscall  syscall
-                                            [lps]    [lps]    [lps]   /Hanoi
+  System       Platform              (MHz)  Dhry2    Hanoi  syscall  syscall  syscall
+                                            [lps]    [lps]    [lps]   /Hanoi   /Dhry2
 
-  2.11BSD      w11a_s3 V0.5          (50)   11510    160.8     7080    44.0
-  2.11BSD      w11a_n2 V0.5          (50)   11519    160.4     6888    42.9
-  2.11BSD      w11a_n2 V0.51         (58)   13218    186.1     7616    40.9
-  2.11BSD      w11a_n4 V0.73         (80)   18095    250.7    10837    43.2
+  2.11BSD      w11a_s3 V0.5          (50)   11510    160.8     7080    44.0    0.615
+  2.11BSD      w11a_n2 V0.5          (50)   11519    160.4     6888    42.9    0.598
+  2.11BSD      w11a_n2 V0.51         (58)   13218    186.1     7616    40.9    0.576
+  2.11BSD      w11a_n4 V0.73         (80)   18095    250.7    10837    43.2    0.599
 
-  2.11BSD      simh on Intel E8400   (--)   17174    250.0    10713    42.9
-  Ubuntu 10.4  Intel E8400         (3000)   10785k    74.1k    1020k   13.8
+  2.11BSD      simh on Intel E8400   (--)   17174    250.0    10713    42.9    0.623
+  2.11BSD      simh on Rasp Pi 2 B   (--)    4477     63.3     2651    41.9    0.592
+  2.11BSD      simh on Rasp Pi 3 b   (--)    7294    104.5     4217    41.3    0.578
+
+  Ubuntu 10.4  Intel E8400         (3000)   10785k    74.1k    1020k   13.8    0.095
 </pre>
 
 <p>

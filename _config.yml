@@ -79,6 +79,7 @@ my:
   bitsaver:
     dec:   http://www.bitsavers.org/pdf/dec
     pdp11: http://www.bitsavers.org/pdf/dec/pdp11
+    uq:    http://www.bitsavers.org/www.computer.museum.uq.edu.au/pdf
 #
   w11:
     top:  https://github.com/wfjm/w11

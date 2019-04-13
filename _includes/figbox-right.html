@@ -9,7 +9,6 @@
     caption:  caption text
 {% endcomment %}
 
-{% assign imgwidth='width="260"' %}
 {% if include.width %}
   {% assign imgwidth='width="' | append: include.width | append: '"'%}
 {% endif %}
@@ -27,7 +26,7 @@
 <div id="{{include.id}}" class="figureframe">
   <div class="figurebox">
     <a href="{{figurlhr}}"> 
-      <img {{imgwidth}} {{imgheight}}
+      <img style="max-width: 90%; height: auto" {{imgwidth}} {{imgheight}}
            alt="{{figalt}}" src="{{include.figurl}}">
     </a>
   </div>
