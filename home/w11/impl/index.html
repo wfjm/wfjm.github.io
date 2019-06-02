@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2019-02-03
+  changedate: 2019-05-19
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -118,6 +118,7 @@ Currently available is a basic set of UNIBUS peripherals which is, apart from
   <li><b>KW11P:</b> programmable clock</li>
   <li><b>KW11L:</b> line frequency clock</li>
   <li><b>DL11:</b> console interface</li>
+  <li><b>DZ11:</b> 8 line serial port multiplexer</li>
   <li><b>LP11:</b> line printer</li>
   <li><b>PC11:</b> paper tape reader/puncher</li>
   <li><b>DEUNA:</b> Ethernet interface</li>
@@ -155,20 +156,20 @@ seven are FPGA verified, two are only simulation verified:
 <pre>
   Name              Board       FPGA      Clk   Mem  --- Resource Usage --- Veri
                                           MHz    kB   flop  luts  slices
-  sys_w11a_c7       Cmod A7     XC7A35T    80   672   3107  6216  1884(23%) FPGA
-  sys_w11a_as7      Arty S7     XC7S50     75  3840   6585  9837  3250(40%) sim
-  sys_w11a_arty     Arty A7     XC7A35T    80  3840   6575  9798  3182(39%) FPGA
-  sys_w11a_b3       Basys3      XC7A35T    80   176   2698  5836  1728(21%) FPGA
-  sys_w11a_n4d      Nexys4 DDR  XC7A100T   80  3840   6538  9496  3308(21%) sim
-  sys_w11a_n4       Nexys4      XC7A100T   80  3840   3148  6227  1982(12%) FPGA
-  sys_w11a_n3       Nexys3      XC6SLX16   64  3840   2979  5542  2018(88%) FPGA
-  sys_w11a_n2       Nexys2      XC3S1200E  52  3840   2976  8101  5201(59%) FPGA
-  sys_w11a_s3       S3board     XC3S1000   50  1024   2782  7873  4942(64%) FPGA
+  sys_w11a_c7       Cmod A7     XC7A35T    80   672   3369  7279  2099(26%) FPGA
+  sys_w11a_as7      Arty S7     XC7S50     75  3840   6843 11480  3425(42%) sim
+  sys_w11a_arty     Arty A7     XC7A35T    80  3840   6838 11497  3392(42%) FPGA
+  sys_w11a_b3       Basys3      XC7A35T    80   176   2968  6633  1963(24%) FPGA
+  sys_w11a_n4d      Nexys4 DDR  XC7A100T   80  3840   6811 11240  3496(22%) sim
+  sys_w11a_n4       Nexys4      XC7A100T   80  3840   3418  7272  2234(14%) FPGA
+  sys_w11a_n3       Nexys3      XC6SLX16   64  3840   3167  6314  2130(93%) FPGA
+  sys_w11a_n2       Nexys2      XC3S1200E  52  3840   3219  9886  5796(66%) FPGA
+  sys_w11a_s3       S3board     XC3S1000   50  1024   3019  9338  5558(72%) FPGA
 
   <i>legacy BRAM only versions</i>
-  sys_w11a_br_as7   Arty S7     XC7S50     80   256   2556  5503  1666(20%) sim
-  sys_w11a_br_arty  Arty A7     XC7A35T    80   176   2560  5496  1722(21%) FPGA
-  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T   80   512   2825  5843  1824(12%) sim
+  sys_w11a_br_as7   Arty S7     XC7S50     80   256   2821  6479  1887(23%) sim
+  sys_w11a_br_arty  Arty A7     XC7A35T    80   176   2829  6499  1897(23%) FPGA
+  sys_w11a_br_n4d   Nexys4 DDR  XC7A100T   80   512   3097  6835  2110(13%) sim
 </pre>
 
 <p>
@@ -213,13 +214,13 @@ All systems have the following configuration for the UNIBUS peripherals:
   DEUNA   ethernet interface      174510  120  5     de 0    XE0:
   DL11    console                 177560  060  4     cn 0    YL0:
   DL11    2nd console             176500  300  4     ttyl 1  YL1:
+  DZ11    terminal interface      160100  310  5     tty *   YZx:      (x=0..7)
   PC11    papertape read/punch    177550  070  4     -       PP:,PR:
   LP11    line printer            177514  200  4     lp 0    LP:
 
 <i>  devices yet to be implemented:
-  DZ11    terminal interface      160130  330  5     tty *   YZx:      (x=0..7)
   CR11    card reader             177160  230  6     -       CR:
-  DU11    synchronous interface   160040  310  5     -       XU:
-  DMC11   interprocessor link     160110  320  5     dmc     XM:
+  DU11    synchronous interface   160120  320  5     -       XU:
+  DMC11   interprocessor link     160140  330  5     dmc     XM:
 </i>    
 </pre>

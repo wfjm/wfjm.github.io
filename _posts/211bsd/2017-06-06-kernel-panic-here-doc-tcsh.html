@@ -3,7 +3,7 @@ title: "Kernel panic, tcsh, and here documents"
 tags:  ["211bsd"]
 #
 my:
-  changedate: 2019-01-27
+  changedate: 2019-05-29
   tuhs_base: https://minnie.tuhs.org/pipermail/tuhs
 ---
 
@@ -272,9 +272,13 @@ three essential <i>build into the CPU</i> debug tools:
     <a href="{{site.my.w11.blob}}/rtl/w11a//pdp11_dmcmon.vhd">
       pdp11_dmcmon.vhd</a>.</li>
   <li>a <i>breakpoint unit</i> which allows to set instruction or data
-    breakpoints.</li>
+    breakpoints, see
+    <a href="{{site.my.w11.blob}}/rtl/w11a//pdp11_dmhbpt.vhd">
+      pdp11_dmhbpt.vhd</a>.</li>
   <li>an <i>ibus monitor</i> which records the last 512 ibus
-    transactions.</li>
+    transactions, see
+    <a href="{{site.my.w11.blob}}/rtl/ibus/ibd_ibmon.vhd">
+      ibd_ibmon.vhd</a>.</li>
 </ul>
 After setting a breakpoint on the trap 004/010 handler an inspection of the
 instruction trace gave the essential information. Below a very condensed
@@ -308,3 +312,67 @@ and annotated excerpt
   <a href="{{page.my.tuhs_base}}/2017-June/011650.html">posting 011650</a>
   and follow the <i>Next message</i> links.
 </div>
+
+Here for reference the three patches
+
+<pre class="code">
+cd /usr/src/sys/pdp
+  
+diff mch_fpsim.s.orig mch_fpsim.s
+249c249
+<       mov     $SIGTRAP.,r0
+---
+>       mov     $SIGTRAP,r0     / wfjm: fixed constant usage, here and below
+252c252
+<       mov     $SIGILL.,r0
+---
+>       mov     $SIGILL,r0
+257c257
+<       mov     $SIGSEGV.,r0
+---
+>       mov     $SIGSEGV,r0
+273c273
+<       mov     $SIGFPE.,r0
+---
+>       mov     $SIGFPE,r0  
+</pre>
+
+<pre class="code">
+cd /usr/src/bin/tcsh
+  
+diff sh.dol.c.orig sh.dol.c
+673a674,691
+> /* wfjm: 2017-06-11: moved rscan from sh.glob.c to  sh.dol.c
+>  *   rscan must be in same overlay as Dtestq and heredoc.
+>  *   If they are in different overlays, the function pointer to Dtestq
+>  *   passed in heredoc to rscan will be invalid after the overlay switch
+>  *   to rscan.
+> */
+> void
+> rscan(t, f)
+>     register Char **t;
+>     void    (*f) ();
+> {
+>     register Char *p;
+> 
+>     while (p = *t++)
+>       while (*p)
+>           (*f) (*p++);
+> }
+> 
+
+diff sh.glob.c.orig sh.glob.c
+536,547d535
+< rscan(t, f)
+<     register Char **t;
+<     void    (*f) ();
+< {
+<     register Char *p;
+< 
+<     while (p = *t++)
+<       while (*p)
+<           (*f) (*p++);
+< }
+< 
+< void
+</pre>
