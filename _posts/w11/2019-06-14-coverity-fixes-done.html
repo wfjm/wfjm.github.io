@@ -1,0 +1,250 @@
+---
+title: "All Coverity detected defects fixed"
+tags:  ["w11"]
+#
+my:
+  changedate: 2019-06-20
+#
+  w11_comm: https://github.com/wfjm/w11/commit
+#
+  defects:
+# ------------------------------------------------
+  - type: uninitialized scalar
+  - class: Rw11RdmaDisk.cpp:55
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+  - class: Rw11VirtDiskFile.cpp:53
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+  - class: RtclRlinkConnect.cpp:*
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+  - class: RtclRw11Cpu.cpp:*
+    state: FIXED
+    date: 2018-09-21
+    comid: c01fc7c
+  - class: RlinkPortTerm.cpp:69
+    state: FIXED
+    date: 2018-09-21
+    comid: a369c48
+  - class: RlinkCommandList.cpp:69
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+  - class: RtclArgs.cpp:98
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+# ------------------------------------------------
+  - type: uninitialized pointer
+  - class: RtclClassBase.cpp:60
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+  - class: RtclProxyBase.cpp:58
+    state: FIXED
+    date: 2018-09-16
+    comid: c01fc7c
+# ------------------------------------------------
+  - type: uncaught exception
+  - class: RlinkConnect.cpp:164
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: RlinkServer.cpp:108
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: RlinkPortCuff.cpp:87
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: Rw11VirtEthTap.cpp:63 
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: Rw11VirtTermTcp.cpp:104
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: Rw11VirtTermPty.cpp:59 
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: RlinkServer.cpp:108
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+  - class: RtclAttnShuttle.cpp:70  
+    state: FIXED
+    date: 2018-10-27
+    comid: 86380fc
+# ------------------------------------------------
+  - type: resource leak
+  - class: Rw11VirtDiskFile.cpp:92
+    state: FIXED
+    date: 2018-09-22
+    comid: 700eb23
+    comm: BUGFIX - leaked file id's under some conditions
+  - class: Rw11VirtTapeTap.cpp:137
+    state: FIXED
+    date: 2018-09-22
+    comid: 700eb23
+  - class: Rw11CntlDEUNA.cpp:414
+    state: FIXED
+    date: 2018-09-22
+    comm: BUGFIX - weak resource leak
+    comid: 700eb23
+# ------------------------------------------------
+  - type: structurally dead code
+  - class: Rw11Cpu.cpp:291
+    state: FIXED
+    date: 2018-09-22
+    comid: 700eb23
+# ------------------------------------------------
+  - type: locally dead code
+  - class: RlinkPacketBufRcv.cpp:102
+    state: FIXED
+    date: 2019-06-14
+    comid: c858427
+  - class: Rw11CntlRHRP.cpp:587 
+    state: IGNORE
+    date: 2019-06-14
+    comid: c858427
+# ------------------------------------------------
+  - type: out-of-bounds read
+  - class: RiosState.cpp:95
+    state: FALSPOS
+    date: 2018-10-27
+# ------------------------------------------------
+  - type: operands don't affect result
+  - class: Rw11VirtTapeTap.cpp:426
+    state: FIXED
+    date: 2018-09-22
+    comid: 700eb23
+# ------------------------------------------------
+  - type: buffer not null-terminated
+  - class: Rw11VirtEthTap.cpp:93
+    state: FIXED
+    date: 2018-10-27
+    comid: 2a50d35
+    comm: BUGFIX - string wasn't null-terminated
+# ------------------------------------------------
+  - type: argument in wrong order
+  - class: RtclArgs.cpp:247
+    state: FIXED
+    date: 2018-09-22
+    comid: 700eb23
+    comm: BUGFIX - faulty defaults
+# ------------------------------------------------
+  - type: unchecked return value
+  - class: RtclCmdBase.cpp:88
+    state: IGNORE
+    date: 2018-09-22
+    comid: 700eb23
+# ------------------------------------------------
+  - type: time of check, time of use
+  - class: Rtools.cpp:133
+    state: IGNORE
+    date: 2018-10-29
+    comid: 0913863
+  - class: RlinkPortFifo.cpp:98  
+    state: IGNORE
+    date: 2018-10-29
+    comid: 0913863
+
+---
+<h2>All Coverity detected defects fixed in backend code</h2>
+
+<p>
+<a href="https://scan.coverity.com/">Coverity Scan</a> is a
+<a href="https://en.wikipedia.org/wiki/Static_program_analysis">
+static code analysis</a> service provided by
+<a href="https://en.wikipedia.org/wiki/Synopsys>">Synopsys</a>
+free of charge for
+<a href="https://en.wikipedia.org/wiki/Free_and_open-source_software">
+open source</a> projects. It detects defects like
+</p>
+<ul>
+  <li>uninitialized variables (especially pointers)</li>
+  <li>resource leaks (memory, but also file handles)</li>
+  <li>uncaught exceptions</li>
+  <li>structurally or locally dead code</li>
+  <li>in some cases out-of-bounds array accesses</li>
+  <li>in some cases misordered arguments</li>
+  <li><i>... and much more ...</i></li>
+</ul>
+
+<p>
+The GitHub project
+<a href="https://github.com/wfjm/w11">wfjm/w11</a>
+was registered on 2018-08-21 with <i>Coverity Scan</i> as project
+<a href="https://scan.coverity.com/projects/wfjm-w11">wfjm-w11</a>.
+The C++ backend code base (under
+<a href="{{site.my.w11.tree}}/tools/src">tools/src</a>)
+is since than submitted to <i>Coverity Scan</i> after each significant
+code update.
+</p>
+
+<p>
+The initial scan done on 2018-09-14 found a moderate number of defects.
+A closer investigation showed that most of them are indeed bad coding but
+will not lead to operational problems. However, some of the defects where
+genuine bugs, which only by chance didn't create malfunctions up to now.
+</p>
+
+<p>
+The last defect was fixed on 2019-06-14, at this moment the
+<a href="https://scan.coverity.com/projects/wfjm-w11">wfjm-w11</a>
+code base was <i>free of defects</i>.
+</p>
+
+<p>
+The following table summarizes the defects detected by <i>Coverity Scan</i>
+and indicates how the case was resolved
+</p>
+<ul>
+  <li>FIXED - code was fixed</li>
+  <li>IGNORE - defect considered irrelevant and ignored</li>
+  <li>FALSPOS - defect considered to be a <i>false positive</i></li>
+</ul>
+<p>
+The comment column highlights the few cases where <i>Coverity Scan</i>
+detected a hard bug which just by change didn't cause operational
+problems prior to detection by the code analysis.
+</p>
+<table >
+  <thead>
+    <tr>
+      <th class="va-top ha-center"><b>Class</b></th>
+      <th class="va-top ha-center"><b>Status</b></th>
+      <th class="va-top ha-center"><b>Fix-Date</b></th>
+      <th class="va-top ha-center"><b>Commit</b></th>
+      <th class="va-top ha-center"><b>Comment</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for def in page.my.defects %}
+    {% if def.type %}
+      <tr style="background: #ededed">
+        <td colspan="5">{{def.type}}</td>
+      </tr>
+      {% else %}
+        <tr style="background: #fdfdfd">
+          <td style="text-indent: 2em"><code>{{def.class}}</code></td>
+          <td class="ha-center">{{def.state}}</td>
+          <td>{{def.date}}</td>
+          <td>
+            {% if def.comid %}
+              <a href="{{page.my.w11_comm}}/{{def.comid}}">{{def.comid}}</a>
+            {% endif %}
+          </td>
+          <td>{{def.comm}}</td>
+        </tr>
+      {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
