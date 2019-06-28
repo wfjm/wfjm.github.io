@@ -2,9 +2,12 @@
 title: "w11: PDP-11/70 CPU and SoC"
 #
 my:
-  changedate: 2019-01-27
+  changedate: 2019-06-21
 #
   milestones:
+  - dat: Jun-2019
+    txt: <b>buffered</b> character devices (DZ11,LP11,PC11); added <b>DZ11</b>;
+         now <i>complete I/O system</i>.
   - dat: Jan-2019
     txt: <b>Vivado Memory Interface Generator</b> support added, w11a systems
          use now the <b>DDR memory</b> on <b>Arty</b> and
@@ -175,7 +178,7 @@ For project news look into the <a href="/blogs/w11">w11 blog</a>, the latest
 items are:
 </p>
 <ul>
-  {% for post in site.categories["w11"] limit: 3 %}
+  {% for post in site.categories["w11"] limit: 5 %}
     <li>
       {{ post.date | date: "%Y-%m-%d" }}:
       <a href="{{ post.url }}">{{ post.title }}</a> - 

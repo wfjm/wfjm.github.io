@@ -2,7 +2,7 @@
 title: "Status"
 #
 my:
-  changedate: 2017-06-28
+  changedate: 2019-06-28
 ---
 
 <h2 id="h_systems">Running Systems</h2>
@@ -31,14 +31,16 @@ including links to the disk sets.
 <p>
 There are some known difference between w11a and 11/70 and also known
 bugs in the current w11a implementation (see 
-<a href="{{site.my.w11.blob}}/doc/w11a_known_issues.md">
-  w11a_known_issues.md</a>).
+<a href="{{site.my.w11.blob}}/doc/README_known_issues.md">
+  README_known_issues.md</a>).
 They affect the behaviour in cases like fatal stack errors or certain
 double faults which don't occur in the normal operation of an operating
 system, and if they happen, in general lead to a crash anyway.
 </p>
 <p>
-The known differences are not considered worth fixing them, while the
+The <a href="{{site.my.w11.blob}}/doc/w11a_known_differences.md">
+  known differences</a>
+are not considered worth fixing them, while the
 known bugs will be addressed in future versions of the w11a core.
 </p>
 <p>
