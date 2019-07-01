@@ -3,7 +3,7 @@ title: "All Coverity detected defects fixed"
 tags:  ["w11"]
 #
 my:
-  changedate: 2019-06-21
+  changedate: 2019-07-01
 #
   w11_comm: https://github.com/wfjm/w11/commit
 #
@@ -186,8 +186,21 @@ was registered on 2018-08-21 with <i>Coverity Scan</i> as project
 The C++ backend code base (under
 <a href="{{site.my.w11.tree}}/tools/src">tools/src</a>)
 is since than submitted to <i>Coverity Scan</i> after each significant
-code update.
+code update. During the whole time Coverity Scan version 2017.07 was used.
 </p>
+
+<div id="Fig_1" class="figureframe_r50">
+  <div class="figurebox">
+    <a href="/downloads/posts/w11/2019-06-14/coverity_state_2019-06-14.png"> 
+      <img style="max-width: 95%; height: auto" width="853" height="500"
+           alt="Fig_1"
+           src="/downloads/posts/w11/2019-06-14/coverity_state_2019-06-14.png">
+    </a>
+  </div>
+  <div class="figurecaption">
+    Fig 1: Status on 2019-06-14 with Coverity Scan version 2017.07.
+  </div>
+</div>
 
 <p>
 The initial scan done on 2018-09-14 found a moderate number of defects.
@@ -197,7 +210,8 @@ genuine bugs, which only by chance didn't create malfunctions up to now.
 </p>
 
 <p>
-The last defect was fixed on 2019-06-14, at this moment the
+The last defect was fixed on 2019-06-14 with commit
+<a href="{{page.my.w11_comm}}/c858427">c858427</a>, at this point the
 <a href="https://scan.coverity.com/projects/wfjm-w11">wfjm-w11</a>
 code base was <i>free of defects</i>.
 </p>
@@ -216,7 +230,8 @@ The comment column highlights the few cases where <i>Coverity Scan</i>
 detected a hard bug which just by change didn't cause operational
 problems prior to detection by the code analysis.
 </p>
-<table>
+
+<table style="clear: both">
   <thead>
     <tr>
       <th class="va-top ha-center"><b>Class</b></th>

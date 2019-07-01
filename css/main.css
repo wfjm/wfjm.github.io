@@ -388,6 +388,15 @@ dt:hover .hover-link {
   background-color: #f0f0ff;
 }
 
+.figureframe_r50 {
+  clear: right;
+  float: right; 
+  width: 50%; 
+  margin-left: 1em;
+  margin-bottom: 10px;
+  background-color: #f0f0ff;
+}
+
 .figurebox {
   margin-top: 10px;
   margin-bottom: 10px;
