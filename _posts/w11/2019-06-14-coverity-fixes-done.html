@@ -5,8 +5,6 @@ tags:  ["w11"]
 my:
   changedate: 2019-07-01
 #
-  w11_comm: https://github.com/wfjm/w11/commit
-#
   defects:
 # ------------------------------------------------
   - type: uninitialized scalar
@@ -211,7 +209,7 @@ genuine bugs, which only by chance didn't create malfunctions up to now.
 
 <p>
 The last defect was fixed on 2019-06-14 with commit
-<a href="{{page.my.w11_comm}}/c858427">c858427</a>, at this point the
+<a href="{{site.my.w11.comm}}/c858427">c858427</a>, at this point the
 <a href="https://scan.coverity.com/projects/wfjm-w11">wfjm-w11</a>
 code base was <i>free of defects</i>.
 </p>
@@ -254,7 +252,7 @@ problems prior to detection by the code analysis.
           <td>{{def.date}}</td>
           <td>
             {% if def.comid %}
-              <a href="{{page.my.w11_comm}}/{{def.comid}}">{{def.comid}}</a>
+              <a href="{{site.my.w11.comm}}/{{def.comid}}">{{def.comid}}</a>
             {% endif %}
           </td>
           <td>{{def.comm}}</td>

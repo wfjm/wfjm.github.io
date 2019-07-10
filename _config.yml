@@ -85,6 +85,8 @@ my:
     top:  https://github.com/wfjm/w11
     tree: https://github.com/wfjm/w11/tree/master
     blob: https://github.com/wfjm/w11/blob/master
+    comm: https://github.com/wfjm/w11/commit
+    tag:  https://github.com/wfjm/w11/releases/tag
     raw:  https://raw.githubusercontent.com/wfjm/w11/master
     manp: https://www.retro11.de/manp/w11/man
 #
@@ -99,13 +101,16 @@ my:
     top:  https://github.com/wfjm/mvs38j-langtest
     tree: https://github.com/wfjm/mvs38j-langtest/tree/master
     blob: https://github.com/wfjm/mvs38j-langtest/blob/master
+    comm: https://github.com/wfjm/mvs38j-langtest/commit
 #
   mvs_sp:
     top:  https://github.com/wfjm/s370-perf
     tree: https://github.com/wfjm/s370-perf/tree/master
     blob: https://github.com/wfjm/s370-perf/blob/master
+    comm: https://github.com/wfjm/s370-perf/commit
 #
   mvs_ht:
     top:  https://github.com/wfjm/herc-tools
     tree: https://github.com/wfjm/herc-tools/tree/master
     blob: https://github.com/wfjm/herc-tools/blob/master
+    comm: https://github.com/wfjm/herc-tools/commit

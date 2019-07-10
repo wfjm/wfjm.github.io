@@ -2,11 +2,7 @@
 title: "Releases"
 #
 my:
-  changedate: 2019-06-01
-#
-  w11_tag:  https://github.com/wfjm/w11/releases/tag
-  w11_comm: https://github.com/wfjm/w11/commit
-  w11_blob: https://github.com/wfjm/w11/blob
+  changedate: 2019-07-08
 #
   future:
   - tag: 0.84
@@ -384,7 +380,7 @@ The <i>code lines by language</i> evolution is available in section
       <td class="va-top ha-center nowrap"><i>today</i></td>
       <td class="va-top ha-center nowarp">-</td>
       <td class="va-top ha-center">
-        <a href="{{page.my.w11_blob}}/master/doc/CHANGELOG.md">CHANGELOG</a>
+        <a href="{{site.my.w11.blob}}/doc/CHANGELOG.md">CHANGELOG</a>
       </td>
       <td class="va-top"><i>state of master/HEAD, the bleeding edge</i></td>
     </tr>
@@ -402,17 +398,18 @@ The <i>code lines by language</i> evolution is available in section
         {% assign rel_temend = "" %}
       {% endif %}
     <tr>
-      <td class="va-top nowrap"><a href="{{page.my.w11_tag}}/{{rel.tag}}">
+      <td class="va-top nowrap"><a href="{{site.my.w11.tag}}/{{rel.tag}}">
           {{rel_tembeg}}{{rel.tag}}{{rel_temend}}</a>
       </td>
       <td class="va-top nowrap">
         {{rel.dat}}
       </td>
       <td class="va-top ha-center nowrap">
-        <a href="{{page.my.w11_comm}}/{{rel.com}}">{{rel_coms}}</a>
+        <a href="{{site.my.w11.comm}}/{{rel.com}}">{{rel_coms}}</a>
       </td>
       <td class="va-top ha-center">
-        <a href="{{page.my.w11_blob}}/{{rel.com}}/{{rel.fil}}">{{rel.nam}}</a>
+        <a href="{{site.my.w11.top}}/blob/{{rel.com}}/{{rel.fil}}">
+          {{rel.nam}}</a>
       </td>
       <td class="va-top">
         {{rel.txt}}
