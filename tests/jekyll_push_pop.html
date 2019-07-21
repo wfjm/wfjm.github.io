@@ -9,37 +9,37 @@ my:
 {% include tests_tools_version.html %}
 
 <h3><code>list = ['a','b','c','d']</code></h3>
-<div class="indent">
+<div class="mind2em">
   {% assign list = page.my.list %}
   list: {{list | jsonify}}
 </div>
 
 <h3><code>list = list | push: 'y'</code></h3>
-<div class="indent">
+<div class="mind2em">
   {% assign list = list | push: 'y' %}
   list: {{list | jsonify}}
 </div>
 
 <h3><code>list = list | unshift: 'x'</code></h3>
-<div class="indent">
+<div class="mind2em">
   {% assign list = list | unshift: 'x' %}
   list: {{list | jsonify}}
 </div>
 
 <h3><code>list = list | pop</code></h3>
-<div class="indent">
+<div class="mind2em">
   {% assign list = list | pop %}
   list: {{list | jsonify}}
 </div>
 
 <h3><code>list = list | shift</code></h3>
-<div class="indent">
+<div class="mind2em">
   {% assign list = list | shift %}
   list: {{list | jsonify}}
 </div>
 
 <h3><code>list.first; list.last</code></h3>
-<div class="indent">
+<div class="mind2em">
   list.first: {{list.first | jsonify}}
   <br>
   list.last:  {{list.last  | jsonify}}
@@ -48,26 +48,26 @@ my:
 <hr>
 
 <h3><code>list1 = ['Seattle', 'Tacoma', 'Spokane']</code></h3>
-<div class="indent">
+<div class="mind2em">
   list1: {{page.my.list1 | jsonify}}
 </div>
 
 <h3><code>list1 | push: "Spokane"</code></h3>
-<div class="indent">
+<div class="mind2em">
   unshift: {{page.my.list1 | push: "Spokane" | jsonify}}
 </div>
 
 <h3><code>list1 | pop</code></h3>
-<div class="indent">
+<div class="mind2em">
   pop: {{page.my.list1 | pop | jsonify}}
 </div>
 
 <h3><code>list1 | shift</code></h3>
-<div class="indent">
+<div class="mind2em">
   shift: {{page.my.list1 | shift | jsonify}}
 </div>
 
 <h3><code>list1 | unshift: "Olympia"</code></h3>
-<div class="indent">
+<div class="mind2em">
   unshift: {{page.my.list1 | unshift: "Olympia" | jsonify}}
 </div>

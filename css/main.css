@@ -113,8 +113,11 @@ td {
   vertical-align: bottom;
 }
 
-.indent {
+.mind2em {
   margin-left: 2em;
+}
+.tind2em {
+  text-indent: 2em;
 }
 
 .nowrap {
@@ -126,6 +129,10 @@ td {
   color: white;
   padding-left: 0.5ex;
   padding-right: 0.5ex;
+}
+
+.clearboth {
+  clear: both;
 }
 
 /* re-define anchor basics     */

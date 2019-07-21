@@ -1,0 +1,181 @@
+---
+title: "Use SPDX license disclaimers"
+tags:  ["w11"]
+#
+my:
+#  changedate: 2019-07-19
+#
+  linux_git: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
+#
+  commits:
+# ------------------------------------------------
+  - date: 2019-06-23
+    comid: 82e1a0c
+    stat: [   8,  28,  10]
+    files: 'tools/make/*.mk'
+    comm: add tags; other changes
+  - date: 2019-06-28
+    comid: 6b4adf2
+    stat: [  15, 143,  66]
+    files: 'tools/oskit/hook/*.tcl'
+    comm: add tags; other changes
+  - date: 2019-06-29
+    comid: 4fbe46d
+    stat: [  44, 128, 393]
+    files: 'tools/bin/*'
+    comm: add tags, drop boilerplate text
+  - date: 2019-06-30
+    comid: 2b953a9
+    stat: [   9,  18,  18]
+    files: 'tools/mcode/*/*.mac'
+    comm: add tags
+  - date: 2019-07-05
+    comid: 99e8b80
+    stat: [  23,  54,  53]
+    files: '*.mk'
+    comm: add tags
+  - date: 2019-07-05
+    comid: 3c92b79
+    stat: [ 167, 503, 195]
+    files: 'Makefile,Makefile.ise'
+    comm: add tags
+  - date: 2019-07-07
+    comid: b6e47e0
+    stat: [  61, 122, 671]
+    files: 'tools/tcl/*/*.tcl'
+    comm: add tags, drop boilerplate text
+  - date: 2019-07-08
+    comid: b4637b1
+    stat: [  53, 106, 159]
+    files: 'tools/tbench/*/*.tcl'
+    comm: add tags
+  - date: 2019-07-12
+    comid: d3cce10
+    stat: [ 525,1050,5775] 
+    files: 'rtl/*/*.vhd'
+    comm: add tags, drop boilerplate text
+  - date: 2019-07-19
+    comid: f0c4ccb
+    stat: [ 381, 752,4439] 
+    files: 'tools/src/*/*.[chi]pp'
+    comm: add tags, drop boilerplate text; drop \file
+  - date: 2019-07-20
+    comid: db27ced
+    stat: [  56, 149,  90] 
+    files: 'tools/asm-11/*/*.mac'
+    comm: add tags
+  - date: 2019-07-20
+    comid: 1618759
+    stat: [  36,  75, 75] 
+    files: 'tools/man/man*/*.[15]'
+    comm: add tags
+  - date: 2019-07-21
+    comid: 87b21f8
+    stat: [  28,  97, 316]
+    files: 'tools/fx2/src/*'
+    comm: add tags, drop boilerplate text
+---
+<h2>Use SPDX license disclaimers</h2>
+
+<p>
+The w11 project is licensed under the terms of the
+<a href="https://www.gnu.org/licenses/gpl-3.0.en.html">
+  GNU General Public License V3</a>
+with the <i>or any later version</i> clause. The license is included
+in the top level project directory as
+as <a href="{{site.my.w11.blob}}/License.txt">License.txt</a>.
+Up to June 2019 most source files had a boilerplate license disclaimer
+</p>
+<pre class="code">
+// This program is free software; you may redistribute and/or modify it under
+// the terms of the GNU General Public License as published by the Free
+// Software Foundation, either version 3, or (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY, without even the implied warranty of MERCHANTABILITY
+// or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+// for complete details.
+</pre>
+or a one line license reference
+<pre class="code">
+// License disclaimer see License.txt in $RETROBASE directory
+</pre>
+<p>
+The boilerplate text bloats the code base. It contributes about 8100 of the
+254000 lines of code or 3.2% (as of release w11a_V0.78, see
+<a href="../../home/w11/proj/statistics.html">code statistics</a>).
+The short license reference on the other side becomes ambiguous when a file
+is seen(copied) out of context, and is thus potentially useless.
+What is clearly needed is a <i>concise</i>, <i>unambiguous</i> and
+<i>universally accepted</i> license disclaimer.
+</p>
+
+<p>
+The <i>Software Package Data Exchange (SPDX)</i> format provides just this, see
+</p>
+<ul>
+  <li><a href="https://spdx.org/">SPDX home page</a></li>
+  <li><a href="https://spdx.org/ids-how">SPDX usage examples</a></li>
+  <li><a href="https://spdx.org/licenses/GPL-3.0-or-later.html">
+      SPDX and GPL V3</a></li>
+  <li><a href="https://www.gnu.org/licenses/identify-licenses-clearly.html">
+      provisos on GPL V3</a></li>
+</ul>
+
+<p>
+The Linux kernel developers started to use SPDX license tags with kernel
+version 4.14 (see
+<a href="https://www.kernel.org/doc/html/latest/process/license-rules.html">
+  Linux kernel licensing rules</a>)
+and have recently converted a large part of the code base
+to SPDX tags in a series of large commits for version 5.2 ( see
+<a href="{{page.my.linux_git}}/commit/?id=2c1212de6">1</a>,
+<a href="{{page.my.linux_git}}/commit/?id=86c2f5d65">2</a>,
+<a href="{{page.my.linux_git}}/commit/?id=2f4c53349">3</a>,
+<a href="{{page.my.linux_git}}/commit/?id=a68dc6188">4</a>,
+<a href="{{page.my.linux_git}}/commit/?id=9331b6740">5</a>).
+</p>
+
+<p>
+This motivated me to use SPDX tags in the w11 code base.   
+All w11 source files have been modified to start with a two line
+license and copyright disclaimer of the form 
+</p>
+<pre class="code">
+// SPDX-License-Identifier: GPL-3.0-or-later
+// Copyright 2017-2019 by Walter F.J. Mueller <W.F.J.Mueller@gsi.de>
+</pre>
+
+<p>
+Almost all files of the w11 project were modified, the steps were
+</p>
+<table class="trtoggle">
+  <thead>
+    <tr>
+      <th class="va-middle ha-center" rowspan="2"><b>Date</b></th>
+      <th class="va-middle ha-center" rowspan="2"><b>Commit</b></th>
+      <th class="va-middle ha-center" colspan="3"><b>Short-Stats</b></th>
+      <th class="va-middle ha-center" rowspan="2"><b>Changed Files</b></th>
+      <th class="va-middle ha-center" rowspan="2"><b>Comment</b></th>
+    </tr>
+      <th class="va-middle ha-center"><b>mod</b></th>
+      <th class="va-middle ha-center"><b>(+)</b></th>
+      <th class="va-middle ha-center"><b>(-)</b></th>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in page.my.commits %}
+    <tr>
+      <td class="va-top nowrap">{{row.date}}</td>
+      <td class="va-top nowrap">
+        <a href="{{site.my.w11.comm}}/{{row.comid}}">{{row.comid}}</a></td>
+      {% for cnt in row.stat %}
+        <td class="va-top ha-right nowrap"> {{cnt}} </td>
+      {% endfor %}
+      <td class="va-top nowrap">{{row.files}}</td>
+      <td class="va-top">{{row.comm}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
