@@ -201,6 +201,11 @@ a:active  {
   line-height: 1.2em;
 }
 
+.mono {
+  font-family: monospace;
+  font-size: 100%;
+}
+
 /* hover anchor links --------------------------------------------- */
 
 .hover-link {

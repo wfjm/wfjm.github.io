@@ -3,7 +3,7 @@ title: "Use SPDX license disclaimers"
 tags:  ["w11"]
 #
 my:
-#  changedate: 2019-07-19
+  changedate: 2019-07-26
 #
   linux_git: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git
 #
@@ -51,22 +51,22 @@ my:
     comm: add tags
   - date: 2019-07-12
     comid: d3cce10
-    stat: [ 525,1050,5775] 
+    stat: [ 525,1050,5775]
     files: 'rtl/*/*.vhd'
     comm: add tags, drop boilerplate text
   - date: 2019-07-19
     comid: f0c4ccb
-    stat: [ 381, 752,4439] 
+    stat: [ 381, 752,4439]
     files: 'tools/src/*/*.[chi]pp'
     comm: add tags, drop boilerplate text; drop \file
   - date: 2019-07-20
     comid: db27ced
-    stat: [  56, 149,  90] 
+    stat: [  56, 149,  90]
     files: 'tools/asm-11/*/*.mac'
     comm: add tags
   - date: 2019-07-20
     comid: 1618759
-    stat: [  36,  75, 75] 
+    stat: [  36,  75, 75]
     files: 'tools/man/man*/*.[15]'
     comm: add tags
   - date: 2019-07-21
@@ -74,6 +74,21 @@ my:
     stat: [  28,  97, 316]
     files: 'tools/fx2/src/*'
     comm: add tags, drop boilerplate text
+  - date: 2019-07-26
+    comid: 0ebc1c7
+    stat: [  19,  41,  55]
+    files: '*.xdc'
+    comm: add tags
+  - date: 2019-07-26
+    comid: 9f35e48
+    stat: [  22,  66,  24]
+    files: 'tb/*/tb_*.dat etc'
+    comm: add tags
+  - date: 2019-07-26
+    comid: 146fea4
+    stat: [  31,  79,  92]
+    files: 'remaing files'
+    comm: add tags
 ---
 <h2>Use SPDX license disclaimers</h2>
 
@@ -143,11 +158,13 @@ license and copyright disclaimer of the form
 </p>
 <pre class="code">
 // SPDX-License-Identifier: GPL-3.0-or-later
-// Copyright 2017-2019 by Walter F.J. Mueller <W.F.J.Mueller@gsi.de>
+// Copyright 2017-2019 by Walter F.J. Mueller &lt;W.F.J.Mueller@gsi.de&gt;
 </pre>
 
 <p>
-Almost all files of the w11 project were modified, the steps were
+65.5% of the files of the w11 project were modified,
+and about 3.5% of the lines, mostly boilerplate text, removed.
+The steps were
 </p>
 <table class="trtoggle">
   <thead>
@@ -158,17 +175,17 @@ Almost all files of the w11 project were modified, the steps were
       <th class="va-middle ha-center" rowspan="2"><b>Changed Files</b></th>
       <th class="va-middle ha-center" rowspan="2"><b>Comment</b></th>
     </tr>
+    <tr>
       <th class="va-middle ha-center"><b>mod</b></th>
       <th class="va-middle ha-center"><b>(+)</b></th>
       <th class="va-middle ha-center"><b>(-)</b></th>
-    <tr>
     </tr>
   </thead>
   <tbody>
     {% for row in page.my.commits %}
     <tr>
       <td class="va-top nowrap">{{row.date}}</td>
-      <td class="va-top nowrap">
+      <td class="va-middle ha-center nowrap mono">
         <a href="{{site.my.w11.comm}}/{{row.comid}}">{{row.comid}}</a></td>
       {% for cnt in row.stat %}
         <td class="va-top ha-right nowrap"> {{cnt}} </td>
@@ -177,5 +194,13 @@ Almost all files of the w11 project were modified, the steps were
       <td class="va-top">{{row.comm}}</td>
     </tr>
     {% endfor %}
+    <tr>
+      <th colspan="2"><b>Total</b></th>
+      <th class="ha-right">1478</th>
+      <th class="ha-right">3411</th>
+      <th class="ha-right">12431</th>
+      <th class="ha-left" colspan="2">
+        9020 lines removed</th>
+    </tr>
   </tbody>
 </table>
