@@ -2,7 +2,7 @@
 title:  "Architecture"
 #
 my:
-  changedate: 2016-12-03
+  changedate: 2019-07-29
 ---
 
 {% capture caption_Fig_I_1 %}
@@ -187,11 +187,14 @@ In the current systems the rlink communication is done via
     by a BREAK + 0x80 sync character sequence (see
     <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
       serport_uart_autobaud.vhd</a>).
-    With the onboard RS232 ports of the s3board and the Nexys2 boards the maximal
-    Baud rate is 460800 when a USB-RS232 adapter is directly connected. The rate 
-    is limited by the RS232 transceivers. With on-board USB-UARTs like the FT232R
-    on the Nexys3 Baud rates of 2 MBaud are possible. The FT2232 on Nexys4 allows
-    up to 12 MBaud (in w11a designs 10 MBaud possible).
+    With the onboard RS232 ports of the s3board and the Nexys2 boards the
+    maximal Baud rate is 460800 when a USB-RS232 adapter is directly
+    connected. The rate  is limited by the RS232 transceivers. With
+    on-board USB-UARTs like the
+    <a href="https://www.ftdichip.com/Products/ICs/FT232R.htm">FT232R</a>
+    on the Nexys3 Baud rates of 2 MBaud are possible. The
+    <a href="https://www.ftdichip.com/Products/ICs/FT2232H.html">FT2232H</a>
+    on Nexys4 and subsequent Digilent boards allows up to 12 MBaud.
   </li>
 
 </ul>
@@ -201,7 +204,7 @@ In the current systems the rlink communication is done via
 All device I/O is emulated, as already described under 
 <a href="/home/w11/impl/">Features</a>. 
 A simple example is the transmit part
-of the <b>DL11</b> console interface 
+of the unbuffered <b>DL11</b> console interface 
 (see <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_dl11.vhd">ibdr_dl11.vhd</a>).
 Sending a character to the emulated console involves the following steps:
 </p>

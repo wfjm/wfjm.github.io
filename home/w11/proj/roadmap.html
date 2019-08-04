@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2019-05-29
+  changedate: 2019-08-03
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -133,18 +133,22 @@ Nice ideas, maybe they are realized, maybe not
 Ports to new boards will be done when interesting products show up. Tempting
 boards are:
 <ul>
+  <li><a href="https://shop.trenz-electronic.de/en/TE0890-01-25-1C-S7-Mini-Fully-Open-Source-Module-with-Xilinx-Spartan-7-7S25-64-MBit-HyperRAM">
+      Trenz TE0890-01-25-1C: "S7 Mini"</a>:
+    lowest cost, w11a with full 4 MB (from 8 MB onboard HyperRAM)
+  </li>
   <li><a href="https://shop.trenz-electronic.de/de/TE0725-03-35-2C-Xilinx-Artix-7-2x50-Pin-FPGA-Modul-mit-XC7A35T-2CSG324C">
       Trenz TE0725-03-35</a>:
     low cost, w11a with full 4 MB (from 8 MB onboard HyperRAM)
   </li>
-  <li><a href="https://shop.trenz-electronic.de/en/TE0712-02-100-2C-Artix-7-100T-Micromodule-with-Xilinx-XC7A100T-2C-Size-4-x-5-cm-com.temp.range">
-      Trenz TE0712-02-xxx</a>:
-    good price/performance for 200 die size
-  </li>
 </ul>
+Both can be easily combined with a
+<a href="https://shop.trenz-electronic.de/en/Products/Trenz-Electronic/Open-Hardware/Xmod-FTDI-JTAG-Adapter/">TE0790 Xmox FTDI JTAG Adapter</a>
+which provides JTAG via USB and a fast USB UART as found on contemporary
+Digilent boards.
 
 <h2 id="h_plan">Release plan for w11a</h2>
-
+  
 <table class="trtoggle">
   <thead>
     <tr>
