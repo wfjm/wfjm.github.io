@@ -3,7 +3,7 @@ title: "Current Board status"
 tags:  ["w11"]
 #
 my:
-#  changedate: 2019-08-03
+  changedate: 2019-08-11
 #
   boards:
 # ------------------------------------------------
@@ -11,16 +11,17 @@ my:
     board: S3BOARD
     link:  digi_s3board
     state: dormant
-    comm:  My very first board, all initial w11 development was done with it.
-           Performance of the rlink over a 460k Baud RS232 link is modest,
-           enough for initial proof-of-principle studies, but a bit slow
-           for practical usage. See also <a href="../../downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg">picture</a>.
-
+    comm:  My very first board, the entire initial w11 development was done
+           with it. Performance of the rlink over a 460k Baud RS232 link is
+           modest, enough for initial proof-of-principle studies, but somewhat
+           slow for practical usage. See also
+           <a href="../../downloads/w11/pictures/wfjm-2010-08-08-w11a_s3.jpg">
+           picture</a>.
   - date:  2010 May
     board: Nexys2
     link:  digi_nexys2
     state: active
-    comm:  The Cypress FX2 USB interface gave a real performance boost, the
+    comm:  The Cypress FX2 USB interface provided a real performance boost, the
            rlink concept finally worked out. Full usage of the 22 bit
            address space thanks to the easy to interface PSRAM memory.
            See also <a href="../../downloads/w11/pictures/wfjm-2010-08-08-w11a_n2.jpg">picture</a>.
@@ -35,20 +36,21 @@ my:
     board: Nexys3
     link:  digi_nexys3
     state: active
-    comm:  Great Spartan-6 based board, with easy to interface PSRAM memory. It
-           gave also a modest performance boost, the w11 system clock increased
-           to 64 MHz from 50 MHz. Of all my boards this one has the smallest
-           FPGA size, the current w11a design uses 93% of the slices.
-           The w11 will soon outgrow this board.
+    comm:  Great Spartan-6 based board, with easy to interface PSRAM memory.
+           There was also a modest increase in performance, with the w11
+           system clock increasing from 50 MHz to 64 MHz. Of all my boards,
+           this one has the smallest FPGA size, the current w11a design
+           uses 93% of the slices. The w11 will outgrow this board soon.
   - date:  2015 Jan
     board: Nexys4
     link:  digi_nexys4
     state: broken
-    comm:  The first Series-7 based board. Initial development was done with
-           ISE 14.7, but switched quickly to Vivado. A much better IDE,
-           code development was fun again, essentially all development
+    comm:  The first Series-7 based board. The initial development was done
+           with ISE 14.7, but quickly switched to Vivado. A much better IDE,
+           code development was fun again, essentially the entire development
            was done on the Nexys4. W11 system clock increased to 80 MHz.
-           The board broke unfortunately in July 2019.
+           The <a href="2019-07-27-nexys4-obituary.html">board broke</a>
+           unfortunately in July 2019.
   - date:  2015 Jan
     board: Basys3
     link:  digi_basys3
@@ -56,15 +58,15 @@ my:
     comm:  Just cute. No on board memory, so w11 sees only 176 kByte memory
            implemented with BRAMs.
   - date:  2016 Feb
-    board: Arty
+    board: Arty A7
     link:  digi_arty
     state: active
-    comm:  This board has the best cost/performance ratio of all my boards.
+    comm:  This board has the best value for monry ratio of all my boards.
            It took quite some time to get the DDR3 memory interface operating,
-           but ever since this board is one of the main development boards.
-           Very nice is the build-in current monitor.
+           but since then this board has been one of the main development
+           boards. Very nice is the build-in current monitor.
   - date:  2017 Jun
-    board: CModA7
+    board: CMod A7
     link:  digi_cmoda7
     state: active
     comm:  A real gadget, certainly the most compact setup I have. The 35T
@@ -72,14 +74,14 @@ my:
            memory combined with some BRAMs result in 672 kByte visible to
            the w11 CPU, enough to run a trimmed down 211bsd system.
   - date:  2019 Aug
-    board: Nexys4 A7
-    link:  digi_nexys4d
-    state: ordered
-    comm:  The Arty board is nice and from a purely function point all one
-           needs. But I like the LEDs of the Nexys series boards, the perfect
-           board for a <i>blinking lights</i> w11. So I ordered a Nexys A7
-           board, formerly known as Nexys4 DDR, as replacement for the broken
-           Nexys4 <i>classic</i>.
+    board: Nexys A7
+    link:  digi_nexysa7
+    state: active
+    comm:  The Arty board is nice and from a purely functional point
+           everything you need. But I like the LEDs of the Nexys series
+           boards, the perfect board for a <i>blinking lights</i> w11.
+           So I ordered a Nexys A7 board, formerly known as Nexys4 DDR,
+           to replace the broken Nexys4 <i>classic</i>.
 
 ---
 <h2>Current Board Status</h2>

@@ -2,7 +2,7 @@
 title:  "Directory Layout"
 #
 my:
-  changedate: 2018-12-30
+  changedate: 2019-08-11
 #
   style: |
     .dl {
@@ -45,7 +45,7 @@ my:
   - ["rtl/bplib/nexys2",             "  - for Digilent Nexys2 board"]
   - ["rtl/bplib/nexys3",             "  - for Digilent Nexys3 board"]
   - ["rtl/bplib/nexys4",             "  - for Digilent Nexys4 board"]
-  - ["rtl/bplib/nexys4d",            "  - for Digilent Nexys4 DDR board"]
+  - ["rtl/bplib/nexys4d",            "  - for Digilent Nexys A7 board"]
   - ["rtl/bplib/nxcramlib",          "  - for Numonix CRAM (on Nexys2,3,4)"]
   - ["rtl/bplib/s3board",            "  - for Digilent S3board"]
   - ["rtl/bplib/sysmon",             "  - for Series-7 XADC"]
@@ -54,18 +54,22 @@ my:
   - ["rtl/sys_gen/tst_mig",          "  - designs for a MIG core tester"]
   - ["rtl/sys_gen/tst_rlink",        "  - designs for a rlink tester"]
   - ["rtl/sys_gen/tst_rlink_cuff",   "  - designs for a rlink over FX2 tester"]
+  - ["rtl/sys_gen/tst_serloop",      "  - designs for a serial link tester"]
+  - ["rtl/sys_gen/tst_snhumanio",    "  - designs for a human IO tester"]
   - ["rtl/sys_gen/tst_sram",         "  - designs for a sram tester"]
   - ["rtl/sys_gen/w11a",             "  - designs for w11a SoC"]
-  - ["rtl/sys_gen/w11a/arty",        "    - w11a SoC for Digilent Arty A7
-  (using DDR memory)"]
+  - ["rtl/sys_gen/w11a/arty",        "    - w11a SoC for Digilent Arty A7"]
   - ["rtl/sys_gen/w11a/arty_bram",   "    - w11a SoC for Digilent Arty A7 (BRAM only)"]
-  - ["rtl/sys_gen/w11a/artys7_bram", "    - w11a SoC for Digilent Arty S7 (BRAM only) UNTESTED"]
+  - ["rtl/sys_gen/w11a/artys7",      "    - w11a SoC for Digilent Arty
+  S7 <i>!only simulated!</i>"]
+  - ["rtl/sys_gen/w11a/artys7_bram", "    - w11a SoC for Digilent Arty S7 (BRAM only) <i>!only simulated!</i>"]
   - ["rtl/sys_gen/w11a/basys3",      "    - w11a SoC for Digilent Basys3"]
   - ["rtl/sys_gen/w11a/cmoda7",      "    - w11a SoC for Digilent Cmod A7"]
   - ["rtl/sys_gen/w11a/nexys2",      "    - w11a SoC for Digilent Nexys2"]
   - ["rtl/sys_gen/w11a/nexys3",      "    - w11a SoC for Digilent Nexys3"]
   - ["rtl/sys_gen/w11a/nexys4",      "    - w11a SoC for Digilent Nexys4"]
-  - ["rtl/sys_gen/w11a/nexys4d_bram","    - w11a SoC for Digilent Nexys4 DDR (BRAM only) UNTESTED"]
+  - ["rtl/sys_gen/w11a/nexys4d",     "    - w11a SoC for Digilent Nexys A7"]
+  - ["rtl/sys_gen/w11a/nexys4d_bram","    - w11a SoC for Digilent Nexys A7 (BRAM only)"]
   - ["rtl/sys_gen/w11a/s3board",     "    - w11a SoC for Digilent S3board"]
   - ["rtl/vlib",                     "- VHDL component libs"]
   - ["rtl/vlib/comlib",              "  - communication"]
@@ -81,6 +85,7 @@ my:
   - ["tools/asm-11",                 "- pdp-11 assembler code"]
   - ["tools/bin",                    "- scripts and binaries"]
   - ["tools/dox",                    "- Doxygen documentation configuration"]
+  - ["tools/exptest",                "- configuration files for ostest etc"]
   - ["tools/make",                   "- make includes"]
   - ["tools/fx2",                    "- Firmware for Cypress FX2 USB Interface"]
   - ["tools/fx2/bin",                "  - pre-build firmware images in .ihx format"]
