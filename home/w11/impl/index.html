@@ -2,7 +2,7 @@
 title:  "Features"
 #
 my:
-  changedate: 2019-08-11
+  changedate: 2019-09-02
 ---
 {% capture caption_Fig_F_1 %}
     Fig F-1: A KB11-C processor without FPP and one Massbus interface, 
@@ -161,15 +161,19 @@ seven are FPGA verified, two are only simulation verified:
   sys_w11a_arty     Arty A7     XC7A35T    72  3840   6838 11497  3392(42%) FPGA
   sys_w11a_b3       Basys3      XC7A35T    80   176   2968  6633  1963(24%) FPGA
   sys_w11a_n4d      Nexys A7    XC7A100T   80  3840   6850 11174  3563(22%) FPGA
-  sys_w11a_n4       Nexys4      XC7A100T   80  3840   3418  7272  2234(14%) FPGA
+  sys_w11a_n4       Nexys4      XC7A100T   80  3840   3418  7272  2234(14%) Note 1
   sys_w11a_n3       Nexys3      XC6SLX16   64  3840   3167  6314  2130(93%) FPGA
   sys_w11a_n2       Nexys2      XC3S1200E  52  3840   3219  9886  5796(66%) FPGA
-  sys_w11a_s3       S3board     XC3S1000   50  1024   3019  9338  5558(72%) FPGA
+  sys_w11a_s3       S3board     XC3S1000   50  1024   3019  9338  5558(72%) Note 2
 
   <i>legacy BRAM only versions</i>
   sys_w11a_br_as7   Arty S7     XC7S50     80   256   2821  6479  1887(23%) sim
   sys_w11a_br_arty  Arty A7     XC7A35T    80   176   2829  6499  1897(23%) FPGA
   sys_w11a_br_n4d   Nexys A7    XC7A100T   80   512   3137  7061  2125(13%) FPGA
+
+  <i>Notes:</i>
+    Note 1: Board failed in July 2019. FPGA tested before, since then only sim tested
+    Note 2: Board available but effectively retired
 </pre>
 
 <p>
