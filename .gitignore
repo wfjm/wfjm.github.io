@@ -1,5 +1,7 @@
 *~
 _site
 Gemfile.lock
-.jekyll-metadata
 .bundle
+.jekyll-cache
+.jekyll-metadata
+*.md.html
