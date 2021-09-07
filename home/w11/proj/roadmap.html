@@ -2,7 +2,7 @@
 title:  "Roadmap"
 #
 my:
-  changedate: 2021-08-22
+  changedate: 2021-09-07
 ---
 {% capture caption_Fig_R_1 %}
     Fig R-1: w11a running on a Digilent 
@@ -85,6 +85,12 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
   <li><b>PiDP-11</b>: support for Oscar Vermeulen's marvelous
     <a href="https://obsolescence.wixsite.com/obsolescence/pidp-11">
       PiDP-11 front panel</a>.</li>
+  <ul>
+    <li>via a Digilent CmodC2 (CPLD) based controller PCB.
+      Connects via Pmod cable to any Digilent board.</li>
+    <li>via a Trenz TE0725 based PCB.
+      Fully integrated solution.</li>
+  </ul>
 </ul>
 
 <h2 id="h_mid">Mid term</h2>
@@ -142,16 +148,17 @@ boards are:
   </li>
   <li><a href="https://shop.trenz-electronic.de/de/TE0725-03-35-2C-Xilinx-Artix-7-2x50-Pin-FPGA-Modul-mit-XC7A35T-2CSG324C">
       Trenz TE0725-03-35</a>:
-    low cost, w11a with full 4 MB (from 8 MB onboard HyperRAM)
+    low cost, w11a with full 4 MB (from 8 MB onboard HyperRAM).
+    Very attractive for integration with PiDP-11 front panel.
   </li>
   <li>Both can be easily combined with a
-<a href="https://shop.trenz-electronic.de/en/Products/Trenz-Electronic/Open-Hardware/Xmod-FTDI-JTAG-Adapter/">TE0790 Xmox FTDI JTAG Adapter</a>
+<a href="https://shop.trenz-electronic.de/en/Products/Trenz-Electronic/Open-Hardware/Xmod-FTDI-JTAG-Adapter/">TE0790 Xmod FTDI JTAG Adapter</a>
 which provides JTAG via USB and a fast USB UART as found on current
 Digilent boards.
   </li>
   <li><a href="https://numato.com/product/skoll-xilinx-kintex-7-usb-ready-to-go-fpga-module/">Numato skoll board</a>:
-    Kintex-7 FPGA XC7K70T, still affordable, high speed, expect about a factor
-    two higher clock rates.
+    Kintex-7 FPGA XC7K70T, still affordable, high speed, expect 50% higher
+    clock rates.
 </ul>
 
 <h2 id="h_plan">Release plan for w11a</h2>
