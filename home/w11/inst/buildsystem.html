@@ -8,9 +8,9 @@ my:
 
 <p>
 The build system employed in this project is based on <b>vbom</b> or 
-<i>"VHDL bill of material"</i> files which list for each vhdl source file the 
-libraries and sources for the instantiated components, the later via their 
-vbom, and last but not least the name of the vhdl source file. All file names 
+<i>"VHDL bill of material"</i> files which list for each VHDL source file the 
+libraries and sources for the instantiated components, the latter via their 
+vbom, and last but not least the name of the VHDL source file. All file names 
 are relative to the current directory (see for example the vbom's of
 <a href="{{site.my.w11.blob}}/rtl/sys_gen/w11a/nexys4/sys_w11a_n4.vbom">
   sys_w11a_n4</a>
@@ -37,8 +37,8 @@ does  this, and generates, depending on options,
 The Makefile's in general just contain a few definitions and includes.
 Master Makefiles contain pattern rules for simulation and synthesis and
 encapsulate all the <code>vbomconf</code> magic.
-A full w11a system is build from about 100 vhdl source files,
-test benches from about 120 vhdl source files. Using the vbom's a large number
+A full w11a system is built from about 100 VHDL source files,
+test benches from about 120 VHDL source files. Using the vbom's a large number
 of designs can be easily maintained.
 For further information see
 </p>

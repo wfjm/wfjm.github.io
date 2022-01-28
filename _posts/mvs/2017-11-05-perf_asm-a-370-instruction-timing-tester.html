@@ -6,7 +6,7 @@ my:
 ---
 
 <p>
-I stumbled some time ago a page about
+I stumbled some time ago on a page about
 <a href="https://en.wikipedia.org/wiki/Hercules_(emulator)">Hercules</a>
 instruction timing, didn't bookmark it properly, and failed to find it again.
 </p>
@@ -25,7 +25,7 @@ I'm fully aware of
 Despite all these provisos I wrote a small synthetic benchmark to
 determine the 370 instruction timing. It covers most non-privileged
 instructions in a total of 124 individual tests. The assembler source
-and a result file is uploaded under
+and a result file are uploaded under
 <a href="http://groups.yahoo.com/group/turnkey-mvs/files/perf_asm.zip">
 perf_asm.zip</a>.
 </p>
@@ -40,7 +40,7 @@ version bundles with Juergen Winkelmann's TK4- distribution.
 </p>
 
 <p>
-The results files <code>perf_asm.txt</code> lists the test tag name 'Tnnn',
+The results files <code>perf_asm.txt</code> list the test tag name 'Tnnn',
 a short description of the instruction tested.
 </p>
 <ul>
@@ -53,7 +53,7 @@ a short description of the instruction tested.
 
 <p>
 The timing is actually measured with <code>STCK</code>, which is a 'time of day'
-clock, The tests were done on a otherwise idle MVS system, and on an
+clock, The tests were done on an otherwise idle MVS system, and on an
 otherwise idle host system. The job <code>perf_asm.jcl</code> was executed
 29 times, the value shown in column 'med' are median values of these 29 runs to
 have an estimate robust against outliers.

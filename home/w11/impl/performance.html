@@ -9,7 +9,7 @@ my:
 <p>
 Because the w11a microarchitecture is very similar to the original 11/70 
 processor, the KB11-C CPU, the instruction timing in clock cycles is also very
-similar.  A register-register operation takes two clock cycles, more a
+similar.  A register-register operation takes two clock cycles, a more
 involved case like an "<code>add @r1,a(r2)</code>" for example takes 12 cycles. 
 Notable exceptions are the MUL (5 instead of 22 cycles) and DIV (23
 instead of 46 cycles) instructions.
@@ -46,7 +46,7 @@ of memory latencies. So one expects that the w11a is about a factor
 <b>Compared to J11 CPU</b>: This later ASIC implementation of the 11/70 ran
 with up to 20 MHz clock rate. It needed 4 clocks per microcycle, resulting 
 in a 200 ns micro cycle time. However, the J11 had a significantly improved
-microarchitecture yielding an up to a factor two better 
+microarchitecture yielding up to a factor of two better 
 <a href="https://en.wikipedia.org/wiki/Cycles_per_instruction">cpi</a> 
 (cycles-per-instruction) value. So one expects that the w11a is at least
 a factor (50/20)*(4/1)*(1/2) or 5 faster than the fastest J11 based system,
@@ -93,12 +93,12 @@ for both boards, the comparison values obtained from
 </pre>
 
 <p>
-Note that the J11 system is listed with the effective microcycle rate of 
+Note that the J11 system is listed with an effective microcycle rate of 
 4.5 MHz rather the chip clock rate of 18 MHz. This is also consistent with
 <a href="http://simh.trailing-edge.com/semi/j11.html">
   Bob Supnik's notes on the J11</a> 
-were the J11 is classified as '4.5 MHz'. This gives a more meaningful
-values for the Dhry/MHz or 'Dhrystone per MHz' column. For a fair comparison 
+where the J11 is classified as '4.5 MHz'. This gives a more meaningful
+value for the Dhry/MHz or 'Dhrystone per MHz' column. For a fair comparison,
 it is also important to remark that the PDP-11/53+ systems didn't have a 
 cache and were therefore about a factor 2.3 slower than a PDP-11/93 with cache
 (see 
@@ -111,7 +111,7 @@ benchmark results.
 </p>
 
 <p>
-The Dhrystone, Tower of Hanoi and 'syscall' benchmarks were also run on a 
+The Dhrystone, Tower of Hanoi, and 'syscall' benchmarks were also run on a 
 <b>simulated PDP-11</b> using 
 <a href="http://simh.trailing-edge.com/">simh</a> 
 version V3.8-1 and <b>natively</b> on a Linux system.
@@ -148,7 +148,7 @@ Some observations are:
       delays from  write-thru's.</li>
   <li>The simulated PDP-11 on a modern 3 GHz PC is about as fast as the current
       FPGA implementation on a Spartan-6. However, there is certainly room for
-      improvement on the FPGA side, either with a faster devices (e.g. a 
+      improvement on the FPGA side, either with faster devices (e.g. a 
       Virtex-6 instead of a Spartan-6) and/or an improved microarchitecture
       (like J11 or even better).</li>
   <li>Comparing the arithmetic benchmarks (Dhry2 and Hanoi) with the 'syscall'

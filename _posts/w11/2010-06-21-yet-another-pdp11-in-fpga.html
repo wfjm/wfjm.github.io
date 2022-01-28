@@ -9,21 +9,21 @@ Brad Parker just
   link="http://www.classiccmp.org/pipermail/cctech/2009-June/067197.html"
   text="posted about his FPGA implementation of a PDP-11" %}
 , 
-which boots so far RT-11, RSTS V4, BSD 2.9 and Unix V6. There was a
-question how fast an FPGA solution might be compared to a PDP-11/93.
+which boots so far RT-11, RSTS V4, BSD 2.9, and Unix V6. There was a
+question of how fast an FPGA solution might be compared to a PDP-11/93.
 </p>
 <p>
-I've also implemented a PDP-11 on an FPGA. It is a full 11/70 with 
-split I&amp;D, MMU and cache. No FPP so far. Available peripherals are so 
-far DL11, LP11, KW11L, PC11, and RK11. All I/O is channeled over via 
+I've also implemented a PDP-11 on an FPGA. It is a full 11/70 with
+split I&amp;D, MMU, and cache. No FPP so far. Available peripherals are so
+far DL11, LP11, KW11L, PC11, and RK11. All I/O is channeled over via
 'remote-register-interface' onto a single bi-directional byte stream
 interface, so the FPGA board needs a backend PC with a server program
 to handle the I/O requests.
 </p>
 
 <p>
-The design is FPGA proven, runs on Digilent S3 and NEXYS2 boards, the 
-former with 1 MB 10 ns SRAM, the later with 16 MB 70ns PSDRAM. 
+The design is FPGA proven, runs on Digilent S3 and NEXYS2 boards, the
+former with 1 MB 10 ns SRAM, the latter with 16 MB 70ns PSDRAM.
 </p>
 <p>
 Resource consumption is
@@ -36,25 +36,25 @@ Resource consumption is
 The implementation was verified against many XXDP maindec's. There are
 some open issues, especially some details of trap and double error
 handling aren't correct yet. In practice this is of little importance,
-the FPGA system happily boots and runs BSD 2.11, a system using 22bit 
+the FPGA system happily boots and runs BSD 2.11, a system using 22bit
 addressing and split I&amp;D space. {Note: you need
 <a href="/blogs/211bsd/2009-01-04-patch-446+447.html">patch 447 for 2.11BSD</a>
 to get FPP emulation and RK support working}
 </p>
 <p>
-On Performance: The design runs at 50 MHz. I've run parts of the 
-Byte Unix benchmark on the FPGA systems. Given that the FPP is only 
+On Performance: The design runs at 50 MHz. I've run parts of the
+Byte Unix benchmark on the FPGA systems. Given that the FPP is only
 emulated by the 2.11BSD kernel it makes only sense to look at the integer
 benchmarks. The Dhrystone benchmark 'dhry2reg' gives about '11500 lps'
-on both boards. For comparison see Michael Schneiders benchmark collection 
-which gives about '830 lps' for a 11/53. There is little Dhrystone difference
-between  the two boards despite the very different memory access times. The 
+on both boards. For comparison see Michael Schneiders benchmark collection
+which gives about '830 lps' for an 11/53. There is little Dhrystone difference
+between  the two boards despite the very different memory access times. The
 8 kB cache with 32 bit cache lines really helps on the NEXYS2 board.
 </p>
 <p>
 I'm in the middle of homogenizing some internal interfaces and of some
 code cleanup, also the backend handler needs a re-write in C++ (currently
-perl). When that's done I'll make the whole package (VHDL sources, test 
+Perl). When that's done I'll make the whole package (VHDL sources, test
 benches, backend) available on <a href="https://opencores.org/">OpenCores</a>.
 </p>
 <p>
@@ -67,13 +67,13 @@ Finally a comment to Dave Mitton's remark
   See <a href="http://www.miim.com/faq/hardware/multipro.html#castor">
     http://www.miim.com/faq/hardware/multipro.html#castor</a>
 </blockquote>
-The reason why I picked a 11/70 and not a J11 as target is because my 
-goal is a 11/74. I've implemented the IIST already and tested against 
-the IIST Diagnostic I could find in XXDP (riiab0).  A dual core will 
-fit into a single xc3s1200e of the NEXYS2 board. The work needed is 
+The reason why I picked an 11/70 and not a J11 as the target is because my
+goal is an 11/74. I've implemented the IIST already and tested it against
+the IIST Diagnostic I could find in XXDP (riiab0).  A dual-core will
+fit into a single xc3s1200e of the NEXYS2 board. The work needed is
 quite clear and doable (changes on cache, mmu, and cpu core for asrb).
 However, I've no plans to implement the CIS, so it will always be a
-subset of a 11/74. But for sure fun to do and run.
+subset of an 11/74. But for sure fun to do and run.
 
 <div class="notebox">
   For original note see

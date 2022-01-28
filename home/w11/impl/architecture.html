@@ -25,7 +25,7 @@ my:
 <p>
 The microarchitecture of the w11a core is similar to the original 11/70 
 processor, the KB11-C CPU. Little parallelism and pipelining, just prefetch 
-of the next instruction, and even that only when current instruction is 
+of the next instruction, and even that only when the current instruction is 
 register destination. The goal was '<i>to get it working</i>'.
 The w11a core 
 (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_core.vhd">pdp11_core.vhd</a>) 
@@ -47,7 +47,7 @@ is composed of four main units:
 </ul>
 
 <p>
-Main difference to the KB11-C is that the w11a is not a micro coded design
+The main difference to the KB11-C is that the w11a is not a microcoded design
 but based on a large sequencer state machine with currently 113 states and
 584 transitions. The number of states is significantly smaller than in the
 original 11/70 for two reasons: the FPP interface isn't implemented yet and 
@@ -64,32 +64,32 @@ document
 </p>
 
 <p>
-The strict separation of main state machine and data path helped a lot
-to control the logic path length. The large number of control signals
+The strict separation of the main state machine and data path helped a lot
+to control the logic path length. A large number of control signals
 between these entities were packed into VHDL records 
 (see definitions in 
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11.vhd">pdp11.vhd</a>)
-so the port lists stayed at a resonable length.
+so the port lists stayed at a reasonable length.
 </p>
 
 <h2 id="h_ibus">The Internal Bus - ibus</h2>
 <p>
 A very simple bus structure called <b>ibus</b> is used to connect the
-CPU with control registers within the processor, e.g. in the MMU, and in the
+CPU with control registers within the processor, e.g. in the MMU, and the
 peripherals. The ibus is a simple synchronous single master - multiple slave 
 bus. The control signals support the bus cycle types 
 of a <a href="https://en.wikipedia.org/wiki/Unibus">UNIBUS</a>. To support
 the I/O emulation and the debug interface additional access modifiers 
-were added to distinguish between 'CPU', 'console' and 'remote access' cycles.
+were added to distinguish between 'CPU', 'console', and 'remote access' cycles.
 The ibus (see definitions in 
 <a href="{{site.my.w11.blob}}/rtl/ibus/iblib.vhd">iblib.vhd</a>)
 is implemented with two VHDL records, a master request and a slave response,
 giving very compact port maps. The slave responses are simply or'ed.
-The handling of interrupt request and acknowledge is done with separate
+The handling of an interrupt request and acknowledge is done with separate
 signals, the interrupt line to vector/priority mapping is done by an
 arbiter module (see <a
 href="{{site.my.w11.blob}}/rtl/ibus/ib_intmap.vhd">ib_intmap.vhd</a>).
-A system has one ibus per processor core, a multicore system will have
+A system has one ibus per processor core, a multi-core system will have
 multiple ibus'es, like the PDP-11/74 had a UNIBUS associated with each 
 processor.
 </p>
@@ -101,16 +101,16 @@ main components of a system to an external control entity. The rbus is again a
 simple synchronous single master - multiple slave bus with an implementation
 quite similar to the ibus (see definitions in 
 <a href="{{site.my.w11.blob}}/rtl/vlib/rbus/rblib.vhd">rblib.vhd</a>).
-Via an rbus to w11a core 'control port' interface (see 
+Via a rbus to w11a core 'control port' interface (see 
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_core_rbus.vhd">
   pdp11_core_rbus.vhd</a>)
-the rbus master can control the CPU (start, stop, step ect) and access all
+the rbus master can control the CPU (start, stop, step etc) and access all
 processor and devices registers as well as the main memory. 
 This interface provides also a 32 words rbus to ibus or <b>rb2ib</b> window
 which maps a fixed part of the rbus address space into a selectable part of
 the ibus address space. ibus accesses via this window are marked as
 'remote' accesses (via the racc signal) and can be distinguished from
-CPU originated accesses. This is used to implement the I/O system emulation.
+CPU-originated accesses. This is used to implement the I/O system emulation.
 </p>
 
 <p>
@@ -128,27 +128,27 @@ an instrumentation standard very often used with a PDP-11 in DAQ systems).
 </p>
 
 <p>
-The rbus can be used to build a direct 16 bit memory mapped interface to 
-another processor. With the <b>rlink</b> protocol the rbus can also be 
+The rbus can be used to build a direct 16 bit memory-mapped interface to 
+another processor. With the <b>rlink</b> protocol, the rbus can also be 
 controlled via any bi-directional byte stream communication channel. 
-In this case the rlink-to-rbus bridge (see
+In this case, the rlink-to-rbus bridge (see
 <a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_core.vhd">rlink_core.vhd</a>)
-is the local rbus master which can be remote controlled from a
+is the local rbus master which can be remotely controlled from a
 <b>backend server</b> via the communication channel. The rlink protocol
 supports register reads and writes, block transfers, and a simple interrupt
 handling via 'attention' messages. It is protected with a 18 bit CRC (see 
 <a href="{{site.my.w11.blob}}/rtl/vlib/comlib/crc16.vhd">crc16.vhd</a>)
 to detect transmission errors. The implementation is based on an extended symbol
 space with 261 symbols, 256 to represent the states of a data byte and 5
-additional symbols IDLE, SOP, EOP, NAK and ATTN used as packet delimiters
+additional symbols IDLE, SOP, EOP, NAK, and ATTN used as packet delimiters
 and for other control purposes and was inspired by the usage of D- and 
-K-symbols in optical link protocols. The symbol space is mapped into a
-8 bit datastream with a simple escaping mechanism (see 
+K-symbols in optical link protocols. The symbol space is mapped into an
+8 bit data stream with a simple escaping mechanism (see 
 <a href="{{site.my.w11.blob}}/rtl/vlib/comlib/cdata2byte.vhd">cdata2byte.vhd</a>
 and 
 <a href="{{site.my.w11.blob}}/rtl/vlib/comlib/byte2cdata.vhd">
   byte2cdata.vhd</a>).
-These 9 bit to 8 bit interface adapters provide a fifo buffered byte wide 
+These 9 bit to 8 bit interface adapters provide a FIFO buffered byte-wide 
 rlink interface used in all systems
 (see also
 <a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_core8.vhd">
@@ -156,16 +156,16 @@ rlink interface used in all systems
 </p>
 
 <p>
-In the current systems the rlink communication is done via 
+In the current systems, the rlink communication is done via 
 </p>
 <ul>
-  <li> an USB FIFO interface using the onboard
+  <li> a USB FIFO interface using the onboard
     <a href="http://www.cypress.com/products/ez-usb-fx2lp">
       Cypress FX2</a> USB controller 
     on Nexys2 and Nexys3 boards. The FPGA interface (see
     <a href="{{site.my.w11.blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
       fx2_2fifoctl_ic.vhd</a>)
-    provides two end points and a data transfer speed of up to 30 MByte/sec and
+    provides two endpoints and a data transfer speed of up to 30 MByte/sec and
     a request-response rate of 4 kHz, limited by the USB 2.0 timing structure.
     The FX2 firmware supports besides data transfers to a running FPGA design
     also the configuration of the FPGA via JTAG (see
@@ -187,14 +187,14 @@ In the current systems the rlink communication is done via
     by a BREAK + 0x80 sync character sequence (see
     <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
       serport_uart_autobaud.vhd</a>).
-    With the onboard RS232 ports of the s3board and the Nexys2 boards the
+    With the onboard RS232 ports of the s3board and the Nexys2 boards, the
     maximal Baud rate is 460800 when a USB-RS232 adapter is directly
     connected. The rate  is limited by the RS232 transceivers. With
-    on-board USB-UARTs like the
+    onboard USB-UARTs like the
     <a href="https://www.ftdichip.com/Products/ICs/FT232R.htm">FT232R</a>
     on the Nexys3 Baud rates of 2 MBaud are possible. The
     <a href="https://www.ftdichip.com/Products/ICs/FT2232H.html">FT2232H</a>
-    on Nexys4 and subsequent Digilent boards allows up to 12 MBaud.
+    on Nexys4 and subsequent Digilent boards allow up to 12 MBaud.
   </li>
 
 </ul>
@@ -237,8 +237,8 @@ is analogous.
 </p>
 
 <p>
-For mass storage peripherals the DMA transfers are emulated too. A simple
-example is a disk access of the <b>RK11</b> disk controller 
+For mass storage peripherals, the DMA transfers are emulated too. A simple
+example is disk access of the <b>RK11</b> disk controller 
 (see <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_rk11.vhd">ibdr_rk11.vhd</a>).
 Reading a disk block from a disk image handled by the backend server to 
 the w11a memory involves the following steps:
@@ -254,7 +254,7 @@ the w11a memory involves the following steps:
       relevant RK11 controller registers via rbus and the rb2ib window, read 
       the disk block data from the disk image file, and transfer the data 
       with rlink block transfer commands directly into the w11a memory.</li>
-  <li>when all data is transfered, the backend server updates the RK11
+  <li>when all data is transferred, the backend server updates the RK11
       registers via rbus and the rb2ib window. The last step is to clear the 
       'GO' bit in the rkcs.</li>
   <li>the clear 'GO' bit concludes the I/O transaction, and in case 
@@ -262,12 +262,12 @@ the w11a memory involves the following steps:
       controller.</li>
 </ul>
 <p>
-Even though conceptually straight forward, the devil is in the details.
+Even though conceptually straightforward, the devil is in the details.
 Some of the device logic must be done in hardware to guarantee the timing 
 behavior expected by the original drivers. The 'remote' semantics of
-some registers is therefore sometime not just the read/write mirror image
+some registers is therefore sometimes not just the read/write mirror image
 of the 'local' semantics, like as the DL11 case, but quite different.
-For example, in the RK11 controller a write to the maintenance register rkmr
+For example, in the RK11 controller, a write to the maintenance register rkmr
 is essentially a noop when done from the CPU but used for all kinds of 
 control functions when done via rbus.
 </p>
@@ -276,13 +276,13 @@ control functions when done via rbus.
 <p>
 So far the w11a has only been used on Xilinx Spartan-3 and Spartan-6 type
 FPGAs, but it is expected that porting to other Xilinx FPGAs like Virtex-6 
-or the Series-7 is easy. The only vendor specific constructs
+or the Series-7 is easy. The only vendor-specific constructs
 are the I/O buffers and the memories, both encapsulated in 
 <a href="{{site.my.w11.tree}}/rtl/vlib/memlib">memlib</a>
 and  
 <a href="{{site.my.w11.tree}}/rtl/vlib/xlib">xlib</a>
 , respectively. 
-The w11a uses distributed RAMs for the general purpose register file
+The w11a uses distributed RAMs for the general-purpose register file
 (see <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_gpr.vhd">pdp11_gpr.vhd</a>)
 the SAR/SDR register file in the MMU (see 
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_mmu_sadr.vhd">
@@ -292,6 +292,6 @@ and small fifo's (see
   fifo_1c_dram_raw.vhd</a>).
 The cache implementation (see 
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_cache.vhd">pdp11_cache.vhd</a>)
-uses dual ported block RAMs in "READ_FIRST" mode to implement a 'speculative
+uses dual-ported block RAMs in "READ_FIRST" mode to implement a 'speculative
 write' which can be undone in the next cycle. 
 </p>

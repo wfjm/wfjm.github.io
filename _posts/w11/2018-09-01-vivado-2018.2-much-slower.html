@@ -6,12 +6,12 @@ my:
   changedate: 2019-01-03
   figpath : ../../downloads/posts/w11/2018-09-01
 ---
-<h2>vivado 2018.2 much slower than 2017.2</h2>
+<h2>Vivado 2018.2 much slower than 2017.2</h2>
 <h3>Detecting the problem (2018-08-26)</h3>
 <p>
-I see much longer elapsed times for vivado 2018.2 compared to 2017.2 on a
+I see much longer elapsed times for Vivado 2018.2 compared to 2017.2 on a
 Linux system.
-I use <code>Ubuntu 2016.04 LTS</code>, thus a system supported for vivado.
+I use <code>Ubuntu 2016.04 LTS</code>, thus a system supported for Vivado.
 I have cross checked on a <code>Debian Wheezy</code> system, with very
 compatible trends.
 </p><p>
@@ -22,11 +22,11 @@ It's most pronounced for small designs, the elapsed time shown in the GUI is
     synth_1    0:51      1:31
     impl_1     1:04      2:57
 </pre>
-so both synthesis step as well as implementation are much slower in 2018.2
+so both synthesis step, as well as implementation, are much slower in 2018.2
 than they are in 2017.2.
 
 <p>
-Usually I use a fully scripted implementation flow.
+Usually, I use a fully scripted implementation flow.
 The elapsed times for a somewhat larger design, but still small by today's
 standards, for synthesis only, synthesis and implementation, and full
 synthesis+implementation+bitgen are
@@ -37,11 +37,11 @@ synthesis+implementation+bitgen are
     synth+impl       3m10.6s   6m56.1s
     synth+impl+bit   3m50.1s   9m16.1s
 </pre>
-From this it's clear that all three steps are substantially slower.
+From this, it's clear that all three steps are substantially slower.
 
 <p>
 When looking at a CPU monitor (like good old <code>xosview</code>) one
-immediately sees that for 2018.2 runs vivado uses a lot of system state time.
+immediately sees that for 2018.2 runs Vivado uses a lot of system state time.
 In certain phases, which last for half a minute, one sees 75% system time.
 This is not observed for 2017.2.
 Needless to say that tests were done on an otherwise idle machine, and that
@@ -60,10 +60,10 @@ full synth+impl+bit runs
     2018.2: usr:   853.77   sys:   224.00   tot:  1077.77
 </pre>
 It is clearly visible that <code>usr</code> time slightly increases,
-and <code>sys</code> time explodes by more that an order of magnitude.
+and <code>sys</code> time explodes by more than an order of magnitude.
 <p>
-Last but not least I checked in which phases vivado 2018.2 behaves
-differently that vivado 2017.2
+Last but not least I checked in which phases Vivado 2018.2 behaves
+differently that Vivado 2017.2
 <pre class="code">
   --- synth step ---
     INFO: [Device 21-403] Loading part xc7a100tcsg324-1
@@ -93,7 +93,7 @@ differently that vivado 2017.2
 From all the above the bottom line is:
 <ol>
   <li>it seems that a very inefficient I/O library is used</li>
-  <li>it seems that vivado waits for something when loading the IP
+  <li>it seems that Vivado waits for something when loading the IP
     repository</li>
 </ol>
 
@@ -114,8 +114,8 @@ I've done a little bit more research on this issue. I've tested two designs
 so one 'null-design' and one small design, both for a Digilent Basys3 board on
 two systems
 <ul>
-  <li><code>sys1</code>: Ubuntu 16.04 LTS;  dual core</li>
-  <li><code>sys2</code>: Debian 7; XEON quad core with hyper-threading</li>
+  <li><code>sys1</code>: Ubuntu 16.04 LTS;  dual-core</li>
+  <li><code>sys2</code>: Debian 7; XEON quad-core with hyper-threading</li>
 </ul>
 which both have Vivado versions from 2016.4 up to 2018.2 installed, and get as
 elapsed times for my scripted build flow (syn+imp+bit)
@@ -149,10 +149,10 @@ shows for 2018.2
 </ul>
 
 <p>
-I used <code>pipstat</code> to trace this, and tried to visualize this with
+I used <code>pipstat</code> to trace this and tried to visualize this with
 <code>gnuplot</code>. Four figures show the CPU utilization (in %) over time,
 red is system state time, green is user state time.
-Click on figure for full size display:
+Click on figure for full-size display:
 <table>
   <thead>
     <tr>
@@ -226,9 +226,9 @@ measured execution times for a syn+imp+bit build were
 
 Vivado 2018.3 is a bit faster than 2018.2, but still significantly slower
 than 2017.1 or 2017.2. I've also repeated the `pipstat` traces. Vivado
-2018.3 does not longer show the excessive amount of system time seen
-in 2018.2. However, there is still an hard to explain idle time of
-several 10 secconds at the end of the bitgen phase. This was also observed
+2018.3 does no longer show the excessive amount of system time seen
+in 2018.2. However, there is still hard to explain the idle time of
+several 10 seconds at the end of the bitgen phase. This was also observed
 for 2018.2, but not for 2017.1.
 
 <table>

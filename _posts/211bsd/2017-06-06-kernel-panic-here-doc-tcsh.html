@@ -14,7 +14,7 @@ my:
 Using 2.11BSD Version 447 I found that a <i>'here document'</i> in
 <code>tcsh</code> leads to a kernel panic.
 It's absolutely reproducible on my system, both
-when run it on my FPGA PDP-11
+when runnig it on my FPGA PDP-11
 <a href="https://wfjm.github.io/home/w11/">w11a</a>
 or in <code>simh</code>. Just doing
 </p>
@@ -96,8 +96,8 @@ and the source
 <p>
 Whatever <code>tcsh</code> does, it should not lead to a kernel panic, and if it does,
 it is primarily a bug of the kernel. It looks like there are two issues,
-one in <code>tcsh</code>, and one in the kernel. I've a hunch were this might come from,
-but that will take a weekend or two to check on.
+one in <code>tcsh</code>, and one in the kernel. I've got a hunch where this
+might come from, but that will take a weekend or two to check on.
 </p>
 
 <h3>Finding the problem(s) (2017-06-10)</h3>
@@ -106,7 +106,7 @@ Two remarks by Johnny Billquist on
 <a href="{{page.my.tuhs_base}}/2017-June/011656.html">June 7th</a>
 and
 <a href="{{page.my.tuhs_base}}/2017-June/011698.html">June 9th</a>
-where very helpful, the essential hint was Johnny's observation that on
+were very helpful, the essential hint was Johnny's observation that on
 his system he gets an <i>"Illegal instruction - core dumped"</i>
 and no kernel panic.
 
@@ -115,10 +115,10 @@ I'm using a self-build PDP 11/70 on an FPGA, see
 <a href="{{site.my.w11.top}}">GitHub w11 project</a>
 and
 <a href="https://wfjm.github.io/home/w11/">w11 home page</a>,
-which doesn't have a floating point unit (yet). Therefore the kernel is build
-with floating point emulation, thus with
+which doesn't have a floating-point unit (yet). Therefore the kernel is built
+with floating-point emulation, thus with
 <pre class="code">
-FPSIM   YES      # floating point simulator
+FPSIM   YES      # floating-point simulator
 </pre>
 
 <p>
@@ -126,7 +126,7 @@ In a kernel with <code>FPSIM</code> activated the trap handler
 <code>trap()</code>, see
 <a href="{{site.my.ouxr.url_211bsd}}/usr/src/sys/pdp/trap.c.html">trap.c.html</a>,
 calls for each user mode illegal instruction trap <code>fpsim()</code>. In case
-it was a floating point instruction <code>fpsim()</code> emulates it, returns 0,
+it was a floating-point instruction <code>fpsim()</code> emulates it, returns 0,
 and <code>trap()</code> simply returns. If not, <code>fpsim()</code> returns
 the abort signal type, and <code>trap()</code> calls <code>psignal()</code>
 with this signal type, which in general will terminate the offending process.
@@ -163,8 +163,8 @@ This signal number is passed to <code>psignal()</code>, which starts with
       mask = sigmask(sig);
       prop = sigprop[sig];
 </pre>
-The access to <code>sigprop[sig]</code> results into an address in IO space,
-causes an UNIBUS timeout, and in consequence the kernel panic.
+The access to <code>sigprop[sig]</code> results in an address in IO space,
+causes a UNIBUS timeout, and in consequence the kernel panic.
 
 <p>
 After fixing the "$SIGILL." to "$SIGILL"  (removing the extraneous '.') and
@@ -172,7 +172,7 @@ three similar cases the kernel doesn't panic anymore, <code>tcsh</code> crashed 
 illegal instruction trap.
 </p>
 <p>
-Remains the question why <code>tcsh</code> runs onto an illegal instruction.
+Remains the question of why <code>tcsh</code> runs onto an illegal instruction.
 Getting now a tcsh core dump <code>adb</code> gives the answer
 </p>
 <pre class="code">
@@ -209,10 +209,10 @@ The problem is that
 <ul>  
   <li><code>heredoc()</code> and <code>Dtestq()</code> are in
     <code>OV1</code></li>
-  <li>that's why in the end <code>~Dtestq</code> is used a function pointer,
+  <li>that's why in the end <code>~Dtestq</code> is using a function pointer,
     like for all overlay internal function invocations</li>
   <li><code>rscan()</code> is in <code>OV6</code>, when it's called,
-    overlay is switched <code>OV1</code> -> <code>OV6</code></li>
+    the overlay is switched <code>OV1</code> -> <code>OV6</code></li>
   <li>this invalidates the function pointer, which points to some random
      code location, which happens to hold '000045', causing a trap.</li>
 </ul>
@@ -271,7 +271,7 @@ three essential <i>build into the CPU</i> debug tools:
     last 256 instructions or vector fetches, see
     <a href="{{site.my.w11.blob}}/rtl/w11a//pdp11_dmcmon.vhd">
       pdp11_dmcmon.vhd</a>.</li>
-  <li>a <i>breakpoint unit</i> which allows to set instruction or data
+  <li>a <i>breakpoint unit</i> that allows to set instruction or data
     breakpoints, see
     <a href="{{site.my.w11.blob}}/rtl/w11a//pdp11_dmhbpt.vhd">
       pdp11_dmhbpt.vhd</a>.</li>
@@ -281,7 +281,7 @@ three essential <i>build into the CPU</i> debug tools:
       ibd_ibmon.vhd</a>.</li>
 </ul>
 After setting a breakpoint on the trap 004/010 handler an inspection of the
-instruction trace gave the essential information. Below a very condensed
+instruction trace gave the essential information. Below is a very condensed
 and annotated excerpt
 <pre class="code">
   nc ....pc cprptnzvc ..dsrc ..ddst ..dres      vmaddr vmdata

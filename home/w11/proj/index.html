@@ -9,12 +9,13 @@ my:
 <p>
 The project holds all the sources to synthesize a complete system. 
 Complete configurations for several boards are currently part of the project,
-the Digilent S3BOARD, Nexys2, Nexys3, Nexys4, Basys3, Arty A7 and CmodA7 boards. 
+the Digilent S3BOARD, Nexys2, Nexys3, Nexys4, Basys3, Arty A7, and CmodA7
+boards. 
 See section <a href="/home/w11/impl/#h_systems">
  Features: Complete Systems</a> for details.
 </p>
 <p>
-So far two UNIX systems have been successfully booted on the w11a:
+So far, two UNIX systems have been successfully booted on the w11a:
 </p>
 <ul>
   <li><b>UNIX 5th edition</b>
@@ -29,23 +30,23 @@ including links to the disk sets.
 <h2 id="h_issues">Known Issues</h2>
 
 <p>
-There are some known difference between w11a and 11/70 and also known
+There are some known differences between w11a and 11/70 and also known
 bugs in the current w11a implementation (see 
 <a href="{{site.my.w11.blob}}/doc/README_known_issues.md">
   README_known_issues.md</a>).
-They affect the behaviour in cases like fatal stack errors or certain
+They affect the behavior in cases like fatal stack errors or certain
 double faults which don't occur in the normal operation of an operating
 system, and if they happen, in general lead to a crash anyway.
 </p>
 <p>
 The <a href="{{site.my.w11.blob}}/doc/w11a_known_differences.md">
   known differences</a>
-are not considered worth fixing them, while the
+are not considered worth fixing, while the
 known bugs will be addressed in future versions of the w11a core.
 </p>
 <p>
 Given that the <b>w11a boots 2.11BSD</b> the cores are considered 
-<b>'Design Done'</b> and <b>'FPGA proven'</b>. The USB based Rlink
+<b>'Design Done'</b> and <b>'FPGA proven'</b>. The USB-based Rlink
 interface and the backend software perform very well. Given the loose ends 
 listed above the project is still considered <b>'Beta'</b> quality.
 </p>

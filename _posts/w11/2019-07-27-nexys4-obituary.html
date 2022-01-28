@@ -13,12 +13,12 @@ my:
 I bought a Nexys4 board in January 2015. It was my first board with a Series-7
 FPGA. The initial development was done with ISE 14.7 because early Vivado
 versions did not properly synthesize the VHDL coding style used in the w11
-project. Vivado quickly matured, and with this the Nexys4 board became the
+project. Vivado quickly matured, and with this, the Nexys4 board became the
 main development platform for the w11 project in the last four and a half years.
 </p>
 
 <p>
-Out of the blue, on July 20th 2019, the Nexys4 board stopped working.
+Out of the blue, on July 20th, 2019, the Nexys4 board stopped working.
 No functional changes on firmware or backend code had been done, only
 lots of <a href="2019-07-21-spdx.html">SPDX comment changes</a>.
 Board configuration worked, but any further rlink communication failed
@@ -45,7 +45,7 @@ a CRC NAK.
 
 <p>
 A <code>NAK</code> comma symbol (represented as <code>ca 6a</code>) is
-send by the rlink core when a received command can't be processed. The
+sent by the rlink core when a received command can't be processed. The
 following byte, the <code>NAK code</code>, encodes one of eight abort
 conditions. The code <code>b8</code> means <code>ccrc abort</code>,
 or in other words, that the CRC check for the command request failed.
@@ -55,22 +55,23 @@ A lot of systematic testing was done
 </p>
 <ul>
   <li><code>tbrun</code> test benches run fine, thus no functional issues.</li>
-  <li>all recent Vivado version were tried, 2017.4, 2018.1, 2018.2,
-    2018.3, 2019.1. Always same result, thus not a synthesis issue.</li>
+  <li>all recent Vivado versions were tried, 2017.4, 2018.1, 2018.2,
+    2018.3, 2019.1. Always the same result, thus not a synthesis issue.</li>
   <li>w11 works fine on Arty, Basys3, CmodA7 as well as Nexys3.</li>
   <li>on Nexys4 not only the <code>sys_w11a_n4</code> design fails, but
     also the <code>sys_tst_rlink_n4</code> design, also with a
     <code>NAK-ccrc</code> after a few commands.</li>
-  <li>tried rlink speeds of 12, 6, 3, and 1 Mbps, always same abort at the
+  <li>tried rlink speeds of 12, 6, 3, and 1 Mbps, always same abort at
     the command.</li>
   <li>the backend software works with all other boards, as well as in the
     behavioral simulation context, is thus very likely OK.</li>
 </ul>
 
 <p>
-At this point is was natural to ask whether the serial data path, starting
+At this point, it was natural to ask whether the serial data path, starting
 at the FTDI FT2232H, was somehow broken. The FT2232H as such seems to be OK
-because FPGA configuration, which uses one of the two channels, always worked.
+because the FPGA configuration, which uses one of the two channels, always
+worked.
 So I ran the <code>sys_tst_serloop2_n4</code> design
 </p>
 <pre class="code">
@@ -100,7 +101,7 @@ So I ran the <code>sys_tst_serloop2_n4</code> design
 </pre>
 
 <p>
-After this puzzling finding another round of testing started         
+After this puzzling finding, another round of testing started         
 </p>
 <ul>
   <li>tried the <code>sys_tst_sram_n4</code> design, it quickly fails
@@ -124,16 +125,16 @@ come up with are somehow excluded:
     older code versions, e.g. V0.753, which definitely worked, also fail.</li>
   <li>if some LUTs or FLOPs are broken in the FPGA one should again see
     different signatures with different Vivado versions and even older
-    project version due to different placements. I've had a board with an
-    internal fault before, but in that case the behavior was very sensitive
+    project versions due to different placements. I've had a board with an
+    internal fault before, but in that case, the behavior was very sensitive
     to minor design changes.</li>
   <li>data could get clobbered between the FT2232H USB UART and the FPGA,
-    but than one should see a dependence on link speed. But in this case
+    but then one should see a dependence on link speed. But in this case,
     <code>sys_tst_serloop2_n4</code> should also fail, but it doesn't.</li>
 </ul>
 
 <p>
 The sad bottom line is that the Nexys4 board is apparently broken. It is
 quite unclear what exactly is damaged. The only thing I can do is to put
-the Nexys4 board aside and buy a Nexys4 A7 as replacement.
+the Nexys4 board aside and buy a Nexys4 A7 as a replacement.
 </p>

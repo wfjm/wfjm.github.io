@@ -42,12 +42,12 @@ Long term goal is to re-create a PDP-11/70MP (aka 11/74) system.
 This up to 4 CPU 
 <a href="https://en.wikipedia.org/wiki/Symmetric_multiprocessing">
 symmetric multiprocessor system</a> was developed in the 
-late '70's by DEC, but was never marketed. See article 
+late '70s by DEC but was never marketed. See article 
 {% include wbm-link.html 
    date="20160529061435"
    link="http://www.village.org/pdp11/faq.pages/never11s.html"
    text="The Never 11's" %}.
-A few prototypes were build, see
+A few prototypes were built, see
 <a href="#Fig_R-2">Figure R-2</a> for a picture of
 PHEANX/CASTOR. Some documentation has survived, like the preliminary DEC 
 <a href="http://www.bitsavers.org/pdf/dec/pdp11/1174/EK-70MP-TM_PRE_1170mp_Prelim_Technical_Manual_1977.pdf">
@@ -58,8 +58,8 @@ operating system,
 see for example the set and remove affinity system calls in the
 <a href="http://www.bitsavers.org/pdf/dec/pdp11/rsx11/RSX11M_V4.1_Apr83/4_ProgramDevelopment/AA-L675A-TC_execRef_Nov81.pdf">
 Executive Manual</a> (STAF$ on p 5-193 and RMAF$ on p 5-128).
-Worth to note in this context is that already in 1972 a 16 node SMP
-system based on PDP-11 CPU's was build by
+Worth noting in this context is that already in 1972 a 16 node SMP
+system based on PDP-11 CPU's was built by
 <a href="https://en.wikipedia.org/wiki/William_Wulf">W. Wulf</a> and 
 <a href="https://en.wikipedia.org/wiki/Gordon_Bell">G. Bell</a>
 at Carnegie Mellon, the <a href="https://en.wikipedia.org/wiki/C.mmp">C.mmp</a>,
@@ -95,7 +95,7 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
 
 <h2 id="h_mid">Mid term</h2>
 <ul>
-  <li><b>DEUNA</b>: add loopback, chaining ect; support OS beyond 211bsd</li>
+  <li><b>DEUNA</b>: add loopback, chaining etc; support OS beyond 211bsd</li>
   <li><b>DZ11</b>: add full modem support</li>
 </ul>
 
@@ -105,7 +105,7 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
     The FPP will be <b>asynchronous</b>, with a more efficient coupling
     than in the original KB11-C CPU plus FP11-C FPP combination.</li>
   <li><b>new cache system</b>: now <b>write-back</b>, wider cache lines,
-    suitable to build a  <b>11/70MP multiprocessor system</b>. 
+    suitable to build an  <b>11/70MP multiprocessor system</b>. 
     In contrast to the original 11/70MP a state-of-the-art 
     <b>cache coherence</b> will be implemented.</li>
   <li><b>configurable CPU</b>: make CPU features build-time configurable,
@@ -121,7 +121,7 @@ for the <a href="http://doi.acm.org/10.1145/1480083.1480098">Fall JCC 1972</a>.
 <h2 id="h_maybe">Maybe term</h2>
 Nice ideas, maybe they are realized, maybe not
 <ul>
-  <li><b>TOY clock</b>: the time-of-year clock was never part of a 11/70
+  <li><b>TOY clock</b>: the time-of-year clock was never part of an 11/70
     system, but it is very convenient to have.</li>    
   <li><b>DMC11</b>: the old way to interconnect nodes via point-to-point
     connections. Can be used with 211bsd to transport ethernet frames.</li>
@@ -129,7 +129,7 @@ Nice ideas, maybe they are realized, maybe not
   <li><b>DU11</b>: Synchronous line interface. Use with
     <a href="https://en.wikipedia.org/wiki/IBM_2780/3780">IBM 3780</a>
     <a href="https://en.wikipedia.org/wiki/Remote_job_entry">RJE</a>
-    terminal emulation to link to a IBM
+    terminal emulation to link to an IBM
     <a href="https://en.wikipedia.org/wiki/IBM_System/370">System/370</a>
     <a href="https://en.wikipedia.org/wiki/IBM_mainframe">mainframe</a>
     emulated by <a href="http://www.hercules-390.org/">Hercules</a>;

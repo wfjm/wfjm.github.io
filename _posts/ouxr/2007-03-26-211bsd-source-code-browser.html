@@ -9,28 +9,28 @@ my:
 
 <p>
 When searching lately a lot through the UNIX 2.11BSD source code I
-wanted many times a hyperlinked and cross referenced rendition of the
+wanted many times a hyperlinked and cross-referenced rendition of the
 sources, much like <a href="http://www.doxygen.org/">doxygen</a> or
 <a href="http://lxr.free-electrons.com/">lxr</a> does it.
-For kernel, lib and user code, for C and assembler.
+For kernel, library, and userland code, for C and assembler.
 </p>
 <p>
 Since none of the existing tools seemed to do what I wanted, I wrote
-a perl script generating such a html'ized version of the source code.
+a Perl script generating such a html'ized version of the source code.
 </p>
 <p>
-The tool far from finished, but might already be useful. For a tour
+The tool is far from finished, but might already be useful. For a tour
 start for example with the code of the <code>cp</code> command
 </p>
 <pre>
   <a href="{{url_211bsd}}/usr/src/bin/cp.c.html">{{url_211bsd}}/usr/src/bin/cp.c.html</a>
 </pre>
-and click along. The links connect C and asm code, the user land code,
-libc and kernel code. Look to the <code>readdir()</code> call in line 197,
+and click along. The links connect C and asm code, the userland code,
+libc, and kernel code. Look to the <code>readdir()</code> call in line 197,
 a click gets you into the libc module implementing <code>readdir()</code>.
 A further click on <code>read()</code> into the assembler stub doing the
 system call, and a click on the kernel handler listed there gets you into
-the kernel source. Here the links of the tour
+the kernel source. Here are the links to the tour
 <pre>
   <a href="{{url_211bsd}}/usr/src/bin/cp.c.html#n:197">{{url_211bsd}}/usr/src/bin/cp.c.html#n:197</a>
   <a href="{{url_211bsd}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir">{{url_211bsd}}/usr/src/lib/libc/gen/readdir.c.html#s:_readdir</a>
@@ -45,7 +45,7 @@ The background color tells you in which territory you are in
   <span class="ouxr-ckern">red    </span>   kernel
   <span class="ouxr-cnet">gold   </span>   network code (running in supervisor)
   <span class="ouxr-clib">green  </span>   libraries
-  <span class="ouxr-cuser">blue   </span>   user level code
+  <span class="ouxr-cuser">blue   </span>   userland code
 </pre>
 <p>
 If you want a kernel tour, start at

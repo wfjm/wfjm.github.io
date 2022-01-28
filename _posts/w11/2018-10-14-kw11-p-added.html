@@ -9,16 +9,16 @@ my:
 <h2>KW11-P Programmable Clock Added</h2>
 
 <p>
-The <code>w11</code> had from from the very beginning a <code>KW11-L</code>
+The <code>w11</code> had from the very beginning a <code>KW11-L</code>
 line frequency clock.
-The <code>KW11-L</code> is a mandatory device and used by all operating
+The <code>KW11-L</code> is a mandatory device used by all operating
 systems to define the <i>system time</i>.
 And it is a very simple device, it just generates interrupts every
 20 msec (w11 uses 50 Hz line frequency, simply because I live in Europe).
 </p>
 <p>
 DEC offered for the <code>UNIBUS</code> systems a more sophisticated device,
-the <code>KW11-P</code>, which can be used as programmable high-precision
+the <code>KW11-P</code>, which can be used as a programmable high-precision
 timer.
 The central element is a 16 bit counter, which is advanced by one of four
 selectable inputs
@@ -33,7 +33,7 @@ selectable inputs
 <p>
 The <code>KW11-P</code> can generate an interrupt when a configurable
 value of the counter is reached, or just count and be used to measure time
-with a resolution of down to 10 usec.
+with a resolution of down to 10 &micro;s.
 The DEC manual
 <a href="{{site.my.bitsaver.dec}}/unibus/DEC-11-HPWB-D_KW11P_Oct72.pdf">
   DEC-11-HPWB-D</a> describes many implementation details but lacks a
@@ -55,7 +55,7 @@ The implementation is in
 The <i>external event</i> port <code>EXTEVT</code> is connected in
 <a href="{{site.my.w11.blob}}/rtl/ibus/ibdr_maxisys.vhd">ibdr_maxisys.vhd</a>
 to the <i>instruction decode</i> signal <code>IDEC</code>,
-which is usually connected in the  <code>w11</code> top level design to the
+which is usually connected in the  <code>w11</code> top-level design to the
 <code>DM_STAT_EXP.se_idec</code> signal provided by
 <a href="{{site.my.w11.blob}}/rtl/w11a/pdp11_sys70.vhd">pdp11_sys70</a>.
 </p>
@@ -64,22 +64,22 @@ which is usually connected in the  <code>w11</code> top level design to the
 I added the <code>KW11-P</code> with three use cases in mind:
 </p>
 <ul class="bigli">
-  <li>as very fast interrupt source for test benches.
-    With the external event mode it is possible to generate an interrupt
+  <li>as a very fast interrupt source for test benches.
+    With the external event mode, it is possible to generate an interrupt
     after a preset number of instructions. Presets of as low as 20 are
-    feasible. This allows to write interrupt tests which execute in a
+    feasible. This allows writing interrupt tests which execute in a
     few 100 instructions, very nice for fast behavioral simulations,
     like in Section B of
     <a href="{{site.my.w11.blob}}/tools/tbench/w11a_kw11p/test_kw11p_int.tcl">
       test_kw11p_int.tcl</a>.
   </li>
-  <li>as high resolution timer for test benches.
+  <li>as a high-resolution timer for test benches.
     Using the 100 kHz mode allows to either measure elapsed times
-    or generate interrupts with a precision of 10 usec. Very nice for
+    or generate interrupts with a precision of 10 &micro;c. Very nice for
     tests of the I/O system.
     </li>
   <li>and as long shot: support 2.11BSD kernel profiling.
-    The 2.10BSD kernel had a very simple but very memory effective 
+    The 2.10BSD kernel had a very simple but very memory-effective 
     <i>kernel profiling</i> feature, which simply histogramed the PC value 
     when in kernel mode. This was never ported to 2.11BSD, but 2.10BSD code
     pieces still linger around in the 2.11BSD code base, see
@@ -97,7 +97,7 @@ I added the <code>KW11-P</code> with three use cases in mind:
       <li>kernel overlays must be handled</li>
       <li>supervisor mode should be handled (the networking code)</li>
       <li>the interrupt code doing the sampling must be short</li>
-      <li>the user land analysis code will certainly gain complexity</li>
+      <li>the userland analysis code will certainly gain complexity</li>
     </ul>
   </li>
 </ul>

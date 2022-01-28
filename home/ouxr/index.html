@@ -114,40 +114,40 @@ my:
 <p>
 The bring-up of UNIX 2.11BSD on the <a href="/home/w11/">w11</a> system
 required a lot of very detailed studies of the source code. That called
-quickly for a hyper-linked and cross referenced rendition of the sources,
+quickly for a hyper-linked and cross-referenced rendition of the sources,
 much like <a href="http://www.doxygen.org/">doxygen</a> or
 <a href="http://lxr.free-electrons.com/">lxr</a> does it.
 The desired features were:
 </p>
 <ul>
-  <li>cover boot, kernel, networking, library and user level code</li>
-  <li>cover C, assembler and other relevant languages with syntax
+  <li>cover boot, kernel, networking, library, and userland code</li>
+  <li>cover C, assembler, and other relevant languages with syntax
     highlighting</li>
   <li>provide 'what is used where' information, over the whole system</li>
   <li>provide hyperlinks for a fast code path analysis, especially
-    across the user,library,kernel interfaces</li>
+    across the user-library-kernel interfaces</li>
   <li>support to follow the execution logic of a system call starting from
     user code, through the library layer, through the kernel interface, to
     the kernel code by just following hyperlinks</li>
 </ul>
 <p>
 Since none of the existing tools seemed to match that profile a new tool
-was written. The task is strongly simplified by the facts that the code
-base is quasi static and that the size of the code base is small by today's
-standards, which allows to hold the meta date od the full code base in
+was written. The task is strongly simplified by the fact that the code
+base is quasi-static and that the size of the code base is small by today's
+standards, which allows holding the metadata of the full code base in
 memory for analysis.
-The tool takes the whole file system and creates at set of static html files
+The tool takes the whole file system and creates a set of static Html files
 which show all sources with proper hyperlinks.
 Even though the original motivation was to understand the 2.11BSD system,
-the tool was design such that all UNIX systems with similar structure can be
-processed. So far the 2.11BSD configuration is certainly the most advanced,
+the tool was designed such that all UNIX systems with a similar structure can
+be processed. So far the 2.11BSD configuration is certainly the most advanced,
 that's why in the following all examples refer to the
 <a href="{{url_211bsd}}/">2.11BSD code base</a>.
 </p>
 
 <h2 id="h_example">Brief Example</h2>
 <p>
-It's very easy to follow the execution flow, even across user-kernel boundary.
+It's very easy to follow the execution flow, even across a user-kernel boundary.
 A simple example starts in the code of the
 {% include ouxr-211bsd-man.html n="telnet" s="1" %}
 command
@@ -169,7 +169,7 @@ command
   {% include ouxr-211bsd-flow-dt.html
      col="ouxr-clib"  path="/usr/src/lib/libc/pdp/sys/__socket.s.html#s:_socket" %}
   <dd>which is an assembler stub in <code>libc</code> which implements the
-    user land side of the 
+    userland side of the 
     {% include ouxr-211bsd-man.html n="socket" s="2" %}
     system call.
     The comments summarize the control flow via <code>trap</code> instruction,
@@ -208,12 +208,12 @@ command
     which is finally the handler doing the work.
   </dd>
 </dl>
-so the tour started in user land and went through kernel mode to a handler
+so the tour started in userland and went through kernel mode to a handler
 executing in supervisor mode.
 <p>
-Each source is full cross referenced, with the whole system code base.
+Each source is fully cross-referenced, with the whole system codebase.
 Clicking on a symbol definition (or the X in the sidebar) gets you to the
-cross referencing info's. That gives comprehensive answers to questions like
+cross-referencing info. This gives comprehensive answers to questions like
 </p>
 <ul>
   <li><a href="{{url_211bsd}}/usr/src/lib/libc/pdp/gen/setjmp.s.html#xref:s:_setjmp">
@@ -271,9 +271,9 @@ The language sources are syntax highlighted with the common color code:
 
 <h3 id="h_navi">Navigation</h3>
 <p>
-A navigation bar lists all defined functions, global variables, macros
+A navigation bar lists all defined functions, global variables, macros,
 and structs. Clicking the name leads to the line of definition, clicking
-the 'X' to the cross reference listing.
+the 'X' to the cross-reference listing.
 Each relevant object in a htlmized source file can be addressed via an URL:
 </p>
 <table class="trtoggle mind2em">
@@ -315,9 +315,9 @@ The background color tells in which territory you are in:
   </tbody>
 </table>
 
-<h3 id="h_xref">Cross Reference</h3>
+<h3 id="h_xref">Cross-Reference</h3>
 <p>
-The cross reference listing shows where global symbols, macro's and struct's
+The cross-reference listing shows where global symbols, macro's and struct's
 are defined and where they are used, in the current source as well as in the
 whole system:
 </p>

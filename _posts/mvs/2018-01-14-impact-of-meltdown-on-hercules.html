@@ -35,7 +35,7 @@ as included in
 <a href="http://wotho.ethz.ch/tk4-/">tk4-</a>,
 in a dual CPU configuration (<code>NUMCPU=2 MAXCPU=2</code>) before and after
 the updates fighting Spectre/Meltdown were installed.
-The <code>CS</code>, <code>CDS</code> and <code>TS</code> tests in the
+The <code>CS</code>, <code>CDS</code>, and <code>TS</code> tests in the
 <i>lock missed</i> configuration show a clear effect, times are up by
 more than a factor two, all other tests stay the same within measurement
 precision. See the test reports
@@ -57,15 +57,15 @@ T621  MVI;TS m (ones)        :    342.58    729.77
 <p>
 As said, all other instruction times are essentially unchanged.
 What happened is easy to explain.
-The <code>CS</code>, <code>CDS</code> and <code>TS</code> emulation
+The <code>CS</code>, <code>CDS</code>, and <code>TS</code> emulation
 code contains
 </p>
 <pre class="code">
   if (sysblk.cpus > 1)  <a href="http://man7.org/linux/man-pages/man2/sched_yield.2.html">sched_yield()</a>;
 </pre>
-to get spin locks in the <i>lock missed</i> case efficiently handled.
+to get spinlocks in the <i>lock missed</i> case efficiently handled.
 That's why the lock missed case shows a  substantially slower instruction
-time than the lock taken case (which takes only about 80-90 usec). So this
+time than the lock taken case (which takes only about 80-90 &micro;s). So this
 test is essentially a system call benchmark, thus very sensitive to the
 KPTI patch.
 
@@ -90,14 +90,14 @@ The Meltdown vulnerability is caused by a combination of
 </ul>
 
 <p>
-The key culprit are the delayed exceptions. This is a feature of the concrete
-implementation of a processor architecture, not of a processor architecture
+The key culprit is the delayed exceptions. This is a feature of the concrete
+implementation of the processor architecture, not of a processor architecture
 itself. Therefore for example Intel has this unfortunate feature, while
 AMD claims it has not.
 </p>
 
 <p>
-Vulnerable is the host CPU and of course not an emulated CPU. The side channel
+Vulnerable is the host CPU and of course not an emulated CPU. The side-channel
 attack requires good time resolution, so it's imho unlikely that System/390
 code executed by Hercules can be either source or target of an attack.
 </p>
@@ -167,7 +167,7 @@ Observations are
 </p>
 <ul>
   <li>simple instructions, like <code>LR</code>, <code>LA</code>,
-    <code>L</code>, or <code>ST</code>, have very similar speed on both
+    <code>L</code>, or <code>ST</code>, have very similar speeds on both
     systems.</li>
   <li>lock misses are apparently more costly in a Linux under VitualBox under
     Windows environment. Not too astonishing, most likely all three layers

@@ -37,8 +37,8 @@ in the Algol F IVP code <code>IEXSAMP4</code> and used for algorithm timing.
 It essentially returns the sum of the <code>ACB</code> fields
 <code>ASCBEJST</code> and <code>ASCBSRBT</code>. The essential drawback is
 that these fields are only updated after each dispatch, and a test quickly
-showed that the CPU time retrieved this way has errors of up to 170 msec
-(seen on a 2 CPU systems with only one user job active).
+showed that the CPU time retrieved this way has errors of up to 170 ms
+(seen on a 2 CPU system with only one user job active).
 </p>
 
 <p>
@@ -62,7 +62,7 @@ A comment in the <code>TIMED</code> function finally pointed me to the proper so
 </div>
 
 <p>
-<code>LCCADTOD</code> is a <code>LCCA</code> field which holds the TOD
+<code>LCCADTOD</code> is a <code>LCCA</code> field that holds the TOD
 of the last dispatch. So I searched the whole <code>MVS 3.8J</code> code base
 for code using <code>LCCADTOD</code>. Easy to do after a full export with the
 hercexport tool (see posting on
@@ -88,16 +88,16 @@ implementations is
   $SLD  R4,LCCADTOD
   $ALD  R4,ASCBEJST
 </pre>
-where <code>$ALD</code> and <code>$SLD</code> are macros for double word
+where <code>$ALD</code> and <code>$SLD</code> are macros for double-word
 integer add/sub (available on the same CBT volume in PDS
 <code>cbtcov.file188</code>). A quick test immediately shows that this works
-fine and returns a high resolution CPU time.
+fine and returns a high-resolution CPU time.
 
 <p>
-However, the key trick of this method, that the time since last dispatch
+However, the key trick of this method, that the time since the last dispatch
 is added, causes also a vulnerability. If a dispatch occurs between the
 subtract of <code>LCCADTOD</code> and the add of <code>ASCBEJST</code> the
-CPU time spend during the previous dispatch is double counted. Not very likely
+CPU time spent during the previous dispatch is double-counted. Not very likely
 to happen, but possible, especially on a single CPU system with some I/O load.
 To protect against this vulnerability, I store the <code>LCCADTOD</code> value
 at the beginning of the function, and check after all arithmetic whether the
@@ -151,14 +151,14 @@ Any comments on the function logic are very much appreciated, especially on
 </p>
 <ul>
   <li>is this solution portable also to current MVS versions ?</li>
-  <li>is there still any hidden vulnerability which affects timing
+  <li>is there still any hidden vulnerability that affects timing
     precision ?</li>
   <li>should the <code>SRB</code> time be included (like in the ALGOL
     example), or not (like in CERNLIB and CBT) ?</li>
 </ul>
 
 <p>
-A test code with the logic described above as available as part of
+A test code with the logic described above is available as part of
 <a href="{{site.my.mvs_sp.top}}">s370_perf project</a>, see
 <a href="{{site.my.mvs_sp.blob}}/codes/test_cputime.asm">source file</a>
 and
