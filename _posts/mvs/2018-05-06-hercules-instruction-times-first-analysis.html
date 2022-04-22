@@ -2,7 +2,7 @@
 title: "Hercules instruction times from s370_perf"
 tags:  ["mvs"]
 my:
-  changedate: 2018-12-27
+  changedate: 2022-04-21
 ---
 
 <h2>Hercules instruction times from s370_perf - a first analysis and observations</h2>
@@ -19,7 +19,7 @@ The page contains a
 </p>
 
 <p>
-Up front a proviso: there are significant deviations from a simple additive
+Upfront a proviso: there are significant deviations from a simple additive
 instruction timing model. See section
 <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-31_sys2.md#user-content-find-itadd">
 additivity of instruction times</a>.
@@ -37,7 +37,7 @@ works, e.g.
   <li><code>ALR</code> is faster than <code>AR</code>, see section
     <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-31_sys2.md#user-content-find-alr">
       ALR timing</a>.</li>
-  <li><code>CS</code>, <code>CDS</code> and <code>TS</code> slow in the
+  <li><code>CS</code>, <code>CDS</code>, and <code>TS</code> are slow in the
     <i>lock missed case</i> for multi-CPU setups, see section
     <a href="{{site.my.mvs_sp.blob}}/narr/2018-03-31_sys2.md#user-content-find-lock">
       CS,CDS, TS performance</a>.</li>
@@ -92,4 +92,7 @@ but the full analysis will take some time.
     Yahoo! Group - Hercules-390</a>
   see
   <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/83415">topic 83415</a>. 
+  <b>Dead link since 2020-12-15</b>: Yahoo! Groups
+  <a href="https://twitter.com/yahoocare/status/1316487848867123201?lang=en">
+    was discontinued by Verizon</a>.
 </div>

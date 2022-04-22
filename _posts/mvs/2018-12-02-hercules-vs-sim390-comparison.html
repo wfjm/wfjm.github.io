@@ -2,13 +2,13 @@
 title: "Hercules vs Sim390 - a comparison"
 tags:  ["mvs"]
 my:
-  changedate: 2018-12-27
+  changedate: 2022-04-21
 ---
 
 <h2>Hercules vs Sim390 - a comparison</h2>
 
 <p>
-Michael Short was so kind to run a 
+Michael Short was so kind as to run a
 <a href="{{site.my.mvs_sp.blob}}/doc/s370_perf.md">s370_perf</a>
 version ported to
 <a href="https://en.wikipedia.org/wiki/MUSIC/SP">MUSIC/SP</a>
@@ -19,7 +19,7 @@ The different OS should have no sizable impact on the measured instruction
 timings since <code>SVC</code> and privileged instructions, which depend on
 system response times, aren't covered.
 A reference run with Hercules 4.0 on the same host CPU is available too.
-The data and full analysis is under
+The data and full analysis are under
 </p>
 <div class="mind2em">
   <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-herc40.md">
@@ -37,7 +37,8 @@ The key findings are
     <a href="{{site.my.mvs_sp.blob}}/narr/README_narr.md#user-content-lmark">
       lmark</a>
     MIPS ratio of 6.39 to 41.54.</li>
-  <li>simple instructions, like LR R,R, are about a factor 9 slower, see
+  <li>simple instructions, like <code>LR R,R</code>, are about a factor 9
+    slower, see
     <a href="{{site.my.mvs_sp.blob}}/narr/2018-07-30_ms1-sim390.md#user-content-find-lr">
       section LR timing</a>.</li>
   <li>branch timing does not depend on same/different page, see
@@ -49,7 +50,7 @@ The key findings are
 </ul>
 
 <p>
-The overall summary is that Hercules has a much more efficient handling of
+The overall summary is that Hercules has much more efficient handling of
 instruction fetch and decoding and virtual to real address mapping.
 </p>
 
@@ -69,4 +70,7 @@ Any remarks and comments are very welcome.
     Yahoo! Group - Hercules-390</a>
   see
   <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/84175">topic 84175</a>. 
+  <b>Dead link since 2020-12-15</b>: Yahoo! Groups
+  <a href="https://twitter.com/yahoocare/status/1316487848867123201?lang=en">
+    was discontinued by Verizon</a>.
 </div>

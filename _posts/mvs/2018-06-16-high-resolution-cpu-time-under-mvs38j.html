@@ -2,7 +2,7 @@
 title: "Reliable High-Resolution CPU time under MVS 3.8J"
 tags:  ["mvs"]
 my:
-#  changedate: 2018-06-16
+#  changedate: 2022-04-21
 ---
 
 <h3>Reliable high-resolution CPU TIME retrieval under MVS 3.8J</h3>
@@ -26,8 +26,8 @@ distribution. The methods used for CPU time retrieval on modern MVS systems
 are not available, most notably
 </p>
 <ul>
-  <li><code>TIMEUSED</code> macro not available (was introduced later)</li>
-  <li><code>TCBTTIME</code> field in <code>TCB</code> not available
+  <li><code>TIMEUSED</code> macro is not available (was introduced later)</li>
+  <li><code>TCBTTIME</code> field in <code>TCB</code> is not available
     (was introduced later)</li>
 </ul>
 
@@ -62,7 +62,7 @@ A comment in the <code>TIMED</code> function finally pointed me to the proper so
 </div>
 
 <p>
-<code>LCCADTOD</code> is a <code>LCCA</code> field that holds the TOD
+<code>LCCADTOD</code> is an <code>LCCA</code> field that holds the TOD
 of the last dispatch. So I searched the whole <code>MVS 3.8J</code> code base
 for code using <code>LCCADTOD</code>. Easy to do after a full export with the
 hercexport tool (see posting on
@@ -100,7 +100,7 @@ subtract of <code>LCCADTOD</code> and the add of <code>ASCBEJST</code> the
 CPU time spent during the previous dispatch is double-counted. Not very likely
 to happen, but possible, especially on a single CPU system with some I/O load.
 To protect against this vulnerability, I store the <code>LCCADTOD</code> value
-at the beginning of the function, and check after all arithmetic whether the
+at the beginning of the function and check after all arithmetic whether the
 <code>LCCADTOD</code> value changed. If yes, a dispatch happened, and the
 whole procedure is simply re-tried. Taken all together the core of my
 <code>CPUTIM</code> method looks like
@@ -172,4 +172,7 @@ and
     Yahoo! Group - H390-MVS</a>
   see
   <a href="https://groups.yahoo.com/neo/groups/H390-MVS/conversations/topics/18217">topic 18217</a>.
+  <b>Dead link since 2020-12-15</b>: Yahoo! Groups
+  <a href="https://twitter.com/yahoocare/status/1316487848867123201?lang=en">
+    was discontinued by Verizon</a>.
 </div>

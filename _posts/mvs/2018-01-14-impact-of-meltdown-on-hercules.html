@@ -2,7 +2,7 @@
 title: "Meltdown patches and Hercules performance"
 tags:  ["mvs"]
 my:
-  changedate: 2018-07-07
+  changedate: 2022-04-21
 ---
 
 <h2>Impact of Meltdown kernel updates on Hercules performance</h2>
@@ -36,8 +36,8 @@ as included in
 in a dual CPU configuration (<code>NUMCPU=2 MAXCPU=2</code>) before and after
 the updates fighting Spectre/Meltdown were installed.
 The <code>CS</code>, <code>CDS</code>, and <code>TS</code> tests in the
-<i>lock missed</i> configuration show a clear effect, times are up by
-more than a factor two, all other tests stay the same within measurement
+<i>lock missed</i> configuration show a clear effect, times are up by more
+than a factor of two, and all other tests stay the same within measurement
 precision. See the test reports
 </p>
 <ul>
@@ -86,7 +86,7 @@ The Meltdown vulnerability is caused by a combination of
   <li>speculative execution</li>
   <li>sub-optimal handling of L1 cache and TLB</li>
   <li>which leads to delayed exceptions</li>
-  <li>which allow a side-channel attack</li>
+  <li>which allows a side-channel attack</li>
 </ul>
 
 <p>
@@ -178,7 +178,7 @@ Observations are
   
 <p>
 Both systems fall likely in the <i>'old CPU'</i> plus <i>'old Kernel'</i>
-category and thus show the worst case impact of the KPTI kernel patches.
+category and thus show the worst-case impact of the KPTI kernel patches.
 </p>
 
 <div class="notebox">
@@ -187,4 +187,7 @@ category and thus show the worst case impact of the KPTI kernel patches.
     Yahoo! Group - Hercules-390</a>
   see
   <a href="https://groups.yahoo.com/neo/groups/hercules-390/conversations/topics/82874">topic 82874</a>. 
+  <b>Dead link since 2020-12-15</b>: Yahoo! Groups
+  <a href="https://twitter.com/yahoocare/status/1316487848867123201?lang=en">
+    was discontinued by Verizon</a>.
 </div>
