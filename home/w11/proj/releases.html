@@ -2,7 +2,7 @@
 title: "Releases"
 #
 my:
-  changedate: 2022-04-21
+  changedate: 2022-04-24
 #
   future:
 #  - tag: 0.84
@@ -25,19 +25,27 @@ my:
 #    dat: Q2'2020
 #    com: in work
 #    txt: cleanups; oskit test automation; w11a I/O complete
-  - tag: 0.791
+  - tag: 0.792
     dat: Q2'2022
     com: in work
-    txt: 'catch-up after 2 year hiatus; base system: C++17, Vivado 2020.1; use GitHub Actions'
+    txt: 't.b.d.'
 #
   releases:
+  - tag: w11a_V0.791
+    dat: 2022-04-24
+    typ: no
+    com: 7ec5be2a306302fa134c1f6b898bdafce3bc2d54
+    fil: doc/CHANGELOG.md
+    nam: CHANGELOG
+    txt: 'GitHub actions; Vivado 2020.1; ostest; finalize <a href="/home/w11/inst/boards.html#digi_nexysa7">Nexys A7</a> (closes <a href="https://github.com/wfjm/w11/issues/16">issue #16</a>)'
+
   - tag: w11a_V0.79
     dat: 2019-07-27
     typ: no
     com: 1742dfab4cb26c748ef98cf47632e457d6f41b66
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: 'use <b><a href="https://wfjm.github.io/blogs/w11/2019-07-21-spdx.html">SPDX</a></b> license tags; vivado 2019.1; Coverity <a href="https://wfjm.github.io/blogs/w11/2019-06-14-coverity-fixes-done.html">defect free</a>; TM11 odd record length (closes <a href="https://github.com/wfjm/w11/issues/8">issue #8</a>)'
+    txt: 'use <b><a href="https://wfjm.github.io/blogs/w11/2019-07-21-spdx.html">SPDX</a></b> license tags; Vivado 2019.1; Coverity <a href="https://wfjm.github.io/blogs/w11/2019-06-14-coverity-fixes-done.html">defect free</a>; TM11 odd record length (closes <a href="https://github.com/wfjm/w11/issues/8">issue #8</a>)'
 
   - tag: w11a_V0.78
     dat: 2019-06-01
@@ -77,7 +85,7 @@ my:
     com: 40d48680e91ea7f710abdb609f5df258ced3efab
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: Add Digilent <a href="https://store.digilentinc.com/arty-s7-spartan-7-fpga-board-for-makers-and-hobbyists/"><b>Arty S7</b></a> support; <i>only simulation tested !</i> ; vivado 2017.2
+    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_artys7"><b>Arty S7</b></a> support; <i>only simulation tested !</i> ; Vivado 2017.2
 
   - tag: w11a_V0.751
     dat: 2018-08-10
@@ -85,7 +93,7 @@ my:
     com: f78b5715c6babd4e907c0f8cc6cb6842e2b4a4d5
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: Add Digilent <a href="http://store.digilentinc.com/cmod-a7-breadboardable-artix-7-fpga-module/"><b>Cmod A7</b></a> support; vivado 2017.1; add Unix 7th oskit
+    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_cmoda7"><b>Cmod A7</b></a> support; Vivado 2017.1; add Unix 7th oskit
 
   - tag: w11a_V0.75
     dat: 2017-06-04
@@ -131,7 +139,7 @@ my:
     com: 2b5cfb7d961b69c69598d31186066d327ae530da
     fil: doc/README.txt
     nam: README
-    txt: Code cleanup for <b>vivado</b>, more <b>xsim</b> support;
+    txt: Code cleanup for <b>Vivado</b>, more <b>xsim</b> support;
          <b>Size-configurable cache</b>, better w11a performance
 
   - tag: w11a_V0.72
@@ -143,7 +151,7 @@ my:
     txt: port of w11a to Digilent
          <a href="/home/w11/inst/boards.html#digi_arty"><b>Arty A7</b></a>;
          support for <b>XADC</b>; 
-         initial vivado <b>xsim</b> support
+         initial Vivado <b>xsim</b> support
 
   - tag: w11a_V0.71
     dat: 2015-12-30

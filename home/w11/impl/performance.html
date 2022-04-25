@@ -113,7 +113,7 @@ benchmark results.
 <p>
 The Dhrystone, Tower of Hanoi, and 'syscall' benchmarks were also run on a 
 <b>simulated PDP-11</b> using 
-<a href="http://simh.trailing-edge.com/">simh</a> 
+<a href="http://simh.trailing-edge.com/">SimH</a>
 version V3.8-1 and <b>natively</b> on a Linux system.
 In both cases a Kubuntu 10.4 system with an Intel Core2 Duo 
 <a href="http://ark.intel.com/products/33910">E8400</a> CPU
@@ -130,9 +130,9 @@ cpufreg</a> was fixed to 3 GHz.
   2.11BSD      w11a_n2 V0.51         (58)   13218    186.1     7616    40.9    0.576
   2.11BSD      w11a_n4 V0.73         (80)   18095    250.7    10837    43.2    0.599
 
-  2.11BSD      simh on Intel E8400   (--)   17174    250.0    10713    42.9    0.623
-  2.11BSD      simh on Rasp Pi 2 B   (--)    4477     63.3     2651    41.9    0.592
-  2.11BSD      simh on Rasp Pi 3 b   (--)    7294    104.5     4217    41.3    0.578
+  2.11BSD      SimH on Intel E8400   (--)   17174    250.0    10713    42.9    0.623
+  2.11BSD      SimH on Rasp Pi 2 B   (--)    4477     63.3     2651    41.9    0.592
+  2.11BSD      SimH on Rasp Pi 3 b   (--)    7294    104.5     4217    41.3    0.578
 
   Ubuntu 10.4  Intel E8400         (3000)   10785k    74.1k    1020k   13.8    0.095
 </pre>
@@ -152,7 +152,7 @@ Some observations are:
       Virtex-6 instead of a Spartan-6) and/or an improved microarchitecture
       (like J11 or even better).</li>
   <li>Comparing the arithmetic benchmarks (Dhry2 and Hanoi) with the 'syscall'
-      benchmark on simh-simulated 2.11BSD and native Linux suggests that the
+      benchmark on SimH-simulated 2.11BSD and native Linux suggests that the
       system call overhead, normalized by processor speed, is larger for
       contemporary Linux than for 2.11BSD.</li>
 </ul>
