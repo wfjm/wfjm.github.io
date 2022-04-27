@@ -1,0 +1,85 @@
+---
+title: "Travis based CI/CD workflow added"
+tags:  ["w11"]
+#
+my:
+  changedate: 2022-04-25
+---
+<h2>Travis based CI/CD workflow added</h2>
+<h3>Initial setup (2018-09-16)</h3>
+<p>
+Travis offers under <code>travis-ci.org</code> a nice environment for
+<code>CI/CD</code> workflows, even free of charge for open source projects,
+and easy one-click integration with GitHub.
+Under the given limitations of the Travis environment, like no custom
+containers, as well as memory size and execution time limits, it was obvious
+that neither the generation of FPGA bitfiles with ISE or Vivado nor the
+generation of simulation models with GHDL (which needs Vivado/ISE UNISIM
+libraries) is feasible.
+The more limited goal was to verify the proper functioning of
+</p>
+<ul>
+  <li>the backend software</li>
+  <li>the test benches under <code>tbrun</code></li>
+</ul>
+<p>
+The simulation models are built separately outside of the Travis
+<code>CI/CD</code> workflow, packaged as a <i>tarball</i>, and uploaded
+to a server. That must be done each time when the VHDL codebase is changed
+and must be done before the code is committed to GitHub and the
+<code>CI/CD</code> is workflow triggered. Not nice, but the best possible
+solution given the constraints.
+</p>
+<p>
+In September 2018 only Ubuntu 14.04 LTS (trusty) was supported by Travis and
+that allowed to set up a <i>build matrix</i> with
+<ul>
+  <li>gcc 4.8</li>
+  <li>gcc 7</li>
+  <li>clang 7</li>
+</ul>
+<p>
+Each job has the steps
+</p>
+<ul>
+  <li>download and unpack the simulation models</li>
+  <li>compile the backend software with the selected compiler</li>
+  <li>execute with <code>tbrun</code> the test benches</li>
+  <li>save detailed log files in a <i>deploy</i> step</li>
+</ul>
+<p>
+For details see
+<a href="https://github.com/wfjm/w11/blob/04c4b5d7/.travis.yml">.travis.yml</a>
+of commit <a href="https://github.com/wfjm/w11/commit/04c4b5d7">04c4b5d7</a>.
+</p>
+
+<h3>Ubuntu 2016.04 LTS available, extended build matrix (2019-01-04)</h3>
+<p>
+Finally and after much popular demand, Travis provided in January 2019 Travis
+Ubuntu 2016.04 LTS (xenial). That allows extending the <i>build matrix</i> to
+</p>
+<ul>
+  <li>Ub 14.04 - gcc 4.8.4</li>
+  <li>Ub 14.04 - gcc 7.4.0</li>
+  <li>Ub 16.04 - clang 7.0.0</li>
+  <li>Ub 16.04 - gcc 5.4.0</li>
+</ul>
+<p>
+Note, the newest gcc is available as <i>backport</i> under Ubuntu 14.04 LTS.
+</p>
+<p>
+For details see
+<a href="https://github.com/wfjm/w11/blob/dd7cdfec/.travis.yml">.travis.yml</a>
+of commit <a href="https://github.com/wfjm/w11/commit/dd7cdfec">dd7cdfec</a>.
+</p>
+
+<div class="notebox">
+  <b>Note 2021-06-15:</b> 
+  Travis was acquired by Idera, Inc in January 2019. Rumors said, that a
+  few weeks later <i>a big portion of the old Travis team was fired</i>.
+  Since June 15th, 2021, the building on <code>travis-ci.org</code> is ceased.
+  No support free of charge support for open source projects anymore only
+  paid services on <code>travis-ci.com</code>.
+  The commit <a href="https://github.com/wfjm/w11/commit/6b8c0633">6b8c0633</a>
+  removes Travis support on August 22nd, 2021.
+</div>
