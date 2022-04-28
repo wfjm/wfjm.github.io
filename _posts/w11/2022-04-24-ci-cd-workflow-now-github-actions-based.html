@@ -1,0 +1,33 @@
+---
+title: "CI/CD workflow now based on GitHub Actions"
+tags:  ["w11"]
+#
+my:
+  changedate: 2022-04-26
+---
+<h2>CI/CD workflow now based on GitHub Actions</h2>
+<p>
+GitHub offers with
+<a href="https://github.com/features/actions">GitHub Actions</a>
+an environment for <code>CI/CD</code> workflows that is free of charge
+for open source projects. After Travis's service stopped in June 2021,
+see the <a href="2018-09-16-travis-based-ci-cd-workflow.html">blog post</a>,
+it was natural to port the existing workflow from Travis to GitHub Actions.
+Since the core functionality of GitHub Actions is similar to that of Travis,
+it was easy to adapt the workflow description.
+GitHub Actions support the currently up-to-date Ubuntu 2020.04 LTS,
+the <i>build matrix</i> reflects therefore my current development environment
+</p>
+<ul>
+  <li>gcc 9.4.0</li>
+  <li>clang 11.0.0.2</li>
+</ul>
+
+<p>
+The workflow logic is identical to the Travis implementation, see the
+<a href="2018-09-16-travis-based-ci-cd-workflow.html">blog post</a>
+for a brief description. For details see
+<a href="https://github.com/wfjm/w11/blob/db7556a4/.github/workflows/ci.yml">
+  .github/workflows/ci.yml</a>
+of commit <a href="https://github.com/wfjm/w11/commit/db7556a4">db7556a4</a>.
+</p>
