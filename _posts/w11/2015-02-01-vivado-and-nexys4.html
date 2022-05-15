@@ -1,0 +1,81 @@
+---
+title: "Vivado and Nexys4 -- a long journey"
+tags:  ["w11"]
+#
+my:
+  changedate: 2022-05-01
+#
+
+---
+<h2>Vivado and Nexys4 -- a long journey</h2>
+
+<h3>2013: First steps</h3>
+<p>
+Xilinx Series-7 and Vivado immediately caught my attention in 2013.
+It was obvious that Vivado had a superior architecture and potential.
+A real development environment for a change, not only an aging collection
+of loosely coupled tools as in ISE. But the first tests with Vivado 2013.2
+were sobering. Vivado synthesis failed with hundreds of warnings
+</p>
+<pre class="code">
+  WARNING: [Synth 8-3848] Net nstate in 
+     module/entity pdp11_sequencer does not have driver.
+  .... many ....
+  WARNING: [Synth 8-3848] Net ndpcntl_dsrc_sel in 
+     module/entity pdp11_sequencer does not have driver.
+</pre>
+<p>
+Vivado simply didn't understand the coding style used in the w11 project,
+while ISE had no problems and happily produced bitfiles for Spartan-based
+boards with the same codebase.
+</p>
+<p>
+Vivado 2013.3 did a little better, only 137 instead of over 250 warnings,
+but now timing closure failed with
+</p>
+<pre class="code">
+  Source: IBD_MAXI.IBDR_SYS/IIST.I0/R_REGS_reg[exc_rte][0]_replica/C
+  Dest:   CORE/SEQ/R_STATE_reg[0]/D
+  Data Path Delay:  14.135ns  (logic 4.664ns route 9.471ns)
+  Logic Levels:     23  (CARRY4=2 LUT3=1 LUT4=2 LUT5=2 LUT6=14 MUXF7=2)
+</pre>
+<p>
+Vivado synthesis produced a very long logic path with 19 LUTs, while ISE
+happily produced performing implementations with the same code base.
+</p>
+
+<h3>2014: Improvements</h3>
+<p>
+Vivado 2014.1 was the first version that seemed to handle the w11 code
+properly, For a <code>sys_w11a_n4</code> design is Vivado was faster in
+real time
+</p>
+<pre class="code">
+  ISE 14.7
+    XST              REAL 131s  CPU   63s
+    map              REAL 356s  CPU  178s
+    par              REAL 118s  CPU   62s
+    Total            REAL 605s  CPU  303s
+
+  Vivado 2014.1
+    synth_design     REAL  95s  CPU  101s
+    place_design     REAL  69s  CPU   73s
+    phys_opt_design  REAL  68s  CPU   69s
+    route_design     REAL  49s  CPU   64s
+    Total            REAL 281s  CPU  307s
+</pre>
+<p>
+and produced an implementation with lower resource consumption, 1097 slices
+compared to ISE with 1333 slices.
+</p>
+
+<h3>2015: Nexys4 procurement</h3>
+<p>
+In January 2015 I procured a Nexys4 board. With Vivado 2014.4 I got within a
+few days a running <code>sys_w11a_n4</code> design which booted a
+2.11BSD system.
+
+<div class="notebox">
+  <b>2019-07-27:</b> The Nexys4 board is now broken, see
+  <a href="2019-07-27-nexys4-obituary.html">blog post</a>
+</div>
