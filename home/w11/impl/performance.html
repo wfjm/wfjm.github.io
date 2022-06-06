@@ -2,7 +2,7 @@
 title:  "Performance"
 #
 my:
-  changedate: 2019-08-11
+  changedate: 2022-06-06
 ---
 
 <h2 id="h_microarchitecture">Microarchitecture</h2>
@@ -146,10 +146,10 @@ Some observations are:
       in cache and do rarely writes they execute with equal speed. syscall is 
       more sensitive to memory latencies, either due to more cache misses or 
       delays from  write-thru's.</li>
-  <li>The simulated PDP-11 on a modern 3 GHz PC is about as fast as the current
-      FPGA implementation on a Spartan-6. However, there is certainly room for
-      improvement on the FPGA side, either with faster devices (e.g. a 
-      Virtex-6 instead of a Spartan-6) and/or an improved microarchitecture
+  <li>The simulated PDP-11 on a vintage 2009 3 GHz PC is about as fast as the
+      current FPGA implementation on an Artix-7. However, there is certainly
+      room for improvement on the FPGA side, either with faster devices (e.g. a 
+      Kintext-7 instead of a Artix-7) and/or an improved microarchitecture
       (like J11 or even better).</li>
   <li>Comparing the arithmetic benchmarks (Dhry2 and Hanoi) with the 'syscall'
       benchmark on SimH-simulated 2.11BSD and native Linux suggests that the
