@@ -3,8 +3,9 @@ title: "Kernel panic, tcsh, and here documents"
 tags:  ["211bsd"]
 #
 my:
-  changedate: 2019-05-29
+  changedate: 2022-06-08
   tuhs_base: https://minnie.tuhs.org/pipermail/tuhs
+  patch_url:  https://www.retro11.de/data/211bsd/patches
 ---
 
 <h2>2.11BSD: kernel panic after a 'here document' in tcsh</h2>
@@ -376,3 +377,13 @@ diff sh.glob.c.orig sh.glob.c
 < 
 < void
 </pre>
+
+<h3>BSD2.11 patch 453 (2019-10-15)</h3>
+The corrections finally made it into the BSD2.11 patch 453 released by
+Steven Schultz in 2019-10-15
+<pre class="code">
+  Subject: fp simulator kernel crash, tcsh here doc crash, welcome y2k bug
+  Index: src/sys/pdp/mch_fpsim.s, src/bin/tcsh/(sh.glob.c,sh.dol.c,sh.decls.h),
+         src/local/welcome/welcome.c
+</pre>
+See <a href="{{page.my.patch_url}}/453">{{page.my.patch_url}}/453</a>.
