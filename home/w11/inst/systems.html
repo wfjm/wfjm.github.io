@@ -2,7 +2,7 @@
 title:  "System Images"
 #
 my:
-  changedate: 2018-02-10
+  changedate: 2022-07-07
 #
   oskit_url:  https://www.retro11.de/data/oc_w11/oskits
   oskit_blob: https://github.com/wfjm/w11/blob/master/tools/oskit
@@ -36,7 +36,7 @@ my:
     desc: 211bsd_rk/README.md
     licw: BSD
     lics: BSD
-    com:
+    com: very limited subset on 5 RK05 volumes
 
 # 2.11BSD rlset
   - system: 2.11BSD
@@ -46,7 +46,7 @@ my:
     desc: 211bsd_rl/README.md
     licw: BSD
     lics: BSD
-    com:
+    com: very limited subset on a RL02 volume
 
 # 2.11BSD rpset
   - system: 2.11BSD
@@ -56,7 +56,27 @@ my:
     desc: 211bsd_rp/README.md
     licw: BSD
     lics: BSD
-    com:
+    com: full distribution, kernel without networking
+
+# 2.11BSD rpethset
+  - system: 2.11BSD
+    vol: RP06
+    typ: rpethset
+    tar: 211bsd_rpethset.tgz
+    desc: 211bsd_rpeth/README.md
+    licw: BSD
+    lics: BSD
+    com: full distribution, kernel with networking
+
+# 2.11BSD rpminset
+  - system: 2.11BSD
+    vol: RP06
+    typ: rpminset
+    tar: 211bsd_rpminset.tgz
+    desc: 211bsd_rpmin/README.md
+    licw: BSD
+    lics: BSD
+    com: full distribution, minimal kernel for small memory systems
 
 # 2.11BSD tmset
   - system: 2.11BSD
@@ -157,11 +177,8 @@ known to boot:
     <a href="/blogs/211bsd/2009-01-04-patch-446+447.html">
       RK05 as boot device (patch 446/447)</a>
     to work.
-    The current w11a system has only RK11 or RL02 disks, so a very limited 
-    subset
-    of the full 2.11BSD distribution was packed onto 5 RK05 disk volumes
-    or a single RL02 disk volume. Both disk sets are available for
-    download, see below under <a href="#h_os_kits">OS Kits</a>.
+    Several disk sets are avaialable, see below under
+    <a href="#h_os_kits">OS Kits</a>.
     See <a href="#Fig_S-1">Figure S-1</a> for a
     screenshot of a 2.11BSD boot sequence on a w11a system.
   </li>
