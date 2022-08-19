@@ -1,0 +1,74 @@
+---
+title: "On Segments and Pages"
+tags:  ["w11"]
+#
+my:
+#  changedate: 2022-08-17
+  bitsaver_url: http://www.bitsavers.org/pdf/dec/pdp11
+  w11git_url: https://github.com/wfjm/w11
+---
+<h2>On Segments and Pages</h2>
+<p>
+The PDP-11 MMU divides the 16-bit address space into 8 <i>thingies</i>, each
+with a size of 8 kBytes. In very early documentation, most notably the
+"pdp11/45 processor handbook" from 1971, this object was called <i>Segment</i>.
+The MMU was called <i>Memory Segmentation Unit</i>, and the registers
+consequently <code>ssr0</code>, <code>sdr</code>, <code>sar</code>, etc.
+</p>
+
+<p>
+DEC quickly changed the wording, and already the 1973 edition of the
+<a href="{{page.my.bitsaver_url}}/handbooks/PDP1145_Handbook_1973.pdf">
+  pdp11/45 processor handbook</a>
+uses the term <i>Page</i> and emphasizes the concept of <i>virtual memory</i>
+Consequently, the registers are now named <code>pdr</code>, <code>par</code>,
+etc.
+The MMU status registers were named <code>sr0,..</code>.
+In later documentation, these registers were eventually referred to as
+<code>mmr0,..</code>.
+These name changes left their mark on the software. In 2.11BSD, the MMU
+status registers are for example still named <code>ssr</code>.
+</p>
+
+<p>
+I had the 1971 edition of the "pdp11/45 processor handbook" as a steady
+companion on my table in the early phases of the w11 project.
+But of course I also consulted many other documents.
+Unfortunately, this led to a mixed language, such as the use of
+<code>ssr1</code> together with <code>pdr</code> in quite a few places.
+Johnny Billquist discovered my sloppy mixed language in the context of the
+<i>"Mysteries of MMR1"</i> discussion and convinced me to get this
+cleaned up, in my mind and in the whole w11 code base.
+Quite a few commits were the result of this:
+<a href="{{page.my.w11git_url}}/commit/fc10cc5">fc10cc5</a>,
+<a href="{{page.my.w11git_url}}/commit/621c200">621c200</a>,
+<a href="{{page.my.w11git_url}}/commit/3ebe054">3ebe054</a>,
+<a href="{{page.my.w11git_url}}/commit/6dfc048">6dfc048</a>, and
+<a href="{{page.my.w11git_url}}/commit/48e08a5">48e08a5</a>.
+</p>
+
+<p>
+But why did DEC change the naming in the first place ? I can only
+speculate. The MMU <i>thingies</i> have an individually configurable length,
+which is a key feature in memory segmentation systems, and is unheard of
+for memory paging systems. That might have led to the initial wording.
+On the other hand, the MMU divides the address space into equal-sized objects
+that are selected via the upper part of the address.
+That's exactly how memory paging systems are built.
+And the MMU provides in <code>mmr1</code> and <code>mmr2</code> all
+the information needed to re-execute an aborted instruction, also
+an essential feature of memory paging systems.
+This is used in 2.11BSD to implement automatic stack extension.
+</p>
+
+<p>
+The official terminology has another advantage:
+</p>
+<ul>
+  <li><b>page</b>: is used for the <i>hardware</i> objects controlled by
+    the MMU</li>
+  <li><b>segment</b>: is used for <i>software</i> objects managed by the
+    operating systems, such as text, data and stack in 2.11BSD.
+    These segments have variable lengths, and can span more than one
+    page.</li>
+</ul>
