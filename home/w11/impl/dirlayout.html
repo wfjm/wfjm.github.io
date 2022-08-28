@@ -2,7 +2,7 @@
 title:  "Directory Layout"
 #
 my:
-  changedate: 2022-07-12
+  changedate: 2022-08-28
 #
   style: |
     .dl {
@@ -59,8 +59,7 @@ my:
   - ["rtl/sys_gen/w11a",             "  - designs for w11a SoC"]
   - ["rtl/sys_gen/w11a/arty",        "    - w11a SoC for Digilent Arty A7"]
   - ["rtl/sys_gen/w11a/arty_bram",   "    - w11a SoC for Digilent Arty A7 (BRAM only)"]
-  - ["rtl/sys_gen/w11a/artys7",      "    - w11a SoC for Digilent Arty
-  S7 <i>!only simulated!</i>"]
+  - ["rtl/sys_gen/w11a/artys7",      "    - w11a SoC for Digilent Arty S7 <i>!only simulated!</i>"]
   - ["rtl/sys_gen/w11a/artys7_bram", "    - w11a SoC for Digilent Arty S7 (BRAM only) <i>!only simulated!</i>"]
   - ["rtl/sys_gen/w11a/basys3",      "    - w11a SoC for Digilent Basys3"]
   - ["rtl/sys_gen/w11a/cmoda7",      "    - w11a SoC for Digilent Cmod A7"]
@@ -85,13 +84,13 @@ my:
   - ["tools/bin",                    "- scripts and binaries"]
   - ["tools/dox",                    "- Doxygen documentation configuration"]
   - ["tools/exptest",                "- configuration files for ostest etc"]
-  - ["tools/make",                   "- make includes"]
   - ["tools/fx2",                    "- Firmware for Cypress FX2 USB Interface"]
-  - ["tools/fx2/bin",                "  - pre-build firmware images in .ihx format"]
-  - ["tools/fx2/src",                "  - C and asm sources"]
-  - ["tools/fx2/sys",                "  - udev rules for USB on fpga eval boards"]
-  - ["tools/oskit",                  "  - setup files for Operation System kits"]
-  - ["tools/src",                    "- C++ sources"]
+  - ["tools/make",                   "- make includes"]
+  - ["tools/man",                    "- man pages for scripts in tools/bin"]
+  - ["tools/mcode",                  "- miscellaneous stand-alone codes for system tests"]
+  - ["tools/oskit",                  "- setup files for Operation System kits"]
+  - ["tools/simh",                   "- configuration files for SimH pdp11 simulator"]
+  - ["tools/src",                    "- C++ sources for rlink backend"]
   - ["tools/src/librlink",           "  - basic rlink interface"]
   - ["tools/src/librlinktpp",        "  - C++ to tcl binding for rlink interface"]
   - ["tools/src/librtcltools",       "  - support classes to implement Tcl bindings"]
@@ -99,9 +98,12 @@ my:
   - ["tools/src/librutiltpp",        "  - Tcl support commands implemented in C++"]
   - ["tools/src/librw11",            "  - w11 over rlink interface"]
   - ["tools/src/librwxxtpp",         "  - C++ to tcl binding for w11 over rlink iface"]
+  - ["tools/sys",                    "- udev rules for USB device handling"]
   - ["tools/tbench",                 "- w11 test bench, tcl based"]
   - ["tools/tcode",                  "- w11 test bench, mac based"]
-  - ["tools/tcl",                    "- Tcl scripts"]
+  - ["tools/tcl",                    "- Tcl sources for rlink backend"]
+  - ["tools/tests",                  "- test programs"]
+  - ["tools/vivado",                 "- scripts for Xilinx Vivado"]
 ---
 
 <h2 id="h_dir_layout">Directory Structure of the Repository</h2>
