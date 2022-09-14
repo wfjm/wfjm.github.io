@@ -2,7 +2,7 @@
 title: "About wfjm"
 #
 my:
-  changedate: 2022-01-28
+  changedate: 2022-09-14
 ---
 
 <h2 id="h_who">Who am I</h2>
@@ -54,6 +54,7 @@ Over time I've worked with many
     Motorola 680x0,
     DEC VAX,
     DEC ALPHA,
+    TI TMS320C62xx,
     Intel IA-64
   </li>
   <li>operating systems:
@@ -65,7 +66,8 @@ Over time I've worked with many
     BSD Unix,
     SUN/OS,
     OS/9,
-    Linux
+    Linux,
+    (Windows when forced)
   </li>
   <li>languages: 
     FORTRAN, 
@@ -78,7 +80,8 @@ Over time I've worked with many
     Perl,
     SQL,
     VHDL,
-    Tcl
+    Tcl,
+    Python
     </li>
 </ul>
 <p>
@@ -103,6 +106,22 @@ These systems were used for many years as a central element in
 <a href="https://en.wikipedia.org/wiki/Data_acquisition">data acquisition</a>
 systems, and my role was often to squeeze the last grain of performance out
 of them. So I naturally learned a lot about the hardware and software stack.
+The data of my Diploma Thesis was collected with a PDP-11/20. For data
+analysis, we had a PDP-11/45, which also served as an RJE station for a
+CDC 7600 used for theory calculations. The data for my PhD Thesis was
+collected initially with a PDP-11/34 which had several
+<a href="https://en.wikipedia.org/wiki/Computer_Automated_Measurement_and_Control">CAMAC</a>
+crates directly attached to the
+<a href="https://en.wikipedia.org/wiki/Unibus">UNIBUS</a>.
+The final setup was a multiprocessor system with
+<a href="https://en.wikipedia.org/wiki/DEC_J-11">J-11</a> based processors
+(a CES ACC 2180 from CES/Geneva) in each CAMAC crate which were read out via
+an MBD <em>'Micro-controlled Branch Driver</em>'
+(from <a href="https://www.bira.com/about.html">BiRa</a>/Albuquerque)
+which in turn was attached to the UNIBUS of a VAX-750. Bare metal MACRO-11
+assembler for raw speed on the J-11's front-ends, micro-coding on the
+MBD for throughput of the data transport, and all the conveniences of
+VMS on the back-end VAX-750. It was really fun to develop this system.
 </p>
 
 <p>
