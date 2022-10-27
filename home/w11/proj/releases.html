@@ -2,7 +2,7 @@
 title: "Releases"
 #
 my:
-  changedate: 2022-10-05
+  changedate: 2022-10-25
 #
   future:
 #  - tag: 0.84
@@ -31,21 +31,35 @@ my:
 #    txt: 'DEUNA buffer chaining; oskit update; ouxr update'
   - tag: 0.793
     dat: t.b.d.
-    com: planned
-    txt: 'cpu xxdp clean'
-  - tag: 0.792
-    dat: Q3'2022
     com: in work
-    txt: 'consolidate ostest; man pages; cleanups; Vivado 2022.1'
+    txt: 'cpu xxdp clean'
 #
   releases:
+  - tag: w11a_V0.792
+    dat: 2022-10-25
+    typ: no
+    com: 9ca20e39ac96198040c792a1e263f021873fa7ab
+    txt: 'consolidate test bench, ostest; drop Atlys,
+         <a href="https://wfjm.github.io/blogs/w11/2019-07-27-nexys4-obituary.html">Nexys4</a>;
+         <a href="https://wfjm.github.io/blogs/w11/2022-08-18-on-segments-and-pages.html">cleanups</a>;
+         viv 2022.1; fixes, closes
+         <a href="https://github.com/wfjm/w11/issues/24">#24</a>,
+         <a href="https://github.com/wfjm/w11/issues/25">#25</a>,
+         <a href="https://github.com/wfjm/w11/issues/26">#26</a>,
+         <a href="https://github.com/wfjm/w11/issues/33">#33</a>,
+         <a href="https://github.com/wfjm/w11/issues/34">#34,
+         <a href="https://github.com/wfjm/w11/issues/35">#35</a>'
+    fil: doc/CHANGELOG.md
+    nam: CHANGELOG
   - tag: w11a_V0.791
     dat: 2022-04-24
     typ: no
     com: 7ec5be2a306302fa134c1f6b898bdafce3bc2d54
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: 'GitHub actions; Vivado 2020.1; ostest; finalize <a href="/home/w11/inst/boards.html#digi_nexysa7">Nexys A7</a> (closes <a href="https://github.com/wfjm/w11/issues/16">issue #16</a>)'
+    txt: 'GitHub actions; Vivado 2020.1; ostest; finalize
+         <a href="/home/w11/inst/boards.html#digi_nexysa7">Nexys A7</a>
+         (closes <a href="https://github.com/wfjm/w11/issues/16">issue #16</a>)'
 
   - tag: w11a_V0.79
     dat: 2019-07-27
@@ -53,7 +67,12 @@ my:
     com: 1742dfab4cb26c748ef98cf47632e457d6f41b66
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: 'use <b><a href="https://wfjm.github.io/blogs/w11/2019-07-21-spdx.html">SPDX</a></b> license tags; Vivado 2019.1; Coverity <a href="https://wfjm.github.io/blogs/w11/2019-06-14-coverity-fixes-done.html">defect free</a>; TM11 odd record length (closes <a href="https://github.com/wfjm/w11/issues/8">issue #8</a>)'
+    txt: 'use <b><a href="https://wfjm.github.io/blogs/w11/2019-07-21-spdx.html">SPDX</a></b>
+         license tags; Vivado 2019.1;
+         Coverity <a href="https://wfjm.github.io/blogs/w11/2019-06-14-coverity-fixes-done.html">defect
+           free</a>;
+         TM11 odd record length
+         (closes <a href="https://github.com/wfjm/w11/issues/8">issue #8</a>)'
 
   - tag: w11a_V0.78
     dat: 2019-06-01
@@ -93,7 +112,8 @@ my:
     com: 40d48680e91ea7f710abdb609f5df258ced3efab
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_artys7"><b>Arty S7</b></a> support; <i>only simulation tested !</i> ; Vivado 2017.2
+    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_artys7"><b>Arty S7</b></a> support;
+         <i>only simulation tested !</i> ; Vivado 2017.2
 
   - tag: w11a_V0.751
     dat: 2018-08-10
@@ -101,7 +121,8 @@ my:
     com: f78b5715c6babd4e907c0f8cc6cb6842e2b4a4d5
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_cmoda7"><b>Cmod A7</b></a> support; Vivado 2017.1; add Unix 7th oskit
+    txt: Add Digilent <a href="/home/w11/inst/boards.html#digi_cmoda7"><b>Cmod A7</b></a> support;
+         Vivado 2017.1; add Unix 7th oskit
 
   - tag: w11a_V0.75
     dat: 2017-06-04
@@ -109,7 +130,7 @@ my:
     com: 5d3504b01ab921b336736c17bbe79d408ff231c0
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: <b>DEUNA</b> Ethernet interface added (functionally restricted); 211bsd with full networking
+    txt: <b>DEUNA</b> Ethernet interface added (functionally restricted); 2.11BSD with full networking
 
   - tag: w11a_V0.742
     dat: 2017-01-07
@@ -364,9 +385,9 @@ my:
     com: 3266c23c57d25ce1cd2b4e1a8c6e4b754448a8ba
     fil: doc/README.txt
     nam: README
-    txt: Initial release; w11a CPU core; 
+    txt: <b>Initial release</b>; w11a CPU core;
          basic set of peripherals; KW11-L, DL11, LP11, PC11, RK11/RK05;
-         two complete systems for Digilent 
+         complete systems for Digilent
          <a href="/home/w11/inst/boards.html#digi_s3board"><b>S3BOARD</b></a> 
          and 
          <a href="/home/w11/inst/boards.html#digi_nexys2"><b>Nexys2</b></a>
