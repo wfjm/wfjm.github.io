@@ -2,7 +2,7 @@
 title: "Releases"
 #
 my:
-  changedate: 2022-10-25
+  changedate: 2023-01-12
 #
   future:
 #  - tag: 0.84
@@ -29,26 +29,45 @@ my:
 #    dat: t.b.d.
 #    com: planned
 #    txt: 'DEUNA buffer chaining; oskit update; ouxr update'
-  - tag: 0.793
+  - tag: 0.794
     dat: t.b.d.
     com: in work
-    txt: 'cpu xxdp clean'
+    txt: 'devices xxdp clean'
 #
   releases:
+  - tag: w11a_V0.793
+    dat: 2023-01-12
+    typ: no
+    com: 8fc44a4e4ba5b156e62f37b30d106c51e951ba91
+    txt: 'w11 CPU xxdp clean; closes
+         <a href="https://github.com/wfjm/w11/issues/36">#36</a>,
+         <a href="https://github.com/wfjm/w11/issues/37">#37</a>; ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-035-stklim-tbit-fixes.md">035</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-036-vpush_abort_ps.md">036</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-037-mmu-instruction_complete.md">037</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-038-MMU_trap_on_IB_access.md">038</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-039-cc_and_aborts.md">039</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-040-cpuerr_rsv.md">040</a>'
+    fil: doc/CHANGELOG.md
+    nam: CHANGELOG
   - tag: w11a_V0.792
     dat: 2022-10-25
     typ: no
     com: 9ca20e39ac96198040c792a1e263f021873fa7ab
-    txt: 'consolidate test bench, ostest; drop Atlys,
+    txt: 'consolidate test bench, ostest; drop
          <a href="https://wfjm.github.io/blogs/w11/2019-07-27-nexys4-obituary.html">Nexys4</a>;
          <a href="https://wfjm.github.io/blogs/w11/2022-08-18-on-segments-and-pages.html">cleanups</a>;
-         viv 2022.1; fixes, closes
+         viv 2022.1; closes
          <a href="https://github.com/wfjm/w11/issues/24">#24</a>,
          <a href="https://github.com/wfjm/w11/issues/25">#25</a>,
          <a href="https://github.com/wfjm/w11/issues/26">#26</a>,
          <a href="https://github.com/wfjm/w11/issues/33">#33</a>,
          <a href="https://github.com/wfjm/w11/issues/34">#34,
-         <a href="https://github.com/wfjm/w11/issues/35">#35</a>'
+         <a href="https://github.com/wfjm/w11/issues/35">#35</a>; ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-031-PSW_protection.md">031</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-032-MMR1_fix.md">032</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-033-MMU_AFC-1_PDR-A.md">033</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-034-MMU_d-space-pc.md">034</a>'
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
   - tag: w11a_V0.791
@@ -88,7 +107,8 @@ my:
     com: 0bdd9f10dd1e6aa3bcef93adca863191b7f13cec
     fil: doc/CHANGELOG.md
     nam: CHANGELOG
-    txt: <b>buffered</b> LP11,PC11,DL11
+    txt: '<b>buffered</b> LP11,PC11,DL11; ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-030-EI_ACK-misroute.md">030</a>'
 
   - tag: w11a_V0.76
     dat: 2019-02-16
@@ -141,10 +161,9 @@ my:
     txt: Fixes for Vivado 2016.4; added w11 shell; 
          Preliminary Digilent 
          <a href="/home/w11/inst/boards.html#digi_nexys4d"><b>Nexys4 DDR</b></a>
-         support; two minor CPU fixes (
-         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-028-ps_init.md">ECO-028</a>
-         and 
-         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-029-cpuerr_creset.md">ECO-029</a>)
+         support; two minor CPU fixes, ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-028-ps_init.md">028</a>,
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-029-cpuerr_creset.md">029</a>
 
   - tag: w11a_V0.741
     dat: 2016-12-23
@@ -188,7 +207,8 @@ my:
     com: 677773d123639fb541a925e8e6037b59941aeead
     fil: doc/README.txt
     nam: README
-    txt: Add CPU debug and monitoring units (dmhbpt,dmscnt,dmcmon)
+    txt: 'Add CPU debug and monitoring units (dmhbpt,dmscnt,dmcmon); ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-027-trap_mmu.md">027</a>'
 
   - tag: w11a_V0.70
     dat: 2015-06-21
@@ -251,7 +271,8 @@ my:
     com: 093d540121313d81c2acaf47093bb5d707b5b68f
     fil: doc/README.txt
     nam: README
-    txt: Bugfix for DIV instruction
+    txt: 'Bugfix for DIV instruction; ECO-
+         <a href="https://github.com/wfjm/w11/blob/master/doc/ECO-026-div.md">026</a>'
 
   - tag: w11a_V0.60
     dat: 2014-06-06
