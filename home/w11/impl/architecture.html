@@ -2,7 +2,7 @@
 title:  "Architecture"
 #
 my:
-  changedate: 2022-12-22
+  changedate: 2023-01-31
 ---
 
 {% capture caption_Fig_I_1 %}
@@ -106,11 +106,11 @@ Via a rbus to w11a core 'control port' interface (see
   pdp11_core_rbus.vhd</a>)
 the rbus master can control the CPU (start, stop, step etc) and access all
 processor and devices registers as well as the main memory. 
-This interface provides also a 32 words rbus to ibus or <b>rb2ib</b> window
-which maps a fixed part of the rbus address space into a selectable part of
-the ibus address space. ibus accesses via this window are marked as
-'remote' accesses (via the racc signal) and can be distinguished from
-CPU-originated accesses. This is used to implement the I/O system emulation.
+This interface provides also a 4096 words rbus to ibus or <b>rb2ib</b> window
+which maps the ibus address space into the rbus address space. ibus accesses
+via this window are marked as 'remote' accesses (via the <code>racc</code>
+signal) and can be distinguished from CPU-originated accesses.
+This is used to implement the I/O system emulation.
 </p>
 
 <p>
@@ -120,8 +120,8 @@ the Digilent boards
 (see <a href="{{site.my.w11.blob}}/rtl/bplib/bpgen/sn_humanio_rbus.vhd">
     sn_humanio_rbus.vhd</a>).
 The rbus has a simple interrupt mechanism. A slave can ask for 'attention' by
-asserting the LAM signal for a cycle (side note: LAM for 'look-at-me' is a 
-retro pun on 
+asserting the <code>LAM</code> signal for a cycle (side note: LAM for
+'look-at-me' is a retro pun on
 <a href="https://en.wikipedia.org/wiki/Computer_Automated_Measurement_and_Control">
   CAMAC</a>,
 an instrumentation standard very often used with a PDP-11 in DAQ systems).
@@ -140,7 +140,8 @@ handling via 'attention' messages. It is protected with a 18 bit CRC (see
 <a href="{{site.my.w11.blob}}/rtl/vlib/comlib/crc16.vhd">crc16.vhd</a>)
 to detect transmission errors. The implementation is based on an extended symbol
 space with 261 symbols, 256 to represent the states of a data byte and 5
-additional symbols IDLE, SOP, EOP, NAK, and ATTN used as packet delimiters
+additional symbols <code>IDLE</code>, <code>SOP</code>, <code>EOP</code>,
+<code>NAK</code>, and <code>ATTN</code> used as packet delimiters
 and for other control purposes and was inspired by the usage of D- and 
 K-symbols in optical link protocols. The symbol space is mapped into an
 8 bit data stream with a simple escaping mechanism (see 
@@ -159,9 +160,31 @@ rlink interface used in all systems
 In the current systems, the rlink communication is done via 
 </p>
 <ul>
+  <li> a real or USB-emulated serial port (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">
+      rlink_sp1c.vhd</a>).
+    The UART (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_rx.vhd">
+      serport_uart_rx.vhd</a>
+    and
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_tx.vhd">
+      serport_uart_tx.vhd</a>)
+    supports baud rates up to 12 Mbaud. The baud rate is detected automatically
+    by a BREAK + 0x80 sync character sequence (see
+    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
+      serport_uart_autobaud.vhd</a>).
+    The <a href="https://www.ftdichip.com/Products/ICs/FT2232H.html">FT2232H</a>
+    on Nexys4 and subsequent Digilent boards allows up to 12 MBaud.
+    With the
+    <a href="https://www.ftdichip.com/Products/ICs/FT232R.htm">FT232R</a>
+    on the Nexys3 Baud rates of 2 MBaud are possible.
+    With the onboard RS232 ports of the s3board and the Nexys2 boards, the
+    maximal Baud rate is 460800 when a USB-RS232 adapter is directly
+    connected. The rate  is limited by the RS232 transceivers.
+  </li>
   <li> a USB FIFO interface using the onboard
     <a href="http://www.cypress.com/products/ez-usb-fx2lp">
-      Cypress FX2</a> USB controller 
+      Cypress FX2</a> USB controller
     on Nexys2 and Nexys3 boards. The FPGA interface (see
     <a href="{{site.my.w11.blob}}/rtl/bplib/fx2lib/fx2_2fifoctl_ic.vhd">
       fx2_2fifoctl_ic.vhd</a>)
@@ -174,34 +197,11 @@ In the current systems, the rlink communication is done via
     <a href="{{site.my.w11.tree}}/tools/fx2/bin">pre-build images</a>).
   </li>
 
-  <li> a real or USB-emulated serial port (see
-    <a href="{{site.my.w11.blob}}/rtl/vlib/rlink/rlink_sp1c.vhd">
-      rlink_sp1c.vhd</a>).
-    The UART (see
-    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_rx.vhd">
-      serport_uart_rx.vhd</a>
-    and
-    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_tx.vhd">
-      serport_uart_tx.vhd</a>)
-    supports baud rates up to 3 Mbaud. The baud rate is detected automatically
-    by a BREAK + 0x80 sync character sequence (see
-    <a href="{{site.my.w11.blob}}/rtl/vlib/serport/serport_uart_autobaud.vhd">
-      serport_uart_autobaud.vhd</a>).
-    With the onboard RS232 ports of the s3board and the Nexys2 boards, the
-    maximal Baud rate is 460800 when a USB-RS232 adapter is directly
-    connected. The rate  is limited by the RS232 transceivers. With
-    onboard USB-UARTs like the
-    <a href="https://www.ftdichip.com/Products/ICs/FT232R.htm">FT232R</a>
-    on the Nexys3 Baud rates of 2 MBaud are possible. The
-    <a href="https://www.ftdichip.com/Products/ICs/FT2232H.html">FT2232H</a>
-    on Nexys4 and subsequent Digilent boards allow up to 12 MBaud.
-  </li>
-
 </ul>
 
 <h2 id="h_io_emulation">The I/O System Emulation</h2>
 <p>
-All device I/O is emulated, as already described under 
+All device I/O is emulated, as already briefly described under
 <a href="/home/w11/impl/">Features</a>. 
 A simple example is the transmit part
 of the unbuffered <b>DL11</b> console interface 
@@ -209,22 +209,26 @@ of the unbuffered <b>DL11</b> console interface
 Sending a character to the emulated console involves the following steps:
 </p>
 <ul>
-  <li>the CPU writes the character to the xbuf (transmit buffer) register of 
-      the DL11.</li>
-  <li>the controller logic clears the xrdy (transmit ready) bit in the
-      csr (control status register) and asserts the RB_LAM signal for
-      one cycle.</li>
-  <li>this will set a bit in the attention mask of the rbus controller, and
-      in case the mask was clear before, trigger the sending of an 'attn'
-      symbol to the backend server.</li>
-  <li>the backend server, upon reception of the 'attn' symbol, will
-      retrieve the attention mask, determine the source (or sources) of the
-      attention requests, and start the appropriate handling.</li>
+  <li>the CPU writes the character to the <code>xbuf</code> (transmit buffer)
+    register of the DL11.</li>
+  <li>the controller logic clears the <code>xrdy</code> (transmit ready) bit
+    in the <code>csr</code> (control status register) and asserts the
+    <code>RB_LAM</code> signal for one cycle.</li>
+  <li>this will set a bit in the attention mask of the rbus controller, and in
+    case the mask was clear before, trigger the sending of an <code>ATTN</code>
+    symbol to the backend server.</li>
+  <li>the backend server, upon reception of the <code>ATTN</code> symbol, will
+    retrieve the attention mask, determine the source (or sources) of the
+    attention requests, and start the appropriate handler (see
+    <a href="{{site.my.w11.blob}}/tools/src/librw11/Rw11CntlDL11.cpp">Rw11CntlDL11.cpp</a>).
+    </li>
   <li>for a console transmit attention the backend server will issue a
-      remote read of the xbuf register via rbus and the rb2ib window.</li>
-  <li>the remote read of the xbuf will return the character to the backend
-      server, set the xrdy bit in the csr, and in case interrupts were
-      enabled, set the interrupt request flop in the controller.</li>
+    remote read of the <code>xbuf</code> register via rbus and the rb2ib
+    window.</li>
+  <li>the remote read of the <code>xbuf</code> will return the character to
+    the backend server, set the <code>xrdy</code> bit in the <code>csr</code>,
+    and in case interrupts were enabled, set the interrupt request flop in
+    the controller.</li>
 </ul>
 <p>
 The DL11 receive logic is conceptually similar. The logic of the <b>LP11</b>
@@ -245,21 +249,26 @@ the w11a memory involves the following steps:
 </p>
 <ul>
   <li>the CPU writes memory and disk address and transfer size information 
-      into the appropriate RK11 controller registers (rkwc, rkba, rkda).</li>
+    into the appropriate RK11 controller registers (<code>rkwc</code>,
+    <code>rkba</code>, <code>rkda</code>).</li>
   <li>the CPU writes the I/O function code into 'control&amp;status' register
-        rkcs and sets the 'GO' bit to start the operation.</li>
-  <li>the setting of the 'GO' bit will cause a RB_LAM and as described above
-      the sending of an 'attn' symbol to the backend server.</li>
-  <li>the device handling routine in the backend server will retrieve all
-      relevant RK11 controller registers via rbus and the rb2ib window, read 
-      the disk block data from the disk image file, and transfer the data 
-      with rlink block transfer commands directly into the w11a memory.</li>
+    <code>rkcs</code> and sets the <code>GO</code> bit to start the
+    operation.</li>
+  <li>the setting of the <code>GO</code> bit will cause an <code>RB_LAM</code>
+    and as described above the sending of an <code>ATTN</code> symbol to the
+    backend server.</li>
+  <li>the device handling routine in the backend server (see
+    <a href="{{site.my.w11.blob}}/tools/src/librw11/Rw11CntlRK11.cpp">Rw11CntlRK11.cpp</a>)
+    will retrieve all relevant RK11 controller registers via rbus and the
+    rb2ib window, read the disk block data from the disk image file, and
+    transfer the data with rlink block transfer commands directly into
+    the w11a memory.</li>
   <li>when all data is transferred, the backend server updates the RK11
-      registers via rbus and the rb2ib window. The last step is to clear the 
-      'GO' bit in the rkcs.</li>
-  <li>the clear 'GO' bit concludes the I/O transaction, and in case 
-      interrupts were enabled, the interrupt request flop is set in the 
-      controller.</li>
+    registers via rbus and the rb2ib window. The last step is to clear the
+    <code>GO</code> bit in the <code>rkcs</code>.</li>
+  <li>the clear <code>GO</code> bit concludes the I/O transaction, and in case
+    interrupts were enabled, the interrupt request flop is set in the
+    controller.</li>
 </ul>
 <p>
 Even though conceptually straightforward, the devil is in the details.
@@ -267,17 +276,17 @@ Some of the device logic must be done in hardware to guarantee the timing
 behavior expected by the original drivers. The 'remote' semantics of
 some registers is therefore sometimes not just the read/write mirror image
 of the 'local' semantics, like as the DL11 case, but quite different.
-For example, in the RK11 controller, a write to the maintenance register rkmr
-is essentially a noop when done from the CPU but used for all kinds of 
-control functions when done via rbus.
+For example, in the RK11 controller, a write to the maintenance register
+<code>rkmr</code> is essentially a noop when done from the CPU but used
+for all kinds of control functions when done via rbus.
 </p>
 
 <h2 id="h_porting">Porting to other FPGA Families</h2>
 <p>
-So far the w11a has only been used on Xilinx Spartan-3 and Spartan-6 type
-FPGAs, but it is expected that porting to other Xilinx FPGAs like Virtex-6 
-or the Series-7 is easy. The only vendor-specific constructs
-are the I/O buffers and the memories, both encapsulated in 
+So far the w11a has only been used on Xilinx Spartan-3, Spartan-6 and Series-7
+FPGAs, but it is expected that porting to other Xilinx FPGAs is easy.
+The only vendor-specific constructs are the I/O buffers and the memories,
+both encapsulated in
 <a href="{{site.my.w11.tree}}/rtl/vlib/memlib">memlib</a>
 and  
 <a href="{{site.my.w11.tree}}/rtl/vlib/xlib">xlib</a>
